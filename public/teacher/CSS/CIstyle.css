@@ -15,7 +15,6 @@
   top: var(--header-height, 80px);
   z-index: 100;
   background-color: var(--color-bg-primary, #fff);
-  padding-bottom: var(--spacing-md, 16px);
 }
 
 /* Breadcrumb */
@@ -83,7 +82,12 @@
   border-bottom: 2px solid var(--color-border-light, #e0e0e0);
   margin-bottom: 30px;
   overflow-x: auto;
-  scrollbar-width: thin;
+  scrollbar-width: none; /* Ẩn scrollbar cho Firefox */
+}
+
+/* Ẩn scrollbar cho Chrome, Safari và Edge */
+.tabs::-webkit-scrollbar {
+  display: none;
 }
 
 /* Responsive tabs */

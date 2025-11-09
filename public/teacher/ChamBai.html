@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -18,312 +19,207 @@
   <div id="sidebar-container"></div>
   <div id="navbar-container"></div>
   
-  <div class="page-container">
-    <div class="stuwork">
-      <div class="stuworkname">
-        <div class="stuworkname-p">
-          <div class="danh-s-ch-c-u-tr-l-i">Danh sách câu trả lời</div>
+  <!-- Main Container with metadata for backend -->
+  <div class="page-container" data-exam-id="123" data-student-id="456">
+    
+    <!-- Two Column Layout -->
+    <div class="main-layout">
+      
+      <!-- LEFT COLUMN: Questions Navigation -->
+      <aside class="questions-navigation">
+        <h3 class="nav-title">Câu hỏi</h3>
+        
+        <!-- Questions Grid - Will be populated by JavaScript -->
+        <div class="questions-grid" id="questionsNav">
+          <!-- Buttons will be rendered here dynamically -->
+          <!-- Example static data for demo (5 columns) -->
+          <button class="question-btn status-checked" data-question-id="1" data-status="checked" onclick="scrollToQuestion(1)">1</button>
+          <button class="question-btn status-checked" data-question-id="2" data-status="checked" onclick="scrollToQuestion(2)">2</button>
+          <button class="question-btn status-checked" data-question-id="3" data-status="checked" onclick="scrollToQuestion(3)">3</button>
+          <button class="question-btn status-unchecked" data-question-id="4" data-status="unchecked" onclick="scrollToQuestion(4)">4</button>
+          <button class="question-btn status-unchecked" data-question-id="5" data-status="unchecked" onclick="scrollToQuestion(5)">5</button>
+          <button class="question-btn status-unchecked" data-question-id="6" data-status="unchecked" onclick="scrollToQuestion(6)">6</button>
+          <button class="question-btn status-unchecked" data-question-id="7" data-status="unchecked" onclick="scrollToQuestion(7)">7</button>
+          <button class="question-btn status-unchecked" data-question-id="8" data-status="unchecked" onclick="scrollToQuestion(8)">8</button>
+          <button class="question-btn status-unchecked" data-question-id="9" data-status="unchecked" onclick="scrollToQuestion(9)">9</button>
+          <button class="question-btn status-unchecked" data-question-id="10" data-status="unchecked" onclick="scrollToQuestion(10)">10</button>
+          <button class="question-btn status-unchecked" data-question-id="11" data-status="unchecked" onclick="scrollToQuestion(11)">11</button>
+          <button class="question-btn status-unchecked" data-question-id="12" data-status="unchecked" onclick="scrollToQuestion(12)">12</button>
+          <button class="question-btn status-unchecked" data-question-id="13" data-status="unchecked" onclick="scrollToQuestion(13)">13</button>
+          <button class="question-btn status-unchecked" data-question-id="14" data-status="unchecked" onclick="scrollToQuestion(14)">14</button>
+          <button class="question-btn status-unchecked" data-question-id="15" data-status="unchecked" onclick="scrollToQuestion(15)">15</button>
+          <button class="question-btn status-unchecked" data-question-id="16" data-status="unchecked" onclick="scrollToQuestion(16)">16</button>
+          <button class="question-btn status-unchecked" data-question-id="17" data-status="unchecked" onclick="scrollToQuestion(17)">17</button>
+          <button class="question-btn status-unchecked" data-question-id="18" data-status="unchecked" onclick="scrollToQuestion(18)">18</button>
+          <button class="question-btn status-unchecked" data-question-id="19" data-status="unchecked" onclick="scrollToQuestion(19)">19</button>
+          <button class="question-btn status-unchecked" data-question-id="20" data-status="unchecked" onclick="scrollToQuestion(20)">20</button>
+          <button class="question-btn status-unchecked" data-question-id="21" data-status="unchecked" onclick="scrollToQuestion(21)">21</button>
+          <button class="question-btn status-unchecked" data-question-id="22" data-status="unchecked" onclick="scrollToQuestion(22)">22</button>
+          <button class="question-btn status-unchecked" data-question-id="23" data-status="unchecked" onclick="scrollToQuestion(23)">23</button>
+          <button class="question-btn status-unchecked" data-question-id="24" data-status="unchecked" onclick="scrollToQuestion(24)">24</button>
+          <button class="question-btn status-unchecked" data-question-id="25" data-status="unchecked" onclick="scrollToQuestion(25)">25</button>
         </div>
-        <div class="dropdown">
-          <select class="top">
-            <option value="tatca">Tất cả</option>
-            <option value="dacham">Đã chấm</option>
-            <option value="chuacham">Chưa chấm</option>
+        
+        <!-- Status Legend -->
+        <div class="status-legend">
+          <div class="status-item">
+            <span class="status-badge unchecked"></span>
+            <span class="status-text">Chưa chấm (<span id="uncheckedCount">22</span>)</span>
+          </div>
+          <div class="status-item">
+            <span class="status-badge checked"></span>
+            <span class="status-text">Đã chấm (<span id="checkedCount">3</span>)</span>
+          </div>
+        </div>
+      </aside>
+      
+      <!-- RIGHT COLUMN: Questions Detail -->
+      <div class="questions-detail">
+        
+        <!-- Header with Filter -->
+        <div class="detail-header">
+          <h1 class="detail-title">Danh sách câu trả lời</h1>
+          <select class="filter-dropdown" id="filterStatus" onchange="filterQuestions()">
+            <option value="all">Tất cả</option>
+            <option value="checked">Đã chấm</option>
+            <option value="unchecked">Chưa chấm</option>
           </select>
         </div>
+        
+        <!-- Questions List - Will be populated by JavaScript -->
+        <div class="questions-list" id="questionsList">
+          
+          <!-- Question 1: Multiple Choice (Checked) -->
+          <div class="question-card" id="question-1" data-question-id="1" data-type="multiple-choice" data-status="checked">
+            <div class="question-header">
+              <h3 class="question-title">Câu hỏi 1: Nội dung câu hỏi trắc nghiệm</h3>
+              <span class="question-points">0.67 điểm</span>
+            </div>
+            <div class="question-options">
+              <label class="option selected correct">
+                <span class="option-radio checked"></span>
+                <span class="option-text">Lựa chọn 1 (Đúng)</span>
+              </label>
+              <label class="option">
+                <span class="option-radio"></span>
+                <span class="option-text">Lựa chọn 2</span>
+              </label>
+              <label class="option">
+                <span class="option-radio"></span>
+                <span class="option-text">Lựa chọn 3</span>
+              </label>
+              <label class="option">
+                <span class="option-radio"></span>
+                <span class="option-text">Lựa chọn 4</span>
+              </label>
+            </div>
+          </div>
+          
+          <!-- Question 2: Multiple Choice (Checked) -->
+          <div class="question-card" id="question-2" data-question-id="2" data-type="multiple-choice" data-status="checked">
+            <div class="question-header">
+              <h3 class="question-title">Câu hỏi 2: Nội dung câu hỏi trắc nghiệm</h3>
+              <span class="question-points">0.67 điểm</span>
+            </div>
+            <div class="question-options">
+              <label class="option">
+                <span class="option-radio"></span>
+                <span class="option-text">Lựa chọn 1</span>
+              </label>
+              <label class="option selected correct">
+                <span class="option-radio checked"></span>
+                <span class="option-text">Lựa chọn 2 (Đúng)</span>
+              </label>
+              <label class="option">
+                <span class="option-radio"></span>
+                <span class="option-text">Lựa chọn 3</span>
+              </label>
+              <label class="option">
+                <span class="option-radio"></span>
+                <span class="option-text">Lựa chọn 4</span>
+              </label>
+            </div>
+          </div>
+          
+          <!-- Question 3: Multiple Choice (Checked) -->
+          <div class="question-card" id="question-3" data-question-id="3" data-type="multiple-choice" data-status="checked">
+            <div class="question-header">
+              <h3 class="question-title">Câu hỏi 3: Nội dung câu hỏi trắc nghiệm</h3>
+              <span class="question-points">0.67 điểm</span>
+            </div>
+            <div class="question-options">
+              <label class="option">
+                <span class="option-radio"></span>
+                <span class="option-text">Lựa chọn 1</span>
+              </label>
+              <label class="option">
+                <span class="option-radio"></span>
+                <span class="option-text">Lựa chọn 2</span>
+              </label>
+              <label class="option selected correct">
+                <span class="option-radio checked"></span>
+                <span class="option-text">Lựa chọn 3 (Đúng)</span>
+              </label>
+              <label class="option">
+                <span class="option-radio"></span>
+                <span class="option-text">Lựa chọn 4</span>
+              </label>
+            </div>
+          </div>
+          
+          <!-- Question 4: Multiple Choice (Unchecked) -->
+          <div class="question-card" id="question-4" data-question-id="4" data-type="multiple-choice" data-status="unchecked">
+            <div class="question-header">
+              <h3 class="question-title">Câu hỏi 4: Nội dung câu hỏi trắc nghiệm</h3>
+              <span class="question-points">0.67 điểm</span>
+            </div>
+            <div class="question-options">
+              <label class="option">
+                <span class="option-radio"></span>
+                <span class="option-text">Lựa chọn 1</span>
+              </label>
+              <label class="option">
+                <span class="option-radio"></span>
+                <span class="option-text">Lựa chọn 2</span>
+              </label>
+              <label class="option">
+                <span class="option-radio"></span>
+                <span class="option-text">Lựa chọn 3</span>
+              </label>
+              <label class="option selected incorrect">
+                <span class="option-radio checked"></span>
+                <span class="option-text">Lựa chọn 4 (Sai - Sinh viên chọn)</span>
+              </label>
+            </div>
+          </div>
+          
+          <!-- More questions will be rendered dynamically here... -->
+          
+        </div>
+        
       </div>
-      <div class="stuwork-info">
-        <div class="section-1">
-          <div class="section">
-            <div class="section2">
-              <div class="product">
-                <div class="rectangle-63"></div>
-                <div class="product-edit">
-                  <div class="section3">
-                    <div class="c-u-h-i-1-n-i-dung-c-u-h-i">
-                      Câu hỏi 1 : Nội dung câu hỏi
-                    </div>
-                    <div class="_0-67-i-m">0,67 điểm</div>
-                  </div>
-                  <div class="q-1-frame">
-                    <div class="selection-1">
-                      <div class="ellipse-1002"></div>
-                      <div class="selec">
-                        <div class="l-a-ch-n-1">Lựa chọn 1</div>
-                      </div>
-                    </div>
-                    <div class="selection-1">
-                      <div class="ellipse-10022"></div>
-                      <div class="selec">
-                        <div class="l-a-ch-n-1">Lựa chọn 1</div>
-                      </div>
-                    </div>
-                    <div class="selection-1">
-                      <div class="ellipse-10022"></div>
-                      <div class="selec">
-                        <div class="l-a-ch-n-1">Lựa chọn 1</div>
-                      </div>
-                    </div>
-                    <div class="selection-1">
-                      <div class="ellipse-10023"></div>
-                      <div class="selec">
-                        <div class="l-a-ch-n-1">Lựa chọn 1</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="section-2">
-          <div class="section">
-            <div class="section2">
-              <div class="product">
-                <div class="rectangle-63"></div>
-                <div class="product-edit">
-                  <div class="section3">
-                    <div class="c-u-h-i-1-n-i-dung-c-u-h-i2">
-                      Câu hỏi 1 : Nội dung câu hỏi
-                    </div>
-                    <div class="_0-67-i-m">0,67 điểm</div>
-                  </div>
-                  <div class="q-1-frame">
-                    <div class="selection-1">
-                      <div class="ellipse-1002"></div>
-                      <div class="frame-1321316761">
-                        <div class="l-a-ch-n-1">Lựa chọn 1</div>
-                      </div>
-                    </div>
-                    <div class="selecion-1">
-                      <div class="ellipse-10022"></div>
-                      <div class="selec">
-                        <div class="l-a-ch-n-1">Lựa chọn 1</div>
-                      </div>
-                    </div>
-                    <div class="selection-1">
-                      <div class="ellipse-10022"></div>
-                      <div class="selec">
-                        <div class="l-a-ch-n-1">Lựa chọn 1</div>
-                      </div>
-                    </div>
-                    <div class="selection-1">
-                      <div class="ellipse-10023"></div>
-                      <div class="selec">
-                        <div class="l-a-ch-n-1">Lựa chọn 1</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="section-3">
-          <div class="section">
-            <div class="section2">
-              <div class="product">
-                <div class="rectangle-632"></div>
-                <div class="product-edit">
-                  <div class="sectionname">
-                    <div class="c-u-h-i-1-n-i-dung-c-u-h-i2">
-                      Câu hỏi 1 : Nội dung câu hỏi
-                    </div>
-                    <div class="_0-67-i-m">0,67 điểm</div>
-                  </div>
-                  <div class="answerfile">
-                    <div class="docx">
-                      <div class="docx2">DOCX</div>
-                    </div>
-                    <div class="anname">
-                      <div class="b-i-n-p">Bài nộp</div>
-                      <img class="download" src="download0.svg" />
-                    </div>
-                  </div>
-                  <div class="point">
-                    <div class="section4">
-                      <div class="ch-m-i-m">Chấm điểm</div>
-                      <div class="_0-00-0-67-i-m">
-                        <span>
-                          <span class="_0-00-0-67-i-m-span">0.00 /</span>
-                          <span class="_0-00-0-67-i-m-span2">0,67 điểm</span>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="accept">
-                      <div class="x-c-nh-n">Xác nhận</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="section-4">
-          <div class="section">
-            <div class="section2">
-              <div class="product">
-                <div class="rectangle-632"></div>
-                <div class="product-edit">
-                  <div class="section3">
-                    <div class="c-u-h-i-1-n-i-dung-c-u-h-i2">
-                      Câu hỏi 1 : Nội dung câu hỏi
-                    </div>
-                    <div class="_0-67-i-m">0,67 điểm</div>
-                  </div>
-                  <div class="stuan">
-                    <div class="ph-n-tr-l-i-c-a-sinh-vi-n">
-                      Phần trả lời của sinh viên
-                    </div>
-                  </div>
-                  <div class="section3">
-                    <div class="ch-m-i-m">Chấm điểm</div>
-                    <div class="_0-00-0-67-i-m">
-                      <span>
-                        <span class="_0-00-0-67-i-m-span3">0.00</span>
-                        <span class="_0-00-0-67-i-m-span">/</span>
-                        <span class="_0-00-0-67-i-m-span2">0,67 điểm</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div>
-    <div class="allquestions">
-      <div class="answers">
-        <div class="c-u-h-i">Câu hỏi</div>
-        <div class="answer-2">
-          <div class="square">
-            <div class="_3">1</div>
-          </div>
-          <div class="square">
-            <div class="_3">2</div>
-          </div>
-          <div class="square">
-            <div class="_3">3</div>
-          </div>
-          <div class="square">
-            <div class="_2">4</div>
-          </div>
-          <div class="square">
-            <div class="_1">5</div>
-          </div>
-          <div class="square">
-            <div class="_1">6</div>
-          </div>
-          <div class="square">
-            <div class="_2">7</div>
-          </div>
-          <div class="square">
-            <div class="_1">8</div>
-          </div>
-          <div class="square">
-            <div class="_2">9</div>
-          </div>
-          <div class="square">
-            <div class="_1">10</div>
-          </div>
-          <div class="square">
-            <div class="_1">11</div>
-          </div>
-          <div class="square">
-            <div class="_2">12</div>
-          </div>
-          <div class="square">
-            <div class="_1">13</div>
-          </div>
-          <div class="square">
-            <div class="_2">14</div>
-          </div>
-          <div class="square">
-            <div class="_1">15</div>
-          </div>
-          <div class="square">
-            <div class="_1">16</div>
-          </div>
-          <div class="square">
-            <div class="_2">17</div>
-          </div>
-          <div class="square">
-            <div class="_1">18</div>
-          </div>
-          <div class="square">
-            <div class="_2">19</div>
-          </div>
-          <div class="square">
-            <div class="_1">20</div>
-          </div>
-          <div class="square">
-            <div class="_1">21</div>
-          </div>
-          <div class="square">
-            <div class="_2">22</div>
-          </div>
-          <div class="square">
-            <div class="_1">23</div>
-          </div>
-          <div class="square">
-            <div class="_2">24</div>
-          </div>
-          <div class="square">
-            <div class="_1">25</div>
-          </div>
-        </div>
-      </div>
-      <div class="trangthai">
-        <div class="chuacham">
-          <div class="chuacham-2"></div>
-          <div class="ch-a-ch-m-22">Chưa chấm (22)</div>
-        </div>
-        <div class="dacham">
-          <div class="dacham-2"></div>
-          <div class="ch-m-3">Đã chấm (3)</div>
-        </div>
-      </div>
-    </div>
+    
   </div>
-  <script>
-function toggleSidebar(event) {
-  // Ngăn sự kiện lan sang logo
-  if (event) event.stopPropagation();
-
-  const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle("collapsed");
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const sidebar = document.getElementById("sidebar");
-  const logoImg = document.querySelector(".logo img.objects");
-
-  logoImg.addEventListener("click", (event) => {
-    // Nếu sidebar đang thu gọn → mở rộng lại
-    if (sidebar.classList.contains("collapsed")) {
-      sidebar.classList.remove("collapsed");
-    } else {
-      // Nếu đang mở → về trang chủ
-      window.location.href = "../TrangChu.html";
-    }
-  });
-
-  // Gắn lại listener cho nút thu gọn
-  const toggleBtn = document.querySelector(".open-close");
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", toggleSidebar);
-  }
-});
-  </script>
-  <script>
-    document.querySelectorAll(".square").forEach(btn => {
-      btn.addEventListener("click", () => {
-        btn.classList.toggle("active");
-      });
-    });
-</script>
-
-<script type="module" src="/public/teacher/js/main.js"></script>
+  
+  <!-- TEMPLATES for Dynamic Rendering (Hidden) -->
+  
+  <!-- Multiple Choice Question Template -->
+  <template id="question-multiple-choice-template">
+    <div class="question-card" data-question-id="" data-type="multiple-choice" data-status="">
+      <div class="question-header">
+        <h3 class="question-title"></h3>
+        <span class="question-points"></span>
+      </div>
+      <div class="question-options">
+        <!-- Options will be inserted here -->
+      </div>
+    </div>
+  </template>
+  
+  <!-- Scripts -->
+  <script type="module" src="/public/teacher/js/main.js"></script>
+  <script type="module" src="/public/teacher/js/chamBai.js"></script>
 </body>
 </html>
