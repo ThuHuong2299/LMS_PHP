@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Làm bài kiểm tra</title>
+    <link rel="stylesheet" href="./CSS/BKT.sv.style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <base href="./assets/">
+</head>
+<body>
+    <div class="container">
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div class="course-title">Tiếng Anh Thương Mại 1</div>
+                <div class="user-info">
+                    <div class="user-avatar">ND</div>
+                    <div class="user-details">
+                        <h3>Nguyễn Cao Kỳ Duyên</h3>
+                        <p>23D192001</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXAM PAGE -->
+            <div class="exam-page active">
+                <div class="exam-header">
+                    <div class="exam-title">Tên bài kiểm tra</div>
+                    <button class="submit-btn" onclick="submitExam()">Nộp bài</button>
+                </div>
+
+                <div class="content-area">
+                    <div>
+                        <div class="question-nav">
+                            <div class="question-grid-title">Câu hỏi</div>
+                            <div class="question-grid" id="questionGrid"></div>
+                        </div>
+
+                        <div class="question-legend">
+                            <div class="legend-group">
+                                <div class="legend-item">
+                                    <div class="legend-box answered"></div>
+                                    <span id="answeredCount">Đã trả lời (0)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-box unanswered"></div>
+                                    <span id="unansweredCount">Chưa trả lời (25)</span>
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box current"></div>
+                                <span>Đang chọn</span>
+                            </div>
+                        </div>
+
+                        <div class="timer-box">
+                            <div class="timer-title">Thời gian còn lại</div>
+                            <div class="timer-display">
+                                <svg class="timer-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                                    <path d="M12 6v6l4 2" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="timer-value" id="timer">45:59</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-area">
+                        <div class="question-header">
+                            <div class="question-title" id="questionTitle">Câu hỏi 1 trên 25</div>
+                            <div class="question-text" id="questionText"></div>
+                        </div>
+
+                        <div class="answers" id="answersContainer"></div>
+
+                        <div class="navigation">
+                            <button class="nav-btn prev" onclick="previousQuestion()">
+                                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                                Trở lại
+                            </button>
+                            <button class="nav-btn next" onclick="nextQuestion()">
+                                Tiếp theo
+                                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESULTS PAGE -->
+            <div class="results-page">
+                <div class="score-header">
+                    <div class="exam-title">Tên bài kiểm tra</div>
+                    <div class="score-display">
+                        <span class="score-value" id="finalScore">9.5</span>
+                        <span>/ 10</span>
+                    </div>
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-label">Câu đúng</div>
+                        <div class="stat-value" id="correctCount">8 câu</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Câu sai</div>
+                        <div class="stat-value" id="wrongCount">10 câu</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Câu chưa<br>hoàn thành</div>
+                        <div class="stat-value" id="skippedCount">18 câu</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Thời gian<br>làm bài</div>
+                        <div class="stat-value" id="timeSpent">20 phút</div>
+                    </div>
+                </div>
+
+                <div class="results-container">
+                    <div class="results-header">
+                        <div class="results-title">Danh sách câu trả lời</div>
+                        <div class="results-count" id="totalQuestions">32 câu</div>
+                    </div>
+                    <div class="results-list" id="resultsList"></div>
+                </div>
+
+                <button class="back-btn" onclick="window.location.href='../Thông%20tin%20bài%20giảng.html'">Trở về lớp học</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [];
+        const correctAnswers = []; // Index of correct answer for each question
+
+        // Generate 25 questions with random correct answers
+        for (let i = 0; i < 25; i++) {
+            questions.push({
+                question: `Nội dung câu hỏi ${i + 1}: This is a sample question about something important?`,
+                answers: ["A. Lựa chọn A", "B. Lựa chọn B", "C. Lựa chọn C", "D. Lựa chọn D"],
+                selected: null
+            });
+            correctAnswers.push(Math.floor(Math.random() * 4)); // Random correct answer
+        }
+
+        let currentQuestion = 0;
+        let timeLeft = 45 * 60 + 59;
+        let timerInterval;
+        let startTime = Date.now();
+
+        function initQuestionGrid() {
+            const grid = document.getElementById('questionGrid');
+            grid.innerHTML = '';
+            for (let i = 0; i < questions.length; i++) {
+                const btn = document.createElement('div');
+                btn.className = 'question-number unanswered';
+                btn.textContent = i + 1;
+                btn.onclick = () => goToQuestion(i);
+                grid.appendChild(btn);
+            }
+            updateQuestionGrid();
+        }
+
+        function updateQuestionGrid() {
+            const buttons = document.querySelectorAll('.question-number');
+            buttons.forEach((btn, index) => {
+                btn.classList.remove('answered', 'current', 'unanswered');
+                if (index === currentQuestion) {
+                    btn.classList.add('current');
+                } else if (questions[index].selected !== null) {
+                    btn.classList.add('answered');
+                } else {
+                    btn.classList.add('unanswered');
+                }
+            });
+            updateCounts();
+        }
+
+        function updateCounts() {
+            const answered = questions.filter(q => q.selected !== null).length;
+            const unanswered = questions.length - answered;
+            document.getElementById('answeredCount').textContent = `Đã trả lời (${answered})`;
+            document.getElementById('unansweredCount').textContent = `Chưa trả lời (${unanswered})`;
+        }
+
+        function displayQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('questionTitle').textContent = `Câu hỏi ${currentQuestion + 1} trên ${questions.length}`;
+            document.getElementById('questionText').textContent = q.question;
+            
+            const container = document.getElementById('answersContainer');
+            container.innerHTML = '';
+            q.answers.forEach((answer, index) => {
+                const option = document.createElement('div');
+                option.className = 'answer-option';
+                if (q.selected === index) {
+                    option.classList.add('selected');
+                }
+                option.innerHTML = `
+                    <div class="radio"></div>
+                    <div class="answer-text">${answer}</div>
+                `;
+                option.onclick = () => selectAnswer(index);
+                container.appendChild(option);
+            });
+        }
+
+        function selectAnswer(index) {
+            questions[currentQuestion].selected = index;
+            displayQuestion();
+            updateQuestionGrid();
+        }
+
+        function goToQuestion(index) {
+            currentQuestion = index;
+            displayQuestion();
+            updateQuestionGrid();
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+                updateQuestionGrid();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+                updateQuestionGrid();
+            }
+        }
+
+        function submitExam() {
+            const answered = questions.filter(q => q.selected !== null).length;
+            const unanswered = questions.length - answered;
+            
+            if (unanswered > 0) {
+                const confirm = window.confirm(`Bạn còn ${unanswered} câu chưa trả lời. Bạn có chắc chắn muốn nộp bài?`);
+                if (!confirm) return;
+            }
+            
+            clearInterval(timerInterval);
+            showResultsPage();
+        }
+
+        function showResultsPage() {
+            document.querySelector('.exam-page').classList.remove('active');
+            document.querySelector('.results-page').classList.add('active');
+            
+            // Calculate results
+            let correct = 0;
+            let wrong = 0;
+            let skipped = 0;
+            
+            questions.forEach((q, index) => {
+                if (q.selected === null) {
+                    skipped++;
+                } else if (q.selected === correctAnswers[index]) {
+                    correct++;
+                } else {
+                    wrong++;
+                }
+            });
+            
+            const score = ((correct / questions.length) * 10).toFixed(1);
+            const timeSpentMinutes = Math.floor((45 * 60 + 59 - timeLeft) / 60);
+            
+            // Update stats
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('correctCount').textContent = `${correct} câu`;
+            document.getElementById('wrongCount').textContent = `${wrong} câu`;
+            document.getElementById('skippedCount').textContent = `${skipped} câu`;
+            document.getElementById('timeSpent').textContent = `${timeSpentMinutes} phút`;
+            document.getElementById('totalQuestions').textContent = `${questions.length} câu`;
+            
+            // Display results list
+            const resultsList = document.getElementById('resultsList');
+            resultsList.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const item = document.createElement('div');
+                item.className = 'result-item';
+                
+                let indicator = 'skipped';
+                if (q.selected !== null) {
+                    indicator = q.selected === correctAnswers[index] ? 'correct' : 'wrong';
+                }
+                
+                let answersHTML = '';
+                q.answers.forEach((answer, ansIndex) => {
+                    let answerClass = '';
+                    if (ansIndex === q.selected) {
+                        answerClass = indicator === 'correct' ? 'correct-answer' : 'user-answer';
+                    } else if (ansIndex === correctAnswers[index]) {
+                        answerClass = 'correct-answer';
+                    }
+                    
+                    answersHTML += `
+                        <div class="result-answer ${answerClass}">
+                            <div class="result-radio"></div>
+                            <div class="result-answer-text">${answer}</div>
+                        </div>
+                    `;
+                });
+                
+                item.innerHTML = `
+                    <div class="result-indicator ${indicator}"></div>
+                    <div class="result-content">
+                        <div class="result-question">Câu hỏi ${index + 1} : ${q.question}</div>
+                        <div class="result-answers">${answersHTML}</div>
+                    </div>
+                `;
+                
+                resultsList.appendChild(item);
+            });
+        }
+
+        function showExamPage() {
+            document.querySelector('.results-page').classList.remove('active');
+            document.querySelector('.exam-page').classList.add('active');
+            
+            // Reset exam
+            questions.forEach(q => q.selected = null);
+            currentQuestion = 0;
+            timeLeft = 45 * 60 + 59;
+            startTime = Date.now();
+            
+            initQuestionGrid();
+            displayQuestion();
+            startTimer();
+        }
+
+        function toggleSubmenu(element) {
+            element.classList.toggle('expanded');
+            const submenu = element.nextElementSibling;
+            submenu.classList.toggle('show');
+        }
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+            } else {
+                clearInterval(timerInterval);
+                alert('Hết giờ làm bài! Bài thi sẽ được tự động nộp.');
+                submitExam();
+            }
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        // Initialize on page load
+        initQuestionGrid();
+        displayQuestion();
+        startTimer();
+    </script>
+</body>
+</html>

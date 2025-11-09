@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <base href="./assets/">
+  
+  <!-- CSS Components -->
+  <link rel="stylesheet" href="/public/teacher/CSS/components/shared.css">
+  <link rel="stylesheet" href="/public/teacher/CSS/components/sidebar.css">
+  <link rel="stylesheet" href="/public/teacher/CSS/components/navbar.css">
+  
+  <!-- CSS của trang -->
+  <link rel="stylesheet" href="/public/teacher/CSS/TBstyle.css">
+  <link rel="stylesheet" href="/public/teacher/CSS/style.css">
+  <link rel="stylesheet" href="/public/teacher/CSS/BTstyle.css">
+  <link rel="stylesheet" href="/public/teacher/CSS/BKTstyle.css">
+  
+  <title>Dashboard - Learn Lab</title>
+</head>
+<body>
+  <div id="sidebar-container"></div>
+  <div id="navbar-container"></div>
+  
+  <div class="trang-ch">
+    <!-- 1. Tiêu đề Dashboard -->
+    <div class="dashboard-gi-ng-vi-n">Dashboard giảng viên</div>
+    
+    <!-- 2. Info Cards -->
+    <div class="info">
+      <div class="classes">
+        <img class="framecl" src="framecl0.svg" />
+        <div class="classes-p">
+          <div class="_8">8</div>
+          <div class="l-p-gi-ng-d-y">Lớp giảng dạy</div>
+        </div>
+      </div>
+      <div class="student">
+        <div class="framest">
+          <img class="frame3" src="frame2.svg" />
+        </div>
+        <div class="student-p">
+          <div class="_80">80</div>
+          <div class="sinh-vi-n-theo-h-c">Sinh viên theo học</div>
+        </div>
+      </div>
+      <div class="tests">
+        <div class="framete">
+          <img class="exercise3" src="exercise2.svg" />
+        </div>
+        <div class="test-p">
+          <div class="_12">12</div>
+          <div class="b-i-ch-ch-m">Bài chờ chấm</div>
+        </div>
+      </div>
+      <div class="notifies">
+        <div class="frameno">
+          <img class="noti3" src="noti2.svg" />
+        </div>
+        <div class="notifies-p">
+          <div class="_3">3</div>
+          <div class="th-ng-b-o-m-i">Thông báo mới</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Container cho Thao tác nhanh và Hoạt động gần đây -->
+    <div class="actions-container">
+      <!-- 3.1 Thao tác nhanh -->
+      <div class="quick-respond">
+        <div class="thao-t-c-nhanh">Thao tác nhanh</div>
+        <div class="quick-respond-item">
+          <div class="tab-side-bar3" id="openModal3">
+            <img class="noti2" src="noti1.svg" />
+            <div class="g-i-th-ng-b-o">Gửi thông báo</div>
+          </div>
+          <div class="quick-lower">
+            <div class="tab-side-bar4" id="openModal1">
+              <img class="exercise" src="exercise0.svg" />
+              <div class="t-o-b-i-t-p">Tạo bài tập</div>
+            </div>
+            <div class="tab-side-bar4" id="openModal2">
+              <img class="exam" src="exam0.svg" />
+              <div class="t-o-b-i-ki-m-tra">Tạo bài kiểm tra</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3.2 Hoạt động gần đây -->
+      <div class="notification">
+      <div class="ho-t-ng-g-n-y">Hoạt động gần đây</div>
+      <div class="noti-10">
+        <div class="frame-noti-10">
+          <img class="frame" src="frame0.svg" />
+        </div>
+        <div class="noti-pa">
+          <div class="sinh-vi-n-ph-m-anh-t-n-p-b-i">
+            <span>
+              <span class="sinh-vi-n-ph-m-anh-t-n-p-b-i-span">
+                Sinh viên Phạm Anh Tú
+              </span>
+              <span class="sinh-vi-n-ph-m-anh-t-n-p-b-i-span2">đã nộp bài</span>
+            </span>
+          </div>
+          <div class="_5-ph-t-tr-c">5 phút trước</div>
+        </div>
+      </div>
+      <div class="noti-20">
+        <div class="frame-noti-20">
+          <img class="exercise2" src="exercise1.svg" />
+        </div>
+        <div class="noti-20-pa">
+          <div class="b-i-t-p-ch-ng-3-h-t-h-n-n-p">
+            Bài tập chương 3 hết hạn nộp
+          </div>
+          <div class="_15-ph-t-tr-c">15 phút trước</div>
+        </div>
+      </div>
+      <div class="noti-30">
+        <div class="noti-302">
+          <img class="exam2" src="exam1.svg" />
+        </div>
+        <div class="noti-30-pa">
+          <div class="b-i-ki-m-ch-ng-3-h-t-h-n-n-p">
+            Bài kiểm chương 3 hết hạn nộp
+          </div>
+          <div class="_25-ph-t-tr-c">25 phút trước</div>
+        </div>
+      </div>
+      <div class="noti-40">
+        <div class="noti-402">
+          <img class="frame2" src="frame1.svg" />
+        </div>
+        <div class="noti-40-pa">
+          <div class="sinh-vi-n-ph-m-ho-ng-nhi-n-p-b-i">
+            <span>
+              <span class="sinh-vi-n-ph-m-ho-ng-nhi-n-p-b-i-span">
+                Sinh viên Phạm Hoàng Nhi
+              </span>
+              <span class="sinh-vi-n-ph-m-ho-ng-nhi-n-p-b-i-span2">
+                đã nộp bài
+              </span>
+            </span>
+          </div>
+          <div class="_35-ph-t-tr-c">35 phút trước</div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  
+  <!-- Modal: Tạo bài tập -->
+<div class="modal" id="assignmentModal">
+  <div class="modal-content-new">
+    <div class="modal-header-new">
+      <div class="t-o-th-ng-b-o-m-ii">Tạo bài tập</div>
+      <button class="btn-close-new" onclick="closeModal('assignmentModal')">×</button>
+    </div>
+    <div class="modal-body-new">
+      <!-- THÊM MỚI: Lớp giao -->
+      <div class="form-row-horizontal">
+        <label class="ti-u">Lớp giao:</label>
+        <div class="form-select-wrapper">
+          <select class="form-select-input" id="assignmentClass">
+            <option value="">Tên môn - Mã lớp</option>
+            <option value="class1">Các Hệ thống thông tin phổ biến trong doanh nghiệp - 213_eCIT2320_09</option>
+            <option value="class2">Quản trị cơ sở dữ liệu - 213_eCIT2310_05</option>
+            <option value="class3">Lập trình hướng đối tượng - 213_eCIT2210_03</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-row-horizontal">
+        <label class="ti-u">Chương giao:</label>
+        <div class="form-select-wrapper">
+          <select class="form-select-input" id="assignmentChapter">
+            <option>Chương 1 - Hệ thống thông tin</option>
+            <option>Chương 2 - Quản trị dữ liệu</option>
+            <option>Chương 3 - Phân tích hệ thống</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-row-horizontal">
+        <label class="ti-u">Tiêu đề:</label>
+        <input type="text" class="exam-form-input" id="assignmentTitle" placeholder="Thông báo nghỉ học">
+      </div>
+      
+      <div class="form-row-horizontal">
+        <label class="ti-u">Thời gian làm bài:</label>
+        <input type="datetime-local" class="exam-form-input" id="assignmentDeadline">
+      </div>
+      
+      <div id="assignmentQuestionsContainer">
+        <div class="question-wrapper">
+          <div class="question-card-new">
+            <div class="question-card-inner">
+              <div class="question-header-section">
+                <input type="text" placeholder="Nội dung câu hỏi" class="question-title-input">
+              </div>
+              <div class="question-description-section">
+                <textarea placeholder="Miêu tả ngắn" rows="2" class="question-textarea"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="question-side-actions">
+            <button class="btn-action-circle" onclick="addAssignmentQuestion()" title="Thêm câu hỏi">
+              <img src="add.svg" alt="Thêm câu hỏi">
+            </button>
+            <button class="btn-action-circle" onclick="deleteAssignmentQuestion(this)" title="Xóa câu hỏi">
+              <img src="delete.svg" alt="Xóa câu hỏi">
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="exam-modal-footer">
+        <button class="exam-btn-cancel" onclick="closeModal('assignmentModal')">Hủy</button>
+        <button class="exam-btn-save" onclick="saveAssignment()">Lưu bài tập</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Modal Tạo Bài Kiểm Tra -->
+<div class="modal" id="examModal">
+  <div class="exam-popup">
+    <div class="exam-popup-header">
+      <div class="t-o-th-ng-b-o-m-ii">Tạo bài kiểm tra</div>
+      <button class="exam-close-btn" onclick="closeModal('examModal')">×</button>
+    </div>
+
+    <div class="exam-popup-body">
+      <!-- THÊM MỚI: Lớp giao -->
+      <div class="exam-form-group">
+        <label class="ti-u">Lớp giao:</label>
+        <select class="exam-form-input" id="examClass">
+          <option value="">Tên môn - Mã lớp</option>
+          <option value="class1">Các Hệ thống thông tin phổ biến trong doanh nghiệp - 213_eCIT2320_09</option>
+          <option value="class2">Quản trị cơ sở dữ liệu - 213_eCIT2310_05</option>
+          <option value="class3">Lập trình hướng đối tượng - 213_eCIT2210_03</option>
+        </select>
+      </div>
+      
+      <div class="exam-form-group">
+        <label class="ti-u">Tiêu đề:</label>
+        <input type="text" class="exam-form-input" id="examTitle" placeholder="Thông báo nghỉ học">
+      </div>
+
+      <div class="exam-form-group">
+        <label class="ti-u">Thời lượng:</label>
+        <input type="text" class="exam-form-input" id="examDuration" placeholder="VD: 60 phút">
+      </div>
+
+      <div class="exam-form-group">
+        <label class="ti-u">Thời gian:</label>
+        <input type="datetime-local" class="exam-form-input" id="examDatetime">
+      </div>
+
+      <div id="questionsContainer">
+        <div class="exam-question-wrapper">
+          <div class="exam-question-card">
+            <div class="exam-question-border"></div>
+            <div class="exam-question-content">
+              <div class="exam-question-input-wrapper">
+                <input type="text" class="exam-question-input" placeholder="Nội dung câu hỏi">
+              </div>
+
+              <div class="exam-option-wrapper">
+                <div class="exam-radio-btn checked" onclick="toggleExamRadio(this)"></div>
+                <input type="text" class="exam-option-input correct" placeholder="Lựa chọn đúng">
+              </div>
+
+              <div class="exam-option-wrapper">
+                <div class="exam-radio-btn" onclick="toggleExamRadio(this)"></div>
+                <input type="text" class="exam-option-input normal" placeholder="Lựa chọn 1">
+              </div>
+
+              <button class="exam-add-option-btn" onclick="addExamOption(this)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 5V19M5 12H19" stroke="#3293F9" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                Thêm lựa chọn
+              </button>
+            </div>
+          </div>
+
+          <div class="exam-action-buttons">
+            <button class="exam-icon-btn" onclick="addExamQuestion()" title="Thêm câu hỏi">
+              <img src="add.svg" alt="Thêm" />
+            </button>
+            <button class="exam-icon-btn" onclick="deleteExamQuestion(this)" title="Xóa câu hỏi">
+              <img src="delete.svg" alt="Xóa" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="exam-modal-footer">
+        <button class="exam-btn-cancel" onclick="closeModal('examModal')">Hủy</button>
+        <button class="exam-btn-save" onclick="submitExam()">Lưu bài kiểm tra</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="modal33" id="taothongbao">
+    <div class="t-o-th-ng-b-o-t-c-th">
+      <div class="createnoti">
+        <div class="t-o-th-ng-b-o-m-ii">Tạo thông báo mới</div>
+        <img class="exam-close-btn" src="exit0.svg" id="closeModal3" onclick="closeModal('taothongbao')"/>
+      </div>
+      <div class="exam-popup-body">
+        <div class="exam-form-group">
+          <div class="ti-u">Lớp giao:</div>
+          <select class="exam-form-input" id="classcode">
+            <option value="">Chọn lớp</option>
+            <option>Cơ sở dữ liệu - CS101</option>
+            <option>Lập trình Java - JV202</option>
+            <option>Phân tích HTTT - IS303</option>
+          </select>
+        </div>
+        <div class="exam-form-group">
+          <label class="ti-u" for="titleInput">Tiêu đề:</label>
+          <input type="text" id="titleInputtb" class="exam-form-input" placeholder="Nhập tiêu đề thông báo..." />
+        </div>
+        <div class="exam-form-group">
+          <label class="ti-u" for="titleInput">Nội dung:</label>
+          <textarea type="text" id="notiInput" rows="8" class="tb-input" placeholder="Nội dung của thông báo..." ></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closeModal('taothongbao')">Hủy</button>
+        <button class="btn-save" onclick="saveThongBao()">Gửi thông báo</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript của trang -->
+  <script src="/public/teacher/js/script.js"></script>
+  
+  <!-- Main App JavaScript -->
+  <script type="module" src="/public/teacher/js/main.js"></script>
+</body>
+</html>

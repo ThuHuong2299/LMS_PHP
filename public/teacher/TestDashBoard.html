@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <base href="./assets/">
+  
+  <!-- CSS Components - Thứ tự import quan trọng (dùng absolute path) -->
+  <link rel="stylesheet" href="/public/teacher/CSS/components/shared.css">
+  <link rel="stylesheet" href="/public/teacher/CSS/components/sidebar.css">
+  <link rel="stylesheet" href="/public/teacher/CSS/components/navbar.css">
+  
+  <!-- CSS riêng của trang -->
+  <link rel="stylesheet" href="/public/teacher/CSS/TDBstyle.css">
+  <title>Quản lý Bài kiểm tra - Learn Lab</title>
+</head>
+<body>
+  <div id="sidebar-container"></div>
+  <div id="navbar-container"></div>
+  
+  <div class="testdash">
+
+    <div class="alltestinfo">
+      <div class="testaval">
+        <div class="baicham" id="baichuacham" >
+          <div class="sobaichuacham">
+            <div class="s-b-i-ch-a-ch-m">Số bài chưa chấm:</div>
+            <div class="_12-b-i">12 bài</div>
+          </div>
+          <img class="frame" src="frame50.svg" />
+        </div>
+        <div class="baicham" id="baidacham">
+          <div class="sobaidacham">
+            <div class="s-b-i-ch-m">Số bài đã chấm:</div>
+            <div class="_12-b-i">12 bài</div>
+          </div>
+          <img class="frame2" src="frame50.svg" />
+        </div>
+      </div>
+      <div class="teststatus">
+        <div class="average">
+          <div class="averpoint">
+            <div class="i-m-trung-b-nh">Điểm trung bình</div>
+            <div class="_8-5-10">
+              <span>
+                <span class="_8-5-10-span">8,5</span>
+                <span class="_8-5-10-span2">/ 10</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="highest">
+          <div class="highestpoint">
+            <div class="i-m-cao-nh-t">Điểm cao nhất</div>
+            <div class="_8-8-10">
+              <span>
+                <span class="_8-8-10-span">8,8</span>
+                <span class="_8-8-10-span2">/ 10</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="lowest">
+          <div class="lowestpoint">
+            <div class="i-m-th-p-nh-t">Điểm thấp nhất</div>
+            <div class="_1-2-10">
+              <span>
+                <span class="_1-2-10-span">1,2</span>
+                <span class="_1-2-10-span2">/ 10</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="sum">
+          <div class="sumtest">
+            <div class="t-ng-b-i-n-p">Tổng bài nộp</div>
+            <div class="_32-36">
+              <span>
+                <span class="_32-36-span">32</span>
+                <span class="_32-36-span2">/ 36</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testinfo">
+        <div class="table-head-row">
+          <div class="table-head">
+            <div class="head">Họ và tên</div>
+          </div>
+          <div class="table-head2">
+            <div class="head">Tình trạng làm bài</div>
+          </div>
+          <div class="table-head3">
+            <div class="head">Điểm số</div>
+          </div>
+          <div class="table-head3">
+            <div class="head">Thời gian làm bài</div>
+          </div>
+        </div>
+        <table class="student-table">
+          <tbody id="studentList">
+            <!-- Students will be rendered here -->
+          </tbody>
+        </table>
+      </div>
+      <div class="table-footer">
+        <div class="pagination-info">1-5 của 36</div>
+        <div class="pagination-buttons">
+          <button class="page-btn" onclick="previousPage()">◀</button>
+          <button class="page-btn" onclick="nextPage()">▶</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript của trang - TDBscript.js (absolute path) -->
+  <script src="/public/teacher/js/TDBscript.js"></script>
+  
+  <!-- Main App JavaScript - Import dưới cùng với type="module" (absolute path) -->
+  <script type="module" src="/public/teacher/js/main.js"></script>
+</body>
+</html>

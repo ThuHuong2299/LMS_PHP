@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quy định làm bài</title>
+  <link rel="stylesheet" href="./CSS/QD.sv.style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <base href="./assets/">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="side-bar" id="sidebar">
+    <div class="logo">
+      <img class="objects" src="objects0.svg"/>
+      <div class="earn-lab">earn Lab</div>
+      <img class="open-close" src="open-close0.svg"/>
+    </div>
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <div class="options">
+      <div class="tab-side-bar1" onclick="toggleDropdown()">
+        <div class="side-text">Bài giảng</div>
+        <span class="arrow" id="arrow">▾</span>
+      </div>
+      <ul class="submenu" id="submenu">
+        <div class="tab-side-bar11">
+          <div class="side-text">Chương 1</div>
+        </div>
+        <div class="tab-side-bar11">
+          <div class="side-text">Chương 2</div>
+        </div>
+        <div class="tab-side-bar11">
+          <div class="side-text">Chương 3</div>
+        </div>
+        <div class="tab-side-bar11">
+          <div class="side-text">Chương 4</div>
+        </div>
+      </ul>
+      <div class="tab-side-bar2" onclick="window.location.href='../Bảng%20điểm.html'">
+        <div class="side-text">Điểm</div>
+      </div>
+      <div class="tab-side-bar3" onclick="window.location.href='../Tài%20liệu.html'">
+        <div class="side-text">Tài liệu</div>
+      </div>
+      <div class="tab-side-bar4" onclick="window.location.href='../Thông%20báo%20trong.html'">
+        <div class="side-text">Thông báo</div>
+      </div>
+      <div class="tab-side-bar5" onclick="window.location.href='../Thông%20tin%20môn%20học.html'">
+        <div class="side-text">Thông tin môn học</div>
+      </div>
+    </div>
+    <div class="logout-section">
+      <button class="logout-btn" onclick="logout()">
+        <img src="logout-icon.svg" alt="Đăng xuất" style="width:20px; margin-right:8px; filter: brightness(0) saturate(100%) invert(0);">
+        <span>Đăng xuất</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content" id="mainContent">
+    <div class="header">
+      <div class="course-info">
+        <h1>Tiếng Anh Thương Mại 1</h1>
+      </div>
+      <div class="user-info">
+        <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Avatar">
+        <div class="user-details">
+          <h3>Nguyễn Cao Kỳ Duyên</h3>
+          <p>23D192001</p>
+        </div>
+      </div>
+    </div>
+    <div class="content-button">
+      <div class="examm">
+        <div class="exam-title">Bài kiểm tra giữa kỳ</div>
+        <div class="exam-time">
+          <span><strong>Thời gian:</strong> 50 phút</span>
+        </div>
+      </div> 
+      <button class="start-button" onclick="window.location.href='../Bài%20kiểm%20tra.html'">Bắt đầu làm bài</button>
+    </div>
+    <div class="content-grid">
+      <!-- Rules -->
+      <div class="info-box rules">
+        <h2>Quy định làm bài</h2>
+        <ul>
+          <li><strong>Thời gian:</strong> Đếm ngược tự động khi bấm "Bắt đầu"</li>
+          <li><strong>Không được:</strong> Refresh, thoát trình duyệt hoặc mở tab mới</li>
+          <li><strong>Nộp bài:</strong> Tự động khi hết giờ hoặc bấm "Nộp bài"</li>
+          <li><strong>Thiết bị:</strong> Chỉ làm trên 1 thiết bị duy nhất</li>
+          <li><strong>Hỗ trợ:</strong> Liên hệ giảng viên nếu gặp sự cố kỹ thuật</li>
+        </ul>
+      </div>
+
+      <!-- Instructions -->
+      <div class="info-box instructions">
+        <h2>Hướng dẫn làm bài</h2>
+        <ol>
+          <li>Đọc kỹ từng câu hỏi trước khi chọn đáp án</li>
+          <li><strong>Câu trắc nghiệm:</strong> Chọn 1 đáp án đúng nhất
+            <ul>
+              <li>Có thể thay đổi đáp án trước khi nộp</li>
+            </ul>
+          </li>
+          <li><strong>Câu tự luận:</strong> Nhập nội dung vào ô trống
+            <ul>
+              <li>Có thể chỉnh sửa trước khi nộp</li>
+            </ul>
+          </li>
+          <li>Dùng "Câu tiếp theo/Câu trước" để di chuyển</li>
+          <li>Xem trạng thái câu hỏi qua bảng điều hướng</li>
+          <li>Bấm "Nộp bài" khi hoàn tất</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+<script>
+function toggleSidebar(event) {
+  // Ngăn sự kiện lan sang logo
+  if (event) event.stopPropagation();
+
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle("collapsed");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const sidebar = document.getElementById("sidebar");
+  const logoImg = document.querySelector(".logo img.objects");
+
+  logoImg.addEventListener("click", (event) => {
+    // Nếu sidebar đang thu gọn → mở rộng lại
+    if (sidebar.classList.contains("collapsed")) {
+      sidebar.classList.remove("collapsed");
+    } else {
+      // Nếu đang mở → về trang chủ
+      window.location.href = "../Trang Chủ.html";
+    }
+  });
+
+  // Gắn lại listener cho nút thu gọn
+  const toggleBtn = document.querySelector(".open-close");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", toggleSidebar);
+  }
+});
+
+  function toggleDropdown() {
+    const submenu = document.getElementById("submenu");
+    const arrow = document.getElementById("arrow");
+    submenu.classList.toggle("open");
+    arrow.classList.toggle("rotate");
+  }
+
+  function logout() {
+    if (confirm("Bạn có chắc muốn đăng xuất không?")) {
+      window.location.href = "../../Đăngnhập.sv.html";
+    }
+  }
+</script>
+</body>
+</html>

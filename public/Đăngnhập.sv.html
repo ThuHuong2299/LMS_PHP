@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./student/CSS/DN.style.css">
+  <base href="./student/assets/">
+  <title>Đăng nhập</title>
+  <style>
+    body {
+      margin: 0px;
+    }
+    .scene {
+      position: absolute;
+      width: 114px;
+      height: 60px;
+      top: 340px;
+      left: 180px;
+    }
+
+    /* Eyes */
+    .eye {
+      position: absolute;
+      width: 18px;
+      height: 22px;
+      background: rgb(0, 0, 0);
+      border-radius: 50%;
+      top: 35px;
+      overflow: hidden;
+    }
+
+    .eye-left {
+      left: 20px;
+    }
+
+    .eye-right {
+      right: 20px;
+    }
+
+    .pupil {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ffffff;
+      border-radius: 50%;
+      top: 6px;
+      left: 4px;
+      transition: all 0.1s ease;
+    }
+
+    /* Input Fields */
+    .frame-1321316888,
+    .frame-1321316889 {
+      position: relative;
+    }
+
+    .frame-1321316888 input,
+    .frame-1321316889 input {
+      width: 100%;
+      background: transparent;
+      color: #000000;
+      font-family: "BeVietnamPro-SemiBold", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      outline: none;
+      border: none;
+    }
+
+    .frame-1321316888 input::placeholder,
+    .frame-1321316889 input::placeholder {
+      color: #848484;
+    }
+
+    /* Override autofill background color */
+    .frame-1321316888 input:-webkit-autofill,
+    .frame-1321316889 input:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px #ededed inset !important;
+      -webkit-text-fill-color: #000000 !important;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
+    .frame-1321316888 input:-webkit-autofill:hover,
+    .frame-1321316889 input:-webkit-autofill:hover,
+    .frame-1321316888 input:-webkit-autofill:focus,
+    .frame-1321316889 input:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0 1000px #ededed inset !important;
+      -webkit-text-fill-color: #000000 !important;
+    }
+
+    /* Password Toggle Icon */
+    .password-toggle {
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.2s;
+    }
+
+    .password-toggle:hover {
+      opacity: 0.7;
+    }
+
+    .password-toggle svg {
+      width: 20px;
+      height: 20px;
+      fill: #848484;
+    }
+
+    /* Adjust padding for password field to make room for icon */
+    .frame-1321316889 {
+      padding-right: 60px !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="desktop-1">
+    <img class="vector" src="vector0.svg" />
+    <img class="frame-1321316894" src="frame-13213168940.svg" />
+    <div class="scene">
+      <div class="eye eye-left">
+        <div class="pupil"></div>
+      </div>
+      <div class="eye eye-right">
+        <div class="pupil"></div>
+      </div>
+    </div>
+    <div class="frame-1321316893">
+      <div class="frame-1321316891">
+        <div class="ng-nh-p">Đăng nhập</div>
+        <div class="frame-1321316887">
+          <div class="s-p-thi-r-i-m-c-n-ch-a-v-o">
+            Sắp thi rồi mà còn chưa vào
+          </div>
+          <div class="frame-1321316886">
+            <img class="objects" src="objects0.svg" />
+            <div class="earn-lab">earn Lab</div>
+          </div>
+        </div>
+      </div>
+      <div class="frame-1321316892">
+        <div class="section">
+          <div class="tab-slider"></div>
+          <div class="frame-668">
+            <div class="gi-ng-vi-n">Giảng viên</div>
+          </div>
+          <div class="frame-669">
+            <div class="sinh-vi-n">Sinh viên</div>
+          </div>
+        </div>
+        <div class="frame-1321316890">
+          <div class="frame-1321316888">
+            <input type="email" id="emailInput" placeholder="Email" autocomplete="email">
+          </div>
+          <div class="frame-1321316889">
+            <input type="password" id="passwordInput" placeholder="Mật khẩu" autocomplete="current-password">
+            <div class="password-toggle" onclick="togglePassword()">
+              <svg id="eyeIcon" viewBox="0 0 24 24">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="frame-13213168892" onclick="handleLogin()">
+          <div class="v-o-h-c-ngay">Vào học ngay !!!!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Eye tracking functionality
+    const pupils = document.querySelectorAll('.pupil');
+    const eyes = document.querySelectorAll('.eye');
+
+    document.addEventListener('mousemove', (e) => {
+      pupils.forEach((pupil, index) => {
+        const eye = eyes[index];
+        const eyeRect = eye.getBoundingClientRect();
+        const eyeCenterX = eyeRect.left + eyeRect.width / 2;
+        const eyeCenterY = eyeRect.top + eyeRect.height / 2;
+
+        const angle = Math.atan2(e.clientY - eyeCenterY, e.clientX - eyeCenterX);
+
+        const maxDistance = 4;
+        const pupilX = Math.cos(angle) * maxDistance;
+        const pupilY = Math.sin(angle) * maxDistance;
+
+        pupil.style.transform = `translate(${pupilX}px, ${pupilY}px)`;
+      });
+    });
+
+    // Tab switching với animation
+    const teacherTab = document.querySelector('.frame-668');
+    const slider = document.querySelector('.tab-slider');
+    let isTransitioning = false;
+
+    teacherTab.addEventListener('click', () => {
+      if (isTransitioning) return;
+      
+      isTransitioning = true;
+      slider.style.transition = 'transform 0.2s ease';
+      slider.style.transform = 'translateX(0)';
+      
+      setTimeout(() => {
+        window.location.href = '../../Đăngnhập.gv.html';
+      }, 200);
+    });
+
+    // Password toggle functionality
+    let passwordVisible = false;
+
+    function togglePassword() {
+      const passwordInput = document.getElementById('passwordInput');
+      const eyeIcon = document.getElementById('eyeIcon');
+      
+      passwordVisible = !passwordVisible;
+      
+      if (passwordVisible) {
+        passwordInput.type = 'text';
+        // Icon mắt có gạch chéo (ẩn)
+        eyeIcon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>';
+      } else {
+        passwordInput.type = 'password';
+        // Icon mắt bình thường (hiện)
+        eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+      }
+    }
+
+    // Login handler
+    function handleLogin() {
+      const email = document.getElementById('emailInput').value;
+      const password = document.getElementById('passwordInput').value;
+      
+      if (!email || !password) {
+        alert('Vui lòng nhập đầy đủ email và mật khẩu!');
+        return;
+      }
+      
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('Email không hợp lệ!');
+        return;
+      }
+      
+      console.log('Login attempt:', { email, password });
+      alert('Đăng nhập thành công!');
+      window.location.href='../Trang%20Chủ.html';
+    }
+
+    // Enter key support
+    document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        handleLogin();
+      }
+    });
+
+    document.getElementById('emailInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        document.getElementById('passwordInput').focus();
+      }
+    });
+  </script>
+</body>
+
+</html>

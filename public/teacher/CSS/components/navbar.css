@@ -1,0 +1,102 @@
+/* NAVBAR COMPONENT */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-width);
+  right: 0;
+  height: var(--header-height);
+  background: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border-light);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl);
+  padding: 0 var(--spacing-xl);
+  z-index: 999;
+  transition: left var(--transition-normal);
+}
+
+body:has(.sidebar--collapsed) .navbar {
+  left: var(--sidebar-collapsed-width);
+}
+
+.navbar__search {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  flex: 0 0 300px;
+}
+
+.navbar__search img {
+  width: 20px;
+  height: 20px;
+}
+
+.navbar__search input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: var(--font-size-md);
+}
+
+.navbar__user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-left: auto;
+}
+
+.navbar__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-round);
+}
+
+.navbar__name {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-md);
+}
+
+.navbar__role {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.navbar__breadcrumb {
+  position: absolute;
+  bottom: -32px;
+  left: var(--spacing-xl);
+  display: flex;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+/* Ẩn breadcrumb nếu chỉ có 1 item (trang chủ) */
+.navbar__breadcrumb:has(.breadcrumb__current:only-child) {
+  display: none;
+}
+
+.breadcrumb__item {
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.breadcrumb__item:hover {
+  color: var(--color-primary);
+}
+
+.breadcrumb__separator {
+  color: var(--color-text-secondary);
+}
+
+.breadcrumb__current {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Offset content cho navbar - giảm padding để content gần navbar hơn */
+body {
+  padding-top: calc(var(--header-height) + 16px);
+}

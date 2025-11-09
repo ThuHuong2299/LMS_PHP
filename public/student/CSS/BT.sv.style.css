@@ -1,0 +1,423 @@
+/* ===== GLOBAL STYLES ===== */
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+}
+
+/* ===== SIDEBAR ===== */
+.side-bar {
+  width: 250px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.side-bar.collapsed {
+  width: 80px;
+}
+
+.side-bar.collapsed .earn-lab,
+.side-bar.collapsed .side-text,
+.side-bar.collapsed .options {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.side-bar.collapsed .tab-side-bar,
+.side-bar.collapsed .tab-side-bar2 {
+  justify-content: center;
+}
+
+/* Logo Section */
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  transition: all 0.3s ease;
+  width: 240px;
+  height: 140px;
+  flex-shrink: 0;
+}
+
+.side-bar.collapsed .logo {
+  padding: 8px;
+}
+
+.objects {
+  width: 56.55px;
+  height: 58.5px;
+  overflow: visible;
+}
+
+.earn-lab {
+  color: #000000;
+  text-align: left;
+  font-family: "BricolageGrotesque-Bold", sans-serif;
+  font-size: 21.38px;
+  font-weight: 700;
+  margin-top: 18px;
+  width: 120px;
+  transition: opacity 0.3s ease;
+}
+
+/* Toggle Button */
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  margin-top: 5px;
+  display: none;
+}
+
+.side-bar.collapsed .toggle-btn {
+  display: block;
+}
+
+.open-close {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  overflow: visible;
+  cursor: ew-resize;
+}
+
+/* Navigation Options */
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+/* Tab Styles */
+.tab-side-bar1,
+.tab-side-bar2,
+.tab-side-bar3,
+.tab-side-bar4,
+.tab-side-bar5,
+.tab-side-bar11 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  height: 50px;
+  width: 240px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.tab-side-bar1 {
+  background-color: #e5f0ff;
+}
+
+.tab-side-bar1:hover,
+.tab-side-bar2:hover,
+.tab-side-bar3:hover,
+.tab-side-bar4:hover,
+.tab-side-bar5:hover,
+.tab-side-bar11:hover {
+  background-color: #e5f0ff;
+}
+
+.study {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.side-text {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  width: 200px;
+}
+
+/* Submenu */
+.submenu {
+  list-style: none;
+  padding-left: 15px;
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.submenu.open {
+  max-height: 500px;
+}
+
+.submenu li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  height: 50px;
+  width: 240px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submenu li:hover {
+  background-color: #e5f0ff;
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.arrow.rotate {
+  transform: rotate(180deg);
+}
+.logout-section {
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  width: 250px;
+}
+.side-bar.collapsed .logout-section {
+ display: none;
+}
+.logout-btn {
+  color: rgb(0, 0, 0);
+  border: none;
+  width: 245px;
+  left: 0px;
+  padding: 5px 5px;
+  font-size: 20px;
+  cursor: pointer;
+  border-width: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background-color: #ffffff;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #ce8787;
+}
+/* ===== MAIN CONTENT ===== */
+.th-ng-tin-b-i-gi-ng {
+  display: flex;
+  background: #ffffff;
+  position: relative;
+  flex: 1;
+}
+
+/* Header Section */
+.frame-48095508 {
+  display: flex;
+  flex-direction: row;
+  gap: 22px;
+  align-items: center;
+  position: absolute;
+  right: 40px;
+  top: 32px;
+}
+
+.ellipse-50 {
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.frame-48095507 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+.nguy-n-cao-k-duy-n {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-SemiBold", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+._23-d-192001 {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  align-self: stretch;
+}
+
+/* Page Title */
+.ti-ng-anh-th-ng-m-i-1 {
+  color: #3293f9;
+  text-align: left;
+  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  position: absolute;
+  left: 40px;
+  top: 47px;
+}
+
+/* Section Headers */
+.frame-1321316834 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  top: 133px;
+}
+
+.t-n-b-i-t-p {
+  color: #000000;
+  text-align: left;
+  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  flex: 1;
+  height: 50px;
+}
+
+.h-n-n-p-23-10-2025 {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-size: 20px;
+  line-height: 100%;
+  font-weight: 600;
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  top: 192px;
+}
+
+.text {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  position: absolute;
+  left: 306px;
+  right: 40px;
+  top: 209px;
+}
+
+/* ===== EXERCISE CARD ===== */
+.frame-1321316825 {
+  border-radius: 18px;
+  border: 1px solid #dbd7d7;
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: flex-start;
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  top: 241px;
+}
+
+.frame-1321316824 {
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.n-i-dung-c-u-h-i-sample-questiion-1-about-something {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-size: 24px;
+  line-height: 100%;
+  font-weight: 400;
+  align-self: stretch;
+}
+
+.frame-1321316823 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+.frame-1321316819 {
+  border-radius: 18px;
+  border: 1px solid #d9d9d9;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 196px;
+}
+
+.frame {
+  width: 134px;
+  height: 134px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+/* Submit Section */
+.frame-1321316835 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+.frame-1321316827 {
+  background: #3293f9;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.frame-1321316827:hover {
+  background: #2080e0;
+}
+
+.n-p-b-i {
+  color: #ffffff;
+  text-align: left;
+  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-size: 20px;
+  line-height: 100%;
+  font-weight: 600;
+}

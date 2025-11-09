@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <base href="./assets/">
+  
+  <link rel="stylesheet" href="/public/teacher/CSS/components/shared.css">
+  <link rel="stylesheet" href="/public/teacher/CSS/components/sidebar.css">
+  <link rel="stylesheet" href="/public/teacher/CSS/components/navbar.css">
+  <link rel="stylesheet" href="/public/teacher/CSS/CIstyle.css">
+  
+  <title>Quản lý lớp học - Learn Lab</title>
+</head>
+
+<body>
+  <div id="sidebar-container"></div>
+  <div id="navbar-container"></div>
+  
+  <div class="container">
+    <div class="main-content">
+
+      <!-- Course Info -->
+      <div class="course-info">
+        <div class="course-title">Các Hệ thống thông tin phổ biến trong doanh nghiệp</div>
+        <div class="course-code">213_eCIT2320_09</div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <a href="#" class="tab active" data-tab="lessons">Bài giảng</a>
+        <a href="#" class="tab" data-tab="assignments">Bài tập</a>
+        <a href="#" class="tab" data-tab="exams">Bài kiểm tra</a>
+        <a href="#" class="tab" data-tab="notifications">Thông báo</a>
+        <a href="#" class="tab" data-tab="documents">Tài liệu</a>
+        <a href="#" class="tab" data-tab="students">Sinh viên</a>
+      </div>
+
+      <!-- Lessons Section (mặc định hiển thị) -->
+      <!-- Lessons Section -->
+      <div class="content-section active" id="lessons-section">
+        <div class="page-header">
+          <h1 class="page-title">Danh sách bài giảng</h1>
+        </div>
+        <div class="chapter">
+          <div class="chapter-header" onclick="toggleChapter(this)"> <span>Chương 1: Tên chương</span> <img
+              class="chapter-arrow" src="chapter-arrow.svg" alt="arrow"> </div>
+          <div class="chapter-content open">
+            <div class="lesson-item">
+              <div class="lesson-thumbnail"></div>
+              <div class="lesson-info">
+                <div class="lesson-title">1.1. Tên mục lục</div>
+                <div class="lesson-desc">Nội dung ngắn gọn của bài giảng</div>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-thumbnail"></div>
+              <div class="lesson-info">
+                <div class="lesson-title">1.2. Tên mục lục</div>
+                <div class="lesson-desc">Nội dung ngắn gọn của bài giảng</div>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-thumbnail"></div>
+              <div class="lesson-info">
+                <div class="lesson-title">1.3. Tên mục lục</div>
+                <div class="lesson-desc">Nội dung ngắn gọn của bài giảng</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chapter">
+          <div class="chapter-header" onclick="toggleChapter(this)"> <span>Chương 2: Tên chương</span> <img
+              class="chapter-arrow" src="chapter-arrow.svg" alt="arrow"> </div>
+          <div class="chapter-content open">
+            <div class="lesson-item">
+              <div class="lesson-thumbnail"></div>
+              <div class="lesson-info">
+                <div class="lesson-title">2.1. Tên mục lục</div>
+                <div class="lesson-desc">Nội dung ngắn gọn của bài giảng</div>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-thumbnail"></div>
+              <div class="lesson-info">
+                <div class="lesson-title">2.2. Tên mục lục</div>
+                <div class="lesson-desc">Nội dung ngắn gọn của bài giảng</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Assignments -->
+      <div id="assignments-section" class="content-section">
+        <div class="page-header">
+          <h1 class="page-title">Danh sách bài tập</h1>
+          <button class="btn-add" onclick="openModal('assignment')">+ Thêm mới</button>
+        </div>
+
+        <div class="assignment-card"  onclick="window.location.href='../WorkDashBoard.html'">
+          <div class="assignment-details">
+            <div class="assignment-meta">Chương 1 - 1.3. Tên mục lục</div>
+            <div class="assignment-title">Bài tập Các hệ thống thông tin</div>
+            <div class="assignment-stats"><span>25 câu</span>
+              <div class="dot"></div><span>20/30 lớp đã làm</span>
+            </div>
+          </div>
+          <div class="deadline">
+            <div class="deadline-label">Hạn nộp</div>
+            <div class="deadline-date">12:00 23/10/2025</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exams -->
+      <div id="exams-section" class="content-section">
+        <div class="page-header">
+          <h1 class="page-title">Danh sách bài kiểm tra</h1>
+          <button class="btn-add" onclick="openModal('exam')">+ Thêm mới</button>
+        </div>
+
+        <div class="assignment-card" onclick="window.location.href='../TestDashBoard.html'">
+          <div class="assignment-details">
+            <div class="assignment-meta">Chương 1 - 1.3. Tên mục lục</div>
+            <div class="assignment-title">Bài kiểm tra 01</div>
+            <div class="assignment-stats"><span>25 câu</span>
+              <div class="dot"></div><span>20/30 lớp đã làm</span>
+            </div>
+          </div>
+          <div class="deadline">
+            <div class="deadline-label">Hạn nộp</div>
+            <div class="deadline-date">12:00 23/10/2025</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notifications (important: inside main-content) -->
+      <div id="notifications-section" class="content-section">
+        <div class="page-header">
+          <h1 class="page-title">Danh sách thông báo</h1>
+          <button class="btn-add" onclick="openNotificationModal()">+ Thêm mới</button>
+        </div>
+
+        <div id="notificationsList">
+          <div class="notification-card">
+            <div class="notification-left">
+              <div class="notification-icon">
+                <img src="noti.svg" alt="icon" />
+              </div>
+              <div class="notification-content">
+                <div class="notification-text">Do lịch cá nhân của giảng viên, công tác giảng dạy sẽ chuyển sang hình
+                  thức trực tuyến.</div>
+                <div class="notification-views">32 đã xem</div>
+              </div>
+            </div>
+            <div class="notification-right">
+              <div class="notification-menu" onclick="deleteNotification(this)">⋮</div>
+              <div class="notification-time">Mới đây</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Documents -->
+      <div id="documents-section" class="content-section">
+        <div class="page-header">
+          <h1 class="page-title">Danh sách tài liệu</h1>
+          <button class="btn-add">+ Thêm mới</button>
+        </div>
+
+        <div class="document-list">
+          <div class="document-card">
+            <div class="document-icon pdf">PDF</div>
+            <div class="document-info">
+              <div class="document-title">Báo cáo hệ thống thông tin</div>
+              <div class="document-actions">
+                <img src="download.svg" alt="Tải xuống" />
+                <img src="3cham.svg" alt="Xem" />
+              </div>
+            </div>
+          </div>
+
+          <div class="document-card">
+            <div class="document-icon docx">DOCX</div>
+            <div class="document-info">
+              <div class="document-title">Giáo trình quản trị dữ liệu</div>
+              <div class="document-actions">
+                <img src="download.svg" alt="Tải xuống" />
+                <img src="3cham.svg" alt="Xem" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Students Section -->
+      <div class="content-section" id="students-section">
+        <div class="page-header">
+          <h1 class="page-title">Danh sách học sinh</h1>
+          <button class="btn-add" onclick="addStudent()">+ Thêm mới</button>
+        </div>
+
+        <table class="student-table">
+          <thead class="table-header">
+            <tr>
+              <th style="width: 200px;">Họ và tên</th>
+              <th>Tiến độ học tập</th>
+              <th style="width: 180px;">Last Updated</th>
+            </tr>
+          </thead>
+          <tbody id="studentList">
+            <!-- Students will be rendered here -->
+          </tbody>
+        </table>
+
+        <div class="table-footer">
+          <div class="pagination-info">1-5 của 36</div>
+          <div class="pagination-buttons">
+            <button class="page-btn" onclick="previousPage()">◀</button>
+            <button class="page-btn" onclick="nextPage()">▶</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- end main-content -->
+  </div><!-- end container -->
+
+  <!-- Modal: Tạo bài tập -->
+  <div class="modal" id="assignmentModal">
+    <div class="modal-content-new">
+      <div class="modal-header-new">
+        <div class="modal-title-new">Tạo bài tập</div>
+        <button class="btn-close-new" onclick="closeModal('assignmentModal')">×</button>
+      </div>
+      <div class="modal-body-new">
+        <div class="form-row-horizontal">
+          <label class="form-label-new">Chương giao:</label>
+          <div class="form-select-wrapper">
+            <select class="form-select-input">
+              <option>Chương 1 - Hệ thống thông tin</option>
+              <option>Chương 2 - Quản trị dữ liệu</option>
+              <option>Chương 3 - Phân tích hệ thống</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row-horizontal">
+          <label class="form-label-new">Tiêu đề:</label>
+          <input type="text" class="form-input" id="assignmentTitle" placeholder="Thông báo nghỉ học">
+        </div>
+        <div class="form-row-horizontal">
+          <label class="form-label-new">Thời gian làm bài:</label>
+          <input type="datetime-local" class="form-input" id="assignmentDeadline">
+        </div>
+        
+        <div id="assignmentQuestionsContainer">
+          <div class="question-wrapper">
+            <div class="question-card-new">
+              <div class="question-card-inner">
+                <div class="question-header-section">
+                  <input type="text" placeholder="Nội dung câu hỏi" class="question-title-input">
+                </div>
+                <div class="question-description-section">
+                  <textarea placeholder="Miêu tả ngắn" rows="2" class="question-textarea"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="question-side-actions">
+              <button class="btn-action-circle" onclick="addAssignmentQuestion()" title="Thêm câu hỏi">
+                <img src="add.svg" alt="Thêm câu hỏi">
+              </button>
+              <button class="btn-action-circle" onclick="deleteAssignmentQuestion(this)" title="Xóa câu hỏi">
+                <img src="delete.svg" alt="Xóa câu hỏi">
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="exam-modal-footer">
+          <button class="exam-btn-cancel" onclick="closeModal('assignmentModal')">Hủy</button>
+          <button class="exam-btn-save" onclick="saveAssignment()">Lưu bài tập</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Tạo Bài Kiểm Tra -->
+  <div class="modal" id="examModal">
+    <div class="exam-popup">
+      <div class="exam-popup-header">
+        <div class="exam-popup-title">Tạo bài kiểm tra</div>
+        <button class="exam-close-btn" onclick="closeModal('examModal')">×</button>
+      </div>
+
+      <div class="exam-popup-body">
+        <div class="exam-form-group">
+          <label class="exam-form-label">Tiêu đề:</label>
+          <input type="text" class="exam-form-input" placeholder="Thông báo nghỉ học">
+        </div>
+
+        <div class="exam-form-group">
+          <label class="exam-form-label">Thời lượng:</label>
+          <input type="text" class="exam-form-input" placeholder="VD: 60 phút">
+        </div>
+
+        <div class="exam-form-group">
+          <label class="exam-form-label">Thời gian:</label>
+          <input type="datetime-local" class="exam-form-input">
+        </div>
+
+        <div id="questionsContainer">
+          <div class="exam-question-wrapper">
+            <div class="exam-question-card">
+              <div class="exam-question-border"></div>
+              <div class="exam-question-content">
+                <div class="exam-question-input-wrapper">
+                  <input type="text" class="exam-question-input" placeholder="Nội dung câu hỏi">
+                </div>
+
+                <div class="exam-option-wrapper">
+                  <div class="exam-radio-btn checked" onclick="toggleExamRadio(this)"></div>
+                  <input type="text" class="exam-option-input correct" placeholder="Lựa chọn đúng">
+                </div>
+
+                <div class="exam-option-wrapper">
+                  <div class="exam-radio-btn" onclick="toggleExamRadio(this)"></div>
+                  <input type="text" class="exam-option-input normal" placeholder="Lựa chọn 1">
+                </div>
+
+                <button class="exam-add-option-btn" onclick="addExamOption(this)">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 5V19M5 12H19" stroke="#3293F9" stroke-width="2" stroke-linecap="round" />
+                  </svg>
+                  Thêm lựa chọn
+                </button>
+              </div>
+            </div>
+
+            <div class="exam-action-buttons">
+              <button class="exam-icon-btn" onclick="addExamQuestion()" title="Thêm câu hỏi">
+                <img src="add.svg" alt="Thêm" />
+              </button>
+              <button class="exam-icon-btn" onclick="deleteExamQuestion(this)" title="Xóa câu hỏi">
+                <img src="delete.svg" alt="Xóa" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="exam-modal-footer">
+          <button class="exam-btn-cancel" onclick="closeModal('examModal')">Hủy</button>
+          <button class="exam-btn-save" onclick="submitExam()">Lưu bài kiểm tra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Notification -->
+  <div id="notificationModal" class="modal" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Tạo thông báo mới</div><button class="btn-close"
+          onclick="closeNotificationModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Tiêu đề</label>
+          <input id="notificationTitle" class="form-input" placeholder="Nhập tiêu đề">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nội dung</label>
+          <textarea id="notificationContent" class="form-textarea" rows="4"
+            placeholder="Nhập nội dung thông báo..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closeNotificationModal()">Hủy</button>
+        <button class="btn-save" onclick="saveNotification()">Lưu</button>
+      </div>
+    </div>
+  <!-- Modal: Thêm tài liệu mới -->
+  <div id="documentModal" class="modal">
+    <div class="modal-content-document">
+      <div class="modal-header-document">
+        <div class="modal-title">Thêm tài liệu mới</div>
+        <button class="btn-close" onclick="closeDocumentModal()">×</button>
+      </div>
+      <div class="modal-body-document">
+        <div class="form-group">
+          <label class="form-label">Tên tài liệu:</label>
+          <input id="documentTitle" class="form-input" placeholder="Nội dung của thông báo...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tài liệu:</label>
+          <div class="upload-box">
+            <div class="upload-icon-wrapper">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <path d="M24 8V32M24 32L16 24M24 32L32 24" stroke="#C6C6C6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M8 40H40" stroke="#C6C6C6" stroke-width="3" stroke-linecap="round" />
+              </svg>
+            </div>
+            <span class="upload-text">Đính kèm tài liệu</span>
+            <input type="file" class="upload-input" id="documentFile" accept=".pdf,.doc,.docx,.ppt,.pptx">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer-document">
+        <button class="btn-cancel" onclick="closeDocumentModal()">Hủy</button>
+        <button class="btn-save" onclick="saveDocument()">Lưu</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/public/teacher/js/CIscript.js"></script>
+  <script type="module" src="/public/teacher/js/main.js"></script>
+</body>
+</html>
