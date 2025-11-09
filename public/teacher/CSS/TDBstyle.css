@@ -1,136 +1,36 @@
-body {
-  display: flex;
-  margin: 0;
-  padding: 0;
-}
+/* ==================== BASE STYLES ==================== */
 * {
   box-sizing: border-box;
 }
-.testdash {
-  display: flex;
-  background: #ffffff;
-  padding: 40px;
-  min-height: 100vh;
-  flex: 1;
-  position: relative;
-  box-sizing: border-box;
-  background: linear-gradient(to right, #f6f5f5 0%, #ffffff 10%, white 10%, white 100%);
-  margin-left: 250px; /* Khoảng cách cho sidebar */
-  transition: margin-left 0.3s ease;
-}
 
-/* Điều chỉnh khi sidebar collapsed */
-body:has(.sidebar--collapsed) .testdash {
-  margin-left: 80px;
-}
+/* ==================== REMOVED - NOW USING shared.css .page-container ==================== */
+/* Old .testdash styles removed - gradient background, position absolute conflicts removed */
+
+/* Search & User info now handled by navbar component - styles removed */
 .search {
-  background: #f5f4f4;
-  border-radius: 36px;
-  border-style: solid;
-  border-color: transparent;
-  border-width: 1px;
-  padding: 8px 15px 8px 15px;
-  display: flex;
-  flex-direction: row;
-  gap: 23px;
-  align-items: center;
-  justify-content: flex-start;
-  width: 746px;
-  position: absolute;
-  left: 40px;
-  top: 32px;
-}
-.search2 {
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  position: relative;
-  overflow: visible;
-}
-.t-m-ki-m {
-  color: #979797;
-  text-align: left;
-  font-family: var(--side-title-font-family, "Quicksand-Medium", sans-serif);
-  font-size: var(--side-title-font-size, 24px);
-  font-weight: var(--side-title-font-weight, 500);
-  position: relative;
-  border: none;          
-  outline: none; 
-  background: transparent; 
-}
-.logout-section {
-  position: fixed;
-  bottom: 0px;
-  left: 0;
-  width: 250px;
-}
-.side-bar.collapsed .logout-section {
- display: none;
-}
-.logout-btn {
-  color: rgb(0, 0, 0);
-  border: none;
-  width: 245px;
-  left: 0px;
-  padding: 5px 5px;
-  font-size: 20px;
-  cursor: pointer;
-  border-width: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  background-color: #ffffff;
-  transition: background-color 0.3s;
+  display: none; /* Hidden - navbar component handles this */
 }
 
-.logout-btn:hover {
-  background-color: #ce8787;
-}
+/* User info now handled by navbar component */
 .user {
+  display: none; /* Hidden - navbar component handles this */
+}
+
+/* ==================== PAGE SPECIFIC STYLES ==================== */
+
+/* Breadcrumb removed - can add back if needed without absolute positioning */
+
+/* Table footer - removed absolute positioning */
+.table-footer {
+  margin-top: 20px;
+  padding: 12px 0;
   display: flex;
   flex-direction: row;
-  gap: 22px;
   align-items: center;
-  justify-content: flex-start;
-  position: absolute;
-  left: 860px;
-  top: 32px;
+  justify-content: space-between;
+  width: 100%;
 }
-.ellipse-50 {
-  border-radius: 50%;
-  flex-shrink: 0;
-  width: 52px;
-  height: 52px;
-  position: relative;
-  object-fit: cover;
-}
-.user-2 {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-}
-.nguy-n-cao-k-duy-n {
-  color: #000000;
-  text-align: left;
-  font-family: "Quicksand-SemiBold", sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  position: relative;
-}
-.m-gi-ng-vi-n {
-  color: #000000;
-  text-align: left;
-  font-family: "Quicksand-Regular", sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  position: relative;
-  align-self: stretch;
-}
+
 .d-dan {
   display: flex;
   flex-direction: row;
@@ -264,37 +164,37 @@ body:has(.sidebar--collapsed) .testdash {
   position: relative;
   overflow: visible;
 }
+/* Main content container - removed absolute positioning */
 .alltestinfo {
   display: flex;
   flex-direction: column;
   gap: 25px;
-  align-items: flex-end;
-  justify-content: flex-start;
-  width: 1098px;
-  position: absolute;
-  left: 40px;
-  top: 165px;
-}
-.testaval {
-  display: flex;
-  flex-direction: row;
-  gap: 25px;
-  align-items: center;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1200px;
 }
 
+/* ==================== STATISTICS CARDS SECTION ==================== */
+.testaval {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+/* Responsive: Stack on mobile */
+@media (max-width: 768px) {
+  .testaval {
+    grid-template-columns: 1fr;
+  }
+}
 
 .sobaichuacham {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  flex-shrink: 0;
-  width: 477px;
-  position: relative;
+  width: 100%;
 }
 
 .s-b-i-ch-a-ch-m {
@@ -321,36 +221,36 @@ body:has(.sidebar--collapsed) .testdash {
   overflow: visible;
 }
 .baicham {
-  background: #e5f0ff;
-  border-radius: 14px;
-  padding: 12px 15px 12px 15px;
+  background: var(--color-bg-active, #e5f0ff);
+  border-radius: var(--radius-md, 14px);
+  padding: 16px 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  flex-shrink: 0;
-  width: 540px;
-  position: relative;
+  width: 100%;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--transition-fast, 0.2s ease);
+  box-shadow: var(--shadow-sm);
 }
 
 .baicham.inactive {
-  background-color: rgb(237, 237, 237);
+  background-color: var(--color-bg-secondary, #f6f5f5);
 }
 
 .baicham:hover {
-  opacity: 0.8;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
+
 .sobaidacham {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  flex-shrink: 0;
-  width: 455px;
-  position: relative;
+  width: 100%;
 }
+
 .s-b-i-ch-m {
   color: #000000;
   text-align: left;
@@ -359,6 +259,7 @@ body:has(.sidebar--collapsed) .testdash {
   font-weight: 600;
   position: relative;
 }
+
 .frame2 {
   flex-shrink: 0;
   width: 24px;
@@ -366,29 +267,45 @@ body:has(.sidebar--collapsed) .testdash {
   position: relative;
   overflow: visible;
 }
+
+/* ==================== STATUS CARDS GRID ==================== */
 .teststatus {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  width: 100%;
 }
+
+/* Responsive: Stack on mobile */
+@media (max-width: 768px) {
+  .teststatus {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .teststatus {
+    grid-template-columns: 1fr;
+  }
+}
+
 .average {
-  border-radius: 16px;
-  border-style: solid;
-  border-color: #979797;
-  border-width: 1px;
-  padding: 25px;
+  border-radius: var(--radius-lg, 16px);
+  border: 1px solid var(--color-border-light, #dddddd);
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 21px;
+  gap: 16px;
   align-items: flex-start;
   justify-content: center;
-  flex-shrink: 0;
-  width: 269px;
-  position: relative;
+  width: 100%;
+  transition: all var(--transition-fast);
+  background: var(--color-bg-primary);
+}
+
+.average:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
 }
 .averpoint {
   display: flex;
@@ -427,25 +344,25 @@ body:has(.sidebar--collapsed) .testdash {
   font-weight: 600;
 }
 .highest {
-  border-radius: 16px;
-  border-style: solid;
-  border-color: #979797;
-  border-width: 1px;
-  padding: 25px;
-  flex-shrink: 0;
-  width: 253px;
-  height: 120px;
-  position: relative;
+  border-radius: var(--radius-lg, 16px);
+  border: 1px solid var(--color-border-light, #dddddd);
+  padding: 24px;
+  width: 100%;
+  transition: all var(--transition-fast);
+  background: var(--color-bg-primary);
 }
+
+.highest:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
 .highestpoint {
   display: flex;
   flex-direction: column;
   gap: 12px;
   align-items: flex-start;
   justify-content: flex-start;
-  position: absolute;
-  left: 25px;
-  top: 25px;
 }
 .i-m-cao-nh-t {
   color: #000000;
@@ -474,19 +391,22 @@ body:has(.sidebar--collapsed) .testdash {
   font-weight: 600;
 }
 .lowest {
-  border-radius: 16px;
-  border-style: solid;
-  border-color: #979797;
-  border-width: 1px;
-  padding: 25px;
+  border-radius: var(--radius-lg, 16px);
+  border: 1px solid var(--color-border-light, #dddddd);
+  padding: 24px;
   display: flex;
-  flex-direction: row;
-  gap: 21px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  width: 264px;
-  position: relative;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  transition: all var(--transition-fast);
+  background: var(--color-bg-primary);
+}
+
+.lowest:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
 }
 .lowestpoint {
   display: flex;
@@ -524,28 +444,30 @@ body:has(.sidebar--collapsed) .testdash {
   font-weight: 600;
 }
 .sum {
-  border-radius: 16px;
-  border-style: solid;
-  border-color: #979797;
-  border-width: 1px;
-  padding: 25px;
+  border-radius: var(--radius-lg, 16px);
+  border: 1px solid var(--color-border-light, #dddddd);
+  padding: 24px;
   display: flex;
-  flex-direction: row;
-  gap: 21px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  width: 234px;
-  position: relative;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  transition: all var(--transition-fast);
+  background: var(--color-bg-primary);
 }
+
+.sum:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
 .sumtest {
   display: flex;
   flex-direction: column;
   gap: 12px;
   align-items: flex-start;
   justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
 }
 .t-ng-b-i-n-p {
   color: #000000;
@@ -573,41 +495,40 @@ body:has(.sidebar--collapsed) .testdash {
   font-size: 16px;
   font-weight: 600;
 }
+/* ==================== TABLE SECTION ==================== */
 .testinfo {
   display: flex;
   flex-direction: column;
-  gap: 0px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+  gap: 0;
+  width: 100%;
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 .table-head-row {
-  background: #ebebeb;
-  border-radius: 8px 8px 0px 0px;
-  border-style: solid;
-  border-color: rgba(6, 6, 6, 0.12);
-  border-width: 0px 0px 1px 0px;
-  display: flex;
-  flex-direction: row;
+  background: var(--color-bg-secondary, #ebebeb);
+  border-bottom: 1px solid var(--color-border-light);
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1.5fr;
   align-items: center;
-  justify-content: space-between;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+  width: 100%;
 }
-.table-head {
-  background: rgba(255, 0, 0, 0);
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .table-head-row {
+    grid-template-columns: 1.5fr 1fr 0.8fr 1fr;
+    font-size: 14px;
+  }
+}
+
+.table-head,
+.table-head2,
+.table-head3 {
   padding: 16px;
   display: flex;
-  flex-direction: row;
-  gap: 0px;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  width: 200px;
-  position: relative;
 }
 .head {
   color: #000000;
@@ -987,4 +908,85 @@ body:has(.sidebar--collapsed) .testdash {
   font-weight: 500;
   position: relative;
   width: 153px;
+}
+
+/* ==================== STUDENT TABLE ==================== */
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.student-table tbody tr {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1.5fr;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border-light);
+  transition: background var(--transition-fast);
+}
+
+.student-table tbody tr:hover {
+  background: var(--color-bg-hover, #f5f9ff);
+}
+
+@media (max-width: 768px) {
+  .student-table tbody tr {
+    grid-template-columns: 1.5fr 1fr 0.8fr 1fr;
+  }
+}
+
+/* ==================== PAGINATION ==================== */
+.pagination-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.page-btn {
+  padding: 8px 12px;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 14px;
+}
+
+.page-btn:hover {
+  background: var(--color-bg-hover);
+  border-color: var(--color-primary);
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==================== UTILITY CLASSES ==================== */
+.text-semibold {
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.text-sm {
+  font-size: var(--font-size-sm, 14px);
+}
+
+.text-md {
+  font-size: var(--font-size-md, 16px);
+}
+
+.text-lg {
+  font-size: var(--font-size-lg, 18px);
+}
+
+.text-xl {
+  font-size: var(--font-size-xl, 20px);
+}
+
+.text-xxl {
+  font-size: var(--font-size-xxl, 24px);
+}
+
+.text-xxxl {
+  font-size: 32px;
+  font-weight: var(--font-weight-semibold, 600);
 }

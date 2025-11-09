@@ -64,38 +64,6 @@ body:has(.sidebar--collapsed) .navbar {
   color: var(--color-text-secondary);
 }
 
-.navbar__breadcrumb {
-  position: absolute;
-  bottom: -32px;
-  left: var(--spacing-xl);
-  display: flex;
-  gap: var(--spacing-sm);
-  font-size: var(--font-size-sm);
-}
-
-/* Ẩn breadcrumb nếu chỉ có 1 item (trang chủ) */
-.navbar__breadcrumb:has(.breadcrumb__current:only-child) {
-  display: none;
-}
-
-.breadcrumb__item {
-  color: var(--color-text-secondary);
-  cursor: pointer;
-}
-
-.breadcrumb__item:hover {
-  color: var(--color-primary);
-}
-
-.breadcrumb__separator {
-  color: var(--color-text-secondary);
-}
-
-.breadcrumb__current {
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-medium);
-}
-
 /* Offset content cho navbar - giảm padding để content gần navbar hơn */
 body {
   padding-top: calc(var(--header-height) + 16px);

@@ -73,54 +73,6 @@ export const MENU_SIDEBAR = [
 ];
 
 /**
- * Breadcrumb mapping - định nghĩa đường dẫn breadcrumb cho mỗi trang
- * Tất cả đường dẫn sử dụng absolute path để tránh lỗi với <base> tag
- */
-export const BREADCRUMB_MAP = {
-  'TrangChu.html': [
-    { ten: 'Dashboard', duongDan: null }
-  ],
-  'Classroom.html': [
-    { ten: 'Lớp học', duongDan: null }
-  ],
-  'ClassroomInfo.html': [
-    { ten: 'Lớp học', duongDan: '/public/teacher/Classroom.html' },
-    { ten: 'Chi tiết lớp', duongDan: null }
-  ],
-  'WorkDashBoard.html': [
-    { ten: 'Lớp học', duongDan: '/public/teacher/Classroom.html' },
-    { ten: '...', duongDan: null },
-    { ten: 'Bài tập', duongDan: null }
-  ],
-  'TestDashBoard.html': [
-    { ten: 'Lớp học', duongDan: '/public/teacher/Classroom.html' },
-    { ten: '...', duongDan: null },
-    { ten: 'Bài kiểm tra', duongDan: null }
-  ],
-  'HomeWork.html': [
-    { ten: 'Lớp học', duongDan: '/public/teacher/Classroom.html' },
-    { ten: '...', duongDan: null },
-    { ten: 'Bài tập', duongDan: '/public/teacher/WorkDashBoard.html' },
-    { ten: 'Chi tiết', duongDan: null }
-  ],
-  'HomeWorkInfo.html': [
-    { ten: 'Lớp học', duongDan: '/public/teacher/Classroom.html' },
-    { ten: '...', duongDan: null },
-    { ten: 'Bài tập', duongDan: '/public/teacher/WorkDashBoard.html' },
-    { ten: 'Thông tin', duongDan: null }
-  ],
-  'ChamBai.html': [
-    { ten: 'Lớp học', duongDan: '/public/teacher/Classroom.html' },
-    { ten: '...', duongDan: null },
-    { ten: 'Bài kiểm tra', duongDan: '/public/teacher/TestDashBoard.html' },
-    { ten: 'Chấm bài', duongDan: null }
-  ],
-  'Notification.html': [
-    { ten: 'Thông báo', duongDan: null }
-  ]
-};
-
-/**
  * Lấy route hiện tại dựa trên URL
  * @returns {Object|null} Route object hoặc null nếu không tìm thấy
  */

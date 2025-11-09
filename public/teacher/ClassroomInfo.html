@@ -20,23 +20,31 @@
   <div id="sidebar-container"></div>
   <div id="navbar-container"></div>
   
-  <div class="container">
-    <div class="main-content">
+  <div class="page-container">
+      <!-- Sticky Header Wrapper -->
+      <div class="sticky-header">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb" id="contentBreadcrumb">
+          <span>Lớp học</span>
+          <span class="separator">›</span>
+          <span>Chi tiết lớp</span>
+        </div>
 
-      <!-- Course Info -->
-      <div class="course-info">
-        <div class="course-title">Các Hệ thống thông tin phổ biến trong doanh nghiệp</div>
-        <div class="course-code">213_eCIT2320_09</div>
-      </div>
+        <!-- Course Info -->
+        <div class="course-info">
+          <div class="course-title">Các Hệ thống thông tin phổ biến trong doanh nghiệp</div>
+          <div class="course-code">213_eCIT2320_09</div>
+        </div>
 
-      <!-- Tabs -->
-      <div class="tabs">
-        <a href="#" class="tab active" data-tab="lessons">Bài giảng</a>
-        <a href="#" class="tab" data-tab="assignments">Bài tập</a>
-        <a href="#" class="tab" data-tab="exams">Bài kiểm tra</a>
-        <a href="#" class="tab" data-tab="notifications">Thông báo</a>
-        <a href="#" class="tab" data-tab="documents">Tài liệu</a>
-        <a href="#" class="tab" data-tab="students">Sinh viên</a>
+        <!-- Tabs -->
+        <div class="tabs">
+          <a href="#" class="tab active" data-tab="lessons">Bài giảng</a>
+          <a href="#" class="tab" data-tab="assignments">Bài tập</a>
+          <a href="#" class="tab" data-tab="exams">Bài kiểm tra</a>
+          <a href="#" class="tab" data-tab="notifications">Thông báo</a>
+          <a href="#" class="tab" data-tab="documents">Tài liệu</a>
+          <a href="#" class="tab" data-tab="students">Sinh viên</a>
+        </div>
       </div>
 
       <!-- Lessons Section (mặc định hiển thị) -->
@@ -415,6 +423,7 @@
       </div>
     </div>
   </div>
+  </div> <!-- End page-container -->
 
   <script src="/public/teacher/js/CIscript.js"></script>
   <script type="module" src="/public/teacher/js/main.js"></script>

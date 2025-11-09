@@ -14,12 +14,25 @@ let allStudents = [];
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function () {
+  renderBreadcrumb();
   initializeTabs();
   initializeModals();
   initializeSidebar();
   generateStudents();
   renderStudents();
 });
+
+// Render Breadcrumb
+function renderBreadcrumb() {
+  const breadcrumb = document.getElementById('contentBreadcrumb');
+  if (!breadcrumb) return;
+  
+  breadcrumb.innerHTML = `
+    <a href="/public/teacher/Classroom.html" style="color: inherit; text-decoration: none;">Lớp học</a>
+    <span class="separator">›</span>
+    <span>Chi tiết lớp</span>
+  `;
+}
 
 // Tab switching
 function initializeTabs() {
