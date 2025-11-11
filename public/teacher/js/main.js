@@ -96,7 +96,7 @@ class App {
     sessionStorage.setItem('redirectAfterLogin', window.location.pathname);
     
     // Redirect
-    window.location.href = '../Đăngnhập.gv.html';
+    window.location.href = '../Login.teacher.html';
   }
 
   /**

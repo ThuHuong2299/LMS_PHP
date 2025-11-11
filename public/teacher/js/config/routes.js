@@ -41,11 +41,6 @@ export const ROUTES_PHU = {
     ten: 'Quản lý bài tập',
     parent: 'lophoc'
   },
-  DASHBOARD_BAI_KIEM_TRA: {
-    duongDan: 'TestDashBoard.html',
-    ten: 'Quản lý bài kiểm tra',
-    parent: 'lophoc'
-  },
   CHI_TIET_BAI_TAP: {
     duongDan: 'HomeWork.html',
     ten: 'Chi tiết bài tập',
@@ -54,11 +49,6 @@ export const ROUTES_PHU = {
   THONG_TIN_BAI_TAP: {
     duongDan: 'HomeWorkInfo.html',
     ten: 'Thông tin bài tập',
-    parent: 'lophoc'
-  },
-  CHAM_BAI: {
-    duongDan: 'ChamBai.html',
-    ten: 'Chấm bài',
     parent: 'lophoc'
   }
 };

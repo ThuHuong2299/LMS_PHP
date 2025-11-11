@@ -50,7 +50,7 @@ function renderStudents() {
   const currentStudents = filtered.slice(startIndex, endIndex);
 
   tbody.innerHTML = currentStudents.map(student => `
-    <div class="hs-1" data-marked="${student.marked}" onclick="window.location.href='../ChamBai.html'">
+    <div class="hs-1" data-marked="${student.marked}">
       <div class="cell-4">
         <div class="box">
           <div class="custom-table-custom-cell">

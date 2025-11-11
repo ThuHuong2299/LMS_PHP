@@ -255,7 +255,7 @@ class SidebarManager {
       this.xoaDuLieuDangNhap();
       
       // Redirect về trang đăng nhập
-      window.location.href = '../Đăngnhập.gv.html';
+      window.location.href = '../Login.teacher.html';
     }
   }
 

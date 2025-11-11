@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', renderStudents);
 // --- Đăng xuất ---
 function logout() {
   if (confirm("Bạn có chắc muốn đăng xuất không?")) {
-    window.location.href = "../Đăngnhập.gv.html";
+    window.location.href = "../Login.teacher.html";
   }
 }
 

@@ -31,16 +31,6 @@ export const API_ENDPOINTS = {
   CAP_NHAT_BAI_TAP: '/homework/:id/update',
   XOA_BAI_TAP: '/homework/:id/delete',
   
-  // Bài kiểm tra
-  LAY_DANH_SACH_BAI_KIEM_TRA: '/exam',
-  TAO_BAI_KIEM_TRA: '/exam/create',
-  CAP_NHAT_BAI_KIEM_TRA: '/exam/:id/update',
-  XOA_BAI_KIEM_TRA: '/exam/:id/delete',
-  
-  // Chấm bài
-  LAY_BAI_LAM_SINH_VIEN: '/submission/:id',
-  CHAM_DIEM: '/submission/:id/grade',
-  
   // Thông báo
   LAY_THONG_BAO: '/notifications',
   TAO_THONG_BAO: '/notifications/create',
