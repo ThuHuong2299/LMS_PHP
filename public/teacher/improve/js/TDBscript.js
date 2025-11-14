@@ -1,33 +1,8 @@
-/**
- * TESTDASHBOARD SCRIPT
- * Logic riêng cho trang TestDashBoard
- * Sidebar và các component chung đã được xử lý bởi main.js
- */
-
-// --- Tạo danh sách sinh viên mẫu ---
+// TODO: Fetch students from database
 const allStudents = [];
-const names = [
-  'Nguyễn Văn An', 'Trần Thị Bình', 'Lê Hoàng Cường', 'Phạm Minh Đức', 'Hoàng Thu Hà',
-  'Vũ Đức Khang', 'Đặng Thùy Linh', 'Bùi Quốc Minh', 'Đỗ Hồng Nhung', 'Mai Xuân Phúc',
-  'Ngô Thu Quyên', 'Phan Văn Sơn', 'Đinh Thị Trang', 'Lý Anh Tuấn', 'Trương Bảo Uyên',
-  'Dương Minh Việt', 'Tô Hải Yến', 'Võ Thanh An', 'Hồ Thu Hằng', 'Chu Đức Huy'
-];
-
-for (let i = 0; i < 36; i++) {
-  allStudents.push({
-    name: names[i % names.length],
-    id: `SV${String(i + 1).padStart(4, '0')}`,
-    status: i % 3 === 0 ? 'Đã hoàn thành' : (i % 3 === 1 ? 'Đang làm bài' : 'Chưa làm'),
-    score: (Math.random() * 10).toFixed(1),
-    time: `${Math.floor(Math.random() * 40) + 10} phút`,
-    marked: i % 2 === 0 ? 'đã chấm' : 'chưa chấm'
-  });
-}
-
-// --- Biến điều khiển ---
 let currentPage = 1;
 const studentsPerPage = 5;
-let filterMode = "all"; // "all" | "graded" | "ungraded"
+let filterMode = "all";
 
 // --- Hàm lấy dữ liệu đang hiển thị ---
 function getFilteredStudents() {

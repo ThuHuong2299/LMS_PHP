@@ -1,56 +1,8 @@
-function toggleSidebar(event) {
-  // Ngăn sự kiện lan sang logo
-  if (event) event.stopPropagation();
-
-  const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle("collapsed");
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const sidebar = document.getElementById("sidebar");
-  const logoImg = document.querySelector(".logo img.objects");
-
-  logoImg.addEventListener("click", (event) => {
-    // Nếu sidebar đang thu gọn → mở rộng lại
-    if (sidebar.classList.contains("collapsed")) {
-      sidebar.classList.remove("collapsed");
-    } else {
-      // Nếu đang mở → về trang chủ
-      window.location.href = "../TrangChu.html";
-    }
-  });
-
-  // Gắn lại listener cho nút thu gọn
-  const toggleBtn = document.querySelector(".open-close");
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", toggleSidebar);
-  }
-});
-
-// --- Tạo danh sách sinh viên mẫu ---
+// TODO: Fetch students from database
 const allStudents = [];
-const names = [
-  'Nguyễn Văn An', 'Trần Thị Bình', 'Lê Hoàng Cường', 'Phạm Minh Đức', 'Hoàng Thu Hà',
-  'Vũ Đức Khang', 'Đặng Thùy Linh', 'Bùi Quốc Minh', 'Đỗ Hồng Nhung', 'Mai Xuân Phúc',
-  'Ngô Thu Quyên', 'Phan Văn Sơn', 'Đinh Thị Trang', 'Lý Anh Tuấn', 'Trương Bảo Uyên',
-  'Dương Minh Việt', 'Tô Hải Yến', 'Võ Thanh An', 'Hồ Thu Hằng', 'Chu Đức Huy'
-];
-
-for (let i = 0; i < 36; i++) {
-  allStudents.push({
-    name: names[i % names.length],
-    id: `SV${String(i + 1).padStart(4, '0')}`,
-    status: i % 3 === 0 ? 'Đã hoàn thành' : (i % 3 === 1 ? 'Đang làm bài' : 'Chưa làm'),
-    score: (Math.random() * 10).toFixed(1),
-    time: `${Math.floor(Math.random() * 40) + 10} phút`,
-    marked: i % 2 === 0 ? 'đã chấm' : 'chưa chấm'
-  });
-}
-
-// --- Biến điều khiển ---
 let currentPage = 1;
 const studentsPerPage = 5;
-let filterMode = "all"; // "all" | "graded" | "ungraded"
+let filterMode = "all";
 
 // --- Hàm lấy dữ liệu đang hiển thị ---
 function getFilteredStudents() {
@@ -174,11 +126,4 @@ btnUngraded.addEventListener('click', function () {
 
 // --- Khởi tạo ---
 document.addEventListener('DOMContentLoaded', renderStudents);
-
-// --- Đăng xuất ---
-function logout() {
-  if (confirm("Bạn có chắc muốn đăng xuất không?")) {
-    window.location.href = "../Login.teacher.html";
-  }
-}
 

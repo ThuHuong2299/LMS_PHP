@@ -6,8 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./student/CSS/DN.style.css">
+  <link rel="stylesheet" href="/public/assets/css/toast.css">
   <base href="./student/assets/">
   <title>Đăng nhập</title>
+  <script src="/public/assets/js/toast.js"></script>
   <style>
     body {
       margin: 0px;
@@ -210,7 +212,7 @@
       slider.style.transform = 'translateX(0)';
       
       setTimeout(() => {
-        window.location.href = '../../Login.teacher.html';
+        window.location.href = '/public/Login.teacher.html';
       }, 200);
     });
 
@@ -240,20 +242,21 @@
       const password = document.getElementById('passwordInput').value;
       
       if (!email || !password) {
-        alert('Vui lòng nhập đầy đủ email và mật khẩu!');
+        Toast.warning('Vui lòng nhập đầy đủ email và mật khẩu!');
         return;
       }
       
       // Validate email format
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        alert('Email không hợp lệ!');
+        Toast.error('Email không hợp lệ!');
         return;
       }
       
-      console.log('Login attempt:', { email, password });
-      alert('Đăng nhập thành công!');
-      window.location.href='../Trang%20Chủ.html';
+      Toast.success('Đăng nhập thành công!');
+      setTimeout(() => {
+        window.location.href='../student/Trang%20Chủ.html';
+      }, 1000);
     }
 
     // Enter key support

@@ -1,55 +1,70 @@
-USE quan_ly_hoc_tap_hoan_chinh;
 
--- ==================================================
--- TRIGGERS
--- ==================================================
+-- =====================================================
+-- 9. TRIGGERS - TỰ ĐỘNG CẬP NHẬT DỮ LIỆU
+-- =====================================================
 
 DELIMITER //
 
--- Trigger cập nhật số lượng đăng ký khi có đăng ký mới
-CREATE TRIGGER trg_DangKyKhoaHoc_Insert
-AFTER INSERT ON dang_ky_khoa_hoc
+-- Trigger: Tự động cập nhật số lượng đã xem thông báo (có thể implement sau)
+-- Trigger: Tự động tính thời gian kết thúc bài kiểm tra
+CREATE TRIGGER trg_tinh_thoi_gian_ket_thuc_bai_kiem_tra
+BEFORE INSERT ON bai_kiem_tra
 FOR EACH ROW
 BEGIN
-    CALL sp_CapNhatSoLuongDangKy(NEW.khoa_hoc_id);
-END //
-
--- Trigger cập nhật số lượng đăng ký khi có thay đổi trạng thái
-CREATE TRIGGER trg_DangKyKhoaHoc_Update
-AFTER UPDATE ON dang_ky_khoa_hoc
-FOR EACH ROW
-BEGIN
-    IF OLD.trang_thai != NEW.trang_thai THEN
-        CALL sp_CapNhatSoLuongDangKy(NEW.khoa_hoc_id);
+    IF NEW.thoi_gian_ket_thuc IS NULL THEN
+        SET NEW.thoi_gian_ket_thuc = DATE_ADD(NEW.thoi_gian_bat_dau, INTERVAL NEW.thoi_luong MINUTE);
     END IF;
-END //
+END//
 
--- Trigger cập nhật số lượng đăng ký khi xóa đăng ký
-CREATE TRIGGER trg_DangKyKhoaHoc_Delete
-AFTER DELETE ON dang_ky_khoa_hoc
+-- Trigger: Tự động thêm mon_hoc_id vào sinh_vien_lop_hoc
+CREATE TRIGGER trg_them_mon_hoc_id_sinh_vien_lop_hoc
+BEFORE INSERT ON sinh_vien_lop_hoc
 FOR EACH ROW
 BEGIN
-    CALL sp_CapNhatSoLuongDangKy(OLD.khoa_hoc_id);
-END //
+    DECLARE v_mon_hoc_id INT;
+    SELECT mon_hoc_id INTO v_mon_hoc_id FROM lop_hoc WHERE id = NEW.lop_hoc_id;
+    SET NEW.mon_hoc_id = v_mon_hoc_id;
+END//
 
--- Trigger tự động cập nhật tiến độ khi có tiến độ chi tiết mới
-CREATE TRIGGER trg_TienDoChiTiet_Update
-AFTER UPDATE ON tien_do_chi_tiet
+-- Trigger: Tự động tính điểm bài làm kiểm tra
+CREATE TRIGGER trg_tinh_diem_bai_kiem_tra
+AFTER INSERT ON chi_tiet_tra_loi
 FOR EACH ROW
 BEGIN
-    IF OLD.da_hoan_thanh != NEW.da_hoan_thanh THEN
-        CALL sp_CapNhatTienDoKhoaHoc(NEW.nguoi_dung_id, NEW.khoa_hoc_id);
+    DECLARE v_so_cau_dung INT;
+    DECLARE v_tong_so_cau INT;
+    DECLARE v_diem_moi DECIMAL(5,2);
+    DECLARE v_diem_toi_da DECIMAL(5,2);
+    
+    -- Đếm số câu đúng
+    SELECT COUNT(*) INTO v_so_cau_dung
+    FROM chi_tiet_tra_loi
+    WHERE bai_lam_kiem_tra_id = NEW.bai_lam_kiem_tra_id AND dung_hay_sai = TRUE;
+    
+    -- Đếm tổng số câu
+    SELECT COUNT(*) INTO v_tong_so_cau
+    FROM chi_tiet_tra_loi
+    WHERE bai_lam_kiem_tra_id = NEW.bai_lam_kiem_tra_id;
+    
+    -- Lấy điểm tối đa
+    SELECT bkt.diem_toi_da INTO v_diem_toi_da
+    FROM bai_lam_kiem_tra blkt
+    JOIN bai_kiem_tra bkt ON blkt.bai_kiem_tra_id = bkt.id
+    WHERE blkt.id = NEW.bai_lam_kiem_tra_id;
+    
+    -- Tính điểm
+    IF v_tong_so_cau > 0 THEN
+        SET v_diem_moi = (v_so_cau_dung / v_tong_so_cau) * v_diem_toi_da;
+    ELSE
+        SET v_diem_moi = 0;
     END IF;
-END //
-
--- Trigger tự động cập nhật tiến độ khi thêm tiến độ mới
-CREATE TRIGGER trg_TienDoChiTiet_Insert
-AFTER INSERT ON tien_do_chi_tiet
-FOR EACH ROW
-BEGIN
-    IF NEW.da_hoan_thanh = TRUE THEN
-        CALL sp_CapNhatTienDoKhoaHoc(NEW.nguoi_dung_id, NEW.khoa_hoc_id);
-    END IF;
-END //
+    
+    -- Cập nhật bài làm
+    UPDATE bai_lam_kiem_tra
+    SET so_cau_dung = v_so_cau_dung,
+        tong_so_cau = v_tong_so_cau,
+        diem = v_diem_moi
+    WHERE id = NEW.bai_lam_kiem_tra_id;
+END//
 
 DELIMITER ;

@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./student/CSS/DN.style.css">
-  <base href="./teacher/assets/">
+  <link rel="stylesheet" href="/public/student/CSS/DN.style.css">
   <title>Đăng nhập</title>
  <style>
     body {
@@ -120,90 +119,17 @@
         </div>
       </div>
     </div>
-    <img class="vector" src="vector01.svg" />
-    <img class="vector2" src="vector1.svg" />
-    <img class="vector3" src="vector2.svg" />
-    <img class="group" src="group0.svg" />
-    <img class="vector4" src="vector3.svg" />
-    <img class="vector5" src="vector4.svg" />
-    <img class="group2" src="group1.svg" />
-    <img class="vector6" src="vector5.svg" />
-    <img class="group3" src="group2.svg" />
-    <img class="vector7" src="vector6.svg" />
+    <img class="vector" src="/public/teacher/assets/vector01.svg" />
+    <img class="vector2" src="/public/teacher/assets/vector1.svg" />
+    <img class="vector3" src="/public/teacher/assets/vector2.svg" />
+    <img class="group" src="/public/teacher/assets/group0.svg" />
+    <img class="vector4" src="/public/teacher/assets/vector3.svg" />
+    <img class="vector5" src="/public/teacher/assets/vector4.svg" />
+    <img class="group2" src="/public/teacher/assets/group1.svg" />
+    <img class="vector6" src="/public/teacher/assets/vector5.svg" />
+    <img class="group3" src="/public/teacher/assets/group2.svg" />
+    <img class="vector7" src="/public/teacher/assets/vector6.svg" />
   </div>
-  <script>
-    // Tab switching với animation
-    const studentTab = document.querySelector('.frame-669');
-    const slider = document.querySelector('.tab-slider');
-    let isTransitioning = false;
-
-    studentTab.addEventListener('click', () => {
-      if (isTransitioning) return;
-      
-      isTransitioning = true;
-      slider.style.transition = 'transform 0.2s ease';
-      slider.style.transform = 'translateX(100%)';
-      
-      setTimeout(() => {
-        window.location.href = '../../Login.student.html';
-      }, 200);
-    });
-
-    // Password toggle functionality
-    let passwordVisible = false;
-
-    function togglePassword() {
-      const passwordInput = document.getElementById('passwordInput');
-      const eyeIcon = document.getElementById('eyeIcon');
-      
-      passwordVisible = !passwordVisible;
-      
-      if (passwordVisible) {
-        passwordInput.type = 'text';
-        // Icon mắt có gạch chéo (ẩn)
-        eyeIcon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>';
-      } else {
-        passwordInput.type = 'password';
-        // Icon mắt bình thường (hiện)
-        eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
-      }
-    }
-
-    // Login handler
-    function handleLogin() {
-      const email = document.getElementById('emailInput').value;
-      const password = document.getElementById('passwordInput').value;
-      
-      if (!email || !password) {
-        alert('Vui lòng nhập đầy đủ email và mật khẩu!');
-        return;
-      }
-      
-      // Validate email format
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        alert('Email không hợp lệ!');
-        return;
-      }
-      
-      console.log('Teacher login attempt:', { email, password });
-      alert('Đăng nhập thành công! Chào mừng thầy/cô!');
-      window.location.href = '../TrangChu.html';
- 
-    }
-
-    // Enter key support
-    document.getElementById('passwordInput').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        handleLogin();
-      }
-    });
-
-    document.getElementById('emailInput').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        document.getElementById('passwordInput').focus();
-      }
-    });
-  </script>
+  <script src="/public/teacher/js/login-teacher.js"></script>
 </body>
 </html>

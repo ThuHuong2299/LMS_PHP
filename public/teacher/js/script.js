@@ -1,33 +1,3 @@
-// ========== SIDEBAR TOGGLE ==========
-function toggleSidebar(event) {
-  // Ngăn sự kiện lan sang logo
-  if (event) event.stopPropagation();
-
-  const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle("collapsed");
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const sidebar = document.getElementById("sidebar");
-  const logoImg = document.querySelector(".logo img.objects");
-
-  logoImg.addEventListener("click", (event) => {
-    // Nếu sidebar đang thu gọn → mở rộng lại
-    if (sidebar.classList.contains("collapsed")) {
-      sidebar.classList.remove("collapsed");
-    } else {
-      // Nếu đang mở → về trang chủ
-      window.location.href = "../TrangChu.html";
-    }
-  });
-
-  // Gắn lại listener cho nút thu gọn
-  const toggleBtn = document.querySelector(".open-close");
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", toggleSidebar);
-  }
-});
-
 // ========== MODAL MANAGEMENT ==========
 // ========== MODAL MANAGEMENT - FIXED ==========
 const modals = {
@@ -113,7 +83,7 @@ function deleteAssignmentQuestion(button) {
   if (container.querySelectorAll('.question-wrapper').length > 1) {
     wrapper.remove();
   } else {
-    alert('Phải có ít nhất một câu hỏi!');
+    if (window.Toast) Toast.warning('Phải có ít nhất một câu hỏi!');
   }
 }
 
@@ -124,12 +94,12 @@ function saveAssignment() {
   const deadline = document.getElementById('assignmentDeadline');
   
   if (!classSelect.value) {
-    alert('Vui lòng chọn lớp giao!');
+    if (window.Toast) Toast.warning('Vui lòng chọn lớp giao!');
     return;
   }
   
-  if (!title.value || !deadline.value) {
-    alert('Vui lòng điền đầy đủ thông tin!');
+  if (!title.value || !duration.value) {
+    if (window.Toast) Toast.warning('Vui lòng điền đầy đủ thông tin!');
     return;
   }
   
@@ -153,7 +123,7 @@ function saveAssignment() {
     questions 
   });
   
-  alert('✅ Đã lưu bài tập!');
+  if (window.Toast) Toast.success('Đã lưu bài tập!');
   closeModal('assignmentModal');
 }
 
@@ -227,7 +197,7 @@ function deleteExamQuestion(button) {
   if (container.querySelectorAll('.exam-question-wrapper').length > 1) {
     wrapper.remove();
   } else {
-    alert('Phải có ít nhất một câu hỏi!');
+    if (window.Toast) Toast.warning('Phải có ít nhất một câu hỏi!');
   }
 }
 
@@ -238,12 +208,12 @@ function submitExam() {
   const datetime = document.getElementById('examDatetime');
   
   if (!classSelect.value) {
-    alert('Vui lòng chọn lớp giao!');
+    if (window.Toast) Toast.warning('Vui lòng chọn lớp giao!');
     return;
   }
   
   if (!title.value || !duration.value || !datetime.value) {
-    alert('Vui lòng điền đầy đủ thông tin!');
+    if (window.Toast) Toast.warning('Vui lòng điền đầy đủ thông tin!');
     return;
   }
   
@@ -273,7 +243,7 @@ function submitExam() {
     questions 
   });
   
-  alert('✅ Đã lưu bài kiểm tra!');
+  if (window.Toast) Toast.success('Đã lưu bài kiểm tra!');
   closeModal('examModal');
 }
 
@@ -284,15 +254,15 @@ function saveThongBao() {
   const content = document.getElementById('notiInput');
   
   if (!classSelect.value) {
-    alert('Vui lòng chọn lớp!');
+    if (window.Toast) Toast.warning('Vui lòng chọn lớp!');
     return;
   }
   if (!title.value.trim()) {
-    alert('Vui lòng nhập tiêu đề!');
+    if (window.Toast) Toast.warning('Vui lòng nhập tiêu đề!');
     return;
   }
   if (!content.value.trim()) {
-    alert('Vui lòng nhập nội dung!');
+    if (window.Toast) Toast.warning('Vui lòng nhập nội dung!');
     return;
   }
   
@@ -305,15 +275,9 @@ function saveThongBao() {
   };
   
   console.log('Thông báo đã tạo:', thongBao);
-  alert('✅ Đã gửi thông báo thành công!');
+  if (window.Toast) Toast.success('Đã gửi thông báo thành công!');
   
   closeModal('taothongbao');
-}
-
-// ========== SIDEBAR TOGGLE ==========
-function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  sidebar.classList.toggle('collapsed');
 }
 
 // ========== SEARCH FUNCTIONALITY ==========

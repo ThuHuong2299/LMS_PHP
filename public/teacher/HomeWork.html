@@ -12,8 +12,11 @@
   <link rel="stylesheet" href="/public/teacher/CSS/components/sidebar.css">
   <link rel="stylesheet" href="/public/teacher/CSS/components/navbar.css">
   <link rel="stylesheet" href="/public/teacher/CSS/HWstyle.css">
+  <link rel="stylesheet" href="/public/assets/css/toast.css">
   
   <title>Bài tập - Learn Lab</title>
+  <script src="/public/assets/js/toast.js"></script>
+  <script src="/public/teacher/js/kiem_tra_session.js"></script>
 </head>
 
 <body>
@@ -144,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
   function logout() {
     if (confirm("Bạn có chắc muốn đăng xuất không?")) {
-      window.location.href = "../../Login.teacher.html";
+      window.location.href = "/public/Login.teacher.html";
     }
   }
 </script>

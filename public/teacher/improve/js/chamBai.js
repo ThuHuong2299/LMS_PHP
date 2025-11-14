@@ -368,7 +368,7 @@ window.submitScore = async function(button) {
   
   // Validation
   if (isNaN(score) || score < 0 || score > maxScore) {
-    alert(`Điểm phải từ 0 đến ${maxScore}`);
+    if (window.Toast) Toast.error(`Điểm phải từ 0 đến ${maxScore}`);
     return;
   }
   

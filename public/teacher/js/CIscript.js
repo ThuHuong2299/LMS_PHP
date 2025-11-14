@@ -1,23 +1,18 @@
-// Constants
 const STUDENTS_PER_PAGE = 5;
-const STUDENT_NAMES = [
-  'Nguyễn Văn An', 'Trần Thị Bình', 'Lê Hoàng Cường', 'Phạm Minh Đức', 'Hoàng Thu Hà',
-  'Vũ Đức Khang', 'Đặng Thùy Linh', 'Bùi Quốc Minh', 'Đỗ Hồng Nhung', 'Mai Xuân Phúc',
-  'Ngô Thu Quyên', 'Phan Văn Sơn', 'Đinh Thị Trang', 'Lý Anh Tuấn', 'Trương Bảo Uyên',
-  'Dương Minh Việt', 'Tô Hải Yến', 'Võ Thanh An', 'Hồ Thu Hằng', 'Chu Đức Huy'
-];
-const AVATAR_COLORS = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#43e97b', '#fa709a'];
-
-// State
 let currentPage = 1;
 let allStudents = [];
+
+// TODO: Fetch students from database
+const AVATAR_COLORS = [
+  '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8',
+  '#F7DC6F', '#BB8FCE', '#85C1E2', '#F8B88B', '#ABEBC6'
+];
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function () {
   renderBreadcrumb();
   initializeTabs();
   initializeModals();
-  initializeSidebar();
   generateStudents();
   renderStudents();
 });
@@ -68,16 +63,6 @@ function initializeModals() {
         }
       });
     }
-  });
-}
-
-// Sidebar navigation
-function initializeSidebar() {
-  document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', () => {
-      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-    });
   });
 }
 
@@ -336,12 +321,10 @@ function saveNotification() {
   const title = document.getElementById('notificationTitle').value.trim();
   const content = document.getElementById('notificationContent').value.trim();
   
-  if (!title || !content) {
-    alert('Vui lòng nhập đầy đủ tiêu đề và nội dung!');
-    return;
-  }
-
-  const card = document.createElement('div');
+    if (!title || !content) {
+      if (window.Toast) Toast.warning('Vui lòng nhập đầy đủ tiêu đề và nội dung!');
+      return;
+    }  const card = document.createElement('div');
   card.className = 'notification-card';
   card.innerHTML = `
     <div class="notification-left">
@@ -501,37 +484,3 @@ function escapeHtml(str) {
   div.textContent = str;
   return div.innerHTML;
 }
-
-    // Sidebar navigation
-
-function toggleSidebar(event) {
-  // Ngăn sự kiện lan sang logo
-  if (event) event.stopPropagation();
-
-  const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle("collapsed");
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const sidebar = document.getElementById("sidebar");
-  const logoImg = document.querySelector(".logo img.objects");
-
-  logoImg.addEventListener("click", (event) => {
-    // Nếu sidebar đang thu gọn → mở rộng lại
-    if (sidebar.classList.contains("collapsed")) {
-      sidebar.classList.remove("collapsed");
-    } else {
-      // Nếu đang mở → về trang chủ
-      window.location.href = "../TrangChu.html";
-    }
-  });
-
-  // Gắn lại listener cho nút thu gọn
-  const toggleBtn = document.querySelector(".open-close");
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", toggleSidebar);
-  }
-});
-
-
-    renderStudents();
