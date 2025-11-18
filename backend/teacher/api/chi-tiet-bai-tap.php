@@ -1,27 +1,35 @@
 <?php
 /**
- * File: bai-giang-lop-hoc.php
- * Mục đích: API lấy thông tin lớp và bài giảng (OOP)
+ * File: chi-tiet-bai-tap.php
+ * Mục đích: API lấy chi tiết bài tập kèm thống kê và danh sách sinh viên
  * Method: GET
- * Params: id (lop_hoc_id)
+ * Parameters: bai_tap_id
  */
 
+// Khởi động session
 session_start();
 
+// Cấu hình CORS
 header('Access-Control-Allow-Origin: http://localhost');
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json; charset=utf-8');
 
+// Kiểm tra method
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
-    echo json_encode(['thanh_cong' => false, 'thong_bao' => 'Phương thức không được hỗ trợ'], JSON_UNESCAPED_UNICODE);
+    echo json_encode([
+        'thanh_cong' => false,
+        'thong_bao' => 'Phương thức không được hỗ trợ'
+    ], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
+// Load các class cần thiết
 require_once __DIR__ . '/../../co-so/Database.php';
 require_once __DIR__ . '/../../dieu-khieu/GiangVienController.php';
 
+// Khởi tạo controller và gọi method
 $controller = new GiangVienController();
-$controller->layBaiGiangLopHoc();
+$controller->layChiTietBaiTap();

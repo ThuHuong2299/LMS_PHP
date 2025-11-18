@@ -16,7 +16,7 @@
   
   <title>Bài tập - Learn Lab</title>
   <script src="/public/assets/js/toast.js"></script>
-  <script src="/public/teacher/js/kiem_tra_session.js"></script>
+  <script src="/public/teacher/js/HomeWorkscript.js" defer></script>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
       <!-- Main Section -->
       <div class="main-section">
         <!-- Question Card -->
-        <div class="question-card" onclick="window.location.href='../HomeWorkInfo.html'">
+        <div class="question-card">
           <div class="question-title">
             Nội dung câu hỏi Sample Question 1 about something?
           </div>
@@ -117,39 +117,7 @@
       </div>
     </div>
   <script>
-function toggleSidebar(event) {
-  // Ngăn sự kiện lan sang logo
-  if (event) event.stopPropagation();
 
-  const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle("collapsed");
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const sidebar = document.getElementById("sidebar");
-  const logoImg = document.querySelector(".logo img.objects");
-
-  logoImg.addEventListener("click", (event) => {
-    // Nếu sidebar đang thu gọn → mở rộng lại
-    if (sidebar.classList.contains("collapsed")) {
-      sidebar.classList.remove("collapsed");
-    } else {
-      // Nếu đang mở → về trang chủ
-      window.location.href = "../TrangChu.html";
-    }
-  });
-
-  // Gắn lại listener cho nút thu gọn
-  const toggleBtn = document.querySelector(".open-close");
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", toggleSidebar);
-  }
-});
-  function logout() {
-    if (confirm("Bạn có chắc muốn đăng xuất không?")) {
-      window.location.href = "/public/Login.teacher.html";
-    }
-  }
 </script>
 
 <script type="module" src="/public/teacher/js/main.js"></script>

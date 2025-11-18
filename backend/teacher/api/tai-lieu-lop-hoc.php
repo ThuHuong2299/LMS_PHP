@@ -1,7 +1,7 @@
 <?php
 /**
- * File: bai-giang-lop-hoc.php
- * Mục đích: API lấy thông tin lớp và bài giảng (OOP)
+ * File: tai-lieu-lop-hoc.php
+ * Mục đích: API lấy danh sách tài liệu của lớp học (OOP)
  * Method: GET
  * Params: id (lop_hoc_id)
  */
@@ -24,4 +24,4 @@ require_once __DIR__ . '/../../co-so/Database.php';
 require_once __DIR__ . '/../../dieu-khieu/GiangVienController.php';
 
 $controller = new GiangVienController();
-$controller->layBaiGiangLopHoc();
+$controller->layTaiLieuLopHoc();

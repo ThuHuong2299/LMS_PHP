@@ -68,8 +68,7 @@ function loadTabData(tabName) {
       if (!currentTabData.notifications) loadTabThongBao();
       break;
     case 'documents':
-      // Bỏ qua
-      console.log('Tab Tài liệu - tạm thời không phát triển');
+      if (!currentTabData.documents) loadTabTaiLieu();
       break;
     case 'students':
       if (!currentTabData.students) loadTabSinhVien();
@@ -159,7 +158,7 @@ function renderBaiGiang(chuongVaBaiGiang) {
     
     chapterDiv.innerHTML = `
       <div class="chapter-header" onclick="toggleChapter(this)">
-        <span>Chương ${chuong.so_thu_tu_chuong}: ${escapeHtml(chuong.ten_chuong)}</span>
+        <span>${escapeHtml(chuong.ten_chuong)}</span>
         <img class="chapter-arrow" src="chapter-arrow.svg" alt="arrow">
       </div>
       <div class="chapter-content open">
@@ -265,7 +264,7 @@ function renderBaiTap(danhSachBaiTap) {
     const cardDiv = document.createElement('div');
     cardDiv.className = 'assignment-card';
     cardDiv.style.cursor = 'pointer';
-    cardDiv.onclick = () => window.location.href = `/public/teacher/WorkDashBoard.html?id=${baiTap.id}`;
+    cardDiv.onclick = () => window.location.href = `/public/teacher/WorkDashBoard.html?bai_tap_id=${baiTap.id}&lop_hoc_id=${currentLopHocId}`;
     
     // Format thông tin chương và bài giảng
     let metaText = '';
@@ -377,8 +376,8 @@ function renderBaiKiemTra(danhSachBaiKiemTra) {
     const cardDiv = document.createElement('div');
     cardDiv.className = 'assignment-card';
     cardDiv.style.cursor = 'pointer';
-    // TODO: Thêm link đến trang chi tiết bài kiểm tra khi có
-    cardDiv.onclick = () => alert('Chức năng xem chi tiết bài kiểm tra sẽ phát triển sau');
+    // TODO: Sẽ implement backend API cho bài kiểm tra sau (tương tự bài tập)
+    cardDiv.onclick = () => window.location.href = `/public/teacher/WorkDashBoard.html?bai_kiem_tra_id=${baiKiemTra.id}&lop_hoc_id=${currentLopHocId}`;
     
     // Format thông tin chương
     let metaText = '';
@@ -631,5 +630,110 @@ function renderSinhVien(data) {
   }
 }
 
+// ========== TAB TÀI LIỆU ==========
+async function loadTabTaiLieu() {
+  try {
+    showLoadingState('documents-section');
+    
+    // Gọi API
+    const data = await ClassroomAPI.getTaiLieuLopHoc(currentLopHocId);
+    
+    // Lưu cache
+    currentTabData.documents = data;
+    
+    // Render tài liệu
+    renderTaiLieu(data);
+    
+  } catch (error) {
+    console.error('Lỗi load tài liệu:', error);
+    showErrorState('documents-section', error.message);
+  }
+}
+
+function renderTaiLieu(danhSachTaiLieu) {
+  const section = document.getElementById('documents-section');
+  if (!section) return;
+  
+  if (!danhSachTaiLieu || danhSachTaiLieu.length === 0) {
+    section.innerHTML = `
+      <div class="page-header">
+        <h1 class="page-title">Danh sách tài liệu</h1>
+        <button class="btn-add">+ Thêm mới</button>
+      </div>
+      <div class="empty-state" style="text-align: center; padding: 60px 20px; color: #999;">
+        <p style="font-size: 16px;">Chưa có tài liệu nào</p>
+      </div>
+    `;
+    return;
+  }
+  
+  const taiLieuHtml = danhSachTaiLieu.map(taiLieu => {
+    // Lấy loại file viết hoa (PDF, DOCX, v.v.)
+    const loaiFileText = taiLieu.loai_file.toUpperCase();
+    
+    return `
+      <div class="document-card">
+        <div class="document-icon ${taiLieu.loai_file}">${loaiFileText}</div>
+        <div class="document-info">
+          <div class="document-title">${taiLieu.ten_tai_lieu}</div>
+          <div class="document-actions">
+            <a href="${taiLieu.duong_dan_file}" target="_blank" download title="Tải xuống">
+              <img src="/public/teacher/assets/download.svg" alt="Tải xuống" style="cursor: pointer;" />
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  section.innerHTML = `
+    <div class="page-header">
+      <h1 class="page-title">Danh sách tài liệu</h1>
+      <button class="btn-add">+ Thêm mới</button>
+    </div>
+    <div class="document-list">
+      ${taiLieuHtml}
+    </div>
+  `;
+}
+
+// Helper: Format ngày giờ cho tài liệu
+function formatDate(dateStr) {
+  if (!dateStr) return 'Không rõ';
+  
+  try {
+    const date = new Date(dateStr);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    
+    return `${day}/${month}/${year}`;
+  } catch (e) {
+    return dateStr;
+  }
+}
+
+// Helper: Lấy icon cho loại file
+function getFileIcon(loaiFile) {
+  const icons = {
+    'pdf': 'fas fa-file-pdf',
+    'docx': 'fas fa-file-word',
+    'pptx': 'fas fa-file-powerpoint',
+    'xlsx': 'fas fa-file-excel'
+  };
+  return icons[loaiFile] || 'fas fa-file';
+}
+
+// Helper: Lấy màu icon cho loại file
+function getFileIconColor(loaiFile) {
+  const colors = {
+    'pdf': '#e74c3c',
+    'docx': '#2980b9',
+    'pptx': '#e67e22',
+    'xlsx': '#27ae60'
+  };
+  return colors[loaiFile] || '#95a5a6';
+}
+
 // Export functions
-export { loadTabBaiGiang, loadTabBaiTap, loadTabBaiKiemTra, loadTabThongBao, loadTabSinhVien, loadTabData };
+export { loadTabBaiGiang, loadTabBaiTap, loadTabBaiKiemTra, loadTabThongBao, loadTabSinhVien, loadTabTaiLieu, loadTabData };

@@ -389,16 +389,11 @@ function saveDocument() {
   closeDocumentModal();
 }
 
-// Student management functions
+// Student management functions (DEPRECATED - sử dụng classroomInfo.js thay thế)
 function generateStudents() {
-  for (let i = 0; i < 36; i++) {
-    allStudents.push({
-      name: STUDENT_NAMES[i % STUDENT_NAMES.length] || `Sinh viên ${i + 1}`,
-      id: `SV${String(i + 1).padStart(4, '0')}`,
-      progress: Math.floor(Math.random() * 40) + 60,
-      updated: i < 10 ? '2 tiếng trước' : i < 20 ? '5 tiếng trước' : i < 30 ? '1 ngày trước' : '2 ngày trước'
-    });
-  }
+  // Logic cũ - không còn sử dụng
+  // Data sẽ được load từ API trong classroomInfo.js
+  console.log('generateStudents() deprecated - use classroomInfo.js');
 }
 
 function renderStudents() {

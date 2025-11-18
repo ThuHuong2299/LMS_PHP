@@ -412,73 +412,38 @@ VALUES
 -- PHẦN 9: TÀI LIỆU LỚP HỌC
 -- ================================================
 
--- Tài liệu cho lớp L001 (Power BI)
+-- Tài liệu cho lớp L001 (Power BI) - 1 file PDF duy nhất
 INSERT INTO tai_lieu_lop_hoc (lop_hoc_id, ten_tai_lieu, loai_file, duong_dan_file, ten_file_goc, kich_thuoc_file, nguoi_upload_id)
 VALUES
 ((SELECT id FROM lop_hoc WHERE ma_lop_hoc='L001'),
- 'Syllabus môn Power BI',
+ 'Báo cáo hệ thống thông tin',
  'pdf',
- 'https://www.besanttechnologies.com/power-bi-course-syllabus',
- 'Syllabus_PowerBI_L001.pdf',
+ '/public/teacher/uploads/tai-lieu/L001/Power BI.pdf',
+ 'Power BI.pdf',
  245760,
- (SELECT giang_vien_id FROM lop_hoc WHERE ma_lop_hoc='L001')),
-((SELECT id FROM lop_hoc WHERE ma_lop_hoc='L001'),
- 'Slide Chương 1 - Giới thiệu & Data Analysis',
- 'pptx',
- 'https://fr.scribd.com/document/748747426/L%E1%BB%98-TRINH',
- 'Slide_Chuong1_PowerBI_L001.pptx',
- 786432,
- (SELECT giang_vien_id FROM lop_hoc WHERE ma_lop_hoc='L001')),
-((SELECT id FROM lop_hoc WHERE ma_lop_hoc='L001'),
- 'File Excel dữ liệu mẫu bán hàng',
- 'xlsx',
- 'https://cloudgo.vn/file-excel-quan-ly-ban-hang',
- 'Dataset_BanHang_PowerBI_L001.xlsx',
- 393216,
  (SELECT giang_vien_id FROM lop_hoc WHERE ma_lop_hoc='L001'));
 
--- Tài liệu cho lớp L002 (Power BI)
-INSERT INTO tai_lieu_lop_hoc (lop_hoc_id, ten_tai_lieu, loai_file, duong_dan_file, ten_file_goc, kich_thuoc_file, nguoi_upload_id)
-VALUES
-((SELECT id FROM lop_hoc WHERE ma_lop_hoc='L002'),
- 'Syllabus môn Power BI - L002',
- 'pdf',
- 'https://www.besanttechnologies.com/power-bi-course-syllabus',
- 'Syllabus_PowerBI_L002.pdf',
- 253952,
- (SELECT giang_vien_id FROM lop_hoc WHERE ma_lop_hoc='L002')),
-((SELECT id FROM lop_hoc WHERE ma_lop_hoc='L002'),
- 'Tài liệu DAX cơ bản cho sinh viên',
- 'pdf',
- 'https://blog.tomorrowmarketers.org/lam-sach-du-lieu-power-bi-power-query/',
- 'TaiLieu_DAX_CoBan_L002.pdf',
- 540672,
- (SELECT giang_vien_id FROM lop_hoc WHERE ma_lop_hoc='L002'));
+-- Tài liệu cho lớp L002 (Power BI) - Chưa có tài liệu
+-- INSERT INTO tai_lieu_lop_hoc (lop_hoc_id, ten_tai_lieu, loai_file, duong_dan_file, ten_file_goc, kich_thuoc_file, nguoi_upload_id)
+-- VALUES
+-- ((SELECT id FROM lop_hoc WHERE ma_lop_hoc='L002'),
+--  'Tên tài liệu',
+--  'pdf',
+--  NULL,
+--  'ten_file.pdf',
+--  0,
+--  (SELECT giang_vien_id FROM lop_hoc WHERE ma_lop_hoc='L002'));
 
--- Tài liệu cho lớp L003 (SQL Server)
-INSERT INTO tai_lieu_lop_hoc (lop_hoc_id, ten_tai_lieu, loai_file, duong_dan_file, ten_file_goc, kich_thuoc_file, nguoi_upload_id)
-VALUES
-((SELECT id FROM lop_hoc WHERE ma_lop_hoc='L003'),
- 'Syllabus môn SQL Server',
- 'pdf',
- 'https://www.w3schools.com/sql/func_sqlserver_substring.asp',
- 'Syllabus_SQLServer_L003.pdf',
- 262144,
- (SELECT giang_vien_id FROM lop_hoc WHERE ma_lop_hoc='L003')),
-((SELECT id FROM lop_hoc WHERE ma_lop_hoc='L003'),
- 'Tài liệu cài đặt SQL Server & SSMS',
- 'pdf',
- 'https://datapot.vn/huong-dan-cai-dat-sql-server-2022-moi-nhat/',
- 'HuongDan_CaiDat_SQLServer_SSMS_L003.pdf',
- 475136,
- (SELECT giang_vien_id FROM lop_hoc WHERE ma_lop_hoc='L003')),
-((SELECT id FROM lop_hoc WHERE ma_lop_hoc='L003'),
- 'Script tạo database và bảng mẫu',
- 'docx',
- 'https://www.tranvanbinh.vn/2023/07/database-mau-e-hoc-sql-server.html',
- 'Script_TaoDatabaseMau_L003.docx',
- 180224,
- (SELECT giang_vien_id FROM lop_hoc WHERE ma_lop_hoc='L003'));
+-- Tài liệu cho lớp L003 (SQL Server) - Chưa có tài liệu
+-- INSERT INTO tai_lieu_lop_hoc (lop_hoc_id, ten_tai_lieu, loai_file, duong_dan_file, ten_file_goc, kich_thuoc_file, nguoi_upload_id)
+-- VALUES
+-- ((SELECT id FROM lop_hoc WHERE ma_lop_hoc='L003'),
+--  'Tên tài liệu',
+--  'pdf',
+--  NULL,
+--  'ten_file.pdf',
+--  0,
+--  (SELECT giang_vien_id FROM lop_hoc WHERE ma_lop_hoc='L003'));
 
 -- ================================================
 -- KẾT THÚC FILE SAMPLE

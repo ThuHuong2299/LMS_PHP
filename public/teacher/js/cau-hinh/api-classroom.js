@@ -174,5 +174,33 @@ export const ClassroomAPI = {
       console.error('Lỗi getSinhVienLopHoc:', error);
       throw error;
     }
+  },
+
+  /**
+   * Lấy danh sách tài liệu
+   * @param {number} lopHocId - ID lớp học
+   * @returns {Promise<Array>}
+   */
+  async getTaiLieuLopHoc(lopHocId) {
+    try {
+      const response = await fetch(`${this.BASE_URL}/tai-lieu-lop-hoc.php?id=${lopHocId}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      const data = await response.json();
+      
+      if (!data.thanh_cong) {
+        throw new Error(data.thong_bao || 'Lỗi khi lấy danh sách tài liệu');
+      }
+      
+      return data.du_lieu;
+    } catch (error) {
+      console.error('Lỗi getTaiLieuLopHoc:', error);
+      throw error;
+    }
   }
 };

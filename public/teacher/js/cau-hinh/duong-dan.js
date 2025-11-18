@@ -45,11 +45,6 @@ export const ROUTES_PHU = {
     duongDan: 'HomeWork.html',
     ten: 'Chi tiết bài tập',
     parent: 'lophoc'
-  },
-  THONG_TIN_BAI_TAP: {
-    duongDan: 'HomeWorkInfo.html',
-    ten: 'Thông tin bài tập',
-    parent: 'lophoc'
   }
 };
 

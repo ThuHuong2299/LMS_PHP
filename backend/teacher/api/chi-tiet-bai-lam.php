@@ -1,11 +1,14 @@
 <?php
 /**
- * File: danh-sach-lop-hoc-oop.php
- * Mục đích: API lấy danh sách lớp học (phiên bản OOP)
+ * File: chi-tiet-bai-lam.php
+ * Mục đích: API lấy chi tiết bài làm của sinh viên
  * Method: GET
- * 
- * ĐÂY LÀ PHIÊN BẢN OOP - SO SÁNH VỚI FILE CŨ danh-sach-lop-hoc.php
+ * Parameters: bai_tap_id, sinh_vien_id
  */
+
+// Tắt hiển thị lỗi ra output (chỉ log vào file)
+ini_set('display_errors', 0);
+error_reporting(E_ALL);
 
 // Khởi động session
 session_start();
@@ -33,4 +36,4 @@ require_once __DIR__ . '/../../dieu-khieu/GiangVienController.php';
 
 // Khởi tạo controller và gọi method
 $controller = new GiangVienController();
-$controller->layDanhSachLopHoc();
+$controller->layChiTietBaiLamSinhVien();
