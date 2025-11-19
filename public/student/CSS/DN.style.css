@@ -1,21 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
+
 /* CSS chung cho cả 2 trang */
 * {
   box-sizing: border-box;
 }
+
 .body {
   margin: 0px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
 /* ==================== TRANG SINH VIÊN (desktop-1) ==================== */
 .desktop-1,
 .desktop-1 * {
   box-sizing: border-box;
 }
+
 .desktop-1 {
   background: #ffffff;
   height: 1024px;
   position: relative;
   overflow: hidden;
 }
+
 .desktop-1 .vector {
   width: 15.5%;
   height: 100%;
@@ -26,6 +34,7 @@
   top: 0%;
   overflow: visible;
 }
+
 .desktop-1 .frame-1321316894 {
   width: 519.11px;
   height: 651.75px;
@@ -34,6 +43,7 @@
   top: 198.28px;
   overflow: visible;
 }
+
 .desktop-1 .frame-1321316893 {
   display: flex;
   flex-direction: column;
@@ -45,6 +55,7 @@
   left: 743px;
   top: 211px;
 }
+
 .desktop-1 .frame-1321316891 {
   display: flex;
   flex-direction: column;
@@ -55,6 +66,7 @@
   width: 448.4px;
   position: relative;
 }
+
 .desktop-1 .frame-1321316887 {
   display: flex;
   flex-direction: row;
@@ -65,21 +77,24 @@
   flex-shrink: 0;
   position: relative;
 }
+
 .s-p-thi-r-i-m-c-n-ch-a-v-o {
   color: #000000;
   text-align: left;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 24px;
-  line-height: 100%;
   font-weight: 600;
+  line-height: 100%;
   position: relative;
 }
+
 .frame-1321316886 {
   flex-shrink: 0;
   width: 107.4px;
   height: 45px;
   position: relative;
 }
+
 .objects {
   width: 40.82px;
   height: 42.22px;
@@ -88,16 +103,18 @@
   top: 0px;
   overflow: visible;
 }
+
 .earn-lab {
   color: #000000;
   text-align: left;
-  font-family: "BricolageGrotesque-Bold", sans-serif;
-  font-size: 15.43131160736084px;
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 700;
+  font-size: 15.43131160736084px;
   position: absolute;
   left: 42.44px;
   top: 26.23px;
 }
+
 .desktop-1 .frame-669 {
   border-radius: 79.57px;
   border-style: solid;
@@ -113,9 +130,11 @@
   position: relative;
   cursor: pointer;
 }
+
 .desktop-1 .sinh-vi-n {
   color: #ffffff;
 }
+
 .desktop-1 .frame-668 {
   border-radius: 79.57px;
   padding: 13px 27.35px 13px 27.35px;
@@ -128,16 +147,18 @@
   position: relative;
   cursor: pointer;
 }
+
 .desktop-1 .gi-ng-vi-n {
   color: #919191;
 }
+
 .v-o-h-c-ngay {
   color: #ffffff;
   text-align: center;
-  font-family: "BeVietnamPro-Bold", sans-serif;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
   font-size: 20px;
   line-height: 100%;
-  font-weight: 700;
   position: relative;
 }
 
@@ -146,12 +167,14 @@
 .desktop-2 * {
   box-sizing: border-box;
 }
+
 .desktop-2 {
   background: #ffffff;
   height: 1024px;
   position: relative;
   overflow: hidden;
 }
+
 .desktop-2 .frame-1321316893 {
   display: flex;
   flex-direction: column;
@@ -163,6 +186,7 @@
   left: 743px;
   top: 211px;
 }
+
 .desktop-2 .frame-1321316891 {
   display: flex;
   flex-direction: column;
@@ -173,6 +197,7 @@
   flex-shrink: 0;
   position: relative;
 }
+
 .desktop-2 .frame-1321316887 {
   display: flex;
   flex-direction: row;
@@ -183,16 +208,18 @@
   flex-shrink: 0;
   position: relative;
 }
+
 .c-u-ch-c-h-m-nay-th-y-c-ch-m-b-i-trong-t-m-tr-ng-th-t-t-t {
   color: #000000;
   text-align: center;
-  font-family: "BeVietnamPro-Medium", sans-serif;
+  font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
   font-size: 24px;
   line-height: 30px;
   font-weight: 500;
   position: relative;
   flex: 1;
 }
+
 .desktop-2 .frame-668 {
   border-radius: 79.57px;
   padding: 13px 27.35px 13px 27.35px;
@@ -205,9 +232,11 @@
   position: relative;
   cursor: pointer;
 }
+
 .desktop-2 .gi-ng-vi-n {
   color: #ffffff;
 }
+
 .desktop-2 .frame-669 {
   border-radius: 79.57px;
   border-style: solid;
@@ -223,18 +252,22 @@
   position: relative;
   cursor: pointer;
 }
+
 .desktop-2 .sinh-vi-n {
   color: #919191;
 }
+
 .ng-nh-p2 {
   color: #ffffff;
   text-align: center;
-  font-family: "BeVietnamPro-Bold", sans-serif;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
   font-size: 20px;
   line-height: 100%;
   font-weight: 700;
   position: relative;
 }
+
 .desktop-2 .vector {
   width: 15.64%;
   height: 8.17%;
@@ -245,6 +278,7 @@
   top: 14.26%;
   overflow: visible;
 }
+
 .desktop-2 .vector2 {
   width: 17.96%;
   height: 12.78%;
@@ -255,6 +289,7 @@
   top: 56.35%;
   overflow: visible;
 }
+
 .desktop-2 .vector3 {
   width: 16.12%;
   height: 15.77%;
@@ -265,6 +300,7 @@
   top: -4.3%;
   overflow: visible;
 }
+
 .desktop-2 .group {
   width: 11.56%;
   height: 17.57%;
@@ -275,6 +311,7 @@
   top: 22.46%;
   overflow: visible;
 }
+
 .desktop-2 .vector4 {
   width: 23.92%;
   height: 29.96%;
@@ -285,6 +322,7 @@
   top: 30.76%;
   overflow: visible;
 }
+
 .desktop-2 .vector5 {
   width: 13.46%;
   height: 18.48%;
@@ -295,6 +333,7 @@
   top: -0.1%;
   overflow: visible;
 }
+
 .desktop-2 .group2 {
   width: 18.35%;
   height: 24.18%;
@@ -305,6 +344,7 @@
   top: 85.94%;
   overflow: visible;
 }
+
 .desktop-2 .vector6 {
   width: 18.7%;
   height: 14.35%;
@@ -315,6 +355,7 @@
   top: 74.61%;
   overflow: visible;
 }
+
 .desktop-2 .group3 {
   width: 10.28%;
   height: 23.21%;
@@ -326,6 +367,7 @@
   transform: translate(-103.73px, 0px);
   overflow: visible;
 }
+
 .desktop-2 .vector7 {
   width: 8.74%;
   height: 8.74%;
@@ -341,12 +383,13 @@
 .ng-nh-p {
   color: #3293f9;
   text-align: center;
-  font-family: "BricolageGrotesque-Bold", sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 64px;
   font-weight: 700;
   position: relative;
   align-self: stretch;
 }
+
 .frame-1321316892 {
   display: flex;
   flex-direction: column;
@@ -357,6 +400,7 @@
   flex-shrink: 0;
   position: relative;
 }
+
 .section {
   border-radius: 79.57px;
   border-style: solid;
@@ -370,28 +414,31 @@
   flex-shrink: 0;
   position: relative;
 }
+
 .gi-ng-vi-n {
   text-align: center;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 16px;
+  font-weight: 600;
   line-height: 120%;
   letter-spacing: 0.005em;
-  font-weight: 600;
   position: relative;
   width: 159.14px;
   height: 21.14px;
 }
+
 .sinh-vi-n {
   text-align: center;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 16px;
+  font-weight: 600;
   line-height: 120%;
   letter-spacing: 0.005em;
-  font-weight: 600;
   position: relative;
   width: 157.89px;
   height: 21.14px;
 }
+
 .frame-1321316890 {
   display: flex;
   flex-direction: column;
@@ -402,6 +449,7 @@
   flex-shrink: 0;
   position: relative;
 }
+
 .frame-1321316888 {
   background: #ededed;
   border-radius: 16px;
@@ -415,15 +463,17 @@
   flex-shrink: 0;
   position: relative;
 }
+
 .email {
   color: #848484;
   text-align: left;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
   font-size: 16px;
   line-height: 100%;
   font-weight: 600;
   position: relative;
 }
+
 .frame-1321316889 {
   background: #ededed;
   border-radius: 16px;
@@ -437,15 +487,17 @@
   flex-shrink: 0;
   position: relative;
 }
+
 .m-t-kh-u {
   color: #848484;
   text-align: left;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
   font-size: 16px;
   line-height: 100%;
   font-weight: 600;
   position: relative;
 }
+
 .frame-13213168892 {
   background: #3293f9;
   border-radius: 16px;
@@ -461,7 +513,10 @@
   position: relative;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
 }
+
 .frame-13213168892:hover {
   background: #2080e0;
 }

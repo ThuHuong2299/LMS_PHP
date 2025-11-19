@@ -1,87 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Be Vietnam Pro', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  background: #ffffff;
-  min-height: 100vh;
-}
-
-.container {
-  display: flex;
-  min-height: 100vh;
-}
-
-/* Main Content */
-.main-content {
-  background: #ffffff;
-  margin-left: 20px;
-    flex: 1;
-    padding: 32px 40px;
-}
-
-/* Header */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 50px;
-}
-
-.course-title {
-  font-size: 32px;
-  font-weight: 600;
-  color: #3293f9;
-  font-family: 'Bricolage Grotesque', sans-serif;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-}
-
-.user-avatar {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #3293f9 0%, #1e7fd8 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.user-details h3 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #000000;
-  margin-bottom: 4px;
-}
-
-.user-details p {
-  font-size: 20px;
-  font-weight: 400;
-  color: #000000;
-}
-
-.page-title {
-  font-size: 28px;
-  font-weight: 600;
-  color: #000000;
-  margin-bottom: 30px;
-  font-family: 'Bricolage Grotesque', sans-serif;
-}
-
-/* Sidebar */
 .side-bar {
   width: 250px;
   height: 100vh;
@@ -181,7 +97,7 @@ body {
   align-items: center;
   gap: 15px;
   height: 50px;
-  width: 250px;
+  width: 240px;
   padding: 12px 20px;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -192,7 +108,7 @@ body {
   align-items: center;
   gap: 15px;
   height: 50px;
-  width: 250px;
+  width: 240px;
   padding: 12px 20px;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -203,7 +119,7 @@ body {
   align-items: center;
   gap: 15px;
   height: 50px;
-  width: 250px;
+  width: 240px;
   padding: 12px 20px;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -214,31 +130,11 @@ body {
   display: flex;
   align-items: center;
   height: 50px;
-  width: 250px;
+  width: 240px;
   gap: 15px;
   padding: 12px 20px;
   cursor: pointer;
   transition: background 0.3s ease;
-}
-
-.tab-side-bar1 {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  height: 50px;
-  width: 250px;
-  padding: 12px 20px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.tab-side-bar1:hover,
-.tab-side-bar2:hover,
-.tab-side-bar11:hover,
-.tab-side-bar5:hover,
-.tab-side-bar3:hover,
-.tab-side-bar4:hover {
-  background-color: #e5f0ff;
 }
 
 .tab-side-bar4 {
@@ -246,7 +142,26 @@ body {
   align-items: center;
   gap: 15px;
   height: 50px;
-  width: 250px;
+  width: 240px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.tab-side-bar1:hover,
+.tab-side-bar11:hover,
+.tab-side-bar2:hover,
+.tab-side-bar3:hover,
+.tab-side-bar4:hover {
+  background-color: #e5f0ff;
+}
+
+.tab-side-bar1 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  height: 50px;
+  width: 240px;
   padding: 12px 20px;
   cursor: pointer;
   background-color: #e5f0ff;
@@ -291,10 +206,10 @@ body {
 /* Danh sách chương */
 .submenu {
   list-style: none;
+  padding-left: 15px;
   margin: 0;
   max-height: 0;
   overflow: hidden;
-  padding: 0px;
   transition: max-height 0.3s ease;
 }
 
@@ -376,171 +291,33 @@ body {
 
 .logout-section {
   position: fixed;
-  bottom: 0px;
+  bottom: 20px;
   left: 0;
   width: 250px;
 }
 
-.logout-section span {
-  color: #000000;
-  text-align: left;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-  position: relative;
-  width: 153px;
-}
-.side-bar.collapsed .logout-section img {
-  margin: 0;
-}
-.side-bar.collapsed .logout-section span {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
-}
 .side-bar.collapsed .logout-section {
-  width: 80px;
+  display: none;
 }
-
 
 .logout-btn {
+  color: rgb(0, 0, 0);
   border: none;
-  background-color: transparent;
-  padding: 12px 20px;
+  width: 245px;
+  left: 0px;
+  padding: 5px 5px;
   font-size: 20px;
   cursor: pointer;
-  display: flex;
-  width: 250px;
-  gap: 15px;
-  align-items: center;
-  font-family: 'Quicksand', sans-serif;
-}
-.logout-btn img {
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  padding-left: 8px;
-  position: relative;
-  overflow: visible;
-}
-
-.logout-section:hover {
-  background-color: #c7c7c7;
-}
-
-/* Notifications */
-.notifications {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-
-.notification-item {
-  padding: 15px 0;
-  border-bottom: 1px solid #e0e0e0;
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  transition: all 0.3s ease;
-}
-
-.notification-item:hover {
-  background: #f9f9f9;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-left: -15px;
-  margin-right: -15px;
-  border-radius: 8px;
-}
-
-.notification-icon {
-  width: 30px;
-  height: 30px;
+  border-width: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  margin: 0 auto;
+  background-color: #ffffff;
+  transition: background-color 0.3s;
+  font-family: 'Quicksand', sans-serif;
 }
 
-.notification-icon img {
-  width: 28px;
-  height: 28px;
-}
-
-.notification-content {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-  gap: 30px;
-}
-
-.notification-text h4 {
-  font-size: 20px;
-  font-weight: 400;
-  color: #000000;
-  margin-bottom: 6px;
-}
-
-.notification-text p {
-  font-size: 16px;
-  font-weight: 400;
-  color: #3293f9;
-}
-
-.notification-time {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.notification-time .time,
-.notification-time .date {
-  font-size: 16px;
-  font-weight: 600;
-  color: #979797;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-  .sidebar {
-    width: 80px;
-  }
-
-  .logo-text,
-  .nav-text {
-    display: none;
-  }
-
-  .main-content {
-    margin-left: 80px;
-  }
-
-  .logo {
-    justify-content: center;
-  }
-
-  .nav-item {
-    justify-content: center;
-    padding: 15px;
-  }
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-
-  .main-content {
-    margin-left: 0;
-  }
-
-  .header {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .search-box {
-    max-width: 100%;
-  }
+.logout-btn:hover {
+  background-color: #ce8787;
 }

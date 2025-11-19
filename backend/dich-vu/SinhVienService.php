@@ -67,4 +67,11 @@ class SinhVienService extends BaseService {
             'pagination' => $pagination
         ];
     }
+    
+    /**
+     * Lấy nhắc nhở mới nhất cho sinh viên
+     */
+    public function layNhacNhoMoiNhat($sinhVienId) {
+        return $this->sinhVienRepo->layNhacNhoMoiNhat($sinhVienId);
+    }
 }

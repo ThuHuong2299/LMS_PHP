@@ -1,0 +1,342 @@
+/**
+ * File: thong-bao.css
+ * Mục đích: Styles cho hệ thống thông báo toast
+ */
+
+/* Container chứa các thông báo */
+.thong-bao-container {
+  position: fixed;
+  z-index: 999999;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Vị trí hiển thị thông báo */
+.thong-bao-container[data-vi-tri="top-right"] {
+  top: 0;
+  right: 0;
+}
+
+.thong-bao-container[data-vi-tri="top-left"] {
+  top: 0;
+  left: 0;
+}
+
+.thong-bao-container[data-vi-tri="bottom-right"] {
+  bottom: 0;
+  right: 0;
+  flex-direction: column-reverse;
+}
+
+.thong-bao-container[data-vi-tri="bottom-left"] {
+  bottom: 0;
+  left: 0;
+  flex-direction: column-reverse;
+}
+
+.thong-bao-container[data-vi-tri="top-center"] {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.thong-bao-container[data-vi-tri="bottom-center"] {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: column-reverse;
+}
+
+/* Thông báo cơ bản */
+.thong-bao {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  pointer-events: auto;
+  min-width: 300px;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Trạng thái hiển thị */
+.thong-bao.hien-thi {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Trạng thái ẩn */
+.thong-bao.an-di {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+/* Animation cho vị trí bên trái */
+.thong-bao-container[data-vi-tri="top-left"] .thong-bao,
+.thong-bao-container[data-vi-tri="bottom-left"] .thong-bao {
+  transform: translateX(-100%);
+}
+
+.thong-bao-container[data-vi-tri="top-left"] .thong-bao.hien-thi,
+.thong-bao-container[data-vi-tri="bottom-left"] .thong-bao.hien-thi {
+  transform: translateX(0);
+}
+
+.thong-bao-container[data-vi-tri="top-left"] .thong-bao.an-di,
+.thong-bao-container[data-vi-tri="bottom-left"] .thong-bao.an-di {
+  transform: translateX(-100%);
+}
+
+/* Icon thông báo */
+.thong-bao-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.thong-bao-icon .icon {
+  display: inline-block;
+}
+
+/* Nội dung thông báo */
+.thong-bao-noi-dung {
+  flex: 1;
+  min-width: 0;
+}
+
+.thong-bao-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333333;
+  word-wrap: break-word;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Nút đóng */
+.thong-bao-dong {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  color: #999999;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+  font-weight: 300;
+}
+
+.thong-bao-dong:hover {
+  color: #666666;
+}
+
+/* Thanh progress (tùy chọn) */
+.thong-bao::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  transform-origin: left;
+  animation: thong-bao-progress 3s linear forwards;
+}
+
+@keyframes thong-bao-progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* ========== Loại thông báo: THÀNH CÔNG ========== */
+.thong-bao-thanh-cong {
+  border-left: 4px solid #10b981;
+}
+
+.thong-bao-thanh-cong .thong-bao-icon {
+  background: #d1fae5;
+  color: #10b981;
+}
+
+.thong-bao-thanh-cong::before {
+  background: #10b981;
+}
+
+/* ========== Loại thông báo: LỖI ========== */
+.thong-bao-loi {
+  border-left: 4px solid #ef4444;
+}
+
+.thong-bao-loi .thong-bao-icon {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.thong-bao-loi::before {
+  background: #ef4444;
+}
+
+/* ========== Loại thông báo: CẢNH BÁO ========== */
+.thong-bao-canh-bao {
+  border-left: 4px solid #f59e0b;
+}
+
+.thong-bao-canh-bao .thong-bao-icon {
+  background: #fef3c7;
+  color: #f59e0b;
+}
+
+.thong-bao-canh-bao::before {
+  background: #f59e0b;
+}
+
+/* ========== Loại thông báo: THÔNG TIN ========== */
+.thong-bao-thong-tin {
+  border-left: 4px solid #3b82f6;
+}
+
+.thong-bao-thong-tin .thong-bao-icon {
+  background: #dbeafe;
+  color: #3b82f6;
+}
+
+.thong-bao-thong-tin::before {
+  background: #3b82f6;
+}
+
+/* ========== Animation Variants ========== */
+
+/* Slide Animation (mặc định) */
+.thong-bao.animation-slide {
+  /* Đã định nghĩa ở trên */
+}
+
+/* Fade Animation */
+.thong-bao.animation-fade {
+  transform: translateX(0) !important;
+  opacity: 0;
+}
+
+.thong-bao.animation-fade.hien-thi {
+  opacity: 1;
+}
+
+.thong-bao.animation-fade.an-di {
+  opacity: 0;
+}
+
+/* Bounce Animation */
+.thong-bao.animation-bounce {
+  transform: scale(0.3);
+  opacity: 0;
+}
+
+.thong-bao.animation-bounce.hien-thi {
+  transform: scale(1);
+  opacity: 1;
+  animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.thong-bao.animation-bounce.an-di {
+  animation: bounce-out 0.3s ease-in;
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+@keyframes bounce-out {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .thong-bao-container {
+    max-width: calc(100% - 40px);
+    padding: 10px;
+  }
+
+  .thong-bao {
+    min-width: auto;
+    padding: 12px 16px;
+  }
+
+  .thong-bao-text {
+    font-size: 13px;
+  }
+
+  .thong-bao-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+}
+
+/* Dark mode support (tùy chọn) */
+@media (prefers-color-scheme: dark) {
+  .thong-bao {
+    background: #1f2937;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .thong-bao-text {
+    color: #f3f4f6;
+  }
+
+  .thong-bao-dong {
+    color: #9ca3af;
+  }
+
+  .thong-bao-dong:hover {
+    color: #d1d5db;
+  }
+}

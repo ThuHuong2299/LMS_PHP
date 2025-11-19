@@ -90,4 +90,17 @@ abstract class BaseController {
         
         return $this->layIdNguoiDung();
     }
+    
+    /**
+     * Kiểm tra quyền sinh viên
+     */
+    protected function kiemTraQuyenSinhVien() {
+        $this->kiemTraDangNhap();
+        
+        if ($this->layVaiTro() !== 'sinh_vien') {
+            $this->traVeLoi('Bạn không có quyền truy cập chức năng này');
+        }
+        
+        return $this->layIdNguoiDung();
+    }
 }

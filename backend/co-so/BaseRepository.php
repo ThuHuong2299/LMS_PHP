@@ -15,7 +15,7 @@ abstract class BaseRepository {
     /**
      * Thực thi câu lệnh SQL và trả về tất cả kết quả
      */
-    protected function truyVan($sql, $params = []) {
+    public function truyVan($sql, $params = []) {
         try {
             $stmt = $this->db->prepare($sql);
             $stmt->execute($params);
@@ -29,7 +29,7 @@ abstract class BaseRepository {
     /**
      * Thực thi câu lệnh SQL và trả về 1 kết quả
      */
-    protected function truyVanMot($sql, $params = []) {
+    public function truyVanMot($sql, $params = []) {
         try {
             $stmt = $this->db->prepare($sql);
             $stmt->execute($params);

@@ -6,7 +6,9 @@
   <title>Trang Chủ</title>
   <link rel="stylesheet" href="./CSS/TC.sv.style.css">
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <base href="./assets/">
+<script src="./js/common.js"></script>
+<script src="../assets/js/trang-chu-sv.js"></script>  
+<base href="./assets/">
 </head>
 <body>
   <div class="trang-ch">
@@ -29,7 +31,7 @@
       </div>
       <div class="logout-section">
         <button class="logout-btn" onclick="logout()">
-          <img src="logout-icon.svg" alt="Đăng xuất" style="width:20px; margin-right:8px; filter: brightness(0) saturate(100%) invert(0);">
+          <img src="logout-icon.svg" alt="Đăng xuất" style=" filter: brightness(0) saturate(100%) invert(0);">
           <span>Đăng xuất</span>
         </button>
       </div>
@@ -163,41 +165,5 @@
     </div>
   </div>
 </body>
-<script>
-function toggleSidebar(event) {
-  // Ngăn sự kiện lan sang logo
-  if (event) event.stopPropagation();
 
-  const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle("collapsed");
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const sidebar = document.getElementById("sidebar");
-  const logoImg = document.querySelector(".logo img.objects");
-
-  logoImg.addEventListener("click", (event) => {
-    // Nếu sidebar đang thu gọn → mở rộng lại
-    if (sidebar.classList.contains("collapsed")) {
-      sidebar.classList.remove("collapsed");
-    } else {
-      // Nếu đang mở → về trang chủ
-      window.location.href = "../Trang Chủ.html";
-    }
-  });
-
-  // Gắn lại listener cho nút thu gọn
-  const toggleBtn = document.querySelector(".open-close");
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", toggleSidebar);
-  }
-});
-</script>
-<script>
-  function logout() {
-    if (confirm("Bạn có chắc muốn đăng xuất không?")) {
-      window.location.href = "/public/Login.student.html";
-    }
-  }
-</script>
 </html>

@@ -7,8 +7,12 @@
  * Output: {thanh_cong, du_lieu, thong_bao}
  */
 
-// Cho phép CORS (nếu cần)
-header('Access-Control-Allow-Origin: *');
+// Khởi động session NGAY ĐẦU
+session_start();
+
+// Cho phép CORS với credentials
+header('Access-Control-Allow-Origin: http://localhost');
+header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
@@ -84,13 +88,19 @@ try {
     luu_phien_dang_nhap($nguoi_dung);
     
     // Chuẩn bị dữ liệu trả về (không trả password hash)
+    // Nếu không có avatar, dùng avatar mặc định
+    $anh_dai_dien = $nguoi_dung['anh_dai_dien'];
+    if (empty($anh_dai_dien)) {
+        $anh_dai_dien = '/public/student/CSS/avatar-sv.webp';
+    }
+    
     $du_lieu_tra_ve = [
         'id' => $nguoi_dung['id'],
         'ma_nguoi_dung' => $nguoi_dung['ma_nguoi_dung'],
         'ten_dang_nhap' => $nguoi_dung['ten_dang_nhap'],
         'email' => $nguoi_dung['email'],
         'ho_ten' => $nguoi_dung['ho_ten'],
-        'anh_dai_dien' => $nguoi_dung['anh_dai_dien'],
+        'anh_dai_dien' => $anh_dai_dien,
         'vai_tro' => $nguoi_dung['vai_tro']
     ];
     
