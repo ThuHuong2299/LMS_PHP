@@ -20,7 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 try {
     // Kiểm tra đăng nhập
-    $phien = QuanLyPhien::lay_thong_tin_phien();
+    bat_dau_phien();
+    $phien = lay_thong_tin_nguoi_dung();
     if (!$phien || $phien['vai_tro'] !== 'giang_vien') {
         http_response_code(401);
         echo json_encode(['thanh_cong' => false, 'thong_bao' => 'Chưa đăng nhập hoặc không có quyền']);

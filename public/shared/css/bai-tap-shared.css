@@ -1,0 +1,414 @@
+/**
+ * File: bai-tap-shared.css
+ * Mục đích: CSS dùng chung cho component câu hỏi bài tập (SV + GV)
+ */
+
+/* ==================== QUESTION WRAPPER ==================== */
+.question-wrapper {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease;
+}
+
+.question-wrapper:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* ==================== QUESTION CONTENT ==================== */
+.question-content {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 16px;
+}
+
+.question-text {
+    flex: 1;
+}
+
+.question-number {
+    font-weight: 600;
+    color: #495057;
+}
+
+.question-title {
+    margin-left: 8px;
+    color: #212529;
+}
+
+.question-description {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #6c757d;
+    line-height: 1.5;
+}
+
+.score-max {
+    min-width: 80px;
+    text-align: right;
+    color: #6c757d;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* ==================== ANSWER SECTION ==================== */
+.answer-section {
+    margin-top: 16px;
+}
+
+.answer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.answer-label {
+    font-weight: 500;
+    color: #495057;
+    font-size: 15px;
+}
+
+.score-earned {
+    font-weight: 600;
+    font-size: 15px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    background: #d4edda;
+}
+
+.score-earned.scored {
+    color: #28a745;
+    background: #d4edda;
+}
+
+.score-earned.not-scored {
+    color: #6c757d;
+    background: #f8f9fa;
+}
+
+.score-earned.zero-score {
+    color: #dc3545;
+    background: #f8d7da;
+}
+
+.answer-content {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 12px 16px;
+    min-height: 80px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #212529;
+    line-height: 1.6;
+}
+
+.answer-content.empty {
+    background: #fff3cd;
+    border-color: #ffc107;
+    color: #856404;
+    font-style: italic;
+}
+
+/* ==================== SCORE INPUT (GV only) ==================== */
+.score-input-section {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+.score-input-label {
+    font-weight: 500;
+    color: #495057;
+    font-size: 14px;
+}
+
+.score-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.score-input {
+    width: 80px;
+    padding: 6px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #495057;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.score-input:focus {
+    outline: none;
+    border-color: #3293f9;
+    box-shadow: 0 0 0 3px rgba(50, 147, 249, 0.1);
+}
+
+.score-input:disabled {
+    background: #e9ecef;
+    cursor: not-allowed;
+}
+
+.score-separator {
+    font-size: 15px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.score-input-hint {
+    font-size: 12px;
+    color: #6c757d;
+    margin-left: 8px;
+}
+
+/* ==================== COMMENT SECTION ==================== */
+.comment-section {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e9ecef;
+}
+
+.comment-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+    user-select: none;
+}
+
+.comment-toggle:hover {
+    background-color: #f8f9fa;
+}
+
+.comment-toggle-icon {
+    width: 20px;
+    height: 20px;
+    color: #6c757d;
+}
+
+.comment-toggle-text {
+    font-weight: 500;
+    color: #495057;
+    font-size: 15px;
+}
+
+.comment-count {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.comment-toggle.expanded .comment-toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* ==================== COMMENT LIST ==================== */
+.comment-list {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.comment-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 6px;
+    background: #f8f9fa;
+    margin-bottom: 8px;
+}
+
+.comment-item:last-child {
+    margin-bottom: 0;
+}
+
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.comment-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.comment-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    gap: 12px;
+}
+
+.comment-author {
+    font-weight: 600;
+    color: #212529;
+    font-size: 14px;
+}
+
+.comment-author.teacher {
+    color: #3293f9;
+}
+
+.comment-author.student {
+    color: #28a745;
+}
+
+.comment-time {
+    font-size: 12px;
+    color: #6c757d;
+    white-space: nowrap;
+}
+
+.comment-text {
+    color: #495057;
+    line-height: 1.5;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+/* ==================== COMMENT INPUT ==================== */
+.comment-input-wrapper {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.comment-input {
+    flex: 1;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 60px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comment-input:focus {
+    outline: none;
+    border-color: #3293f9;
+    box-shadow: 0 0 0 3px rgba(50, 147, 249, 0.1);
+}
+
+.comment-input::placeholder {
+    color: #adb5bd;
+}
+
+.btn-send-comment {
+    background: #3293f9;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    align-self: flex-start;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-send-comment:hover {
+    background: #2178d4;
+}
+
+.btn-send-comment:active {
+    transform: translateY(1px);
+}
+
+.btn-send-comment:disabled {
+    background: #adb5bd;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ==================== EMPTY STATE ==================== */
+.comment-empty {
+    text-align: center;
+    padding: 20px;
+    color: #6c757d;
+    font-size: 14px;
+    font-style: italic;
+}
+
+/* ==================== LOADING STATE ==================== */
+.loading-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3293f9;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .question-wrapper {
+        padding: 16px;
+    }
+
+    .question-header {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .score-max {
+        text-align: left;
+    }
+
+    .answer-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .score-input-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .comment-item {
+        gap: 8px;
+    }
+
+    .comment-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .comment-input-wrapper {
+        flex-direction: column;
+    }
+
+    .btn-send-comment {
+        align-self: stretch;
+    }
+}

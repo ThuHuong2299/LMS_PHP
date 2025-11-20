@@ -146,15 +146,24 @@ function renderBaiGiang(chuongVaBaiGiang) {
     const chapterDiv = document.createElement('div');
     chapterDiv.className = 'chapter';
     
-    const lessonsHTML = chuong.bai_giang.map(baiGiang => `
-      <div class="lesson-item">
-        <div class="lesson-thumbnail" style="background: url('/public/assets/avatar-bai-giang.jpg') center/cover no-repeat;"></div>
-        <div class="lesson-info">
-          <div class="lesson-title">${escapeHtml(baiGiang.tieu_de)}</div>
-          <div class="lesson-desc">${baiGiang.duong_dan_video ? 'Video bài giảng' : 'Nội dung bài giảng'}</div>
+    const lessonsHTML = chuong.bai_giang.map(baiGiang => {
+      // Debug: Log để kiểm tra cấu trúc dữ liệu
+      console.log('Bài giảng:', baiGiang);
+      console.log('ID field:', baiGiang.bai_giang_id || baiGiang.id);
+      
+      // Lấy ID (có thể là bai_giang_id hoặc id)
+      const baiGiangId = baiGiang.bai_giang_id || baiGiang.id;
+      
+      return `
+        <div class="lesson-item" onclick="xemBaiGiang(${baiGiangId})" style="cursor: pointer;">
+          <div class="lesson-thumbnail" style="background: url('/public/assets/avatar-bai-giang.jpg') center/cover no-repeat;"></div>
+          <div class="lesson-info">
+            <div class="lesson-title">${escapeHtml(baiGiang.tieu_de)}</div>
+            <div class="lesson-desc">${baiGiang.duong_dan_video ? 'Video bài giảng' : 'Nội dung bài giảng'}</div>
+          </div>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
     
     chapterDiv.innerHTML = `
       <div class="chapter-header" onclick="toggleChapter(this)">
@@ -327,6 +336,29 @@ window.toggleChapter = function(header) {
   const content = header.nextElementSibling;
   if (arrow) arrow.classList.toggle('open');
   if (content) content.classList.toggle('open');
+};
+
+// Expose xemBaiGiang globally cho onclick - chuyển đến trang thông tin bài học
+window.xemBaiGiang = function(baiGiangId) {
+  console.log('=== XEM BÀI GIẢNG DEBUG ===');
+  console.log('baiGiangId:', baiGiangId);
+  console.log('currentLopHocId:', currentLopHocId);
+  console.log('Type of baiGiangId:', typeof baiGiangId);
+  console.log('Type of currentLopHocId:', typeof currentLopHocId);
+  
+  if (!baiGiangId || !currentLopHocId) {
+    console.error('❌ Thiếu thông tin:');
+    console.error('  - baiGiangId:', baiGiangId);
+    console.error('  - currentLopHocId:', currentLopHocId);
+    alert('Thiếu thông tin bài giảng. Vui lòng thử lại!');
+    return;
+  }
+  
+  // Chuyển đến trang ThongTinBaiHoc.html với params
+  // Sử dụng đường dẫn tuyệt đối để tránh bị ảnh hưởng bởi <base> tag
+  const url = `/public/teacher/ThongTinBaiHoc.html?bai_giang_id=${baiGiangId}&lop_hoc_id=${currentLopHocId}`;
+  console.log('✓ Chuyển đến:', url);
+  window.location.href = url;
 };
 
 // ========== TAB BÀI KIỂM TRA ==========

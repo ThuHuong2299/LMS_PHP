@@ -71,7 +71,7 @@ async function fetchHomeWorkData() {
 function renderAllData(data) {
   renderStudentInfo(data.sinh_vien);
   renderQuestions(data.cau_hoi, data.bai_lam);
-  renderComments(data.binh_luan);
+  // Comments đã được render trong từng câu hỏi bởi shared component
 }
 
 /**
@@ -84,13 +84,13 @@ function renderStudentInfo(sinhVien) {
   
   if (studentName) studentName.textContent = sinhVien.ho_ten;
   if (studentId) studentId.textContent = sinhVien.ma_sinh_vien;
-  if (studentAvatar && sinhVien.anh_dai_dien) {
-    studentAvatar.style.background = `url(${sinhVien.anh_dai_dien}) center/cover no-repeat`;
+  if (studentAvatar) {
+    studentAvatar.style.background = `url(/public/student/CSS/avatar-sv.webp) center/cover no-repeat`;
   }
 }
 
 /**
- * Render danh sách câu hỏi
+ * Render danh sách câu hỏi bằng shared component
  */
 function renderQuestions(cauHoi, baiLam) {
   const mainSection = document.querySelector('.main-section');
@@ -108,152 +108,23 @@ function renderQuestions(cauHoi, baiLam) {
     return;
   }
   
-  // Render từng câu hỏi
+  // Render từng câu hỏi bằng shared component
   cauHoi.forEach((ch, index) => {
-    const questionCard = document.createElement('div');
-    questionCard.className = 'question-card';
+    const questionElement = CauHoiBaiTapRenderer.createQuestionElement(ch, index + 1, {
+      showScoreInput: true,           // GV có input chấm điểm
+      readOnly: true,                 // Chế độ đọc câu trả lời
+      allowComment: true,             // Cho phép thảo luận
+      onScoreSave: luuDiem,          // Callback khi lưu điểm
+      baiTapId: baiTapId,            // ID bài tập
+      sinhVienId: sinhVienId,        // ID sinh viên
+      apiEndpoint: '/backend/teacher/api/binh-luan-cau-hoi.php'  // API endpoint
+    });
     
-    const hasAnswer = ch.tra_loi && ch.tra_loi.noi_dung;
-    const scoreText = ch.tra_loi && ch.tra_loi.diem !== null 
-      ? `${ch.tra_loi.diem}` 
-      : '-';
-    
-    questionCard.innerHTML = `
-      <div class="question-title">
-        ${index + 1}. ${escapeHtml(ch.noi_dung)}
-        ${ch.mo_ta ? `<div style="font-size: 14px; color: #666; margin-top: 8px;">${escapeHtml(ch.mo_ta)}</div>` : ''}
-      </div>
-      
-      ${hasAnswer ? `
-        <div class="submission-file">
-          <div class="file-type">
-            <span class="file-type-text">TXT</span>
-          </div>
-          <div class="file-info">
-            <span class="file-name">Câu trả lời của sinh viên</span>
-          </div>
-        </div>
-        
-        <div style="padding: 16px; background: #f9fafb; border-radius: 8px; margin: 16px 0;">
-          <div style="white-space: pre-wrap; color: #374151;">${escapeHtml(ch.tra_loi.noi_dung)}</div>
-        </div>
-      ` : `
-        <div style="padding: 16px; background: #fef3c7; border-radius: 8px; margin: 16px 0; color: #92400e;">
-          Sinh viên chưa trả lời câu hỏi này
-        </div>
-      `}
-      
-      <div class="score-section">
-        <div class="score-label">Điểm số:</div>
-        <div class="score-value">
-          <input 
-            type="number" 
-            class="score-input" 
-            value="${ch.tra_loi && ch.tra_loi.diem !== null ? ch.tra_loi.diem : ''}" 
-            placeholder="-"
-            min="0" 
-            max="${ch.diem_toi_da}" 
-            step="0.1"
-            data-cau-hoi-id="${ch.cau_hoi_id}"
-            data-tra-loi-id="${ch.tra_loi ? ch.tra_loi.id : ''}"
-            onkeypress="if(event.key === 'Enter') luuDiem(this)"
-            ${!hasAnswer ? 'disabled' : ''}
-            style="width: 60px; padding: 4px 8px; border: 1px solid #d1d5db; border-radius: 4px; text-align: center; font-size: 16px; font-weight: 600;"
-          />
-          <span class="score-total"> / ${ch.diem_toi_da}</span>
-        </div>
-      </div>
-    `;
-    
-    mainSection.appendChild(questionCard);
-  });
-  
-  // Thêm comments section
-  const commentsSection = document.createElement('div');
-  commentsSection.className = 'comments-section';
-  commentsSection.id = 'comments-container';
-  mainSection.appendChild(commentsSection);
-}
-
-/**
- * Render danh sách bình luận
- */
-function renderComments(binhLuan) {
-  const commentsContainer = document.getElementById('comments-container');
-  if (!commentsContainer) return;
-  
-  commentsContainer.innerHTML = '';
-  
-  if (!binhLuan || binhLuan.length === 0) {
-    commentsContainer.innerHTML = `
-      <div style="text-align: center; padding: 20px; color: #999;">
-        <p>Chưa có bình luận nào</p>
-      </div>
-    `;
-    return;
-  }
-  
-  binhLuan.forEach(bl => {
-    const commentDiv = document.createElement('div');
-    commentDiv.className = 'comment';
-    
-    const isTeacher = bl.nguoi_gui.vai_tro === 'giang_vien';
-    const avatarColor = isTeacher 
-      ? 'linear-gradient(135deg, #fbbf24, #f59e0b)' 
-      : 'linear-gradient(135deg, #34d399, #10b981)';
-    
-    const time = formatDateTime(bl.thoi_gian_gui);
-    
-    commentDiv.innerHTML = `
-      <div class="comment-avatar" style="background: ${avatarColor};"></div>
-      <div class="comment-content">
-        <div class="comment-header">
-          <div class="comment-author">${escapeHtml(bl.nguoi_gui.ho_ten)}</div>
-          <div class="comment-time">
-            <span>${time.time}</span>
-            <span>${time.date}</span>
-          </div>
-        </div>
-        <div class="comment-text">
-          ${escapeHtml(bl.noi_dung)}
-        </div>
-      </div>
-    `;
-    
-    commentsContainer.appendChild(commentDiv);
+    mainSection.appendChild(questionElement);
   });
 }
 
 // ==================== UTILITY FUNCTIONS ====================
-
-/**
- * Format DateTime
- */
-function formatDateTime(dateString) {
-  if (!dateString) return { time: '-', date: '-' };
-  
-  const date = new Date(dateString);
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
-  
-  return {
-    time: `${hours}:${minutes}`,
-    date: `${day}/${month}/${year}`
-  };
-}
-
-/**
- * Escape HTML
- */
-function escapeHtml(text) {
-  if (!text) return '';
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
 
 /**
  * Show Error
@@ -265,13 +136,14 @@ function showError(message) {
 
 /**
  * Lưu điểm cho câu hỏi
+ * Callback function cho shared component
+ * @param {Number} traLoiId - ID trả lời
+ * @param {Number} diem - Điểm số
+ * @param {HTMLElement} input - Input element
+ * @param {Number} cauHoiId - ID câu hỏi
+ * @param {Number} maxDiem - Điểm tối đa
  */
-async function luuDiem(input) {
-  const diem = parseFloat(input.value);
-  const cauHoiId = input.dataset.cauHoiId;
-  const traLoiId = input.dataset.traLoiId;
-  const maxDiem = parseFloat(input.max);
-  
+async function luuDiem(traLoiId, diem, input, cauHoiId, maxDiem) {
   // Validate
   if (isNaN(diem)) {
     ThongBao.canh_bao('Vui lòng nhập điểm hợp lệ');
@@ -309,10 +181,18 @@ async function luuDiem(input) {
     if (data.thanh_cong) {
       ThongBao.thanh_cong('Đã lưu điểm thành công');
       
-      // Reload để cập nhật tổng điểm
-      setTimeout(() => {
-        fetchHomeWorkData();
-      }, 1000);
+      // Update score display
+      const questionWrapper = input.closest('.question-wrapper');
+      if (questionWrapper) {
+        const scoreEarned = questionWrapper.querySelector('.score-earned');
+        if (scoreEarned) {
+          scoreEarned.textContent = `${diem} điểm`;
+          scoreEarned.className = 'score-earned ' + (diem > 0 ? 'scored' : 'zero-score');
+        }
+      }
+      
+      // Re-enable input
+      input.disabled = false;
     } else {
       ThongBao.loi(data.thong_bao || 'Không thể lưu điểm');
       input.disabled = false;

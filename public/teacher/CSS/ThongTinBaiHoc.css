@@ -1,0 +1,539 @@
+/* Thông tin bài học - Giáo viên */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #f5f5f5;
+}
+
+.page-container {
+  margin-left: 250px;
+  margin-top: 70px;
+  padding: 40px;
+  min-height: calc(100vh - 70px);
+  background: #ffffff;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  margin-bottom: 20px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 16px;
+  color: #666;
+}
+
+.breadcrumb-link {
+  color: #3293f9;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb-link:hover {
+  color: #1e7de0;
+  text-decoration: underline;
+}
+
+.breadcrumb .separator {
+  margin: 0 10px;
+  color: #999;
+}
+
+/* Lesson Heading */
+.lesson-heading {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 30px;
+}
+
+/* Video Container - Responsive */
+.video-container {
+  background: #f7fafd;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9; /* Tỷ lệ video chuẩn */
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 30px;
+  transition: transform 0.3s ease;
+}
+
+.video-container:hover {
+  transform: scale(1.01);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  border-radius: 10px;
+  outline: none;
+  object-fit: contain; /* Giữ tỉ lệ, không bị vỡ */
+}
+
+/* Comments Section */
+.comments-section {
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+
+.comments-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.loading-message {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.comment {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.comment:hover {
+  background: #f8f9fa;
+  transform: translateX(5px);
+}
+
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.comment-author {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.comment-time {
+  font-size: 14px;
+  color: #979797;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.comment-text {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  margin-bottom: 10px;
+}
+
+.reply-button {
+  color: #3293f9;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.3s ease;
+  font-family: 'Quicksand', sans-serif;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.reply-button:hover {
+  color: #1e7de0;
+  text-decoration: underline;
+}
+
+/* Replies */
+.replies-toggle {
+  background: #e5f0ff;
+  color: #3293f9;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 56px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.replies-toggle:hover {
+  background: #3293f9;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(50, 147, 249, 0.3);
+}
+
+.replies-container {
+  margin-left: 56px;
+  max-height: 1000px;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.replies-container.hidden {
+  max-height: 0;
+  opacity: 0;
+}
+
+.reply {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.reply:hover {
+  background: #f8f9fa;
+}
+
+.reply .comment-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+/* Add Comment Box - Ẩn ở dưới, hiện khi hover/focus */
+.add-comment-box {
+  position: fixed;
+  right: 40px;
+  bottom: -180px; /* Ẩn ở dưới, chỉ hiện tiêu đề */
+  width: 400px;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px 12px 0 0;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.1);
+  transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+}
+
+/* Hiện lên khi hover hoặc khi có focus bên trong */
+.add-comment-box:hover,
+.add-comment-box:focus-within {
+  bottom: 0;
+  box-shadow: 0 -4px 24px rgba(50, 147, 249, 0.2);
+  border-color: #3293f9;
+}
+
+/* Tab nhỏ ở trên để kéo lên */
+.add-comment-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: #d9d9d9;
+  border-radius: 2px;
+  transition: background 0.3s ease;
+}
+
+.add-comment-box:hover::before {
+  background: #3293f9;
+}
+
+.add-comment-header {
+  margin-bottom: 15px;
+}
+
+.add-comment-title {
+  color: #000000;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.comment-input {
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: #333;
+  resize: none;
+  min-height: 80px;
+  transition: all 0.3s ease;
+}
+
+.comment-input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.comment-input:hover {
+  border-color: #3293f9;
+}
+
+.comment-input:focus {
+  outline: none;
+  border-color: #3293f9;
+  box-shadow: 0 0 0 3px rgba(50, 147, 249, 0.1);
+}
+
+.send-button {
+  background: #3293f9;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 12px;
+  float: right;
+  transition: all 0.3s ease;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.send-button:hover {
+  background: #1e7de0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(50, 147, 249, 0.3);
+}
+
+.send-button:active {
+  transform: translateY(0);
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Tablet (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+  .page-container {
+    margin-left: 200px;
+    padding: 30px 20px;
+  }
+  
+  .lesson-heading {
+    font-size: 28px;
+  }
+  
+  /* Video tự động điều chỉnh theo aspect ratio */
+  .video-container {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .add-comment-box {
+    width: 350px;
+    right: 20px;
+  }
+}
+
+/* Mobile Landscape & Small Tablet (481px - 767px) */
+@media screen and (max-width: 767px) {
+  .page-container {
+    margin-left: 0;
+    margin-top: 60px;
+    padding: 20px 15px;
+  }
+  
+  .breadcrumb {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .breadcrumb .separator {
+    margin: 0 5px;
+  }
+  
+  .lesson-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Video responsive - giữ tỷ lệ */
+  .video-container {
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+  }
+  
+  .video-container:hover {
+    transform: none;
+  }
+  
+  /* Comments */
+  .comments-section {
+    margin-bottom: 180px;
+  }
+  
+  .comments-title {
+    font-size: 18px;
+  }
+  
+  .comment {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .comment-avatar {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .comment-author {
+    font-size: 13px;
+  }
+  
+  .comment-time {
+    font-size: 12px;
+  }
+  
+  .comment-text {
+    font-size: 14px;
+  }
+  
+  .reply-button {
+    font-size: 13px;
+  }
+  
+  .replies-toggle {
+    margin-left: 48px;
+    padding: 6px 16px;
+    font-size: 12px;
+  }
+  
+  .replies-container {
+    margin-left: 48px;
+  }
+  
+  .reply .comment-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  /* Add Comment Box - Full width on mobile với hiệu ứng trượt */
+  .add-comment-box {
+    position: fixed;
+    right: 0;
+    bottom: -220px; /* Ẩn sâu hơn trên mobile */
+    left: 0;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    padding: 15px;
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+  
+  .add-comment-box:hover,
+  .add-comment-box:focus-within {
+    bottom: 0;
+  }
+  
+  /* Tab kéo lớn hơn trên mobile */
+  .add-comment-box::before {
+    width: 80px;
+    height: 5px;
+  }
+  
+  .add-comment-title {
+    font-size: 16px;
+  }
+  
+  .comment-input {
+    min-height: 60px;
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+  
+  .send-button {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+}
+
+/* Mobile Portrait (max 480px) */
+@media screen and (max-width: 480px) {
+  .page-container {
+    padding: 15px 10px;
+  }
+  
+  .lesson-heading {
+    font-size: 20px;
+  }
+  
+  /* Video responsive - aspect ratio tự động */
+  .video-container {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .comment {
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .comment-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .reply .comment-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+  }
+  
+  .comment-text {
+    font-size: 13px;
+  }
+  
+  .replies-toggle {
+    margin-left: 42px;
+  }
+  
+  .replies-container {
+    margin-left: 42px;
+  }
+  
+  .add-comment-box {
+    padding: 12px;
+  }
+  
+  .comment-input {
+    min-height: 50px;
+  }
+}

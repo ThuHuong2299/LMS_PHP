@@ -453,7 +453,7 @@ class BaiTapRepository extends BaseRepository {
      */
     public function layThongTinTraLoi($traLoiId) {
         $sql = "SELECT tl.*, ch.bai_tap_id, ch.diem AS diem_toi_da_cau_hoi
-                FROM tra_loi tl
+                FROM tra_loi_bai_tap tl
                 INNER JOIN cau_hoi_bai_tap ch ON tl.cau_hoi_id = ch.id
                 WHERE tl.id = :tra_loi_id";
         
@@ -483,9 +483,8 @@ class BaiTapRepository extends BaseRepository {
      * Cập nhật điểm trả lời
      */
     public function capNhatDiemTraLoi($traLoiId, $diem) {
-        $sql = "UPDATE tra_loi 
-                SET diem = :diem, 
-                    ngay_cham = NOW() 
+        $sql = "UPDATE tra_loi_bai_tap 
+                SET diem = :diem 
                 WHERE id = :tra_loi_id";
         
         return $this->thucThi($sql, [
@@ -502,7 +501,7 @@ class BaiTapRepository extends BaseRepository {
         $sql = "UPDATE bai_lam bl
                 SET bl.diem = (
                     SELECT COALESCE(SUM(tl.diem), 0)
-                    FROM tra_loi tl
+                    FROM tra_loi_bai_tap tl
                     WHERE tl.bai_lam_id = bl.id
                 ),
                 bl.trang_thai = 'da_cham',

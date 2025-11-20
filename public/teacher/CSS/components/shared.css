@@ -372,7 +372,7 @@ textarea::placeholder {
 
 @media (min-width: 1400px) {
   .page-container {
-    padding: 40px 56px;
+    padding: 0px 56px 40px 56px;
   }
 }
 

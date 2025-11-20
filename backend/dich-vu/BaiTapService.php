@@ -606,4 +606,87 @@ class BaiTapService extends BaseService {
             'bai_lam_id' => $baiLamId
         ];
     }
+    
+    /**
+     * Lấy danh sách bình luận theo câu hỏi - Giảng viên
+     */
+    public function layBinhLuanCauHoiGiangVien($baiTapId, $sinhVienId, $cauHoiId, $giangVienId) {
+        // Validate
+        if (!$this->kiemTraSoNguyen($baiTapId) || !$this->kiemTraSoNguyen($sinhVienId) || !$this->kiemTraSoNguyen($cauHoiId)) {
+            $this->nemLoi('Tham số không hợp lệ');
+        }
+        
+        // Kiểm tra quyền: GV phải là chủ lớp
+        $lopHocId = $this->baiTapRepo->layLopHocIdTheoBaiTap($baiTapId);
+        if (!$this->lopHocRepo->kiemTraQuyenTruyCap($lopHocId, $giangVienId)) {
+            $this->nemLoi('Bạn không có quyền truy cập bài tập này');
+        }
+        
+        // Lấy bài làm
+        $baiLam = $this->baiTapRepo->layChiTietBaiLam($baiTapId, $sinhVienId);
+        if (!$baiLam) {
+            $this->nemLoi('Sinh viên chưa làm bài tập này');
+        }
+        
+        $baiLamId = $baiLam['bai_lam_id'];
+        
+        // Lấy bình luận theo câu hỏi
+        $binhLuan = $this->baiTapRepo->layBinhLuan($baiLamId, $cauHoiId);
+        
+        // Format dữ liệu
+        return array_map(function($bl) {
+            return [
+                'id' => (int)$bl['id'],
+                'noi_dung' => $bl['noi_dung'],
+                'thoi_gian_gui' => $bl['thoi_gian_gui'],
+                'nguoi_gui' => [
+                    'id' => (int)$bl['nguoi_gui_id'],
+                    'ho_ten' => $bl['nguoi_gui_ten'],
+                    'anh_dai_dien' => $bl['nguoi_gui_anh'],
+                    'vai_tro' => $bl['nguoi_gui_vai_tro']
+                ]
+            ];
+        }, $binhLuan);
+    }
+    
+    /**
+     * Gửi bình luận mới - Giảng viên
+     */
+    public function guiBinhLuanCauHoi($baiTapId, $sinhVienId, $cauHoiId, $noiDung, $giangVienId) {
+        // Validate
+        if (!$this->kiemTraSoNguyen($baiTapId) || !$this->kiemTraSoNguyen($sinhVienId) || !$this->kiemTraSoNguyen($cauHoiId)) {
+            $this->nemLoi('Tham số không hợp lệ');
+        }
+        
+        if (empty(trim($noiDung))) {
+            $this->nemLoi('Nội dung bình luận không được để trống');
+        }
+        
+        // Kiểm tra quyền
+        $lopHocId = $this->baiTapRepo->layLopHocIdTheoBaiTap($baiTapId);
+        if (!$this->lopHocRepo->kiemTraQuyenTruyCap($lopHocId, $giangVienId)) {
+            $this->nemLoi('Bạn không có quyền truy cập bài tập này');
+        }
+        
+        // Lấy bài làm
+        $baiLam = $this->baiTapRepo->layChiTietBaiLam($baiTapId, $sinhVienId);
+        if (!$baiLam) {
+            $this->nemLoi('Sinh viên chưa làm bài tập này');
+        }
+        
+        $baiLamId = $baiLam['bai_lam_id'];
+        
+        // Thêm bình luận
+        $ketQua = $this->baiTapRepo->themBinhLuan($baiLamId, $giangVienId, $noiDung, $cauHoiId);
+        
+        if (!$ketQua) {
+            $this->nemLoi('Không thể gửi bình luận');
+        }
+        
+        return [
+            'id' => $this->baiTapRepo->layIdVuaThem(),
+            'bai_lam_id' => $baiLamId,
+            'cau_hoi_id' => $cauHoiId
+        ];
+    }
 }

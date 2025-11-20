@@ -14,6 +14,8 @@ require_once __DIR__ . '/../dich-vu/BaiKiemTraService.php';
 require_once __DIR__ . '/../dich-vu/ThongBaoService.php';
 require_once __DIR__ . '/../dich-vu/SinhVienService.php';
 require_once __DIR__ . '/../dich-vu/TaiLieuService.php';
+require_once __DIR__ . '/../dich-vu/BinhLuanService.php';
+require_once __DIR__ . '/../kho-du-lieu/BaiGiangRepository.php';
 
 class GiangVienController extends BaseController {
     
@@ -26,6 +28,8 @@ class GiangVienController extends BaseController {
     private $thongBaoService;
     private $sinhVienService;
     private $taiLieuService;
+    private $baiGiangRepo;
+    private $binhLuanService;
     
     public function __construct() {
         $this->lopHocService = new LopHocService();
@@ -37,6 +41,8 @@ class GiangVienController extends BaseController {
         $this->thongBaoService = new ThongBaoService();
         $this->sinhVienService = new SinhVienService();
         $this->taiLieuService = new TaiLieuService();
+        $this->baiGiangRepo = new BaiGiangRepository();
+        $this->binhLuanService = new BinhLuanService();
     }
     
     /**
@@ -422,6 +428,188 @@ class GiangVienController extends BaseController {
                 'thanh_cong' => false,
                 'thong_bao' => $e->getMessage()
             ];
+        }
+    }
+    
+    /**
+     * API: Lấy danh sách bình luận theo câu hỏi
+     * Method: GET
+     * Endpoint: /teacher/api/binh-luan-cau-hoi.php?bai_tap_id={id}&sinh_vien_id={id}&cau_hoi_id={id}
+     */
+    public function layBinhLuanCauHoi() {
+        try {
+            $giangVienId = $this->kiemTraQuyenGiangVien();
+            $baiTapId = $this->layThamSoGetInt('bai_tap_id');
+            $sinhVienId = $this->layThamSoGetInt('sinh_vien_id');
+            $cauHoiId = $this->layThamSoGetInt('cau_hoi_id');
+            
+            $duLieu = $this->baiTapService->layBinhLuanCauHoiGiangVien($baiTapId, $sinhVienId, $cauHoiId, $giangVienId);
+            
+            $this->traVeThanhCong($duLieu, 'Lấy danh sách bình luận thành công');
+            
+        } catch (Exception $e) {
+            error_log("Lỗi trong layBinhLuanCauHoi: " . $e->getMessage());
+            $this->traVeLoi($e->getMessage());
+        }
+    }
+    
+    /**
+     * API: Gửi bình luận mới
+     * Method: POST
+     * Endpoint: /teacher/api/binh-luan-cau-hoi.php
+     */
+    public function guiBinhLuanCauHoi() {
+        try {
+            $giangVienId = $this->kiemTraQuyenGiangVien();
+            
+            // Lấy dữ liệu từ request body
+            $input = json_decode(file_get_contents('php://input'), true);
+            
+            if (!isset($input['bai_tap_id']) || !isset($input['sinh_vien_id']) || 
+                !isset($input['cau_hoi_id']) || !isset($input['noi_dung'])) {
+                $this->traVeLoi('Thiếu thông tin bắt buộc');
+                return;
+            }
+            
+            $baiTapId = (int)$input['bai_tap_id'];
+            $sinhVienId = (int)$input['sinh_vien_id'];
+            $cauHoiId = (int)$input['cau_hoi_id'];
+            $noiDung = trim($input['noi_dung']);
+            
+            $ketQua = $this->baiTapService->guiBinhLuanCauHoi(
+                $baiTapId, 
+                $sinhVienId, 
+                $cauHoiId, 
+                $noiDung, 
+                $giangVienId
+            );
+            
+            $this->traVeThanhCong($ketQua, 'Đã gửi bình luận thành công');
+            
+        } catch (Exception $e) {
+            error_log("Lỗi trong guiBinhLuanCauHoi: " . $e->getMessage());
+            $this->traVeLoi($e->getMessage());
+        }
+    }
+    
+    /**
+     * API: Lấy chi tiết bài giảng (cho giảng viên xem)
+     * Method: GET
+     * Endpoint: /api/giang-vien/chi-tiet-bai-giang
+     */
+    public function layChiTietBaiGiang() {
+        try {
+            // Kiểm tra quyền giảng viên
+            $giangVienId = $this->kiemTraQuyenGiangVien();
+            
+            $baiGiangId = $this->layThamSoGetInt('bai_giang_id');
+            $lopHocId = $this->layThamSoGetInt('lop_hoc_id');
+            
+            if ($baiGiangId <= 0 || $lopHocId <= 0) {
+                throw new Exception('Tham số không hợp lệ');
+            }
+            
+            // Verify giảng viên dạy lớp này
+            $lopHoc = $this->lopHocService->layThongTinLopHoc($lopHocId, $giangVienId);
+            if (!$lopHoc) {
+                throw new Exception('Bạn không có quyền truy cập lớp học này');
+            }
+            
+            // Lấy thông tin bài giảng từ repository
+            $baiGiang = $this->baiGiangRepo->layBaiGiangTheoId($baiGiangId);
+            
+            if (!$baiGiang) {
+                throw new Exception('Không tìm thấy bài giảng');
+            }
+            
+            // Lấy thông tin chương
+            $chuong = $this->baiGiangRepo->layThongTinChuong($baiGiang['chuong_id']);
+            
+            // Format dữ liệu trả về (tương tự student nhưng không cần tiến độ)
+            $duLieu = [
+                'bai_giang_id' => $baiGiang['bai_giang_id'],
+                'tieu_de' => $baiGiang['tieu_de'],
+                'duong_dan_video' => $baiGiang['duong_dan_video'],
+                'mo_ta' => $baiGiang['mo_ta'],
+                'thu_tu' => $baiGiang['thu_tu'],
+                'ten_chuong' => $chuong['ten_chuong'] ?? 'Chương',
+                'chuong_id' => $baiGiang['chuong_id']
+            ];
+            
+            $this->traVeThanhCong($duLieu, 'Lấy chi tiết bài giảng thành công');
+            
+        } catch (Exception $e) {
+            error_log("Lỗi layChiTietBaiGiang (teacher): " . $e->getMessage());
+            $this->traVeLoi($e->getMessage());
+        }
+    }
+    
+    /**
+     * API: Lấy bình luận bài giảng (cho giảng viên)
+     * Method: GET
+     * Endpoint: /api/giang-vien/binh-luan-bai-giang
+     */
+    public function layBinhLuanBaiGiang() {
+        try {
+            // Kiểm tra quyền giảng viên
+            $giangVienId = $this->kiemTraQuyenGiangVien();
+            
+            $baiGiangId = $this->layThamSoGetInt('bai_giang_id');
+            
+            if ($baiGiangId <= 0) {
+                throw new Exception('Tham số bai_giang_id không hợp lệ');
+            }
+            
+            // Lấy dữ liệu từ service (không cần phân trang cho giảng viên)
+            $duLieu = $this->binhLuanService->layDanhSachBinhLuan($baiGiangId, 1, 100);
+            
+            $this->traVeThanhCong($duLieu, 'Lấy bình luận thành công');
+            
+        } catch (Exception $e) {
+            error_log("Lỗi layBinhLuanBaiGiang (teacher): " . $e->getMessage());
+            $this->traVeLoi($e->getMessage());
+        }
+    }
+    
+    /**
+     * API: Thêm bình luận bài giảng (cho giảng viên)
+     * Method: POST
+     * Body: { bai_giang_id, noi_dung, binh_luan_cha_id (optional) }
+     */
+    public function themBinhLuanBaiGiang() {
+        try {
+            // Kiểm tra quyền giảng viên
+            $giangVienId = $this->kiemTraQuyenGiangVien();
+            
+            $duLieuNhap = $this->layDuLieuJSON();
+            
+            $baiGiangId = $duLieuNhap['bai_giang_id'] ?? 0;
+            $noiDung = $duLieuNhap['noi_dung'] ?? '';
+            $binhLuanChaId = $duLieuNhap['binh_luan_cha_id'] ?? null;
+            
+            if ($baiGiangId <= 0) {
+                throw new Exception('Tham số bai_giang_id không hợp lệ');
+            }
+            
+            if (empty(trim($noiDung))) {
+                throw new Exception('Nội dung bình luận không được để trống');
+            }
+            
+            // Gọi service để thêm bình luận
+            // Giảng viên dùng ID âm hoặc check role ở service
+            $binhLuanMoi = $this->binhLuanService->themBinhLuan(
+                $baiGiangId, 
+                $giangVienId, // Giảng viên ID
+                $noiDung, 
+                $binhLuanChaId,
+                'giang_vien' // Thêm role để phân biệt
+            );
+            
+            $this->traVeThanhCong($binhLuanMoi, 'Thêm bình luận thành công');
+            
+        } catch (Exception $e) {
+            error_log("Lỗi themBinhLuanBaiGiang (teacher): " . $e->getMessage());
+            $this->traVeLoi($e->getMessage());
         }
     }
 }
