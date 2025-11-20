@@ -363,8 +363,10 @@
 }
     /* Main content */
     .main-content {
+      margin-left: 250px;
       flex: 1;
       padding: 32px 48px;
+      background-color: white;
     }
 
     .header {
@@ -416,28 +418,23 @@
     .assignment-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       margin-bottom: 24px;
       flex-wrap: wrap;
       gap: 20px;
+      padding: 0 20px;
     }
 
     .assignment-title {
       flex: 1;
-      min-width: 300px;
+      min-width: 250px;
     }
 
     .assignment-title h1 {
       font-family: 'Bricolage Grotesque', sans-serif;
       font-size: 28px;
       font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .deadline {
-      font-size: 18px;
-      font-weight: 600;
-      color: #666;
+      margin: 0;
     }
 
     .actions {
@@ -476,21 +473,19 @@
 
     /* Content card */
     .content-wrapper {
-      position: relative;
       display: flex;
       flex-direction: column;
-      gap: 24px;
-      left: 40px;
-      right: 40px;
+      gap: 20px;
+      padding: 0 20px 20px;
+      max-width: 100%;
     }
 
     .assignment-card {
-      position:relative;
       background: white;
       border-radius: 18px;
       border: 1px solid #e0e0e0;
-      padding: 32px;
-      right: 40px;
+      padding: 24px;
+      width: 100%;
     }
 
     .question {
@@ -567,110 +562,131 @@
       color: #000;
     }
 
-    /* Comment card */
-    .comment-card {
+    /* Comment styles removed - now using per-question comments */
+
+    /* Question wrapper styles */
+    .question-wrapper {
       background: white;
-      border-radius: 18px;
-      position: absolute;
-      border: 1px solid #e0e0e0;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      Width: 342px;
-      gap: 16px;
-      right: 40px;
-      top: 320px;
-      height: fit-content;
-    }
-
-    .comment-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 18px;
-      font-weight: 500;
-    }
-
-    .comment-icon {
-      width: 28px;
-      height: 28px;
-      background: #3293f9;
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
-    .comment-input {
-      border: 1px solid #d9d9d9;
-      border-radius: 12px;
+    .question-content {
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .answer-content {
+      margin-top: 12px;
+    }
+
+    /* Info card styles */
+    .info-card {
+      background: #f8f9fa;
+      border-radius: 8px;
       padding: 16px;
-      color: #979797;
-      font-family: 'Be Vietnam Pro', sans-serif;
-      font-size: 15px;
-      line-height: 1.5;
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .send-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      cursor: pointer;
-      align-self: flex-end;
-      transition: all 0.2s;
-    }
-    .down-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      cursor: pointer;
-      align-self: flex-end;
-      transition: all 0.2s;
-    }
-
-    .send-icon:hover {
-      transform: scale(1.1);
+      margin-bottom: 20px;
+      border-left: 4px solid #28a745;
     }
 
     /* Responsive */
     @media (max-width: 1200px) {
+      .main-content {
+        padding: 20px;
+      }
+      
+      .assignment-title h1 {
+        font-size: 24px;
+      }
+      
       .content-wrapper {
-        grid-template-columns: 1fr;
+        padding: 0 16px 16px;
       }
     }
 
     @media (max-width: 768px) {
-      .sidebar {
+      .side-bar {
         position: fixed;
         left: -280px;
         transition: left 0.3s;
         z-index: 100;
       }
 
-      .sidebar.open {
+      .side-bar.open {
         left: 0;
       }
 
       .main-content {
-        padding: 24px;
+        padding: 16px;
+        width: 100%;
       }
 
       .assignment-header {
         flex-direction: column;
+        align-items: flex-start;
+        padding: 0 12px;
+        gap: 12px;
       }
 
-      .course-title {
-        font-size: 24px;
+      .assignment-title {
+        min-width: 100%;
+      }
+
+      .assignment-title h1 {
+        font-size: 22px;
+      }
+
+      .actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .btn-back {
+        font-size: 16px;
+      }
+
+      .content-wrapper {
+        padding: 0 12px 12px;
+        gap: 16px;
+      }
+
+      .assignment-card {
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .question-wrapper {
+        padding: 16px;
+      }
+
+
+
+
+
+      .info-card {
+        padding: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .assignment-title h1 {
+        font-size: 20px;
+      }
+
+      .btn-back {
+        font-size: 14px;
+      }
+
+      .question-wrapper,
+      .assignment-card,
+      .comment-card {
+        padding: 12px;
+      }
+
+      .info-card {
+        padding: 10px;
       }
     }

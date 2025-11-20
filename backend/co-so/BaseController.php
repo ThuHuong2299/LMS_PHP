@@ -22,13 +22,22 @@ abstract class BaseController {
     
     /**
      * Trả về JSON response
+     * Format: thanh_cong, du_lieu, thong_bao (format cũ - giữ nguyên để tương thích)
+     * Hoặc: status, data, message (format mới)
      */
     protected function traVeJson($thanhCong, $duLieu = null, $thongBao = '') {
         header('Content-Type: application/json; charset=utf-8');
+        
+        // Hỗ trợ cả 2 format để frontend linh hoạt
         echo json_encode([
+            // Format cũ (tương thích với code hiện tại)
             'thanh_cong' => $thanhCong,
             'du_lieu' => $duLieu,
-            'thong_bao' => $thongBao
+            'thong_bao' => $thongBao,
+            // Format mới (chuẩn REST API)
+            'status' => $thanhCong ? 'success' : 'error',
+            'data' => $duLieu,
+            'message' => $thongBao
         ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
         exit;
     }
@@ -53,6 +62,22 @@ abstract class BaseController {
     protected function layDuLieuJson() {
         $json = file_get_contents('php://input');
         return json_decode($json, true);
+    }
+    
+    /**
+     * Lấy tham số từ JSON body
+     */
+    protected function layThamSoJson($key, $default = null) {
+        $data = $this->layDuLieuJson();
+        return isset($data[$key]) ? $data[$key] : $default;
+    }
+    
+    /**
+     * Lấy tham số số nguyên từ JSON body
+     */
+    protected function layThamSoJsonInt($key, $default = 0) {
+        $data = $this->layDuLieuJson();
+        return isset($data[$key]) ? (int)$data[$key] : $default;
     }
     
     /**

@@ -1,0 +1,721 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&display=swap');
+/* ==================== CHAM BAI - GRADING PAGE ==================== */
+/* Optimized for Backend Integration with Two Column Layout */
+
+/* ==================== MAIN LAYOUT ==================== */
+.main-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  padding: 0;
+  min-height: calc(100vh - 100px);
+  max-width: 1600px;
+  margin: 0;
+}
+
+/* ==================== LEFT COLUMN: QUESTIONS NAVIGATION ==================== */
+.questions-navigation {
+  background: var(--color-bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 12px);
+  border: 1px solid var(--color-border, #e0e0e0);
+  padding: 20px;
+  height: fit-content;
+  position: sticky;
+  top: 24px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  box-shadow: var(--shadow-sm, 0 2px 4px rgba(0,0,0,0.05));
+  transition: var(--transition-normal, all 0.3s ease);
+}
+
+.questions-navigation:hover {
+  box-shadow: var(--shadow-md, 0 4px 8px rgba(0,0,0,0.1));
+}
+
+.nav-title {
+  color: var(--color-text-primary, #1a1a1a);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+/* Questions Grid - 5 columns */
+.questions-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+/* Question Navigation Buttons */
+.question-btn {
+  aspect-ratio: 1;
+  min-height: 42px;
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid var(--color-border, #e0e0e0);
+  background: var(--color-bg-primary, #ffffff);
+  color: var(--color-text-primary, #1a1a1a);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.question-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.question-btn:active {
+  transform: translateY(0);
+}
+
+/* Status Colors for Question Buttons */
+.question-btn.status-unchecked {
+  background: #fff3e0;
+  border-color: #ffb74d;
+  color: #f57c00;
+}
+
+.question-btn.status-checked {
+  background: #e8f5e9;
+  border-color: #81c784;
+  color: #388e3c;
+}
+
+.question-btn.status-checking {
+  background: #e3f2fd;
+  border-color: #64b5f6;
+  color: #1976d2;
+}
+
+/* Status Legend */
+.status-legend {
+  border-top: 1px solid var(--color-border, #e0e0e0);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-badge {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.status-badge.unchecked {
+  background: #fff3e0;
+  border: 1px solid #ffb74d;
+}
+
+.status-badge.checked {
+  background: #e8f5e9;
+  border: 1px solid #81c784;
+}
+
+.status-text {
+  color: var(--color-text-secondary, #666666);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+}
+
+.status-text span {
+  font-weight: 600;
+  color: var(--color-text-primary, #1a1a1a);
+}
+
+/* ==================== RIGHT COLUMN: QUESTIONS DETAIL ==================== */
+.questions-detail {
+  background: var(--color-bg-primary, #ffffff);
+  border-radius: var(--radius-lg, 12px);
+  border: 1px solid var(--color-border, #e0e0e0);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: var(--shadow-sm, 0 2px 4px rgba(0,0,0,0.05));
+}
+
+/* Detail Header */
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border, #e0e0e0);
+}
+
+.detail-title {
+  color: var(--color-text-primary, #1a1a1a);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Filter Dropdown */
+.filter-dropdown {
+  background: var(--color-bg-primary, #ffffff);
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid var(--color-border, #e0e0e0);
+  padding: 10px 16px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  color: var(--color-text-primary, #1a1a1a);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 140px;
+  outline: none;
+}
+
+.filter-dropdown:hover {
+  border-color: var(--color-primary, #2196f3);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.filter-dropdown:focus {
+  border-color: var(--color-primary, #2196f3);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+/* Questions List Container */
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: calc(100vh - 250px);
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Custom Scrollbar */
+.questions-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.questions-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.questions-list::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.questions-list::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* ==================== QUESTION CARD ==================== */
+.question-card {
+  background: var(--color-bg-primary, #ffffff);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--color-border, #e0e0e0);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.3s ease;
+  scroll-margin-top: 20px;
+}
+
+.question-card:hover {
+  border-color: var(--color-primary, #2196f3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.question-card.highlight {
+  animation: highlightPulse 2s ease;
+}
+
+@keyframes highlightPulse {
+  0%, 100% {
+    background: var(--color-bg-primary, #ffffff);
+  }
+  50% {
+    background: #e3f2fd;
+  }
+}
+
+/* Question Header */
+.question-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.question-title {
+  color: var(--color-text-primary, #1a1a1a);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+  line-height: 1.5;
+}
+
+.question-points {
+  color: var(--color-primary, #2196f3);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  background: #e3f2fd;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm, 6px);
+}
+
+/* ==================== MULTIPLE CHOICE OPTIONS ==================== */
+.question-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid var(--color-border, #e0e0e0);
+  background: var(--color-bg-secondary, #fafafa);
+  cursor: default;
+  transition: all 0.2s ease;
+}
+
+.option:hover {
+  background: #f5f5f5;
+}
+
+.option.selected {
+  background: #e3f2fd;
+  border-color: #2196f3;
+}
+
+.option.correct {
+  background: #e8f5e9;
+  border-color: #4caf50;
+}
+
+.option.incorrect {
+  background: #ffebee;
+  border-color: #f44336;
+}
+
+.option-radio {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border, #e0e0e0);
+  background: var(--color-bg-primary, #ffffff);
+  flex-shrink: 0;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.option-radio.checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2196f3;
+}
+
+.option.correct .option-radio {
+  border-color: #4caf50;
+}
+
+.option.correct .option-radio.checked::after {
+  background: #4caf50;
+}
+
+.option-text {
+  color: var(--color-text-primary, #1a1a1a);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ==================== FILE UPLOAD SECTION ==================== */
+.file-submission {
+  background: var(--color-bg-secondary, #fafafa);
+  border-radius: var(--radius-sm, 6px);
+  padding: 16px;
+}
+
+.file-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.file-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-sm, 6px);
+  background: #2196f3;
+  color: #ffffff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.file-icon.docx {
+  background: #2b579a;
+}
+
+.file-icon.pdf {
+  background: #d32f2f;
+}
+
+.file-icon.jpg,
+.file-icon.png {
+  background: #7b1fa2;
+}
+
+.file-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.file-name {
+  color: var(--color-text-primary, #1a1a1a);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.download-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-bg-primary, #ffffff);
+  border: 1px solid var(--color-border, #e0e0e0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.download-btn:hover {
+  background: var(--color-primary, #2196f3);
+  border-color: var(--color-primary, #2196f3);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.download-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==================== ESSAY ANSWER SECTION ==================== */
+.student-answer {
+  background: var(--color-bg-secondary, #fafafa);
+  border-radius: var(--radius-sm, 6px);
+  padding: 16px;
+  border-left: 3px solid var(--color-primary, #2196f3);
+}
+
+.answer-text {
+  color: var(--color-text-primary, #1a1a1a);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* ==================== GRADING SECTION ==================== */
+.grading-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: #f5f9ff;
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid #bbdefb;
+}
+
+.grading-input {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.grading-label {
+  color: var(--color-text-primary, #1a1a1a);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.score-input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.score-input {
+  width: 80px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid var(--color-border, #e0e0e0);
+  background: var(--color-bg-primary, #ffffff);
+  color: var(--color-text-primary, #1a1a1a);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.score-input:focus {
+  outline: none;
+  border-color: var(--color-primary, #2196f3);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.score-divider {
+  color: var(--color-text-secondary, #666666);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+}
+
+.max-score {
+  color: var(--color-text-secondary, #666666);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.confirm-btn {
+  padding: 10px 24px;
+  border-radius: var(--radius-sm, 6px);
+  border: none;
+  background: var(--color-primary, #2196f3);
+  color: #ffffff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.confirm-btn:hover {
+  background: #1976d2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+.confirm-btn:active {
+  transform: translateY(0);
+}
+
+.confirm-btn:disabled {
+  background: #bdbdbd;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+/* Tablet - Stack navigation on top */
+@media (max-width: 1024px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .questions-navigation {
+    position: static;
+    max-height: none;
+  }
+  
+  .questions-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  
+  .status-legend {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 24px;
+  }
+}
+
+/* Mobile - Single column, larger touch targets */
+@media (max-width: 768px) {
+  .main-layout {
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .questions-navigation {
+    padding: 16px;
+  }
+  
+  .questions-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  
+  .question-btn {
+    min-height: 44px;
+    font-size: 13px;
+  }
+  
+  .questions-detail {
+    padding: 16px;
+  }
+  
+  .detail-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .detail-title {
+    font-size: 20px;
+  }
+  
+  .filter-dropdown {
+    width: 100%;
+  }
+  
+  .question-card {
+    padding: 16px;
+  }
+  
+  .question-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .grading-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .grading-input {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .score-input-group {
+    justify-content: center;
+  }
+  
+  .confirm-btn {
+    width: 100%;
+  }
+  
+  .status-legend {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .questions-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .question-btn {
+    min-height: 40px;
+    font-size: 12px;
+  }
+}
+
+/* ==================== PRINT STYLES ==================== */
+@media print {
+  .questions-navigation {
+    display: none;
+  }
+  
+  .detail-header {
+    border-bottom: 2px solid #000;
+  }
+  
+  .filter-dropdown {
+    display: none;
+  }
+  
+  .question-card {
+    page-break-inside: avoid;
+    border: 1px solid #000;
+  }
+  
+  .confirm-btn {
+    display: none;
+  }
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+.question-btn:focus-visible,
+.filter-dropdown:focus-visible,
+.score-input:focus-visible,
+.confirm-btn:focus-visible {
+  outline: 2px solid var(--color-primary, #2196f3);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .question-card {
+    border-width: 2px;
+  }
+  
+  .option {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

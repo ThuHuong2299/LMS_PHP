@@ -394,8 +394,9 @@ body {
 
 /* Main Content */
 .main-content {
+  margin-left: 250px;
   flex: 1;
-  padding: 0px 40px;
+  padding: 110px 40px 40px 40px;
   overflow-y: auto;
 }
 .header {
@@ -521,6 +522,9 @@ video {
   height: 34px;
   border-radius: 50%;
   background: #e0e0e0;
+  background-image: url('avatar-sv.webp');
+  background-size: cover;
+  background-position: center;
   flex-shrink: 0;
 }
 

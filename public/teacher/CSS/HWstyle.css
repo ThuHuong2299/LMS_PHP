@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&display=swap');
 /* ==================== BASE STYLES ==================== */
 * {
   margin: 0;
@@ -97,6 +100,7 @@
   color: var(--color-primary, #2563eb);
   font-size: var(--font-size-md, 16px);
   font-weight: var(--font-weight-semibold, 600);
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .file-info {
@@ -119,6 +123,7 @@
 .file-name {
   font-size: var(--font-size-md, 16px);
   color: var(--color-text-primary, #000);
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .download-icon {
@@ -139,22 +144,25 @@
 }
 
 .score-label {
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: var(--font-size-xxl, 24px);
   font-weight: var(--font-weight-medium, 500);
   color: var(--color-text-primary, #000);
 }
 
 .score-value {
-  font-family: var(--font-secondary, 'Quicksand', sans-serif);
+  font-family: 'Quicksand', sans-serif;
 }
 
 .score-number {
+  font-family: 'Quicksand', sans-serif;
   font-size: 36px;
   font-weight: var(--font-weight-semibold, 600);
   color: var(--color-primary, #3293f9);
 }
 
 .score-total {
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: var(--font-size-xxl, 24px);
   font-weight: var(--font-weight-semibold, 600);
   color: var(--color-text-primary, #000);
@@ -198,6 +206,7 @@
 }
 
 .comment-author {
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: var(--font-size-sm, 14px);
   font-weight: var(--font-weight-semibold, 600);
   color: var(--color-text-primary, #000);
@@ -206,12 +215,14 @@
 .comment-time {
   display: flex;
   gap: 6px;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: var(--font-size-sm, 14px);
   color: var(--color-text-secondary, #979797);
   white-space: nowrap;
 }
 
 .comment-text {
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: var(--font-size-md, 16px);
   line-height: 1.5;
   color: var(--color-text-primary, #000);
@@ -261,12 +272,14 @@
 }
 
 .student-name {
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: var(--font-size-lg, 18px);
   font-weight: var(--font-weight-regular, 400);
   color: var(--color-text-primary, #000);
 }
 
 .student-id {
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: var(--font-size-lg, 18px);
   color: var(--color-text-secondary, #979797);
 }
@@ -305,6 +318,7 @@
 }
 
 .evaluation-title {
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: var(--font-size-xl, 20px);
   font-weight: var(--font-weight-medium, 500);
   color: var(--color-text-primary, #000);
@@ -315,7 +329,7 @@
   border: 1px solid var(--color-border-light, #d9d9d9);
   border-radius: var(--radius-lg, 18px);
   padding: 16px 18px;
-  font-family: var(--font-primary, 'Be Vietnam Pro', sans-serif);
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: var(--font-size-md, 16px);
   font-style: italic;
   color: var(--color-text-secondary, #979797);

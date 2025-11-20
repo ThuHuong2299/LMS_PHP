@@ -19,13 +19,6 @@ export const ROUTES = {
     ten: 'Lớp học',
     icon: 'study0.svg',
     moTa: 'Quản lý các lớp học'
-  },
-  THONG_BAO: {
-    id: 'thongbao',
-    duongDan: 'Notification.html',
-    ten: 'Thông báo',
-    icon: 'noti0.svg',
-    moTa: 'Xem và tạo thông báo'
   }
 };
 
@@ -53,8 +46,7 @@ export const ROUTES_PHU = {
  */
 export const MENU_SIDEBAR = [
   ROUTES.TRANG_CHU,
-  ROUTES.LOP_HOC,
-  ROUTES.THONG_BAO
+  ROUTES.LOP_HOC
 ];
 
 /**

@@ -244,4 +244,123 @@ class SinhVienRepository extends BaseRepository {
         $result = $this->truyVanMot($sql, ['lop_hoc_id' => $lopHocId]);
         return (int)($result['total'] ?? 0);
     }
+
+    /**
+     * Kiểm tra sinh viên có đăng ký lớp học này không
+     * @param int $sinhVienId
+     * @param int $lopHocId
+     * @return bool
+     */
+    public function kiemTraSinhVienTrongLop($sinhVienId, $lopHocId) {
+        $sql = "SELECT id FROM sinh_vien_lop_hoc
+                WHERE sinh_vien_id = :sinh_vien_id 
+                AND lop_hoc_id = :lop_hoc_id
+                AND trang_thai = 'dang_hoc'
+                LIMIT 1";
+        
+        $result = $this->truyVanMot($sql, [
+            'sinh_vien_id' => $sinhVienId,
+            'lop_hoc_id' => $lopHocId
+        ]);
+        
+        return !empty($result);
+    }
+    
+    /**
+     * Lấy thông báo trong (hoạt động) của sinh viên
+     * Bao gồm: bài tập sắp hết hạn, bài kiểm tra sắp hết hạn, thông báo lớp học
+     * @param int $sinhVienId
+     * @return array
+     */
+    public function getThongBaoTrong($sinhVienId) {
+        $sql = "
+            -- 1. Bài tập sắp hết hạn (7 ngày tới)
+            SELECT 
+                'bai_tap' AS loai,
+                bt.id AS bai_id,
+                bt.tieu_de,
+                mh.ten_mon_hoc,
+                bt.han_nop AS deadline,
+                DATEDIFF(bt.han_nop, NOW()) AS con_bao_nhieu_ngay,
+                CASE 
+                    WHEN bl.id IS NULL THEN 'chua_nop'
+                    WHEN bl.trang_thai = 'luu_nhap' THEN 'dang_lam'
+                    ELSE 'da_nop'
+                END AS trang_thai,
+                lh.id AS lop_hoc_id,
+                DATE_FORMAT(bt.han_nop, '%H:%i') AS thoi_gian,
+                DATE_FORMAT(bt.han_nop, '%d/%m/%Y') AS ngay
+            FROM bai_tap bt
+            JOIN lop_hoc lh ON bt.lop_hoc_id = lh.id
+            JOIN mon_hoc mh ON lh.mon_hoc_id = mh.id
+            JOIN sinh_vien_lop_hoc svlh ON lh.id = svlh.lop_hoc_id AND svlh.sinh_vien_id = :sinh_vien_id1
+            LEFT JOIN bai_lam bl ON bt.id = bl.bai_tap_id AND bl.sinh_vien_id = :sinh_vien_id2
+            WHERE svlh.trang_thai = 'dang_hoc'
+            AND bt.han_nop IS NOT NULL
+            AND bt.han_nop >= NOW()
+            AND bt.han_nop <= DATE_ADD(NOW(), INTERVAL 7 DAY)
+            AND (bl.id IS NULL OR bl.trang_thai != 'da_nop')
+            
+            UNION ALL
+            
+            -- 2. Bài kiểm tra sắp đến hạn (7 ngày tới)
+            SELECT 
+                'bai_kiem_tra' AS loai,
+                bkt.id AS bai_id,
+                bkt.tieu_de,
+                mh.ten_mon_hoc,
+                bkt.thoi_gian_bat_dau AS deadline,
+                DATEDIFF(bkt.thoi_gian_bat_dau, NOW()) AS con_bao_nhieu_ngay,
+                CASE 
+                    WHEN blkt.id IS NULL THEN 'chua_lam'
+                    WHEN blkt.trang_thai = 'da_nop' THEN 'da_lam'
+                    ELSE 'dang_lam'
+                END AS trang_thai,
+                lh.id AS lop_hoc_id,
+                DATE_FORMAT(bkt.thoi_gian_bat_dau, '%H:%i') AS thoi_gian,
+                DATE_FORMAT(bkt.thoi_gian_bat_dau, '%d/%m/%Y') AS ngay
+            FROM bai_kiem_tra bkt
+            JOIN lop_hoc lh ON bkt.lop_hoc_id = lh.id
+            JOIN mon_hoc mh ON lh.mon_hoc_id = mh.id
+            JOIN sinh_vien_lop_hoc svlh ON lh.id = svlh.lop_hoc_id AND svlh.sinh_vien_id = :sinh_vien_id3
+            LEFT JOIN bai_lam_kiem_tra blkt ON bkt.id = blkt.bai_kiem_tra_id AND blkt.sinh_vien_id = :sinh_vien_id4
+            WHERE svlh.trang_thai = 'dang_hoc'
+            AND bkt.thoi_gian_bat_dau IS NOT NULL
+            AND bkt.thoi_gian_bat_dau >= NOW()
+            AND bkt.thoi_gian_bat_dau <= DATE_ADD(NOW(), INTERVAL 7 DAY)
+            
+            UNION ALL
+            
+            -- 3. Thông báo lớp học (7 ngày gần nhất)
+            SELECT 
+                'thong_bao' AS loai,
+                tb.id AS bai_id,
+                tb.tieu_de,
+                mh.ten_mon_hoc,
+                tb.thoi_gian_gui AS deadline,
+                0 AS con_bao_nhieu_ngay,
+                'moi' AS trang_thai,
+                lh.id AS lop_hoc_id,
+                DATE_FORMAT(tb.thoi_gian_gui, '%H:%i') AS thoi_gian,
+                DATE_FORMAT(tb.thoi_gian_gui, '%d/%m/%Y') AS ngay
+            FROM thong_bao_lop_hoc tb
+            JOIN lop_hoc lh ON tb.lop_hoc_id = lh.id
+            JOIN mon_hoc mh ON lh.mon_hoc_id = mh.id
+            JOIN sinh_vien_lop_hoc svlh ON lh.id = svlh.lop_hoc_id AND svlh.sinh_vien_id = :sinh_vien_id5
+            WHERE svlh.trang_thai = 'dang_hoc'
+            AND tb.thoi_gian_gui >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+            
+            ORDER BY deadline DESC
+        ";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':sinh_vien_id1', $sinhVienId, PDO::PARAM_INT);
+        $stmt->bindValue(':sinh_vien_id2', $sinhVienId, PDO::PARAM_INT);
+        $stmt->bindValue(':sinh_vien_id3', $sinhVienId, PDO::PARAM_INT);
+        $stmt->bindValue(':sinh_vien_id4', $sinhVienId, PDO::PARAM_INT);
+        $stmt->bindValue(':sinh_vien_id5', $sinhVienId, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

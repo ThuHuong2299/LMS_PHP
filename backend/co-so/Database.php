@@ -20,6 +20,8 @@ class Database {
      * Private constructor để ngăn khởi tạo trực tiếp
      */
     private function __construct() {
+        // Set múi giờ mặc định
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $this->khoiTaoKetNoi();
     }
     

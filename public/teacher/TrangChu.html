@@ -20,8 +20,10 @@
   <link rel="stylesheet" href="/public/teacher/CSS/style.css">
   <link rel="stylesheet" href="/public/teacher/CSS/BTstyle.css">
   <link rel="stylesheet" href="/public/teacher/CSS/BKTstyle.css">
+  <link rel="stylesheet" href="/public/assets/css/thong-bao.css">
   
   <title>Dashboard - Learn Lab</title>
+  <script src="/public/assets/js/thong-bao.js"></script>
 </head>
 <body>
   <div id="sidebar-container"></div>
@@ -36,7 +38,7 @@
       <div class="classes">
         <img class="framecl" src="framecl0.svg" />
         <div class="classes-p">
-          <div class="_8">8</div>
+          <div class="_8">-</div>
           <div class="l-p-gi-ng-d-y">Lớp giảng dạy</div>
         </div>
       </div>
@@ -45,7 +47,7 @@
           <img class="frame3" src="frame2.svg" />
         </div>
         <div class="student-p">
-          <div class="_80">80</div>
+          <div class="_80">-</div>
           <div class="sinh-vi-n-theo-h-c">Sinh viên theo học</div>
         </div>
       </div>
@@ -54,7 +56,7 @@
           <img class="exercise3" src="exercise2.svg" />
         </div>
         <div class="test-p">
-          <div class="_12">12</div>
+          <div class="_12">-</div>
           <div class="b-i-ch-ch-m">Bài chờ chấm</div>
         </div>
       </div>
@@ -63,7 +65,7 @@
           <img class="noti3" src="noti2.svg" />
         </div>
         <div class="notifies-p">
-          <div class="_3">3</div>
+          <div class="_3">-</div>
           <div class="th-ng-b-o-m-i">Thông báo mới</div>
         </div>
       </div>
@@ -94,64 +96,11 @@
 
       <!-- 3.2 Hoạt động gần đây -->
       <div class="notification">
-      <div class="ho-t-ng-g-n-y">Hoạt động gần đây</div>
-      <div class="noti-10">
-        <div class="frame-noti-10">
-          <img class="frame" src="frame0.svg" />
-        </div>
-        <div class="noti-pa">
-          <div class="sinh-vi-n-ph-m-anh-t-n-p-b-i">
-            <span>
-              <span class="sinh-vi-n-ph-m-anh-t-n-p-b-i-span">
-                Sinh viên Phạm Anh Tú
-              </span>
-              <span class="sinh-vi-n-ph-m-anh-t-n-p-b-i-span2">đã nộp bài</span>
-            </span>
-          </div>
-          <div class="_5-ph-t-tr-c">5 phút trước</div>
+        <div class="ho-t-ng-g-n-y">Hoạt động gần đây</div>
+        <div id="hoat-dong-container">
+          <!-- Dữ liệu sẽ được load từ API -->
         </div>
       </div>
-      <div class="noti-20">
-        <div class="frame-noti-20">
-          <img class="exercise2" src="exercise1.svg" />
-        </div>
-        <div class="noti-20-pa">
-          <div class="b-i-t-p-ch-ng-3-h-t-h-n-n-p">
-            Bài tập chương 3 hết hạn nộp
-          </div>
-          <div class="_15-ph-t-tr-c">15 phút trước</div>
-        </div>
-      </div>
-      <div class="noti-30">
-        <div class="noti-302">
-          <img class="exam2" src="exam1.svg" />
-        </div>
-        <div class="noti-30-pa">
-          <div class="b-i-ki-m-ch-ng-3-h-t-h-n-n-p">
-            Bài kiểm chương 3 hết hạn nộp
-          </div>
-          <div class="_25-ph-t-tr-c">25 phút trước</div>
-        </div>
-      </div>
-      <div class="noti-40">
-        <div class="noti-402">
-          <img class="frame2" src="frame1.svg" />
-        </div>
-        <div class="noti-40-pa">
-          <div class="sinh-vi-n-ph-m-ho-ng-nhi-n-p-b-i">
-            <span>
-              <span class="sinh-vi-n-ph-m-ho-ng-nhi-n-p-b-i-span">
-                Sinh viên Phạm Hoàng Nhi
-              </span>
-              <span class="sinh-vi-n-ph-m-ho-ng-nhi-n-p-b-i-span2">
-                đã nộp bài
-              </span>
-            </span>
-          </div>
-          <div class="_35-ph-t-tr-c">35 phút trước</div>
-        </div>
-      </div>
-    </div>
     </div>
   </div>
   
@@ -236,25 +185,30 @@
     </div>
 
     <div class="exam-popup-body">
-      <!-- THÊM MỚI: Lớp giao -->
+      <!-- Lớp giao -->
       <div class="exam-form-group">
         <label class="ti-u">Lớp giao:</label>
         <select class="exam-form-input" id="examClass">
           <option value="">Tên môn - Mã lớp</option>
-          <option value="class1">Các Hệ thống thông tin phổ biến trong doanh nghiệp - 213_eCIT2320_09</option>
-          <option value="class2">Quản trị cơ sở dữ liệu - 213_eCIT2310_05</option>
-          <option value="class3">Lập trình hướng đối tượng - 213_eCIT2210_03</option>
+        </select>
+      </div>
+      
+      <!-- Chương (không bắt buộc) -->
+      <div class="exam-form-group">
+        <label class="ti-u">Chương (không bắt buộc):</label>
+        <select class="exam-form-input" id="examChapter">
+          <option value="">Chọn chương (không bắt buộc)</option>
         </select>
       </div>
       
       <div class="exam-form-group">
         <label class="ti-u">Tiêu đề:</label>
-        <input type="text" class="exam-form-input" id="examTitle" placeholder="Thông báo nghỉ học">
+        <input type="text" class="exam-form-input" id="examTitle" placeholder="Kiểm tra giữa kỳ - Power BI">
       </div>
 
       <div class="exam-form-group">
-        <label class="ti-u">Thời lượng:</label>
-        <input type="text" class="exam-form-input" id="examDuration" placeholder="VD: 60 phút">
+        <label class="ti-u">Thời lượng (phút):</label>
+        <input type="number" class="exam-form-input" id="examDuration" placeholder="60" min="1">
       </div>
 
       <div class="exam-form-group">

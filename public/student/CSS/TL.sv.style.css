@@ -369,9 +369,9 @@ body {
 
 /* Main Content */
 .main-content {
-  margin-left: 20px;
-    flex: 1;
-    padding: 32px 40px;
+  margin-left: 250px;
+  flex: 1;
+  padding: 110px 40px 40px 40px;
 }
 
 .header {
@@ -517,4 +517,38 @@ body {
 .download-btn img {
   width: 32px;
   height: 32px;
+}
+
+/* Empty and Error Messages */
+.empty-message,
+.error-message {
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.error-message {
+  color: #ff0000;
+}
+
+/* Additional file type colors */
+.doc-type.xlsx,
+.doc-type.xls {
+  color: #10b981;
+}
+
+.doc-type.pptx,
+.doc-type.ppt {
+  color: #f97316;
+}
+
+.doc-type.txt {
+  color: #6b7280;
+}
+
+.doc-type.zip,
+.doc-type.rar {
+  color: #8b5cf6;
 }

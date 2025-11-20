@@ -1,0 +1,573 @@
+* {
+  box-sizing: border-box;
+}
+
+.trangchu {
+  background: var(--color-bg-primary, #ffffff);
+  padding: 40px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Header section with title and add button */
+.trangchu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+/* Grid layout for classes */
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 32px;
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .classes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .classes-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .trangchu {
+    padding: 24px;
+  }
+}
+/* Search đã được xử lý bởi navbar component - xóa hoặc ẩn đi */
+.searchh {
+  display: none;
+}
+.search {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  position: relative;
+  overflow: visible;
+}
+.t-m-ki-m {
+  color: #979797;
+  text-align: left;
+  font-family: var(--side-title-font-family, "Quicksand-Medium", sans-serif);
+  font-size: var(--side-title-font-size, 24px);
+  font-weight: var(--side-title-font-weight, 500);
+  position: relative;
+  border: none;          
+  outline: none; 
+  background: transparent; 
+}
+.logout-section {
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  width: 250px;
+}
+.side-bar.collapsed .logout-section {
+ display: none;
+}
+.logout-btn {
+  color: rgb(0, 0, 0);
+  border: none;
+  width: 245px;
+  left: 0px;
+  padding: 5px 5px;
+  font-size: 20px;
+  cursor: pointer;
+  border-width: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background-color: #ffffff;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #ce8787;
+}
+/* Account info đã được xử lý bởi navbar component - xóa hoặc ẩn đi */
+.account {
+  display: none;
+}
+.ellipse-50 {
+  border-radius: 50%;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  position: relative;
+  object-fit: cover;
+}
+.accountinfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.nguy-n-cao-k-duy-n {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-SemiBold", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  position: relative;
+}
+.m-gi-ng-vi-n {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+}
+.c-c-l-p-ang-gi-ng-d-y {
+  color: #000000;
+  text-align: left;
+  font-family: var(--font-heading), "BricolageGrotesque-SemiBold", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+.addnew {
+  background: var(--color-primary, #3293f9);
+  border-radius: var(--radius-sm, 8px);
+  padding: 15px 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.2s);
+  position: absolute;
+  right: 40px;
+  top: 0;
+}
+
+.addnew:hover {
+  background: var(--color-secondary, #739FFF);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+.addnewplus {
+  flex-shrink: 0;
+  width: 20.14px;
+  height: 20.14px;
+  position: relative;
+  overflow: visible;
+}
+.th-m-m-i {
+  color: #ffffff;
+  text-align: left;
+  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-size: 20px;
+  line-height: 100%;
+  font-weight: 600;
+  position: relative;
+}
+.class-1 {
+  border-radius: var(--radius-xl, 18px);
+  border: 1px solid var(--color-border-light, #979797);
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.2s);
+  background: var(--color-bg-primary, #ffffff);
+}
+
+.class-1:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary, #3293f9);
+}
+.c-c-h-th-ng-th-ng-tin-ph-bi-n-trong-doanh-nghi-p {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-Medium", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  position: relative;
+  align-self: stretch;
+}
+._213-e-cit-2320-09 {
+  color: #3293f9;
+  text-align: left;
+  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+  align-self: stretch;
+}
+.vector-43 {
+  flex-shrink: 0;
+  width: 487px;
+  height: 0px;
+  position: relative;
+  overflow: visible;
+}
+.class-1-info {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.class-1-student {
+  display: flex;
+  flex-direction: row;
+  gap: 11.55px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame {
+  border-radius: 61.6px;
+  padding: 14.44px;
+  display: flex;
+  flex-direction: column;
+  gap: 9.62px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 34.65px;
+  height: 34.65px;
+  position: relative;
+  overflow: hidden;
+}
+.frame2 {
+  flex-shrink: 0;
+  width: 35.35px;
+  height: 35.35px;
+  position: relative;
+  overflow: visible;
+}
+._36-sinh-vi-n {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-size: 15.399559020996094px;
+  font-weight: 400;
+  position: relative;
+}
+.class-1-homework {
+  display: flex;
+  flex-direction: row;
+  gap: 11.55px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.exercise {
+  display: flex;
+  flex-direction: row;
+  gap: 9.62px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38.5px;
+  height: 38.5px;
+  position: relative;
+  overflow: visible;
+}
+._12-b-i-t-p {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-size: 15.399559020996094px;
+  font-weight: 400;
+  position: relative;
+}
+.class-1-test {
+  display: flex;
+  flex-direction: row;
+  gap: 12.51px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.exam {
+  display: flex;
+  flex-direction: row;
+  gap: 9.62px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38.5px;
+  height: 38.5px;
+  position: relative;
+  overflow: visible;
+}
+._6-b-i-ki-m-tra {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-size: 15.399559020996094px;
+  font-weight: 400;
+  position: relative;
+}
+.class-2 {
+  border-radius: var(--radius-xl, 18px);
+  border: 1px solid var(--color-border-light, #979797);
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.2s);
+  background: var(--color-bg-primary, #ffffff);
+}
+
+.class-2:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary, #3293f9);
+}
+.vector-432 {
+  flex-shrink: 0;
+  width: 487px;
+  height: 0px;
+  position: relative;
+  overflow: visible;
+}
+.class-2-info {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.class-2-student {
+  display: flex;
+  flex-direction: row;
+  gap: 11.55px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame3 {
+  flex-shrink: 0;
+  width: 35.35px;
+  height: 35.35px;
+  position: relative;
+  overflow: visible;
+}
+.class-2-homework {
+  display: flex;
+  flex-direction: row;
+  gap: 11.55px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.exercise2 {
+  display: flex;
+  flex-direction: row;
+  gap: 9.62px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38.5px;
+  height: 38.5px;
+  position: relative;
+  overflow: visible;
+}
+.class-2-test {
+  display: flex;
+  flex-direction: row;
+  gap: 12.51px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.exam2 {
+  display: flex;
+  flex-direction: row;
+  gap: 9.62px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38.5px;
+  height: 38.5px;
+  position: relative;
+  overflow: visible;
+}
+.side-bar {
+  width: 250px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+.side-bar.collapsed {
+  width: 80px;
+}
+.side-bar.collapsed .earn-lab,
+.side-bar.collapsed .dashboard,
+.side-bar.collapsed .l-p-h-c,
+.side-bar.collapsed .th-ng-b-o {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.side-bar.collapsed .tab-side-bar,
+.side-bar.collapsed .tab-side-bar2 {
+  justify-content: center;
+}
+.side-bar .logo {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  transition: all 0.3s ease;
+}
+.side-bar.collapsed .logo {
+  padding: 8px;
+}
+.side-bar .earn-lab {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+  transition: opacity 0.3s ease;
+}
+.logo {
+  flex-shrink: 0;
+  width: 240px;
+  height: 140px;
+  position: relative;
+}
+.objects {
+  width: 56.55px;
+  height: 58.5px;
+  position: relative;
+  overflow: visible;
+}
+.earn-lab {
+  color: #000000;
+  text-align: left;
+  font-family: "BricolageGrotesque-Bold", sans-serif;
+  font-size: 21.379295349121094px;
+  font-weight: 700;
+  position: relative;
+  top: 18px;
+  width: 120px;
+}
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.tab-side-bar,
+.tab-side-bar3 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.tab-side-bar2 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  cursor: pointer;
+  background-color: #e5f0ff;
+
+}
+.tab-side-bar:hover,
+.tab-side-bar3:hover {
+  background-color: #e5f0ff;
+}
+.side-bar.collapsed .tab-side-bar img,
+.side-bar.collapsed .tab-side-bar2 img {
+  margin: 0;
+}
+.open-close {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  overflow: visible;
+}
+.open-close:hover {
+  cursor: ew-resize;
+}
+.db {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  position: relative;
+  overflow: visible;
+}
+.dashboard {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+  width: 153px;
+}
+
+.study {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  position: relative;
+  overflow: visible;
+}
+.l-p-h-c {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+  width: 153px;
+}
+.noti {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  position: relative;
+  overflow: visible;
+}
+.th-ng-b-o {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+  width: 153px;
+}

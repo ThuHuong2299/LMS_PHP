@@ -1,0 +1,85 @@
+/**
+ * File: navbar.sv.style.css
+ * Mục đích: CSS độc lập cho Navbar component
+ * - Chứa toàn bộ style cho navbar (header, page-title, user-info, avatar, details)
+ * - Không phụ thuộc vào CSS của bất kỳ trang nào
+ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 250px;
+  right: 0;
+  z-index: 999;
+  background: #ffffff;
+  padding: 16px 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 84px;
+}
+
+/* Search Bar */
+.search-bar {
+  background: #f5f4f4;
+  border-radius: 36px;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+  max-width: 800px;
+}
+
+/* Page Title */
+.page-title {
+  color: #3b82f6;
+  margin-bottom: 30px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.search-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.search-input {
+  border: none;
+  background: none;
+  flex: 1;
+  font-size: 18px;
+  color: #979797;
+  outline: none;
+  font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
+}
+
+/* User info */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-avatar img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-details h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
+}
+
+.user-details p {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+  font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
+}

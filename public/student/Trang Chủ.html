@@ -4,62 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trang Chủ</title>
+  <!-- Sidebar & Navbar Styles -->
+  <link rel="stylesheet" href="./CSS/components/sidebar.css">
+  <link rel="stylesheet" href="./components/navbar.sv.style.css">
+  <!-- Main Content Styles -->
   <link rel="stylesheet" href="./CSS/TC.sv.style.css">
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="./js/common.js"></script>
-<script src="../assets/js/trang-chu-sv.js"></script>  
-<base href="./assets/">
+  <script src="./js/common.js"></script>
+  <script src="./js/components/navbar.js"></script>
+  <script src="../assets/js/trang-chu-sv.js"></script>
+    <script type="module" src="./js/main.js"></script>
 </head>
 <body>
   <div class="trang-ch">
-    <!-- Sidebar -->
-    <div class="side-bar" id="sidebar">
-      <div class="logo">
-        <img class="objects" src="objects0.svg"/>
-        <div class="earn-lab">earn Lab</div>
-        <img class="open-close" src="open-close0.svg"/>
-      </div>
-      <div class="options">
-        <div class="tab-side-bar2">
-          <img class="study" src="study0.svg" />
-          <div class="l-p-h-c">Lớp học</div>
-        </div>
-        <div class="tab-side-bar3" onclick="window.location.href='../Thông%20báo.html'">
-          <img class="noti" src="noti0.svg" />
-          <div class="th-ng-b-o">Thông báo</div>
-        </div>
-      </div>
-      <div class="logout-section">
-        <button class="logout-btn" onclick="logout()">
-          <img src="logout-icon.svg" alt="Đăng xuất" style=" filter: brightness(0) saturate(100%) invert(0);">
-          <span>Đăng xuất</span>
-        </button>
-      </div>
-    </div>
+    <!-- Sidebar Container (loaded dynamically) -->
+    <div id="sidebar-container"></div>
 
     <!-- Main Content -->
     <div class="main-content">
-            <!-- Header -->
-      <div class="header">
-        <div class="search-bar">
-          <div class="search-icon">
-            <img src="search0.svg" alt="Tìm kiếm" style="width: 24px;">
-          </div>
-          <input type="text" class="search-input" placeholder="Tìm kiếm">
-        </div>
-
-        <div class="user-info">
-          <div class="user-avatar">
-            <img src="ellipse-500.png" alt="User" />
-          </div>
-          <div class="user-details">
-            <h3>Nguyễn Cao Kỳ Duyên</h3>
-            <p>Mã giảng viên</p>
-          </div>
-        </div>
-      </div>
-      <!-- Page Title -->
-      <div class="trang-ch3">Trang chủ</div>
+      <!-- Navbar Container -->
+      <div id="navbar-container"></div>
 
       <!-- Content Grid -->
       <div class="content-grid">
@@ -164,6 +128,9 @@
       </div>
     </div>
   </div>
+
+  <!-- Load dynamic components -->
+
 </body>
 
 </html>

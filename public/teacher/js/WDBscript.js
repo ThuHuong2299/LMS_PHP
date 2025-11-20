@@ -49,9 +49,7 @@ async function fetchWorkDashboardData() {
     if (workType === 'bai_tap') {
       apiUrl = `/backend/teacher/api/chi-tiet-bai-tap.php?bai_tap_id=${baiTapId}`;
     } else if (workType === 'bai_kiem_tra') {
-      // TODO: Backend API cho bài kiểm tra chưa implement
-      showError('Chức năng xem chi tiết bài kiểm tra đang được phát triển');
-      return;
+      apiUrl = `/backend/teacher/api/chi-tiet-bai-kiem-tra.php?bai_kiem_tra_id=${baiKiemTraId}`;
     }
     
     const response = await fetch(apiUrl, {
@@ -64,11 +62,18 @@ async function fetchWorkDashboardData() {
     
     const data = await response.json();
     
+    console.log('📊 API Response:', data);
+    console.log('📋 Work Type:', workType);
+    
     if (data.thanh_cong) {
+      console.log('✅ Thống kê:', data.du_lieu.thong_ke);
+      console.log('👥 Danh sách sinh viên:', data.du_lieu.danh_sach_sinh_vien);
+      
       updateStatistics(data.du_lieu.thong_ke);
       allStudents = formatStudentData(data.du_lieu.danh_sach_sinh_vien);
       renderStudents();
     } else {
+      console.error('❌ Lỗi API:', data.thong_bao);
       showError(data.thong_bao || 'Không thể lấy dữ liệu');
     }
   } catch (error) {
@@ -81,16 +86,28 @@ async function fetchWorkDashboardData() {
  * Cập nhật thống kê
  */
 function updateStatistics(thongKe) {
-  // Cập nhật số bài chưa chấm
-  const soBaiChuaCham = document.querySelector('#baichuacham ._12-b-i');
-  if (soBaiChuaCham) {
-    soBaiChuaCham.textContent = `${thongKe.so_bai_chua_cham} bài`;
-  }
-  
-  // Cập nhật số bài đã chấm
-  const soBaiDaCham = document.querySelector('#baidacham ._12-b-i');
-  if (soBaiDaCham) {
-    soBaiDaCham.textContent = `${thongKe.so_bai_da_cham} bài`;
+  // Ẩn/hiện phần số bài chấm dựa vào loại công việc
+  const testaval = document.querySelector('.testaval');
+  if (testaval) {
+    if (workType === 'bai_kiem_tra') {
+      // Ẩn phần số bài chưa chấm/đã chấm với bài kiểm tra (tự động chấm)
+      testaval.style.display = 'none';
+    } else {
+      // Hiển thị với bài tập
+      testaval.style.display = 'flex';
+      
+      // Cập nhật số bài chưa chấm
+      const soBaiChuaCham = document.querySelector('#baichuacham ._12-b-i');
+      if (soBaiChuaCham) {
+        soBaiChuaCham.textContent = `${thongKe.so_bai_chua_cham} bài`;
+      }
+      
+      // Cập nhật số bài đã chấm
+      const soBaiDaCham = document.querySelector('#baidacham ._12-b-i');
+      if (soBaiDaCham) {
+        soBaiDaCham.textContent = `${thongKe.so_bai_da_cham} bài`;
+      }
+    }
   }
   
   // Cập nhật điểm trung bình
@@ -189,8 +206,7 @@ function formatDateTime(dateString) {
  */
 function showError(message) {
   console.error(message);
-  // TODO: Có thể hiển thị toast notification ở đây
-  alert(message);
+  ThongBao.loi(message);
 }
 
 // ==================== FILTER & PAGINATION ====================

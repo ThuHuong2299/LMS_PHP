@@ -25,9 +25,18 @@ function closeModal(modalId) {
 }
 
 // Event listeners cho các nút mở modal - FIXED
-document.getElementById('openModal1')?.addEventListener('click', () => openModal('assignmentModal'));
-document.getElementById('openModal2')?.addEventListener('click', () => openModal('examModal'));
-document.getElementById('openModal3')?.addEventListener('click', () => openModal('taothongbao'));
+document.getElementById('openModal1')?.addEventListener('click', () => {
+  loadDanhSachLopBaiTap();
+  openModal('assignmentModal');
+});
+document.getElementById('openModal2')?.addEventListener('click', () => {
+  loadDanhSachLopKiemTra();
+  openModal('examModal');
+});
+document.getElementById('openModal3')?.addEventListener('click', () => {
+  loadDanhSachLop();
+  openModal('taothongbao');
+});
 
 // Đóng modal khi click bên ngoài
 ['assignmentModal', 'examModal', 'taothongbao'].forEach(modalId => {
@@ -87,45 +96,275 @@ function deleteAssignmentQuestion(button) {
   }
 }
 
-function saveAssignment() {
+async function saveAssignment() {
   const classSelect = document.getElementById('assignmentClass');
-  const chapter = document.getElementById('assignmentChapter');
+  const chapterSelect = document.getElementById('assignmentChapter');
   const title = document.getElementById('assignmentTitle');
   const deadline = document.getElementById('assignmentDeadline');
   
+  // Validation
+  if (!classSelect || !chapterSelect || !title || !deadline) {
+    ThongBao.loi('Không tìm thấy form!');
+    return;
+  }
+  
   if (!classSelect.value) {
-    if (window.Toast) Toast.warning('Vui lòng chọn lớp giao!');
+    ThongBao.canh_bao('Vui lòng chọn lớp!');
     return;
   }
   
-  if (!title.value || !duration.value) {
-    if (window.Toast) Toast.warning('Vui lòng điền đầy đủ thông tin!');
+  if (!chapterSelect.value) {
+    ThongBao.canh_bao('Vui lòng chọn chương!');
     return;
   }
   
-  const questions = [];
-  document.querySelectorAll('#assignmentQuestionsContainer .question-wrapper').forEach((wrapper, index) => {
-    const questionText = wrapper.querySelector('.question-title-input').value;
-    const description = wrapper.querySelector('.question-textarea').value;
+  if (!title.value.trim()) {
+    ThongBao.canh_bao('Vui lòng nhập tiêu đề!');
+    return;
+  }
+  
+  if (!deadline.value) {
+    ThongBao.canh_bao('Vui lòng chọn hạn nộp!');
+    return;
+  }
+  
+  // Lấy danh sách câu hỏi
+  const cauHoiList = [];
+  const questionWrappers = document.querySelectorAll('#assignmentQuestionsContainer .question-wrapper');
+  
+  if (questionWrappers.length === 0) {
+    ThongBao.canh_bao('Phải có ít nhất 1 câu hỏi!');
+    return;
+  }
+  
+  let hasError = false;
+  questionWrappers.forEach((wrapper, index) => {
+    const noiDung = wrapper.querySelector('.question-title-input')?.value.trim();
+    const moTa = wrapper.querySelector('.question-textarea')?.value.trim();
     
-    questions.push({
-      id: index + 1,
-      question: questionText,
-      description: description
+    if (!noiDung) {
+      ThongBao.canh_bao(`Câu hỏi ${index + 1} không được để trống!`);
+      hasError = true;
+      return;
+    }
+    
+    cauHoiList.push({
+      noi_dung: noiDung,
+      mo_ta: moTa || null,
+      diem: 10 / questionWrappers.length // Chia đều điểm
     });
   });
   
-  console.log('Assignment Data:', { 
-    class: classSelect.options[classSelect.selectedIndex].text,
-    chapter: chapter.value,
-    title: title.value, 
-    deadline: deadline.value, 
-    questions 
-  });
+  if (hasError) return;
   
-  if (window.Toast) Toast.success('Đã lưu bài tập!');
-  closeModal('assignmentModal');
+  try {
+    const response = await fetch('/backend/teacher/api/tao-bai-tap.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        lop_hoc_id: classSelect.value,
+        chuong_id: chapterSelect.value,
+        tieu_de: title.value.trim(),
+        han_nop: deadline.value,
+        cau_hoi: cauHoiList
+      })
+    });
+    
+    const data = await response.json();
+    
+    if (data.thanh_cong) {
+      ThongBao.thanh_cong(data.thong_bao || 'Đã tạo bài tập thành công!');
+      
+      // Reset form
+      classSelect.selectedIndex = 0;
+      chapterSelect.innerHTML = '<option value="">Chọn chương</option>';
+      title.value = '';
+      deadline.value = '';
+      
+      // Xóa câu hỏi thừa, giữ lại 1
+      const container = document.getElementById('assignmentQuestionsContainer');
+      const firstQuestion = container.querySelector('.question-wrapper');
+      if (firstQuestion) {
+        container.innerHTML = firstQuestion.outerHTML;
+        container.querySelector('.question-title-input').value = '';
+        container.querySelector('.question-textarea').value = '';
+      }
+      
+      closeModal('assignmentModal');
+      
+      // Reload danh sách bài tập nếu đang ở trang chi tiết lớp
+      if (typeof loadTabBaiTap === 'function') {
+        loadTabBaiTap();
+      }
+    } else {
+      ThongBao.loi(data.thong_bao || 'Không thể tạo bài tập');
+    }
+  } catch (error) {
+    console.error('Lỗi:', error);
+    ThongBao.loi('Không thể kết nối đến server');
+  }
 }
+
+/**
+ * Load danh sách chương khi chọn lớp
+ */
+async function loadChuongTheoLop(lopHocId) {
+  try {
+    const response = await fetch(`/backend/teacher/api/chuong-theo-lop.php?lop_hoc_id=${lopHocId}`, {
+      credentials: 'include'
+    });
+    const data = await response.json();
+    
+    if (data.thanh_cong && data.du_lieu) {
+      const select = document.getElementById('assignmentChapter');
+      if (!select) return;
+      
+      select.innerHTML = '<option value="">Chọn chương</option>';
+      
+      data.du_lieu.forEach(chuong => {
+        const option = document.createElement('option');
+        option.value = chuong.id;
+        option.textContent = `Chương ${chuong.so_thu_tu} - ${chuong.ten_chuong}`;
+        select.appendChild(option);
+      });
+    }
+  } catch (error) {
+    console.error('Lỗi load chương:', error);
+  }
+}
+
+/**
+ * Load danh sách lớp học vào dropdown bài tập
+ */
+async function loadDanhSachLopBaiTap() {
+  try {
+    const response = await fetch('/backend/teacher/api/danh-sach-lop-hoc.php', {
+      credentials: 'include'
+    });
+    const data = await response.json();
+    
+    if (data.thanh_cong && data.du_lieu) {
+      const select = document.getElementById('assignmentClass');
+      if (!select) {
+        console.error('Không tìm thấy select#assignmentClass');
+        return;
+      }
+      
+      select.innerHTML = '<option value="">Tên môn - Mã lớp</option>';
+      
+      data.du_lieu.forEach(lop => {
+        const option = document.createElement('option');
+        option.value = lop.id;
+        option.textContent = `${lop.ten_lop_hoc} - ${lop.ma_lop_hoc}`;
+        select.appendChild(option);
+      });
+    } else {
+      console.error('API không trả về dữ liệu:', data);
+    }
+  } catch (error) {
+    console.error('Lỗi load danh sách lớp:', error);
+  }
+}
+
+/**
+ * Load danh sách lớp học vào dropdown bài kiểm tra
+ */
+async function loadDanhSachLopKiemTra() {
+  try {
+    const response = await fetch('/backend/teacher/api/danh-sach-lop-hoc.php', {
+      credentials: 'include'
+    });
+    const data = await response.json();
+    
+    if (data.thanh_cong && data.du_lieu) {
+      const select = document.getElementById('examClass');
+      if (!select) {
+        console.error('Không tìm thấy select#examClass');
+        return;
+      }
+      
+      select.innerHTML = '<option value="">Tên môn - Mã lớp</option>';
+      
+      data.du_lieu.forEach(lop => {
+        const option = document.createElement('option');
+        option.value = lop.id;
+        option.textContent = `${lop.ten_lop_hoc} - ${lop.ma_lop_hoc}`;
+        select.appendChild(option);
+      });
+    } else {
+      console.error('API không trả về dữ liệu:', data);
+    }
+  } catch (error) {
+    console.error('Lỗi load danh sách lớp:', error);
+  }
+}
+
+/**
+ * Load chương theo lớp vào dropdown bài kiểm tra
+ */
+async function loadChuongTheoLopKiemTra(lopHocId) {
+  try {
+    const response = await fetch(`/backend/teacher/api/chuong-theo-lop.php?lop_hoc_id=${lopHocId}`, {
+      credentials: 'include'
+    });
+    const data = await response.json();
+    
+    const select = document.getElementById('examChapter');
+    if (!select) {
+      console.error('Không tìm thấy select#examChapter');
+      return;
+    }
+    
+    select.innerHTML = '<option value="">Chọn chương (không bắt buộc)</option>';
+    
+    if (data.thanh_cong && data.du_lieu) {
+      data.du_lieu.forEach(chuong => {
+        const option = document.createElement('option');
+        option.value = chuong.id;
+        option.textContent = `Chương ${chuong.so_thu_tu}: ${chuong.ten_chuong}`;
+        select.appendChild(option);
+      });
+    }
+  } catch (error) {
+    console.error('Lỗi load chương:', error);
+  }
+}
+
+// Event listener cho select lớp trong modal bài tập
+document.addEventListener('DOMContentLoaded', () => {
+  // Modal bài tập
+  const assignmentClassSelect = document.getElementById('assignmentClass');
+  if (assignmentClassSelect) {
+    assignmentClassSelect.addEventListener('change', function() {
+      if (this.value) {
+        loadChuongTheoLop(this.value);
+      } else {
+        const chapterSelect = document.getElementById('assignmentChapter');
+        if (chapterSelect) {
+          chapterSelect.innerHTML = '<option value="">Chọn chương</option>';
+        }
+      }
+    });
+  }
+  
+  // Modal bài kiểm tra
+  const examClassSelect = document.getElementById('examClass');
+  if (examClassSelect) {
+    examClassSelect.addEventListener('change', function() {
+      if (this.value) {
+        loadChuongTheoLopKiemTra(this.value);
+      } else {
+        const chapterSelect = document.getElementById('examChapter');
+        if (chapterSelect) {
+          chapterSelect.innerHTML = '<option value="">Chọn chương (không bắt buộc)</option>';
+        }
+      }
+    });
+  }
+});
 
 // ========== EXAM FUNCTIONS ==========
 function toggleExamRadio(radioBtn) {
@@ -201,83 +440,252 @@ function deleteExamQuestion(button) {
   }
 }
 
-function submitExam() {
+async function submitExam() {
   const classSelect = document.getElementById('examClass');
+  const chapterSelect = document.getElementById('examChapter');
   const title = document.getElementById('examTitle');
   const duration = document.getElementById('examDuration');
   const datetime = document.getElementById('examDatetime');
   
+  // Validation
+  if (!classSelect || !title || !duration || !datetime) {
+    ThongBao.loi('Không tìm thấy form!');
+    return;
+  }
+  
   if (!classSelect.value) {
-    if (window.Toast) Toast.warning('Vui lòng chọn lớp giao!');
+    ThongBao.canh_bao('Vui lòng chọn lớp!');
     return;
   }
   
-  if (!title.value || !duration.value || !datetime.value) {
-    if (window.Toast) Toast.warning('Vui lòng điền đầy đủ thông tin!');
+  if (!title.value.trim()) {
+    ThongBao.canh_bao('Vui lòng nhập tiêu đề!');
     return;
   }
   
-  const questions = [];
-  document.querySelectorAll('.exam-question-wrapper').forEach((wrapper, index) => {
-    const questionText = wrapper.querySelector('.exam-question-input').value;
-    const options = [];
+  const thoiLuong = parseInt(duration.value);
+  if (!thoiLuong || thoiLuong <= 0) {
+    ThongBao.canh_bao('Thời lượng phải lớn hơn 0!');
+    return;
+  }
+  
+  if (!datetime.value) {
+    ThongBao.canh_bao('Vui lòng chọn thời gian bắt đầu!');
+    return;
+  }
+  
+  // Thu thập câu hỏi
+  const cauHoi = [];
+  const questionWrappers = document.querySelectorAll('.exam-question-wrapper');
+  
+  if (questionWrappers.length === 0) {
+    ThongBao.canh_bao('Phải có ít nhất 1 câu hỏi!');
+    return;
+  }
+  
+  let hasError = false;
+  questionWrappers.forEach((wrapper, index) => {
+    const noiDungCauHoi = wrapper.querySelector('.exam-question-input')?.value.trim();
     
-    wrapper.querySelectorAll('.exam-option-wrapper').forEach(opt => {
-      const optionText = opt.querySelector('.exam-option-input').value;
-      const isCorrect = opt.querySelector('.exam-radio-btn').classList.contains('checked');
-      options.push({ text: optionText, correct: isCorrect });
+    if (!noiDungCauHoi) {
+      ThongBao.canh_bao(`Câu hỏi ${index + 1} không được để trống!`);
+      hasError = true;
+      return;
+    }
+    
+    // Thu thập lựa chọn
+    const cacLuaChon = [];
+    const optionWrappers = wrapper.querySelectorAll('.exam-option-wrapper');
+    
+    if (optionWrappers.length < 2) {
+      ThongBao.canh_bao(`Câu hỏi ${index + 1} phải có ít nhất 2 lựa chọn!`);
+      hasError = true;
+      return;
+    }
+    
+    let hasCorrectAnswer = false;
+    optionWrappers.forEach((optWrapper, optIndex) => {
+      const noiDung = optWrapper.querySelector('.exam-option-input')?.value.trim();
+      const dung = optWrapper.querySelector('.exam-radio-btn')?.classList.contains('checked');
+      
+      if (!noiDung) {
+        ThongBao.canh_bao(`Câu hỏi ${index + 1}, lựa chọn ${optIndex + 1} không được để trống!`);
+        hasError = true;
+        return;
+      }
+      
+      if (dung) hasCorrectAnswer = true;
+      
+      cacLuaChon.push({
+        thu_tu: optIndex + 1,
+        noi_dung: noiDung,
+        dung: dung
+      });
     });
     
-    questions.push({
-      id: index + 1,
-      question: questionText,
-      options: options
+    if (!hasCorrectAnswer) {
+      ThongBao.canh_bao(`Câu hỏi ${index + 1} phải có ít nhất 1 đáp án đúng!`);
+      hasError = true;
+      return;
+    }
+    
+    cauHoi.push({
+      thu_tu: index + 1,
+      noi_dung_cau_hoi: noiDungCauHoi,
+      diem: 1.0, // Có thể customize sau
+      cac_lua_chon: cacLuaChon
     });
   });
   
-  console.log('Exam Data:', { 
-    class: classSelect.options[classSelect.selectedIndex].text,
-    title: title.value, 
-    duration: duration.value, 
-    datetime: datetime.value, 
-    questions 
-  });
+  if (hasError) return;
   
-  if (window.Toast) Toast.success('Đã lưu bài kiểm tra!');
-  closeModal('examModal');
+  try {
+    const response = await fetch('/backend/teacher/api/tao-bai-kiem-tra.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        lop_hoc_id: classSelect.value,
+        chuong_id: chapterSelect?.value || null,
+        tieu_de: title.value.trim(),
+        thoi_luong: thoiLuong,
+        thoi_gian_bat_dau: datetime.value,
+        cho_phep_lam_lai: false,
+        cau_hoi: cauHoi
+      })
+    });
+    
+    const data = await response.json();
+    
+    if (data.thanh_cong) {
+      ThongBao.thanh_cong(data.thong_bao || 'Đã tạo bài kiểm tra thành công!');
+      
+      // Reset form
+      classSelect.selectedIndex = 0;
+      if (chapterSelect) chapterSelect.innerHTML = '<option value="">Chọn chương (không bắt buộc)</option>';
+      title.value = '';
+      duration.value = '';
+      datetime.value = '';
+      
+      // Reset câu hỏi về mặc định
+      const container = document.getElementById('questionsContainer');
+      if (container) {
+        const firstQuestion = container.querySelector('.exam-question-wrapper');
+        if (firstQuestion) {
+          container.innerHTML = firstQuestion.outerHTML;
+          container.querySelector('.exam-question-input').value = '';
+          const optInputs = container.querySelectorAll('.exam-option-input');
+          optInputs.forEach(input => input.value = '');
+        }
+      }
+      
+      closeModal('examModal');
+      
+      // Reload danh sách bài kiểm tra nếu đang ở trang chi tiết lớp
+      if (typeof loadTabBaiKiemTra === 'function') {
+        loadTabBaiKiemTra();
+      }
+    } else {
+      ThongBao.loi(data.thong_bao || 'Không thể tạo bài kiểm tra');
+    }
+  } catch (error) {
+    console.error('Lỗi khi tạo bài kiểm tra:', error);
+    ThongBao.loi('Đã xảy ra lỗi khi tạo bài kiểm tra');
+  }
 }
 
 // ========== NOTIFICATION FUNCTIONS ==========
-function saveThongBao() {
-  const classSelect = document.getElementById('classSelecttb');
+async function saveThongBao() {
+  const classSelect = document.getElementById('classcode');
   const title = document.getElementById('titleInputtb');
   const content = document.getElementById('notiInput');
   
+  if (!classSelect || !title || !content) {
+    ThongBao.loi('Không tìm thấy form!');
+    return;
+  }
+  
   if (!classSelect.value) {
-    if (window.Toast) Toast.warning('Vui lòng chọn lớp!');
+    ThongBao.canh_bao('Vui lòng chọn lớp!');
     return;
   }
   if (!title.value.trim()) {
-    if (window.Toast) Toast.warning('Vui lòng nhập tiêu đề!');
+    ThongBao.canh_bao('Vui lòng nhập tiêu đề!');
     return;
   }
   if (!content.value.trim()) {
-    if (window.Toast) Toast.warning('Vui lòng nhập nội dung!');
+    ThongBao.canh_bao('Vui lòng nhập nội dung!');
     return;
   }
   
-  const thongBao = {
-    type: 'thongbao',
-    class: classSelect.value,
-    title: title.value,
-    content: content.value,
-    createdAt: new Date().toISOString()
-  };
-  
-  console.log('Thông báo đã tạo:', thongBao);
-  if (window.Toast) Toast.success('Đã gửi thông báo thành công!');
-  
-  closeModal('taothongbao');
+  try {
+    const response = await fetch('/backend/teacher/api/tao-thong-bao.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        lop_hoc_id: classSelect.value,
+        tieu_de: title.value.trim(),
+        noi_dung: content.value.trim()
+      })
+    });
+    
+    const data = await response.json();
+    
+    if (data.thanh_cong) {
+      ThongBao.thanh_cong(data.thong_bao || 'Đã gửi thông báo thành công!');
+      
+      // Reset form
+      classSelect.selectedIndex = 0;
+      title.value = '';
+      content.value = '';
+      
+      closeModal('taothongbao');
+    } else {
+      ThongBao.loi(data.thong_bao || 'Không thể gửi thông báo');
+    }
+  } catch (error) {
+    console.error('Lỗi:', error);
+    ThongBao.loi('Không thể kết nối đến server');
+  }
+}
+
+/**
+ * Load danh sách lớp học vào dropdown
+ */
+async function loadDanhSachLop() {
+  try {
+    const response = await fetch('/backend/teacher/api/danh-sach-lop-hoc.php', {
+      credentials: 'include'
+    });
+    const data = await response.json();
+    
+    if (data.thanh_cong && data.du_lieu) {
+      const select = document.getElementById('classcode');
+      if (!select) {
+        console.error('Không tìm thấy select#classcode');
+        return;
+      }
+      
+      select.innerHTML = '<option value="">Chọn lớp</option>';
+      
+      data.du_lieu.forEach(lop => {
+        const option = document.createElement('option');
+        option.value = lop.id;
+        option.textContent = `${lop.ten_lop_hoc} - ${lop.ma_lop_hoc}`;
+        select.appendChild(option);
+      });
+    } else {
+      console.error('API không trả về dữ liệu:', data);
+    }
+  } catch (error) {
+    console.error('Lỗi load danh sách lớp:', error);
+    ThongBao.loi('Không thể tải danh sách lớp học');
+  }
 }
 
 // ========== SEARCH FUNCTIONALITY ==========

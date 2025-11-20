@@ -8,7 +8,7 @@
 
 body {
   font-family: 'Be Vietnam Pro', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #ffffff;
+  background: #f5f5f5;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
@@ -365,9 +365,10 @@ body {
 
 /* Main Content */
 .main-content {
-  margin-left: 20px;
+  margin-left: 250px;
   flex: 1;
-  padding: 32px 40px;
+  padding: 110px 40px 40px 40px;
+  background-color: white;
 }
 
 .header {
@@ -416,28 +417,281 @@ body {
 
 .page-title {
   font-family: 'Bricolage Grotesque', sans-serif;
-  /* Headline dùng Bricolage */
   font-size: 28px;
   font-weight: 600;
   color: #000;
-  margin-bottom: 30px;
-  margin-top: 50px;
+  margin-bottom: 20px;
+  margin-top: 30px;
 }
 
-/* Table */
-.grade-table {
+/* Chapter Filter */
+.chapter-filter {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  padding: 15px 20px;
+  background: #f7fafd;
+  border-radius: 8px;
+}
+
+.chapter-filter label {
+  font-weight: 500;
+  color: #333;
+  font-size: 15px;
+}
+
+.chapter-dropdown {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'Be Vietnam Pro', sans-serif;
   background: white;
+  cursor: pointer;
+  min-width: 300px;
+  transition: border-color 0.2s;
+}
+
+.chapter-dropdown:hover {
+  border-color: #3293f9;
+}
+
+.chapter-dropdown:focus {
+  outline: none;
+  border-color: #3293f9;
+  box-shadow: 0 0 0 3px rgba(50, 147, 249, 0.1);
+}
+
+/* Overview Section */
+.overview-section {
+  margin-bottom: 30px;
+}
+
+.overview-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.overview-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.overview-label {
+  font-size: 14px;
+  color: #000000;
+  font-weight: 500;
+}
+
+.overview-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+}
+
+/* Grades Container */
+#grades-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Chapter Grade Card */
+.chapter-grade-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+}
+
+.chapter-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #3293f9;
+}
+
+/* Grade Table */
+.grade-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0;
 }
 
-.table-header {
+.grade-row {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  background: #d8ebff;
-  border: 1px solid #d9d9d9;
+  border-bottom: 1px solid #f0f0f0;
 }
+
+.grade-row:last-child {
+  border-bottom: none;
+}
+
+.grade-cell {
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.type-cell {
+  justify-content: flex-start;
+}
+
+.weight-cell, .score-cell {
+  justify-content: center;
+}
+
+/* Header Row */
+.header-row {
+  background: #f7fafd;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Main Row */
+.main-row {
+  background: #ffffff;
+  font-size: 15px;
+}
+
+.main-row .type-cell {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Detail Row */
+.detail-row {
+  background: #f7fafd;
+  font-size: 14px;
+  color: #666;
+}
+
+.detail-text {
+  padding-left: 40px;
+  font-style: italic;
+}
+
+.detail-icon {
+  margin-right: 8px;
+  color: #3293f9;
+  font-weight: bold;
+}
+
+/* Total Row */
+.total-row {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  font-size: 16px;
+  border-top: 2px solid #e0e0e0;
+}
+
+.total-row .grade-cell {
+  padding: 18px 20px;
+}
+
+/* Score Badges */
+.score-badge {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.score-badge.excellent {
+  background: #d4edda;
+  color: #155724;
+}
+
+.score-badge.good {
+  background: #e5f0ff;
+  color: #3293f9;
+}
+
+.score-badge.average {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.score-badge.poor {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.score-badge.total {
+  background: transparent;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 8px 16px;
+}
+
+.score-badge.pending {
+  background: transparent;
+  color: #dc3545;
+  font-weight: 700;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 13px;
+  display: inline-block;
+}
+
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.completed {
+  background: #28a745;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grade-row {
+    grid-template-columns: 1.5fr 0.8fr 0.8fr;
+  }
+  
+  .grade-cell {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+  
+  .chapter-dropdown {
+    min-width: 200px;
+  }
+  
+  .overview-card {
+    grid-template-columns: 1fr;
+  }
+}
+  /* background: #d8ebff;
+  border: 1px solid #d9d9d9;
+} */
 
 .table-cell {
   padding: 12px 20px;

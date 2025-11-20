@@ -58,7 +58,7 @@ class HoatDongRepository extends BaseRepository {
             SELECT 
                 CONCAT('het_han_bkt_', bkt.id) as id,
                 'het_han_kiem_tra' as loai,
-                'test1.svg' as icon,
+                '/public/assets/icon-tb-bkt.jpg' as icon,
                 NULL as ho_ten,
                 NULL as anh_dai_dien,
                 bkt.tieu_de as tieu_de_bai,

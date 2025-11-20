@@ -44,4 +44,80 @@ class BaiGiangService extends BaseService {
         
         return $duLieu;
     }
+    
+    /**
+     * Lấy danh sách tất cả chương + tiến độ
+     */
+    public function layDanhSachChuong($lopHocId, $sinhVienId) {
+        // Validate
+        if (!$this->kiemTraSoNguyen($lopHocId) || !$this->kiemTraSoNguyen($sinhVienId)) {
+            $this->nemLoi('ID không hợp lệ');
+        }
+        
+        // Lấy danh sách chương
+        $danhSach = $this->baiGiangRepo->layAllChuong($lopHocId);
+        
+        // Thêm tiến độ & thống kê
+        foreach ($danhSach as &$chuong) {
+            $chuong['thong_ke'] = $this->baiGiangRepo->tinhThongKeChương($chuong['id']);
+            $chuong['tien_do'] = $this->baiGiangRepo->tinhTienDoChuong(
+                $chuong['id'], 
+                $sinhVienId
+            );
+        }
+        
+        return $danhSach;
+    }
+    
+    /**
+     * Lấy danh sách bài học trong chương + tiến độ sinh viên
+     */
+    public function layDanhSachBaiHoc($chuongId, $lopHocId, $sinhVienId) {
+        // Validate
+        if (!$this->kiemTraSoNguyen($chuongId) || !$this->kiemTraSoNguyen($sinhVienId)) {
+            $this->nemLoi('ID không hợp lệ');
+        }
+        
+        // Lấy danh sách bài
+        $baiHoc = $this->baiGiangRepo->layBaiHocChuong($chuongId, $lopHocId);
+        
+        // Thêm tiến độ cho mỗi bài
+        foreach ($baiHoc as &$bai) {
+            $bai['tien_do'] = $this->baiGiangRepo->layTienDoBai(
+                $bai['id'], 
+                $bai['loai'],  // 'video' | 'bai_tap' | 'bai_kiem_tra'
+                $sinhVienId
+            );
+        }
+        
+        return $baiHoc;
+    }
+    
+    /**
+     * Lấy danh sách chương theo lớp (cho giảng viên)
+     */
+    public function layChuongTheoLopGiangVien($lopHocId, $giangVienId) {
+        // Validate
+        if (!$this->kiemTraSoNguyen($lopHocId)) {
+            $this->nemLoi('ID lớp học không hợp lệ');
+        }
+        
+        // Kiểm tra quyền
+        if (!$this->lopHocRepo->kiemTraQuyenTruyCap($lopHocId, $giangVienId)) {
+            $this->nemLoi('Bạn không có quyền truy cập lớp học này');
+        }
+        
+        // Lấy danh sách chương
+        $danhSach = $this->baiGiangRepo->layAllChuong($lopHocId);
+        
+        // Format dữ liệu
+        return array_map(function($chuong) {
+            return [
+                'id' => (int)$chuong['id'],
+                'so_thu_tu' => (int)$chuong['so_thu_tu_chuong'],
+                'ten_chuong' => $chuong['ten_chuong'],
+                'muc_tieu' => $chuong['muc_tieu'] ?? null
+            ];
+        }, $danhSach);
+    }
 }

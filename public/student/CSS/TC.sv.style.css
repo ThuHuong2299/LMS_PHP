@@ -261,6 +261,12 @@ body {
 
 /* Header */
 /* Header */
+/* 
+    COMMENTED OUT: Navbar CSS
+   Logic này đã được tách sang /components/navbar.sv.style.css
+   Mỗi trang sẽ load navbar CSS riêng từ file component
+   
+   Original CSS:
 .header {
   display: flex;
   justify-content: space-between;
@@ -268,7 +274,6 @@ body {
   margin-bottom: 40px;
 }
 
-/* Search Bar */
 .search-bar {
   background: #f5f4f4;
   border-radius: 36px;
@@ -278,6 +283,14 @@ body {
   gap: 15px;
   flex: 1;
   max-width: 800px;
+}
+
+.page-title {
+  color: #3b82f6;
+  margin-bottom: 30px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
 }
 
 .search-icon img {
@@ -295,7 +308,6 @@ body {
   font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
 }
 
-/* User info */
 .user-info {
   display: flex;
   align-items: center;
@@ -322,12 +334,14 @@ body {
   margin: 0;
   font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
 }
+*/
 
 
 /* Main Content */
 .main-content {
+  margin-left: 250px;
   flex: 1;
-  padding: 30px 40px;
+  padding: 110px 40px 40px 40px;
   background: #ffffff;
 }
 

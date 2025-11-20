@@ -47,14 +47,14 @@ async function handleLogin() {
   const password = document.getElementById('passwordInput').value;
   
   if (!email || !password) {
-    alert('Vui lòng nhập đầy đủ email và mật khẩu!');
+    ThongBao.canh_bao('Vui lòng nhập đầy đủ email và mật khẩu!');
     return;
   }
   
   // Validate email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    alert('Email không hợp lệ!');
+    ThongBao.loi('Email không hợp lệ!');
     return;
   }
   
@@ -82,7 +82,7 @@ async function handleLogin() {
     
     if (data.thanh_cong) {
       // Đăng nhập thành công
-      alert(data.thong_bao || 'Đăng nhập thành công!');
+      ThongBao.thanh_cong(data.thong_bao || 'Đăng nhập thành công!');
       
       // Lưu thông tin người dùng vào localStorage (tùy chọn)
       if (data.du_lieu) {
@@ -93,7 +93,7 @@ async function handleLogin() {
       window.location.replace('/public/teacher/TrangChu.html');
     } else {
       // Đăng nhập thất bại
-      alert(data.thong_bao || 'Đăng nhập thất bại!');
+      ThongBao.loi(data.thong_bao || 'Đăng nhập thất bại!');
       
       // Reset button
       loginButton.querySelector('.ng-nh-p2').textContent = originalText;
@@ -103,7 +103,7 @@ async function handleLogin() {
     
   } catch (error) {
     console.error('Lỗi kết nối API:', error);
-    alert('Không thể kết nối đến server. Vui lòng kiểm tra kết nối!');
+    ThongBao.loi('Không thể kết nối đến server. Vui lòng kiểm tra kết nối!');
     
     // Reset button
     loginButton.querySelector('.ng-nh-p2').textContent = originalText;

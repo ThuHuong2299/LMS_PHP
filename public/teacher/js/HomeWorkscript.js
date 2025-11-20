@@ -44,10 +44,17 @@ async function fetchHomeWorkData() {
     
     const data = await response.json();
     
+    console.log('📊 API Response:', data);
+    
     if (data.thanh_cong) {
+      console.log('✅ Dữ liệu:', data.du_lieu);
+      console.log('📝 Câu hỏi:', data.du_lieu.cau_hoi);
+      console.log('📋 Bài làm:', data.du_lieu.bai_lam);
+      
       currentData = data.du_lieu;
       renderAllData(currentData);
     } else {
+      console.error('❌ Lỗi API:', data.thong_bao);
       showError(data.thong_bao || 'Không thể lấy dữ liệu');
     }
   } catch (error) {
@@ -139,7 +146,20 @@ function renderQuestions(cauHoi, baiLam) {
       <div class="score-section">
         <div class="score-label">Điểm số:</div>
         <div class="score-value">
-          <span class="score-number">${scoreText}</span>
+          <input 
+            type="number" 
+            class="score-input" 
+            value="${ch.tra_loi && ch.tra_loi.diem !== null ? ch.tra_loi.diem : ''}" 
+            placeholder="-"
+            min="0" 
+            max="${ch.diem_toi_da}" 
+            step="0.1"
+            data-cau-hoi-id="${ch.cau_hoi_id}"
+            data-tra-loi-id="${ch.tra_loi ? ch.tra_loi.id : ''}"
+            onkeypress="if(event.key === 'Enter') luuDiem(this)"
+            ${!hasAnswer ? 'disabled' : ''}
+            style="width: 60px; padding: 4px 8px; border: 1px solid #d1d5db; border-radius: 4px; text-align: center; font-size: 16px; font-weight: 600;"
+          />
           <span class="score-total"> / ${ch.diem_toi_da}</span>
         </div>
       </div>
@@ -240,7 +260,68 @@ function escapeHtml(text) {
  */
 function showError(message) {
   console.error(message);
-  alert(message);
+  ThongBao.loi(message);
+}
+
+/**
+ * Lưu điểm cho câu hỏi
+ */
+async function luuDiem(input) {
+  const diem = parseFloat(input.value);
+  const cauHoiId = input.dataset.cauHoiId;
+  const traLoiId = input.dataset.traLoiId;
+  const maxDiem = parseFloat(input.max);
+  
+  // Validate
+  if (isNaN(diem)) {
+    ThongBao.canh_bao('Vui lòng nhập điểm hợp lệ');
+    return;
+  }
+  
+  if (diem < 0 || diem > maxDiem) {
+    ThongBao.canh_bao(`Điểm phải từ 0 đến ${maxDiem}`);
+    return;
+  }
+  
+  if (!traLoiId) {
+    ThongBao.canh_bao('Sinh viên chưa trả lời câu hỏi này');
+    return;
+  }
+  
+  try {
+    // Disable input
+    input.disabled = true;
+    
+    const response = await fetch('/backend/teacher/api/cham-diem-cau-hoi.php', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        tra_loi_id: parseInt(traLoiId),
+        diem: diem
+      })
+    });
+    
+    const data = await response.json();
+    
+    if (data.thanh_cong) {
+      ThongBao.thanh_cong('Đã lưu điểm thành công');
+      
+      // Reload để cập nhật tổng điểm
+      setTimeout(() => {
+        fetchHomeWorkData();
+      }, 1000);
+    } else {
+      ThongBao.loi(data.thong_bao || 'Không thể lưu điểm');
+      input.disabled = false;
+    }
+  } catch (error) {
+    console.error('Lỗi khi lưu điểm:', error);
+    ThongBao.loi('Không thể kết nối đến server');
+    input.disabled = false;
+  }
 }
 
 // ==================== INITIALIZATION ====================

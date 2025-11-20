@@ -4,6 +4,8 @@
  * Mục đích: Class repository cơ sở cho tất cả repositories
  */
 
+require_once __DIR__ . '/Database.php';
+
 abstract class BaseRepository {
     
     protected $db;

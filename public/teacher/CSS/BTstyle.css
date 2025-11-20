@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&display=swap');
 /* ========== MODAL BASE ========== */
 .modal {
   display: none;
@@ -37,6 +40,7 @@
 }
 
 .modal-title-new {
+  font-family: 'Be Vietnam Pro', sans-serif;
   color: white;
   font-size: 16px;
   font-weight: 600;
@@ -72,6 +76,7 @@
 }
 
 .form-label-new {
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 500;
   color: #000;
@@ -94,7 +99,7 @@
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   font-size: 14px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   background: white;
   cursor: pointer;
   outline: none;
@@ -113,6 +118,7 @@
 
 .form-select-input option {
   color: #000;
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .form-row-horizontal .form-input {
@@ -122,7 +128,7 @@
   border-radius: 6px;
   font-size: 14px;
   outline: none;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .form-row-horizontal .form-input:focus {
@@ -168,11 +174,12 @@
   font-size: 16px;
   color: #000;
   outline: none;
-  font-family: inherit;
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .question-title-input::placeholder {
   color: #000;
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .question-description-section {
@@ -187,6 +194,7 @@
   flex: 1;
   border: none;
   background: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 14px;
   color: #666;
   resize: none;
@@ -197,6 +205,7 @@
 
 .question-textarea::placeholder {
   color: #666;
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .btn-attach {
@@ -266,7 +275,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .exam-btn-cancel {

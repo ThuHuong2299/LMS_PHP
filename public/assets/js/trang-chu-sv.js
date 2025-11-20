@@ -44,8 +44,9 @@ function loadDashboardData() {
  * Render dữ liệu vào trang
  */
 function renderDashboard(data) {
-    // Render thông tin sinh viên
-    renderThongTinSinhVien(data.thong_tin_sinh_vien);
+    //  COMMENTED OUT: Render thông tin sinh viên
+    // Logic này đã được tách sang navbar.js - NavbarManager sẽ xử lý
+    // renderThongTinSinhVien(data.thong_tin_sinh_vien);
     
     // Render danh sách lớp học
     renderDanhSachLopHoc(data.danh_sach_lop_hoc);
@@ -57,6 +58,9 @@ function renderDashboard(data) {
 /**
  * Render thông tin sinh viên
  */
+//  COMMENTED OUT: Logic này đã được tách sang navbar.js
+// Nếu cần chỉnh sửa navbar, hãy cập nhật trong /public/student/js/components/navbar.js
+/*
 function renderThongTinSinhVien(thongTin) {
     // Cập nhật tên sinh viên
     const userDetailsElement = document.querySelector('.user-details h3');
@@ -79,6 +83,7 @@ function renderThongTinSinhVien(thongTin) {
         }
     }
 }
+*/
 
 /**
  * Render danh sách lớp học
@@ -105,13 +110,33 @@ function createCourseCard(lop) {
     
     const card = document.createElement('div');
     card.className = 'course-card';
-    card.onclick = function() {
-        // Có thể điều hướng đến trang chi tiết lớp học
-        window.location.href = `../Thông%20tin%20bài%20giảng.html?lop_id=${lop.lop_hoc_id}`;
+    card.onclick = async function() {
+        // Lấy chương đầu tiên từ API
+        try {
+            const response = await fetch(`/backend/student/api/danh-sach-chuong.php?lop_hoc_id=${lop.lop_hoc_id}`, {
+                method: 'GET',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await response.json();
+            
+            if (data.thanh_cong && data.du_lieu && data.du_lieu.length > 0) {
+                const chuongDauTien = data.du_lieu[0];
+                // Điều hướng đến trang Thông tin bài giảng với chương đầu tiên
+                window.location.href = `/public/student/Thông%20tin%20bài%20giảng.html?lop_hoc_id=${lop.lop_hoc_id}&chuong_id=${chuongDauTien.id}`;
+            } else {
+                // Không có chương, chỉ chuyển đến trang với lop_hoc_id
+                window.location.href = `/public/student/Thông%20tin%20bài%20giảng.html?lop_hoc_id=${lop.lop_hoc_id}`;
+            }
+        } catch (error) {
+            console.error('Lỗi lấy chương đầu tiên:', error);
+            // Fallback: chuyển đến trang mà không có chuong_id
+            window.location.href = `/public/student/Thông%20tin%20bài%20giảng.html?lop_hoc_id=${lop.lop_hoc_id}`;
+        }
     };
     
     card.innerHTML = `
-        <div class="rectangle-3255"></div>
+        <div class="rectangle-3255" style="background-image: url('/public/assets/avatar-mon-hoc.jpg'); background-size: cover; background-position: center;"></div>
         <div class="frame-1000001977">
             <div>
                 <div class="course-name">${escapeHtml(lop.ten_mon_hoc)}</div>
@@ -126,7 +151,7 @@ function createCourseCard(lop) {
                 </div>
             </div>
             <div class="frame-1000001974">
-                <span>Kết thúc vào: ${formatDate(lop.ngay_ket_thuc || 'Đang diễn ra')}</span>
+                <span>Đang diễn ra</span>
             </div>
         </div>
     `;

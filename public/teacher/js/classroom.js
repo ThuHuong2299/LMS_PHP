@@ -47,7 +47,7 @@ function showErrorState(message) {
   
   container.innerHTML = `
     <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
-      <div style="font-size: 20px; color: #ff6b6b; margin-bottom: 10px;">⚠️ Có lỗi xảy ra</div>
+      <div style="font-size: 20px; color: #ff6b6b; margin-bottom: 10px;"> Có lỗi xảy ra</div>
       <div style="font-size: 16px; color: #666;">${message}</div>
       <button onclick="location.reload()" style="
         margin-top: 20px;
@@ -74,7 +74,7 @@ function renderDanhSachLop(danhSachLop) {
   if (!danhSachLop || danhSachLop.length === 0) {
     container.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
-        <div style="font-size: 20px; color: #999; margin-bottom: 10px;">📚 Chưa có lớp học nào</div>
+        <div style="font-size: 20px; color: #999; margin-bottom: 10px;"> Chưa có lớp học nào</div>
         <div style="font-size: 16px; color: #666;">Bạn chưa được phân công giảng dạy lớp nào</div>
       </div>
     `;

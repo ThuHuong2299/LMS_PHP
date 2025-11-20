@@ -1,0 +1,995 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&display=swap');
+/* ==================== BASE STYLES ==================== */
+* {
+  box-sizing: border-box;
+}
+
+/* ==================== REMOVED - NOW USING shared.css .page-container ==================== */
+/* Old .testdash styles removed - gradient background, position absolute conflicts removed */
+
+/* Search & User info now handled by navbar component - styles removed */
+.search {
+  display: none; /* Hidden - navbar component handles this */
+}
+
+/* User info now handled by navbar component */
+.user {
+  display: none; /* Hidden - navbar component handles this */
+}
+
+/* ==================== PAGE SPECIFIC STYLES ==================== */
+
+/* Breadcrumb removed - can add back if needed without absolute positioning */
+
+/* Table footer - removed absolute positioning */
+.table-footer {
+  margin-top: 20px;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.d-dan {
+  display: flex;
+  flex-direction: row;
+  gap: 17px;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  left: 60px;
+  top: 121px;
+}
+.l-p-h-cc {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-Medium", sans-serif;
+  width: 80px;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+}
+.vector-49 {
+  flex-shrink: 0;
+  width: 5px;
+  height: 10px;
+  position: relative;
+  overflow: visible;
+}
+.div {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+}
+.vector-51 {
+  flex-shrink: 0;
+  width: 5px;
+  height: 10px;
+  position: relative;
+  overflow: visible;
+}
+.b-i-ki-m-tra2 {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+}
+.vector-50 {
+  flex-shrink: 0;
+  width: 5px;
+  height: 10px;
+  position: relative;
+  overflow: visible;
+}
+.t-n-b-i-ki-m-tra {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+}
+.table-footer {
+  margin-top: 20px;
+  padding: 2px 0px 2px 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 900px;
+  align-items: center;
+  justify-content: flex-end;
+  width: 1072px;
+  height: 4.3%;
+  position: absolute;
+  left: 20px;
+  top: 680px;
+}
+._1-10-of-100 {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-size: 12px;
+  line-height: 166%;
+  letter-spacing: 0.4px;
+  font-weight: 400;
+  position: relative;
+  width: 118px;
+}
+.navigation {
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.icon-button {
+  border-radius: 100px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.icon {
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.chevron-left-filled {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.chevron-right-filled {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+/* Main content container - removed absolute positioning */
+.alltestinfo {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* ==================== STATISTICS CARDS SECTION ==================== */
+.testaval {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+/* Responsive: Stack on mobile */
+@media (max-width: 768px) {
+  .testaval {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sobaichuacham {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.s-b-i-ch-a-ch-m {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+}
+._12-b-i {
+  color: #000000;
+  text-align: left;
+  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  position: relative;
+}
+.frame {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+.baicham {
+  background: var(--color-bg-active, #e5f0ff);
+  border-radius: var(--radius-md, 14px);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.2s ease);
+  box-shadow: var(--shadow-sm);
+}
+
+.baicham.inactive {
+  background-color: var(--color-bg-secondary, #f6f5f5);
+}
+
+.baicham:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.sobaidacham {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.s-b-i-ch-m {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+}
+
+.frame2 {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  overflow: visible;
+}
+
+/* ==================== STATUS CARDS GRID ==================== */
+.teststatus {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+/* Responsive: Stack on mobile */
+@media (max-width: 768px) {
+  .teststatus {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .teststatus {
+    grid-template-columns: 1fr;
+  }
+}
+
+.average {
+  border-radius: var(--radius-lg, 16px);
+  border: 1px solid var(--color-border-light, #dddddd);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  transition: all var(--transition-fast);
+  background: var(--color-bg-primary);
+}
+
+.average:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+.averpoint {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  height: 69px;
+  position: relative;
+}
+.i-m-trung-b-nh {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+  align-self: stretch;
+}
+._8-5-10 {
+  text-align: left;
+  position: relative;
+  align-self: stretch;
+}
+._8-5-10-span {
+  color: #000000;
+  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+}
+._8-5-10-span2 {
+  color: #979797;
+  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+.highest {
+  border-radius: var(--radius-lg, 16px);
+  border: 1px solid var(--color-border-light, #dddddd);
+  padding: 24px;
+  width: 100%;
+  transition: all var(--transition-fast);
+  background: var(--color-bg-primary);
+}
+
+.highest:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.highestpoint {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.i-m-cao-nh-t {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+  align-self: stretch;
+}
+._8-8-10 {
+  text-align: left;
+  position: relative;
+  align-self: stretch;
+}
+._8-8-10-span {
+  color: #000000;
+  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+}
+._8-8-10-span2 {
+  color: #979797;
+  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+.lowest {
+  border-radius: var(--radius-lg, 16px);
+  border: 1px solid var(--color-border-light, #dddddd);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  transition: all var(--transition-fast);
+  background: var(--color-bg-primary);
+}
+
+.lowest:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+.lowestpoint {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.i-m-th-p-nh-t {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+  align-self: stretch;
+}
+._1-2-10 {
+  text-align: left;
+  position: relative;
+  align-self: stretch;
+}
+._1-2-10-span {
+  color: #000000;
+  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+}
+._1-2-10-span2 {
+  color: #979797;
+  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+.sum {
+  border-radius: var(--radius-lg, 16px);
+  border: 1px solid var(--color-border-light, #dddddd);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  transition: all var(--transition-fast);
+  background: var(--color-bg-primary);
+}
+
+.sum:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.sumtest {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.t-ng-b-i-n-p {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+  align-self: stretch;
+}
+._32-36 {
+  text-align: left;
+  position: relative;
+  align-self: stretch;
+}
+._32-36-span {
+  color: #000000;
+  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+}
+._32-36-span2 {
+  color: #979797;
+  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+/* ==================== TABLE SECTION ==================== */
+.testinfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.table-head-row {
+  background: var(--color-bg-secondary, #ebebeb);
+  border-bottom: 1px solid var(--color-border-light);
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1.5fr;
+  align-items: center;
+  width: 100%;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .table-head-row {
+    grid-template-columns: 1.5fr 1fr 0.8fr 1fr;
+    font-size: 14px;
+  }
+}
+
+.table-head,
+.table-head2,
+.table-head3 {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.head {
+  color: #000000;
+  text-align: left;
+  font-family: var(--table-header-font-family, "Roboto-Medium", sans-serif);
+  font-size: var(--table-header-font-size, 14px);
+  line-height: var(--table-header-line-height, 24px);
+  letter-spacing: var(--table-header-letter-spacing, 0.17px);
+  font-weight: var(--table-header-font-weight, 500);
+  position: relative;
+}
+.table-head2 {
+  background: rgba(255, 0, 0, 0);
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 255px;
+  position: relative;
+}
+.table-head3 {
+  background: rgba(255, 0, 0, 0);
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 180px;
+  position: relative;
+}
+.pagination-info {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+  align-self: stretch;
+}
+.hs-1 {
+  display: flex;
+  flex-direction: row;
+  row-gap: 0px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-content: center;
+  flex-shrink: 0;
+  width: 1096px;
+  height: 77px;
+  position: relative;
+  cursor: pointer;
+}
+.hs-1:hover {
+  background: #f5f9ff;
+}
+.cell-4 {
+  background: rgba(255, 0, 0, 0);
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 200px;
+  position: relative;
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+  position: relative;
+}
+.custom-table-custom-cell {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.avatar {
+  border-radius: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.min-width {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  transform-origin: 0 0;
+  transform: rotate(-90deg) scale(1, 1);
+}
+.frame-1321316798 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.t-n-sinh-vi-n {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-size: 14px;
+  line-height: 143%;
+  letter-spacing: 0.17px;
+  font-weight: 400;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.m-sinh-vi-n {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-size: 14px;
+  line-height: 143%;
+  letter-spacing: 0.17px;
+  font-weight: 400;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.cell-6 {
+  background: rgba(255, 0, 0, 0);
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 178px;
+  position: relative;
+}
+.box2 {
+  background: #e1ffc2;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.typography {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.body-2 {
+  color: #000000;
+  text-align: left;
+  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-size: 14px;
+  line-height: 143%;
+  letter-spacing: 0.17px;
+  font-weight: 400;
+  position: relative;
+}
+.hspoint {
+  display: flex;
+  flex-direction: row;
+  gap: 26px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 120px;
+  height: 80px;
+  position: relative;
+}
+.hstime {
+  display: flex;
+  flex-direction: row;
+  gap: 26px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 147px;
+  height: 80px;
+  position: relative;
+}
+.vector-46 {
+  flex-shrink: 0;
+  width: 1072px;
+  height: 0px;
+  position: relative;
+  overflow: visible;
+}
+
+.side-bar {
+  width: 250px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+.side-bar.collapsed {
+  width: 80px;
+}
+.side-bar.collapsed .earn-lab,
+.side-bar.collapsed .dashboard,
+.side-bar.collapsed .l-p-h-c,
+.side-bar.collapsed .th-ng-b-o {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.sidebar.collapsed .logo:hover::after {
+  content: "⮞";
+  font-size: 1.2rem;
+  margin-left: 5px;
+  color: #38bdf8;
+}
+.side-bar.collapsed .tab-side-bar,
+.side-bar.collapsed .tab-side-bar2 {
+  justify-content: center;
+}
+.side-bar .logo {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  transition: all 0.3s ease;
+}
+.side-bar.collapsed .logo {
+  padding: 8px;
+}
+.side-bar .earn-lab {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+  transition: opacity 0.3s ease;
+}
+.logo {
+  flex-shrink: 0;
+  width: 240px;
+  height: 140px;
+  position: relative;
+}
+.objects {
+  width: 56.55px;
+  height: 58.5px;
+  position: relative;
+  overflow: visible;
+}
+.earn-lab {
+  color: #000000;
+  text-align: left;
+  font-family: "BricolageGrotesque-Bold", sans-serif;
+  font-size: 21.379295349121094px;
+  font-weight: 700;
+  position: relative;
+  top: 18px;
+  width: 120px;
+}
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.tab-side-bar,
+.tab-side-bar3 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.tab-side-bar2 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  cursor: pointer;
+  background-color: #e5f0ff;
+
+}
+.tab-side-bar:hover,
+.tab-side-bar3:hover {
+  background-color: #e5f0ff;
+}
+.side-bar.collapsed .tab-side-bar img,
+.side-bar.collapsed .tab-side-bar2 img {
+  margin: 0;
+}
+.open-close {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  overflow: visible;
+}
+.open-close:hover {
+  cursor: ew-resize;
+}
+.db {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  position: relative;
+  overflow: visible;
+}
+.dashboard {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+  width: 153px;
+}
+
+.study {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  position: relative;
+  overflow: visible;
+}
+.l-p-h-c {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+  width: 153px;
+}
+.noti {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  position: relative;
+  overflow: visible;
+}
+.th-ng-b-o {
+  color: #000000;
+  text-align: left;
+  font-family: "Quicksand-Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+  width: 153px;
+}
+
+/* ==================== STUDENT TABLE ==================== */
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.student-table tbody tr {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1.5fr;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border-light);
+  transition: background var(--transition-fast);
+}
+
+.student-table tbody tr:hover {
+  background: var(--color-bg-hover, #f5f9ff);
+}
+
+@media (max-width: 768px) {
+  .student-table tbody tr {
+    grid-template-columns: 1.5fr 1fr 0.8fr 1fr;
+  }
+}
+
+/* ==================== PAGINATION ==================== */
+.pagination-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.page-btn {
+  padding: 8px 12px;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 14px;
+}
+
+.page-btn:hover {
+  background: var(--color-bg-hover);
+  border-color: var(--color-primary);
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==================== UTILITY CLASSES ==================== */
+.text-semibold {
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.text-sm {
+  font-size: var(--font-size-sm, 14px);
+}
+
+.text-md {
+  font-size: var(--font-size-md, 16px);
+}
+
+.text-lg {
+  font-size: var(--font-size-lg, 18px);
+}
+
+.text-xl {
+  font-size: var(--font-size-xl, 20px);
+}
+
+.text-xxl {
+  font-size: var(--font-size-xxl, 24px);
+}
+
+.text-xxxl {
+  font-size: 32px;
+  font-weight: var(--font-weight-semibold, 600);
+}

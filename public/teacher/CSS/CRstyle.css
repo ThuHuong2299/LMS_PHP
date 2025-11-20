@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&display=swap');
 * {
   box-sizing: border-box;
 }
@@ -134,7 +137,7 @@
 .c-c-l-p-ang-gi-ng-d-y {
   color: #000000;
   text-align: left;
-  font-family: var(--font-heading), "BricolageGrotesque-SemiBold", sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 32px;
   font-weight: 600;
   margin-bottom: 40px;
@@ -170,7 +173,7 @@
 .th-m-m-i {
   color: #ffffff;
   text-align: left;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 20px;
   line-height: 100%;
   font-weight: 600;
@@ -196,7 +199,7 @@
 .c-c-h-th-ng-th-ng-tin-ph-bi-n-trong-doanh-nghi-p {
   color: #000000;
   text-align: left;
-  font-family: "BeVietnamPro-Medium", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 24px;
   font-weight: 500;
   position: relative;
@@ -205,7 +208,7 @@
 ._213-e-cit-2320-09 {
   color: #3293f9;
   text-align: left;
-  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 400;
   position: relative;
@@ -260,7 +263,7 @@
 ._36-sinh-vi-n {
   color: #000000;
   text-align: left;
-  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 15.399559020996094px;
   font-weight: 400;
   position: relative;
@@ -289,7 +292,7 @@
 ._12-b-i-t-p {
   color: #000000;
   text-align: left;
-  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 15.399559020996094px;
   font-weight: 400;
   position: relative;
@@ -318,7 +321,7 @@
 ._6-b-i-ki-m-tra {
   color: #000000;
   text-align: left;
-  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 15.399559020996094px;
   font-weight: 400;
   position: relative;

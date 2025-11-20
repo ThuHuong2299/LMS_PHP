@@ -399,7 +399,7 @@ window.submitScore = async function(button) {
     
   } catch (error) {
     console.error('Error submitting score:', error);
-    alert('Lỗi khi lưu điểm: ' + error.message);
+    ThongBao.loi('Lỗi khi lưu điểm: ' + error.message);
     button.textContent = 'Xác nhận';
     button.disabled = false;
   }

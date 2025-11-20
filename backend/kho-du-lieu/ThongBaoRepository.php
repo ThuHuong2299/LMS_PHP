@@ -23,4 +23,28 @@ class ThongBaoRepository extends BaseRepository {
         
         return $this->truyVan($sql, ['lop_hoc_id' => $lopHocId]);
     }
+    
+    /**
+     * Tạo thông báo mới
+     */
+    public function taoThongBao($duLieu) {
+        $sql = "INSERT INTO thong_bao_lop_hoc 
+                (lop_hoc_id, nguoi_gui_id, tieu_de, noi_dung, thoi_gian_gui) 
+                VALUES 
+                (:lop_hoc_id, :nguoi_gui_id, :tieu_de, :noi_dung, NOW())";
+        
+        return $this->thucThi($sql, [
+            'lop_hoc_id' => $duLieu['lop_hoc_id'],
+            'nguoi_gui_id' => $duLieu['nguoi_gui_id'],
+            'tieu_de' => $duLieu['tieu_de'],
+            'noi_dung' => $duLieu['noi_dung']
+        ]);
+    }
+    
+    /**
+     * Lấy ID vừa thêm
+     */
+    public function layIdVuaThem() {
+        return $this->layIdVuaInsert();
+    }
 }

@@ -161,6 +161,9 @@ class BaiTapService extends BaseService {
                 $this->nemLoi('Không tìm thấy sinh viên');
             }
             
+            // Lấy danh sách câu hỏi của bài tập (dù sinh viên chưa làm)
+            $cauHoiBaiTap = $this->baiTapRepo->layCauHoiBaiTap($baiTapId);
+            
             return [
                 'bai_lam' => null,
                 'sinh_vien' => [
@@ -176,7 +179,15 @@ class BaiTapService extends BaseService {
                     'han_nop' => $baiTap['han_nop'],
                     'diem_toi_da' => (float)$baiTap['diem_toi_da']
                 ],
-                'cau_hoi' => [],
+                'cau_hoi' => array_map(function($ch) {
+                    return [
+                        'cau_hoi_id' => (int)$ch['id'],
+                        'noi_dung' => $ch['noi_dung_cau_hoi'],
+                        'mo_ta' => $ch['mo_ta'],
+                        'diem_toi_da' => (float)$ch['diem'],
+                        'tra_loi' => null // Sinh viên chưa trả lời
+                    ];
+                }, $cauHoiBaiTap),
                 'binh_luan' => []
             ];
         }
@@ -239,6 +250,360 @@ class BaiTapService extends BaseService {
                     ]
                 ];
             }, $binhLuan)
+        ];
+    }
+    
+    // ========================================
+    // METHODS CHO SINH VIÊN LÀM BÀI TẬP
+    // ========================================
+    
+    /**
+     * Lấy chi tiết bài tập + câu hỏi + bài làm của sinh viên
+     */
+    public function layChiTietBaiTapChoSinhVien($baiTapId, $sinhVienId) {
+        if (!$this->kiemTraSoNguyen($baiTapId) || !$this->kiemTraSoNguyen($sinhVienId)) {
+            $this->nemLoi('Tham số không hợp lệ');
+        }
+        
+        // Lấy thông tin bài tập
+        $baiTap = $this->baiTapRepo->layChiTietBaiTap($baiTapId);
+        if (!$baiTap) {
+            $this->nemLoi('Không tìm thấy bài tập');
+        }
+        
+        // Lấy danh sách câu hỏi
+        $cauHoi = $this->baiTapRepo->layCauHoiBaiTap($baiTapId);
+        
+        // Lấy hoặc tạo bài làm
+        $baiLam = $this->baiTapRepo->layBaiLamSinhVien($baiTapId, $sinhVienId);
+        
+        if (!$baiLam) {
+            // Tạo bài làm mới
+            $baiLamId = $this->baiTapRepo->taoBaiLam($baiTapId, $sinhVienId);
+            $baiLam = $this->baiTapRepo->layBaiLamSinhVien($baiTapId, $sinhVienId);
+        }
+        
+        // Lấy các câu trả lời đã lưu
+        $traLoi = [];
+        if ($baiLam) {
+            $traLoiRaw = $this->baiTapRepo->layTraLoiDaLuu($baiLam['id']);
+            foreach ($traLoiRaw as $tl) {
+                $traLoi[$tl['cau_hoi_id']] = [
+                    'noi_dung_tra_loi' => $tl['noi_dung_tra_loi'],
+                    'thoi_gian_tra_loi' => $tl['thoi_gian_tra_loi'],
+                    'diem' => $tl['diem']
+                ];
+            }
+        }
+        
+        return [
+            'bai_tap' => [
+                'id' => (int)$baiTap['id'],
+                'tieu_de' => $baiTap['tieu_de'],
+                'mo_ta' => $baiTap['mo_ta'],
+                'han_nop' => $baiTap['han_nop'],
+                'diem_toi_da' => (float)$baiTap['diem_toi_da']
+            ],
+            'cau_hoi' => array_map(function($ch) use ($traLoi) {
+                $traLoiData = isset($traLoi[$ch['id']]) ? $traLoi[$ch['id']] : null;
+                return [
+                    'id' => (int)$ch['id'],
+                    'noi_dung_cau_hoi' => $ch['noi_dung_cau_hoi'],
+                    'mo_ta' => $ch['mo_ta'],
+                    'diem' => (float)$ch['diem'],
+                    'tra_loi_da_luu' => $traLoiData ? $traLoiData['noi_dung_tra_loi'] : '',
+                    'diem_dat_duoc' => $traLoiData && isset($traLoiData['diem']) ? (float)$traLoiData['diem'] : null
+                ];
+            }, $cauHoi),
+            'bai_lam' => [
+                'id' => (int)$baiLam['id'],
+                'trang_thai' => $baiLam['trang_thai'],
+                'thoi_gian_bat_dau' => $baiLam['thoi_gian_bat_dau'],
+                'thoi_gian_nop' => $baiLam['thoi_gian_nop'],
+                'diem' => $baiLam['diem']
+            ]
+        ];
+    }
+    
+    /**
+     * Lưu câu trả lời của sinh viên
+     */
+    public function luuTraLoiBaiTap($baiTapId, $sinhVienId, $traLoiList) {
+        if (!$this->kiemTraSoNguyen($baiTapId) || !$this->kiemTraSoNguyen($sinhVienId)) {
+            $this->nemLoi('Tham số không hợp lệ');
+        }
+        
+        if (!is_array($traLoiList) || empty($traLoiList)) {
+            $this->nemLoi('Dữ liệu trả lời không hợp lệ');
+        }
+        
+        // Lấy hoặc tạo bài làm
+        $baiLam = $this->baiTapRepo->layBaiLamSinhVien($baiTapId, $sinhVienId);
+        
+        if (!$baiLam) {
+            $baiLamId = $this->baiTapRepo->taoBaiLam($baiTapId, $sinhVienId);
+        } else {
+            $baiLamId = $baiLam['id'];
+            
+            // Kiểm tra đã nộp chưa
+            if ($baiLam['trang_thai'] === 'da_nop' || $baiLam['trang_thai'] === 'da_cham') {
+                $this->nemLoi('Bài tập đã được nộp, không thể chỉnh sửa');
+            }
+        }
+        
+        // Lưu từng câu trả lời
+        foreach ($traLoiList as $traLoi) {
+            if (!isset($traLoi['cau_hoi_id']) || !isset($traLoi['noi_dung_tra_loi'])) {
+                continue;
+            }
+            
+            $cauHoiId = (int)$traLoi['cau_hoi_id'];
+            $noiDungTraLoi = trim($traLoi['noi_dung_tra_loi']);
+            
+            // Lưu hoặc cập nhật
+            $this->baiTapRepo->luuTraLoi($baiLamId, $cauHoiId, $noiDungTraLoi);
+        }
+        
+        return true;
+    }
+    
+    /**
+     * Nộp bài tập
+     */
+    public function nopBaiTap($baiTapId, $sinhVienId) {
+        if (!$this->kiemTraSoNguyen($baiTapId) || !$this->kiemTraSoNguyen($sinhVienId)) {
+            $this->nemLoi('Tham số không hợp lệ');
+        }
+        
+        // Lấy bài làm
+        $baiLam = $this->baiTapRepo->layBaiLamSinhVien($baiTapId, $sinhVienId);
+        
+        if (!$baiLam) {
+            $this->nemLoi('Chưa có bài làm');
+        }
+        
+        if ($baiLam['trang_thai'] === 'da_nop' || $baiLam['trang_thai'] === 'da_cham') {
+            $this->nemLoi('Bài tập đã được nộp trước đó');
+        }
+        
+        // Nộp bài
+        $result = $this->baiTapRepo->nopBaiTap($baiLam['id']);
+        
+        if (!$result) {
+            $this->nemLoi('Không thể nộp bài');
+        }
+        
+        // Đếm số câu đã trả lời
+        $thongKe = $this->baiTapRepo->demSoCauTraLoi($baiLam['id'], $baiTapId);
+        
+        return [
+            'thoi_gian_nop' => date('Y-m-d H:i:s'),
+            'so_cau_da_tra_loi' => (int)$thongKe['so_cau_da_tra_loi'],
+            'tong_so_cau' => (int)$thongKe['tong_so_cau']
+        ];
+    }
+    
+    /**
+     * Lấy bình luận của câu hỏi
+     */
+    public function layBinhLuanCauHoi($baiTapId, $cauHoiId, $sinhVienId) {
+        if (!$this->kiemTraSoNguyen($baiTapId) || !$this->kiemTraSoNguyen($cauHoiId) || !$this->kiemTraSoNguyen($sinhVienId)) {
+            $this->nemLoi('Tham số không hợp lệ');
+        }
+        
+        // Kiểm tra quyền truy cập (sinh viên phải có bài làm)
+        $baiLam = $this->baiTapRepo->layBaiLamSinhVien($baiTapId, $sinhVienId);
+        
+        if (!$baiLam) {
+            $this->nemLoi('Bạn chưa có bài làm cho bài tập này');
+        }
+        
+        // Lấy bình luận
+        $binhLuan = $this->baiTapRepo->layBinhLuan($baiLam['id'], $cauHoiId);
+        
+        return array_map(function($bl) {
+            return [
+                'id' => (int)$bl['id'],
+                'noi_dung' => $bl['noi_dung'],
+                'thoi_gian_gui' => $bl['thoi_gian_gui'],
+                'nguoi_gui' => [
+                    'id' => (int)$bl['nguoi_gui_id'],
+                    'ho_ten' => $bl['nguoi_gui_ten'],
+                    'anh_dai_dien' => $bl['nguoi_gui_anh'],
+                    'vai_tro' => $bl['nguoi_gui_vai_tro']
+                ]
+            ];
+        }, $binhLuan);
+    }
+    
+    /**
+     * Thêm bình luận cho câu hỏi
+     */
+    public function themBinhLuanCauHoi($baiTapId, $cauHoiId, $sinhVienId, $noiDung) {
+        if (!$this->kiemTraSoNguyen($baiTapId) || !$this->kiemTraSoNguyen($cauHoiId) || !$this->kiemTraSoNguyen($sinhVienId)) {
+            $this->nemLoi('Tham số không hợp lệ');
+        }
+        
+        if (empty(trim($noiDung))) {
+            $this->nemLoi('Nội dung bình luận không được để trống');
+        }
+        
+        // Kiểm tra quyền truy cập
+        $baiLam = $this->baiTapRepo->layBaiLamSinhVien($baiTapId, $sinhVienId);
+        
+        if (!$baiLam) {
+            $this->nemLoi('Bạn chưa có bài làm cho bài tập này');
+        }
+        
+        // Thêm bình luận
+        $binhLuanId = $this->baiTapRepo->themBinhLuan($baiLam['id'], $sinhVienId, $noiDung, $cauHoiId);
+        
+        if (!$binhLuanId) {
+            $this->nemLoi('Không thể thêm bình luận');
+        }
+        
+        return [
+            'id' => $binhLuanId,
+            'thoi_gian_gui' => date('Y-m-d H:i:s')
+        ];
+    }
+    
+    /**
+     * Tạo bài tập mới với danh sách câu hỏi
+     */
+    public function taoBaiTap($lopHocId, $giangVienId, $chuongId, $tieuDe, $hanNop, $cauHoiList) {
+        // Validate
+        if (!$this->kiemTraSoNguyen($lopHocId)) {
+            $this->nemLoi('ID lớp học không hợp lệ');
+        }
+        
+        if (!$this->kiemTraSoNguyen($chuongId)) {
+            $this->nemLoi('ID chương không hợp lệ');
+        }
+        
+        if (empty(trim($tieuDe))) {
+            $this->nemLoi('Tiêu đề không được để trống');
+        }
+        
+        if (empty($hanNop)) {
+            $this->nemLoi('Hạn nộp không được để trống');
+        }
+        
+        // Validate thời gian
+        $hanNopTime = strtotime($hanNop);
+        if ($hanNopTime === false || $hanNopTime <= time()) {
+            $this->nemLoi('Hạn nộp phải là thời điểm trong tương lai');
+        }
+        
+        if (empty($cauHoiList) || !is_array($cauHoiList)) {
+            $this->nemLoi('Bài tập phải có ít nhất 1 câu hỏi');
+        }
+        
+        // Kiểm tra quyền
+        if (!$this->lopHocRepo->kiemTraQuyenTruyCap($lopHocId, $giangVienId)) {
+            $this->nemLoi('Bạn không có quyền tạo bài tập cho lớp này');
+        }
+        
+        // Tính tổng điểm
+        $tongDiem = 0;
+        foreach ($cauHoiList as $index => $cauHoi) {
+            if (empty(trim($cauHoi['noi_dung'] ?? ''))) {
+                $this->nemLoi("Câu hỏi " . ($index + 1) . " không được để trống");
+            }
+            $tongDiem += floatval($cauHoi['diem'] ?? 0);
+        }
+        
+        if ($tongDiem <= 0) {
+            $tongDiem = 10; // Mặc định 10 điểm
+        }
+        
+        // 1. Tạo bài tập
+        $duLieuBaiTap = [
+            'lop_hoc_id' => $lopHocId,
+            'chuong_id' => $chuongId,
+            'tieu_de' => trim($tieuDe),
+            'mo_ta' => null,
+            'han_nop' => $hanNop,
+            'diem_toi_da' => $tongDiem
+        ];
+        
+        $ketQua = $this->baiTapRepo->taoBaiTap($duLieuBaiTap);
+        
+        if (!$ketQua) {
+            $this->nemLoi('Không thể tạo bài tập');
+        }
+        
+        $baiTapId = $this->baiTapRepo->layIdVuaThem();
+        
+        // 2. Thêm các câu hỏi
+        foreach ($cauHoiList as $index => $cauHoi) {
+            $duLieuCauHoi = [
+                'noi_dung' => trim($cauHoi['noi_dung']),
+                'mo_ta' => isset($cauHoi['mo_ta']) ? trim($cauHoi['mo_ta']) : null,
+                'diem' => floatval($cauHoi['diem'] ?? ($tongDiem / count($cauHoiList)))
+            ];
+            
+            $ketQuaCauHoi = $this->baiTapRepo->themCauHoi($baiTapId, $duLieuCauHoi);
+            
+            if (!$ketQuaCauHoi) {
+                $this->nemLoi('Không thể thêm câu hỏi ' . ($index + 1));
+            }
+        }
+        
+        return [
+            'id' => $baiTapId,
+            'thong_bao' => 'Đã tạo bài tập thành công'
+        ];
+    }
+    
+    /**
+     * Chấm điểm câu hỏi
+     */
+    public function chamDiemCauHoi($traLoiId, $diem, $giangVienId) {
+        // Validate
+        if (!$this->kiemTraSoNguyen($traLoiId)) {
+            $this->nemLoi('ID trả lời không hợp lệ');
+        }
+        
+        if (!is_numeric($diem) || $diem < 0) {
+            $this->nemLoi('Điểm không hợp lệ');
+        }
+        
+        // Lấy thông tin trả lời
+        $traLoi = $this->baiTapRepo->layThongTinTraLoi($traLoiId);
+        if (!$traLoi) {
+            $this->nemLoi('Không tìm thấy trả lời');
+        }
+        
+        // Kiểm tra quyền: giảng viên phải là chủ lớp
+        $baiTapId = $traLoi['bai_tap_id'];
+        $lopHocId = $this->baiTapRepo->layLopHocIdTheoBaiTap($baiTapId);
+        
+        if (!$this->lopHocRepo->kiemTraQuyenTruyCap($lopHocId, $giangVienId)) {
+            $this->nemLoi('Bạn không có quyền chấm bài tập này');
+        }
+        
+        // Kiểm tra điểm không vượt quá điểm tối đa
+        $cauHoi = $this->baiTapRepo->layCauHoi($traLoi['cau_hoi_id']);
+        if ($diem > $cauHoi['diem']) {
+            $this->nemLoi('Điểm không được vượt quá ' . $cauHoi['diem']);
+        }
+        
+        // Cập nhật điểm
+        $ketQua = $this->baiTapRepo->capNhatDiemTraLoi($traLoiId, $diem);
+        
+        if (!$ketQua) {
+            $this->nemLoi('Không thể cập nhật điểm');
+        }
+        
+        // Tính lại tổng điểm bài làm
+        $baiLamId = $traLoi['bai_lam_id'];
+        $this->baiTapRepo->capNhatTongDiemBaiLam($baiLamId);
+        
+        return [
+            'tra_loi_id' => $traLoiId,
+            'diem' => $diem,
+            'bai_lam_id' => $baiLamId
         ];
     }
 }

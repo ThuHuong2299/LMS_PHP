@@ -270,4 +270,158 @@ class GiangVienController extends BaseController {
             $this->traVeLoi($e->getMessage());
         }
     }
+    
+    /**
+     * API: Tạo thông báo mới
+     * Method: POST
+     * Endpoint: /api/giang-vien/tao-thong-bao
+     * Body: {lop_hoc_id, tieu_de, noi_dung}
+     */
+    public function taoThongBao() {
+        try {
+            // Kiểm tra quyền giảng viên
+            $giangVienId = $this->kiemTraQuyenGiangVien();
+            
+            // Lấy dữ liệu từ request
+            $duLieu = $this->layDuLieuJson();
+            
+            $lopHocId = $duLieu['lop_hoc_id'] ?? null;
+            $tieuDe = $duLieu['tieu_de'] ?? '';
+            $noiDung = $duLieu['noi_dung'] ?? '';
+            
+            // Tạo thông báo
+            $ketQua = $this->thongBaoService->taoThongBao($lopHocId, $giangVienId, $tieuDe, $noiDung);
+            
+            $this->traVeThanhCong(['id' => $ketQua['id']], $ketQua['thong_bao']);
+            
+        } catch (Exception $e) {
+            error_log("Lỗi trong taoThongBao: " . $e->getMessage());
+            $this->traVeLoi($e->getMessage());
+        }
+    }
+    
+    /**
+     * API: Lấy danh sách chương theo lớp
+     * Method: GET
+     * Endpoint: /api/giang-vien/chuong-theo-lop?lop_hoc_id={id}
+     */
+    public function layChuongTheoLop() {
+        try {
+            $giangVienId = $this->kiemTraQuyenGiangVien();
+            $lopHocId = $this->layThamSoGetInt('lop_hoc_id');
+            
+            $danhSach = $this->baiGiangService->layChuongTheoLopGiangVien($lopHocId, $giangVienId);
+            
+            $this->traVeThanhCong($danhSach, 'Lấy danh sách chương thành công');
+            
+        } catch (Exception $e) {
+            error_log("Lỗi trong layChuongTheoLop: " . $e->getMessage());
+            $this->traVeLoi($e->getMessage());
+        }
+    }
+    
+    /**
+     * API: Tạo bài tập mới
+     * Method: POST
+     * Endpoint: /api/giang-vien/tao-bai-tap
+     * Body: {lop_hoc_id, chuong_id, tieu_de, han_nop, cau_hoi: [{noi_dung, mo_ta, diem}]}
+     */
+    public function taoBaiTap() {
+        try {
+            $giangVienId = $this->kiemTraQuyenGiangVien();
+            $duLieu = $this->layDuLieuJson();
+            
+            $lopHocId = $duLieu['lop_hoc_id'] ?? null;
+            $chuongId = $duLieu['chuong_id'] ?? null;
+            $tieuDe = $duLieu['tieu_de'] ?? '';
+            $hanNop = $duLieu['han_nop'] ?? '';
+            $cauHoiList = $duLieu['cau_hoi'] ?? [];
+            
+            $ketQua = $this->baiTapService->taoBaiTap(
+                $lopHocId,
+                $giangVienId,
+                $chuongId,
+                $tieuDe,
+                $hanNop,
+                $cauHoiList
+            );
+            
+            $this->traVeThanhCong(['id' => $ketQua['id']], $ketQua['thong_bao']);
+            
+        } catch (Exception $e) {
+            error_log("Lỗi trong taoBaiTap: " . $e->getMessage());
+            $this->traVeLoi($e->getMessage());
+        }
+    }
+    
+    /**
+     * API: Tạo bài kiểm tra mới
+     * Method: POST
+     * Endpoint: /api/giang-vien/tao-bai-kiem-tra
+     * Body: {lop_hoc_id, chuong_id, tieu_de, thoi_luong, thoi_gian_bat_dau, cau_hoi: [{noi_dung_cau_hoi, diem, cac_lua_chon}]}
+     */
+    public function taoBaiKiemTra() {
+        try {
+            $giangVienId = $this->kiemTraQuyenGiangVien();
+            $duLieu = $this->layDuLieuJson();
+            
+            $ketQua = $this->baiKiemTraService->taoBaiKiemTra($duLieu, $giangVienId);
+            
+            $this->traVeThanhCong(
+                ['id' => $ketQua['id']], 
+                'Tạo bài kiểm tra thành công với tổng điểm: ' . $ketQua['tong_diem']
+            );
+            
+        } catch (Exception $e) {
+            error_log("Lỗi trong taoBaiKiemTra: " . $e->getMessage());
+            $this->traVeLoi($e->getMessage());
+        }
+    }
+    
+    /**
+     * API: Lấy chi tiết bài kiểm tra
+     * Method: GET
+     * Endpoint: /teacher/api/lay-chi-tiet-bai-kiem-tra.php
+     */
+    public function layChiTietBaiKiemTra() {
+        try {
+            $giangVienId = $this->kiemTraQuyenGiangVien();
+            $baiKiemTraId = $this->layThamSoGetInt('bai_kiem_tra_id');
+            
+            $duLieu = $this->baiKiemTraService->layChiTietBaiKiemTra($baiKiemTraId, $giangVienId);
+            
+            $this->traVeThanhCong($duLieu, 'Lấy chi tiết bài kiểm tra thành công');
+            
+        } catch (Exception $e) {
+            error_log("Lỗi trong layChiTietBaiKiemTra: " . $e->getMessage());
+            $this->traVeLoi($e->getMessage());
+        }
+    }
+    
+    /**
+     * API: Chấm điểm câu hỏi
+     * Method: POST
+     * Endpoint: /teacher/api/cham-diem-cau-hoi.php
+     */
+    public function chamDiemCauHoi($traLoiId, $diem) {
+        try {
+            $giangVienId = $this->kiemTraQuyenGiangVien();
+            
+            // Gọi service để chấm điểm
+            $ketQua = $this->baiTapService->chamDiemCauHoi($traLoiId, $diem, $giangVienId);
+            
+            return [
+                'thanh_cong' => true,
+                'thong_bao' => 'Đã lưu điểm thành công',
+                'du_lieu' => $ketQua
+            ];
+            
+        } catch (Exception $e) {
+            error_log("Lỗi trong chamDiemCauHoi: " . $e->getMessage());
+            return [
+                'thanh_cong' => false,
+                'thong_bao' => $e->getMessage()
+            ];
+        }
+    }
 }

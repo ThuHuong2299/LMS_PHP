@@ -2,253 +2,214 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bảng Điểm</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./CSS/components/sidebar.css">
+  <link rel="stylesheet" href="./components/navbar.sv.style.css">
   <link rel="stylesheet" href="./CSS/BD.sv.style.css">
+  <link rel="stylesheet" href="../assets/css/thong-bao.css">
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <base href="./assets/">
 </head>
 <body>
   <div class="container">
-    <!-- Sidebar -->
-    <div class="side-bar" id="sidebar">
-      <div class="logo">
-        <img class="objects" src="objects0.svg"/>
-        <div class="earn-lab">earn Lab</div>
-        <img class="open-close" src="open-close0.svg"/>
-      </div>
-      <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-      <div class="options">
-        <div class="tab-side-bar1" onclick="toggleDropdown()">
-          <div class="side-text">Bài giảng</div>
-          <span class="arrow" id="arrow">▾</span>
-        </div>
-        <ul class="submenu" id="submenu">
-          <div class="tab-side-bar11" onclick="window.location.href='../Thông%20tin%20bài%20giảng.html'">
-            <div class="side-text">Chương 1
-              <ul class="submenu2">
-                <div class="tab-side-bar21" onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.1. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21" onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.2. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21" onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.3. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-              </ul>
-            </div>
-          </div>
-          <div class="tab-side-bar11" onclick="window.location.href='../Thông%20tin%20bài%20giảng.html'">
-            <div class="side-text">Chương 2
-              <ul class="submenu2">
-                <div class="tab-side-bar21" onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.1. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21" onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.2. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21" onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.3. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-              </ul>
-            </div>
-          </div>
-          <div class="tab-side-bar11" onclick="window.location.href='../Thông%20tin%20bài%20giảng.html'">
-            <div class="side-text">Chương 3
-              <ul class="submenu2">
-                <div class="tab-side-bar21" onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.1. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21" onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.2. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21" onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.3. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-              </ul>
-            </div>
-          </div>
-          <div class="tab-side-bar11" onclick="window.location.href='../Thông%20tin%20bài%20giảng.html'">
-            <div class="side-text">Chương 4
-                            <ul class="submenu2">
-                <div class="tab-side-bar21" onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.1. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21" onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.2. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21" onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.3. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-              </ul>
-            </div>
-          </div>
-        </ul>
-        <div class="tab-side-bar2" onclick="window.location.href='../Bảng%20điểm.html'">
-          <div class="side-text">Điểm</div>
-        </div>
-        <div class="tab-side-bar3" onclick="window.location.href='../Tài%20liệu.html'">
-          <div class="side-text">Tài liệu</div>
-        </div>
-        <div class="tab-side-bar4" onclick="window.location.href='../Thông%20báo%20trong.html'">
-          <div class="side-text">Thông báo</div>
-        </div>
-        <div class="tab-side-bar5" onclick="window.location.href='../Thông%20tin%20môn%20học.html'">
-          <div class="side-text">Thông tin môn học</div>
-        </div>
-      </div>
-      <div class="logout-section">
-        <button class="logout-btn" onclick="logout()">
-          <img src="logout-icon.svg" alt="Đăng xuất" style="filter: brightness(0) saturate(100%) invert(0);">
-          <span>Đăng xuất</span>
-        </button>
-      </div>
-    </div>
+    <!-- Sidebar Course Container (loaded dynamically) -->
+    <div id="sidebar-course-container"></div>
 
     <!-- Main Content -->
     <main class="main-content">
-      <header class="header">
-        <h1 class="course-title">Tiếng Anh Thương Mại 1</h1>
-        
-        <div class="user-info">
-          <div class="user-avatar"></div>
-          <div class="user-details">
-            <h3>Nguyễn Cao Kỳ Duyên</h3>
-            <p>23D192001</p>
+      <!-- Navbar Container -->
+      <div id="navbar-container"></div>
+
+      <!-- Dropdown chọn chương -->
+      <div class="chapter-filter">
+        <label for="chapter-select">Chọn chương:</label>
+        <select id="chapter-select" class="chapter-dropdown">
+          <option value="all">Tất cả</option>
+          <option value="1" selected>Chương 1: Giới thiệu SQL Server</option>
+          <option value="2">Chương 2: Câu lệnh SELECT cơ bản</option>
+          <option value="3">Chương 3: JOIN và Subquery</option>
+        </select>
+      </div>
+
+      <!-- Container điểm theo chương -->
+      <div id="grades-container">
+        <!-- Chương 1 -->
+        <div class="chapter-grade-card">
+          <h3 class="chapter-title">Chương 1: Giới thiệu SQL Server</h3>
+          
+          <div class="grade-table">
+            <!-- Header -->
+            <div class="grade-row header-row">
+              <div class="grade-cell type-cell">Loại điểm</div>
+              <div class="grade-cell weight-cell">Trọng số</div>
+              <div class="grade-cell score-cell">Điểm</div>
+            </div>
+
+            <!-- Chuyên cần -->
+            <div class="grade-row main-row">
+              <div class="grade-cell type-cell">
+                <strong>Chuyên cần (CC)</strong>
+              </div>
+              <div class="grade-cell weight-cell">10%</div>
+              <div class="grade-cell score-cell">
+                <span class="score-badge good">9.0/10</span>
+              </div>
+            </div>
+            <div class="grade-row detail-row">
+              <div class="grade-cell type-cell detail-text">
+                <span class="detail-icon">↳</span> Video đã xem: 5/5
+              </div>
+              <div class="grade-cell weight-cell"></div>
+              <div class="grade-cell score-cell"></div>
+            </div>
+
+            <!-- Bài tập -->
+            <div class="grade-row main-row">
+              <div class="grade-cell type-cell">
+                <strong>Bài tập</strong>
+              </div>
+              <div class="grade-cell weight-cell">40%</div>
+              <div class="grade-cell score-cell">
+                <span class="score-badge average">8.5/10</span>
+              </div>
+            </div>
+            <div class="grade-row detail-row">
+              <div class="grade-cell type-cell detail-text">
+                <span class="detail-icon">↳</span> Bài tập 1: Tạo database
+              </div>
+              <div class="grade-cell weight-cell"></div>
+              <div class="grade-cell score-cell">9.0/10</div>
+            </div>
+            <div class="grade-row detail-row">
+              <div class="grade-cell type-cell detail-text">
+                <span class="detail-icon">↳</span> Bài tập 2: Tạo bảng
+              </div>
+              <div class="grade-cell weight-cell"></div>
+              <div class="grade-cell score-cell">8.0/10</div>
+            </div>
+            <div class="grade-row detail-row">
+              <div class="grade-cell type-cell detail-text">
+                <span class="detail-icon">↳</span> Bài tập 3: INSERT dữ liệu
+              </div>
+              <div class="grade-cell weight-cell"></div>
+              <div class="grade-cell score-cell">
+                <span class="status-badge pending">Chưa nộp</span>
+              </div>
+            </div>
+
+            <!-- Kiểm tra -->
+            <div class="grade-row main-row">
+              <div class="grade-cell type-cell">
+                <strong>Kiểm tra cuối chương</strong>
+              </div>
+              <div class="grade-cell weight-cell">50%</div>
+              <div class="grade-cell score-cell">
+                <span class="score-badge average">8.0/10</span>
+              </div>
+            </div>
+            <div class="grade-row detail-row">
+              <div class="grade-cell type-cell detail-text">
+                <span class="detail-icon">↳</span> Kiểm tra 1 (15 phút)
+              </div>
+              <div class="grade-cell weight-cell"></div>
+              <div class="grade-cell score-cell">8.0/10</div>
+            </div>
+
+            <!-- Tổng điểm chương -->
+            <div class="grade-row total-row">
+              <div class="grade-cell type-cell">
+                <strong>ĐIỂM CHƯƠNG</strong>
+              </div>
+              <div class="grade-cell weight-cell">100%</div>
+              <div class="grade-cell score-cell">
+                <span class="score-badge total">8.4/10</span>
+              </div>
+            </div>
           </div>
         </div>
-      </header>
 
-      <h2 class="page-title">Bảng điểm</h2>
+        <!-- Chương 2 -->
+        <div class="chapter-grade-card">
+          <h3 class="chapter-title">Chương 2: Câu lệnh SELECT cơ bản</h3>
+          
+          <div class="grade-table">
+            <div class="grade-row header-row">
+              <div class="grade-cell type-cell">Loại điểm</div>
+              <div class="grade-cell weight-cell">Trọng số</div>
+              <div class="grade-cell score-cell">Điểm</div>
+            </div>
 
-      <div class="grade-table">
-        <!-- Header -->
-        <div class="table-header">
-          <div class="table-cell header">Tên thành phần</div>
-          <div class="table-cell header">Trọng số</div>
-          <div class="table-cell header">Điểm số</div>
-        </div>
+            <div class="grade-row main-row">
+              <div class="grade-cell type-cell">
+                <strong>Chuyên cần (CC)</strong>
+              </div>
+              <div class="grade-cell weight-cell">10%</div>
+              <div class="grade-cell score-cell">
+                <span class="score-badge average">7.0/10</span>
+              </div>
+            </div>
+            <div class="grade-row detail-row">
+              <div class="grade-cell type-cell detail-text">
+                <span class="detail-icon">↳</span> Video đã xem: 7/10
+              </div>
+              <div class="grade-cell weight-cell"></div>
+              <div class="grade-cell score-cell"></div>
+            </div>
 
-        <!-- Điểm chuyên cần -->
-        <div class="table-headrow">
-          <div class="table-cell">Điểm chuyên cần</div>
-          <div class="table-cell center">80%</div>
-          <div class="table-cell center">8.0</div>
-        </div>
+            <div class="grade-row main-row">
+              <div class="grade-cell type-cell">
+                <strong>Bài tập</strong>
+              </div>
+              <div class="grade-cell weight-cell">40%</div>
+              <div class="grade-cell score-cell">
+                <span class="score-badge good">9.0/10</span>
+              </div>
+            </div>
+            <div class="grade-row detail-row">
+              <div class="grade-cell type-cell detail-text">
+                <span class="detail-icon">↳</span> Bài tập 1: SELECT cơ bản
+              </div>
+              <div class="grade-cell weight-cell"></div>
+              <div class="grade-cell score-cell">9.5/10</div>
+            </div>
+            <div class="grade-row detail-row">
+              <div class="grade-cell type-cell detail-text">
+                <span class="detail-icon">↳</span> Bài tập 2: WHERE và ORDER BY
+              </div>
+              <div class="grade-cell weight-cell"></div>
+              <div class="grade-cell score-cell">8.5/10</div>
+            </div>
 
-        <!-- Bài tập -->
-        <div class="table-row">
-          <div class="table-cell">Điểm bài tập 1</div>
-          <div class="table-cell center">80%</div>
-          <div class="table-cell center">9.0</div>
-        </div>
-        <div class="table-row">
-          <div class="table-cell">Điểm bài tập 2</div>
-          <div class="table-cell center">80%</div>
-          <div class="table-cell center">-</div>
-        </div>
-        <div class="table-row">
-          <div class="table-cell">Điểm bài tập 3</div>
-          <div class="table-cell center">80%</div>
-          <div class="table-cell center">-</div>
-        </div>
-        <div class="table-row">
-          <div class="table-cell">Điểm bài tập 4</div>
-          <div class="table-cell center">80%</div>
-          <div class="table-cell center">-</div>
-        </div>
+            <div class="grade-row main-row">
+              <div class="grade-cell type-cell">
+                <strong>Kiểm tra cuối chương</strong>
+              </div>
+              <div class="grade-cell weight-cell">50%</div>
+              <div class="grade-cell score-cell">
+                <span class="status-badge pending">Chưa làm</span>
+              </div>
+            </div>
 
-        <!-- Kiểm tra -->
-        <div class="table-headrow">
-          <div class="table-cell">Điểm kiểm tra</div>
-          <div class="table-cell center">80%</div>
-          <div class="table-cell center">8.0</div>
-        </div>
-        <div class="table-row">
-          <div class="table-cell">Điểm kiểm tra 1</div>
-          <div class="table-cell center">80%</div>
-          <div class="table-cell center">9.0</div>
-        </div>
-        <div class="table-row">
-          <div class="table-cell">Điểm kiểm tra 2</div>
-          <div class="table-cell center">80%</div>
-          <div class="table-cell center">-</div>
-        </div>
-        <div class="table-row">
-          <div class="table-cell">Điểm kiểm tra 3</div>
-          <div class="table-cell center">80%</div>
-          <div class="table-cell center">-</div>
-        </div>
-        <div class="table-row">
-          <div class="table-cell">Điểm kiểm tra 4</div>
-          <div class="table-cell center">80%</div>
-          <div class="table-cell center">-</div>
+            <div class="grade-row total-row">
+              <div class="grade-cell type-cell">
+                <strong>ĐIỂM CHƯƠNG</strong>
+              </div>
+              <div class="grade-cell weight-cell">100%</div>
+              <div class="grade-cell score-cell">
+                <span class="score-badge pending">Chưa đủ dữ liệu</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
   </div>
+
+  <script src="./js/common.js"></script>
+  <script src="../assets/js/thong-bao.js"></script>
+  <script src="./js/components/navbar.js"></script>
+  <script type="module" src="./js/main-course.js"></script>
+  <script src="./js/bang-diem.js"></script>
 </body>
-<script src="./js/common.js"></script>
 </html>

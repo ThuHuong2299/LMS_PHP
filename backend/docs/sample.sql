@@ -409,7 +409,218 @@ VALUES
  'Giữa kỳ gồm 3 câu trắc nghiệm mẫu, nội dung từ Chương 1 và Chương 2 (WHERE, LIKE, BETWEEN, IN, GROUP BY...).');
 
 -- ================================================
--- PHẦN 9: TÀI LIỆU LỚP HỌC
+-- PHẦN 9: BÀI LÀM
+-- ================================================
+-- Dữ liệu mẫu cho bảng bài làm 
+INSERT INTO bai_lam (bai_tap_id, sinh_vien_id, trang_thai, diem, thoi_gian_bat_dau, thoi_gian_nop, thoi_gian_cham, nguoi_cham_id) VALUES
+
+-- Sinh viên 1
+(1, 6, 'da_nop', 8.5, '2025-10-15 08:30:00', '2025-10-20 22:15:00', '2025-10-21 09:45:00', 1),
+(2, 6, 'da_nop', 9.0, '2025-10-22 14:20:00', '2025-10-28 23:55:00', '2025-10-29 10:30:00', 1),
+(3, 6, 'chu_lam', NULL, NULL, NULL, NULL, NULL),
+
+-- Sinh viên 2
+(1, 7, 'da_nop', 7.0, '2025-10-16 09:15:00', '2025-10-20 20:30:00', '2025-10-21 11:20:00', 1),
+(2, 7, 'da_nop', 6.5, '2025-10-23 10:00:00', '2025-10-29 01:10:00', NULL, NULL), 
+(3, 7, 'dang_lam', NULL, '2025-11-10 15:45:00', NULL, NULL, NULL),
+
+-- Sinh viên 3
+(1, 8, 'da_nop', 10.0, '2025-10-14 07:50:00', '2025-10-19 18:00:00', '2025-10-20 14:15:00', 1),
+(2, 8, 'da_nop', 9.5, '2025-10-21 13:30:00', '2025-10-27 21:45:00', '2025-10-28 08:55:00', 1),
+(3, 8, 'da_nop', 8.0, '2025-11-05 09:00:00', '2025-11-17 23:59:00', '2025-11-18 10:30:00', 1),
+
+-- Sinh viên 4
+(1, 9, 'da_nop', 5.5, '2025-10-17 11:20:00', '2025-10-21 02:30:00', '2025-10-21 15:40:00', 1), 
+(2, 9, 'chu_lam', NULL, NULL, NULL, NULL, NULL),
+(3, 9, 'dang_lam', NULL, '2025-11-12 20:15:00', NULL, NULL, NULL),
+
+-- Sinh viên 5
+(1, 10, 'da_nop', 9.0, '2025-10-15 10:00:00', '2025-10-20 19:45:00', '2025-10-21 09:10:00', 1),
+(2, 10, 'da_nop', 8.5, '2025-10-22 15:10:00', '2025-10-28 22:30:00', '2025-10-29 11:15:00', 1),
+(3, 10, 'da_nop', NULL, '2025-11-08 08:20:00', '2025-11-18 00:05:00', NULL, NULL); 
+
+-- ================================================
+-- PHẦN 10: BÀI LÀM KIỂM TRA
+-- ================================================
+
+INSERT INTO bai_lam_kiem_tra (
+    bai_kiem_tra_id,
+    sinh_vien_id,
+    trang_thai,
+    diem,
+    so_cau_dung,
+    tong_so_cau,
+    thoi_gian_bat_dau,
+    thoi_gian_nop,
+    thoi_gian_lam_bai
+) VALUES
+-- Bài kiểm tra giữa kỳ Power BI (id = 1) - đã diễn ra ngày 20/10/2025
+(1, 6, 'da_nop', 9.50, 18, 20, '2025-10-20 18:20:00', '2025-10-20 18:48:00', 28),
+(1, 7, 'da_nop', 8.5, 17, 20, '2025-10-20 18:25:00', '2025-10-20 18:50:00', 27),
+(1, 8, 'da_nop', 10.00, 20, 20, '2025-10-20 18:20:00', '2025-10-20 18:45:00', 30),
+(1, 9, 'da_nop', 7.00, 14, 20, '2025-10-20 18:30:00', '2025-10-20 18:50:00', 24),
+(1, 10, 'da_nop', 8.5, 17, 20, '2025-10-20 18:22:00', '2025-10-20 18:49:00', 27),
+
+-- Bài kiểm tra cuối kỳ Power BI (id = 2) - đã diễn ra ngày 3/11/2025 
+(2, 11, 'da_nop', 9.00, 18, 20, '2025-11-03 18:25:00', '2025-11-03 19:05:00', 40),
+(2, 12, 'da_nop', 7.50, 15, 20, '2025-11-03 18:28:00', '2025-11-03 19:05:00', 37),
+(2, 10, 'da_nop', 9.50, 19, 20, '2025-11-03 18:25:00', '2025-11-03 18:58:00', 33),
+(2, 9, 'da_nop', 6.50, 13, 20, '2025-11-03 18:35:00', '2025-11-03 19:05:00', 30),
+(2, 13, 'chua_lam', NULL, 0, 20, NULL, NULL, 0), -- Chưa làm bài cuối kỳ
+
+-- Bài kiểm tra giữa kỳ SQL (id = 3) - đã diễn ra ngày 18/11/2025
+(3, 8, 'da_nop', 10.00, 20, 20, '2025-11-18 18:20:00', '2025-11-18 18:45:00', 25),
+(3, 9, 'da_nop', 8.50, 17, 20, '2025-11-18 18:25:00', '2025-11-18 18:50:00', 25),
+(3, 10, 'da_nop', 9.00, 18, 20, '2025-11-18 18:22:00', '2025-11-18 18:48:00', 26),
+(3, 11, 'dang_lam', NULL, 12, 20, '2025-11-18 18:40:00', NULL, 15), 
+(3, 12, 'da_nop', 7.50, 15, 20, '2025-11-18 18:30:00', '2025-11-18 18:50:00', 20);
+
+-- ================================================
+-- PHẦN 11: BÌNH LUẬN BÀI TẬP
+-- ================================================
+
+-- Chèn bình luận mẫu vào bảng bình luận bài tập
+INSERT INTO binh_luan_bai_tap (
+    bai_lam_id,          
+    nguoi_gui_id,        
+    noi_dung,
+    thoi_gian_gui
+) VALUES
+-- Bình luận của giảng viên cho các bài làm (thường là góp ý, chấm điểm)
+(1, 1, 'Bài làm tốt, phần xử lý dữ liệu sạch sẽ. +0.5 điểm thưởng!', '2025-10-21 10:15:30'),
+(1, 6, 'Cảm ơn thầy, em sẽ cố gắng hơn ở bài sau ạ!', '2025-10-21 10:20:15'),
+(3, 1, 'Phần mô hình dữ liệu còn thiếu relationship giữa 2 bảng, cần bổ sung.', '2025-10-29 12:45:00'),
+(4, 1, 'Nộp muộn 2 ngày, trừ 2 điểm theo quy định lớp mình.', '2025-10-21 16:10:00'),
+(5, 1, 'Rất tốt! Dashboard trực quan, màu sắc hài hòa.', '2025-10-29 14:30:22'),
+
+-- Sinh viên hỏi đáp lẫn nhau
+(2, 7, 'Bạn ơi cho mình hỏi phần slicer bạn làm thế nào để lọc theo quý vậy?', '2025-10-28 20:15:40'),
+(2, 8, '@20127002 bạn vào Visualizations → Slicer → chọn trường Quarter là xong ấy mà', '2025-10-28 20:18:10'),
+(7, 9, 'Mình bị lỗi "Cannot connect to data source" ai giúp với :((', '2025-11-05 09:55:20'),
+(7, 10, '@20127003 bạn kiểm tra lại đường dẫn file Excel xem có bị di chuyển không nhé', '2025-11-05 10:02:45'),
+(9, 1, 'Bài này em làm rất sáng tạo với drill-through, giữ phong độ nhé!', '2025-11-18 11:25:00'),
+
+-- Một số bình luận mới nhất hôm nay (18/11/2025)
+(12, 1, 'Tất cả các bạn chú ý deadline bài tập cuối kỳ là 23h59 ngày 30/11 nhé!', '2025-11-18 08:30:00'),
+(12, 8, 'Dạ vâng thầy!', '2025-11-18 08:32:10'),
+(15, 9, 'Em nộp rồi ạ thầy cô chấm giúp em với ạ', '2025-11-18 00:15:30'),
+(15, 1, '@9 Thầy thấy rồi, sẽ chấm trong tối nay!', '2025-11-18 09:10:45'),
+(8, 1, 'Nhiều bạn chưa nộp bài tập tuần này, hạn cuối là tối nay 23h59.', '2025-11-17 20:00:00');
+
+-- ================================================
+-- PHẦN 12: CÂU HỎI BÀI TẬP
+-- ================================================
+
+INSERT INTO cau_hoi_bai_tap (
+    bai_tap_id,
+    noi_dung_cau_hoi,
+    mo_ta,
+    diem
+) VALUES
+-- Bài tập 1.1 - L001 (id = 1): Tải file Excel bất kỳ
+(1, 'File Excel bạn vừa tải về có tên là gì và có bao nhiêu sheet?', NULL, 1.00),
+(1, 'Tổng số dòng dữ liệu (bao gồm cả header) trong sheet chính là bao nhiêu?', NULL, 1.50),
+(1, 'Hãy chụp màn hình cửa sổ Power Query sau khi bạn đã Remove Duplicates cột "Mã khách hàng"', 'Đính kèm ảnh', 2.50),
+
+-- Bài tập 1.2 - L001 (id = 2): Viết mô tả sự khác nhau
+(2, 'Hãy nêu ít nhất 3 điểm khác biệt chính giữa Power BI Desktop và Power BI Service.', 'Trả lời ngắn gọn, gạch đầu dòng', 4.00),
+(2, 'Calculated Column và Measure khác nhau như thế nào về thời điểm tính toán và nơi lưu trữ?', NULL, 3.00),
+(2, 'Trong DAX, hàm nào dùng để bỏ qua filter từ visual khác?', 'Gợi ý: ALL, REMOVEFILTERS...', 3.00),
+
+-- Bài tập 2.1 - L001 (id = 3): Import một bảng dữ liệu có ít nhất 2 bảng
+(3, 'Bạn đã import bao nhiêu bảng vào model? Hãy liệt kê tên các bảng.', NULL, 1.50),
+(3, 'Chụp màn hình Model view thể hiện rõ các relationship bạn đã tạo', 'Bắt buộc đính kèm ảnh', 3.50),
+
+-- Bài tập 2.2 - L001 (id = 4): Merge 2 bảng
+(4, 'Khi Merge bảng Orders và Returns, bạn đã chọn kiểu Join nào? (Left Outer/Inner/...) Và vì sao?', NULL, 3.00),
+(4, 'Sau khi Merge, cột mới tạo ra có tên là gì? Chụp màn hình bước Merge Queries', NULL, 4.00),
+
+-- Bài tập 1.1 - L002 (id = 5) và 1.2 - L002 (id = 6) giống L001 → thêm câu hỏi nâng cao hơn
+(5, 'Trong file Excel của bạn, hãy dùng Power Query để Unpivot các cột tháng (Jan → Dec) thành 2 cột "Tháng" và "Doanh thu"', 'Chụp ảnh bước Unpivot', 4.00),
+(6, 'Viết công thức DAX tính doanh thu quý hiện tại (QTD) và so sánh với quý trước (Previous Quarter)', NULL, 5.00),
+
+-- Bài tập SQL L003
+(7, 'Viết câu lệnh CREATE TABLE cho bảng quanly_sinhvien bao gồm các ràng buộc: PRIMARY KEY, NOT NULL, UNIQUE cho email', NULL, 4.00),
+(8, 'Viết câu lệnh ALTER TABLE để thêm FOREIGN KEY từ bảng diem_thi tham chiếu đến sinh_vien và mon_hoc', NULL, 3.50),
+(8, 'Viết truy vấn SELECT liệt kê top 5 sinh viên có điểm trung bình cao nhất (sử dụng JOIN, GROUP BY, ORDER BY)', NULL, 4.50);
+
+-- ================================================
+-- PHẦN 13: CHI TIẾT TRẢ LỜI
+-- ================================================
+
+INSERT INTO chi_tiet_tra_loi (
+    bai_lam_kiem_tra_id,   
+    cau_hoi_id,            
+    lua_chon_id,           
+    dung_hay_sai,          
+    thoi_gian_tra_loi      
+) VALUES
+-- Sinh viên 20127001 làm bài kiểm tra giữa kỳ Power BI (bai_lam_kiem_tra_id = 1)
+(1, 1, NULL, 1, '2025-11-20 18:22:15'),  
+(1, 2, NULL, 1, '2025-11-20 18:23:40'),
+(1, 3, NULL, 1, '2025-11-20 18:25:10'),
+(1, 4, NULL, 1, '2025-11-20 18:27:30'),  
+
+-- Sinh viên 20127002 (có sai vài câu)
+(2, 1, NULL, 1, '2025-11-20 18:26:20'),
+(2, 2, NULL, 0, '2025-11-20 18:28:45'),  
+(2, 3, NULL, 1, '2025-11-20 18:30:15'),
+(2, 4, NULL, 0, '2025-11-20 18:33:20'),  
+
+-- Sinh viên 20127004 làm dở dang (chỉ trả lời 2/4 câu)
+(4, 1, NULL, 1, '2025-11-20 18:32:10'),
+(4, 2, NULL, 0, '2025-11-20 18:35:55'),
+-- Câu 3,4 chưa trả lời → dung_hay_sai = NULL
+
+-- Sinh viên 20127003 làm bài kiểm tra cuối kỳ (bai_lam_kiem_tra_id = 8)
+(8, 1, NULL, 1, '2025-12-03 18:27:30'),
+(8, 2, NULL, 1, '2025-12-03 18:30:45'),
+(8, 3, NULL, 1, '2025-12-03 18:34:20'),
+(8, 4, NULL, 0, '2025-12-03 18:38:15'),  
+
+-- Sinh viên 20127006 đang làm dở bài cuối kỳ hôm nay (18/11/2025 chưa tới hạn)
+(9, 1, NULL, 1, '2025-12-03 18:40:10'),
+(9, 2, NULL, NULL, '2025-12-03 18:42:30');
+
+-- ================================================
+-- PHẦN 14: TIẾN ĐỘ HỌC TẬP
+-- ================================================
+
+INSERT INTO tien_do_hoc_tap (
+    sinh_vien_id,
+    lop_hoc_id,
+    loai_noi_dung,     
+    noi_dung_id,       
+    da_hoan_thanh,     
+    phan_tram_hoan_thanh,
+    lan_cap_nhat_cuoi
+) VALUES
+-- Sinh viên chăm chỉ nhất lớp 
+(8, 1, 'bai_giang', 1, 1, 100.00, '2025-11-10 09:15:20'),
+(8, 1, 'bai_giang', 2, 1, 100.00, '2025-11-10 14:30:45'),
+(8, 1, 'bai_giang', 3, 1, 100.00, '2025-11-12 20:10:00'),
+(8, 1, 'bai_giang', 4, 1, 100.00, '2025-11-15 08:45:30'),
+
+-- xem đều, còn đang xem dở vài bài
+(9, 1, 'bai_giang', 1, 1, 100.00, '2025-11-11 10:20:15'),
+(9, 1, 'bai_giang', 2, 1, 100.00, '2025-11-13 18:55:00'),
+(9, 1, 'bai_giang', 3, 0, 78.50, '2025-11-18 15:42:10'), 
+(9, 1, 'bai_giang', 4, 0, 45.00, '2025-11-18 16:10:30'), 
+
+-- học trước lớp luôn
+(10, 1, 'bai_giang', 1, 1, 100.00, '2025-11-09 21:30:00'),
+(10, 1, 'bai_giang', 2, 1, 100.00, '2025-11-09 22:15:40'),
+(10, 1, 'bai_giang', 5, 1, 100.00, '2025-11-17 19:20:00'),
+
+-- Sinh viên chậm tiến độ 
+(11, 1, 'bai_giang', 1, 1, 100.00, '2025-11-18 09:05:00'), 
+(11, 1, 'bai_giang', 2, 0, 20.00, '2025-11-18 09:30:15'), 
+
+(12, 1, 'bai_giang', 1, 0, 95.00, '2025-11-18 14:55:00'), 
+(12, 1, 'bai_giang', 2, 0,  0.00, NULL);
+
+-- ================================================
+-- PHẦN 15: TÀI LIỆU LỚP HỌC
 -- ================================================
 
 -- Tài liệu cho lớp L001 (Power BI) - 1 file PDF duy nhất
@@ -422,35 +633,6 @@ VALUES
  'Power BI.pdf',
  245760,
  (SELECT giang_vien_id FROM lop_hoc WHERE ma_lop_hoc='L001'));
-
--- Tài liệu cho lớp L002 (Power BI) - Chưa có tài liệu
--- INSERT INTO tai_lieu_lop_hoc (lop_hoc_id, ten_tai_lieu, loai_file, duong_dan_file, ten_file_goc, kich_thuoc_file, nguoi_upload_id)
--- VALUES
--- ((SELECT id FROM lop_hoc WHERE ma_lop_hoc='L002'),
---  'Tên tài liệu',
---  'pdf',
---  NULL,
---  'ten_file.pdf',
---  0,
---  (SELECT giang_vien_id FROM lop_hoc WHERE ma_lop_hoc='L002'));
-
--- Tài liệu cho lớp L003 (SQL Server) - Chưa có tài liệu
--- INSERT INTO tai_lieu_lop_hoc (lop_hoc_id, ten_tai_lieu, loai_file, duong_dan_file, ten_file_goc, kich_thuoc_file, nguoi_upload_id)
--- VALUES
--- ((SELECT id FROM lop_hoc WHERE ma_lop_hoc='L003'),
---  'Tên tài liệu',
---  'pdf',
---  NULL,
---  'ten_file.pdf',
---  0,
---  (SELECT giang_vien_id FROM lop_hoc WHERE ma_lop_hoc='L003'));
-
--- ================================================
--- KẾT THÚC FILE SAMPLE
--- Đã thêm: người dùng, môn học, lớp học, ghi danh, 
--- chương, bài giảng, bài tập, bài kiểm tra, 
--- câu hỏi trắc nghiệm, lựa chọn, thông báo, tài liệu
--- ================================================
 
 COMMIT;
 SET FOREIGN_KEY_CHECKS = 1;

@@ -1,0 +1,307 @@
+/* Sidebar CSS */
+
+.side-bar {
+  width: 250px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.side-bar.collapsed {
+  width: 80px;
+}
+
+.side-bar.collapsed .earn-lab,
+.side-bar.collapsed .dashboard,
+.side-bar.collapsed .l-p-h-c,
+.side-bar.collapsed .th-ng-b-o {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.side-bar.collapsed .tab-side-bar,
+.side-bar.collapsed .tab-side-bar2 {
+  justify-content: center;
+}
+
+.side-bar .logo {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  transition: all 0.3s ease;
+}
+
+.side-bar.collapsed .logo {
+  padding: 8px;
+}
+
+.side-bar .earn-lab {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+  transition: opacity 0.3s ease;
+}
+
+.logo {
+  flex-shrink: 0;
+  width: 240px;
+  height: 140px;
+  position: relative;
+}
+
+.objects {
+  width: 56.55px;
+  height: 58.5px;
+  position: relative;
+  overflow: visible;
+}
+
+.earn-lab {
+  color: #000000;
+  text-align: left;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 21.379295349121094px;
+  position: relative;
+  top: 18px;
+  width: 120px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.tab-side-bar,
+.tab-side-bar3,
+.tab-side-bar11 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  cursor: pointer;
+  width: 250px;
+  transition: background 0.3s ease;
+}
+
+.tab-side-bar2 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  cursor: pointer;
+  background-color: #e5f0ff;
+  width: 250px;
+}
+
+.tab-side-bar:hover,
+.tab-side-bar3:hover,
+.tab-side-bar11:hover {
+  background-color: #e5f0ff;
+}
+
+/* Side text - thống nhất font size */
+.side-text {
+  color: #000000;
+  text-align: left;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* Arrow styling */
+.arrow {
+  transition: transform 0.3s ease;
+  color: #999;
+}
+
+/* Lesson item styling */
+.tab-side-bar21 {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 20px 12px 50px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 250px;
+}
+
+.tab-side-bar21:hover {
+  background-color: #e5f0ff;
+}
+
+.lesson-title {
+  font-family: 'Quicksand', sans-serif;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lesson-meta {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-size: 10px;
+  color: #979797;
+  font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
+}
+
+.lesson-meta .dot {
+  width: 3px;
+  height: 3px;
+  background-color: #979797;
+  border-radius: 50%;
+}
+
+.side-bar.collapsed .tab-side-bar img,
+.side-bar.collapsed .tab-side-bar2 img {
+  margin: 0;
+}
+
+.open-close {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  overflow: visible;
+}
+
+.open-close:hover {
+  cursor: ew-resize;
+}
+
+.db {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  position: relative;
+  overflow: visible;
+}
+
+.dashboard {
+  color: #000000;
+  text-align: left;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+  width: 153px;
+}
+
+.study {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  position: relative;
+  overflow: visible;
+}
+
+.l-p-h-c {
+  color: #000000;
+  text-align: left;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+  width: 153px;
+}
+
+.noti {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  position: relative;
+  overflow: visible;
+}
+
+.th-ng-b-o {
+  color: #000000;
+  text-align: left;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+  width: 153px;
+}
+
+.logout-section {
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  width: 250px;
+}
+
+.logout-section span {
+  color: #000000;
+  text-align: left;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+  width: 153px;
+}
+
+.side-bar.collapsed .logout-section img {
+  margin: 0;
+}
+
+.side-bar.collapsed .logout-section span {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.side-bar.collapsed .logout-section {
+  width: 80px;
+}
+
+.logout-btn {
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 12px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  transition: background-color 0.3s;
+  font-family: 'Quicksand', sans-serif;
+  background-color: #ffffff;
+}
+
+.logout-btn img {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  padding-left: 8px;
+  position: relative;
+  overflow: visible;
+}
+
+.logout-section:hover {
+  background-color: #c7c7c7;
+}
+
+/* Main content offset to account for fixed sidebar */
+.main-content {
+  margin-left: 250px;
+}

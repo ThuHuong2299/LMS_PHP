@@ -49,4 +49,46 @@ class ThongBaoService extends BaseService {
             ];
         }, $danhSach);
     }
+    
+    /**
+     * Tạo thông báo mới cho lớp học
+     */
+    public function taoThongBao($lopHocId, $giangVienId, $tieuDe, $noiDung) {
+        // Validate
+        if (!$this->kiemTraSoNguyen($lopHocId)) {
+            $this->nemLoi('ID lớp học không hợp lệ');
+        }
+        
+        if (empty(trim($tieuDe))) {
+            $this->nemLoi('Tiêu đề không được để trống');
+        }
+        
+        if (empty(trim($noiDung))) {
+            $this->nemLoi('Nội dung không được để trống');
+        }
+        
+        // Kiểm tra quyền
+        if (!$this->lopHocRepo->kiemTraQuyenTruyCap($lopHocId, $giangVienId)) {
+            $this->nemLoi('Bạn không có quyền tạo thông báo cho lớp này');
+        }
+        
+        // Tạo thông báo
+        $duLieu = [
+            'lop_hoc_id' => $lopHocId,
+            'nguoi_gui_id' => $giangVienId,
+            'tieu_de' => trim($tieuDe),
+            'noi_dung' => trim($noiDung)
+        ];
+        
+        $ketQua = $this->thongBaoRepo->taoThongBao($duLieu);
+        
+        if (!$ketQua) {
+            $this->nemLoi('Không thể tạo thông báo');
+        }
+        
+        return [
+            'id' => $this->thongBaoRepo->layIdVuaThem(),
+            'thong_bao' => 'Đã gửi thông báo thành công'
+        ];
+    }
 }

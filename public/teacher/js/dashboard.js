@@ -202,7 +202,7 @@ function renderActivityItem(activity, index) {
     return `
       <div class="noti-${classNumber}0">
         <div class="frame-noti-${classNumber}0">
-          <img class="frame" src="${activity.anh_dai_dien || 'frame0.svg'}" alt="${activity.ho_ten}" />
+          <img class="frame" src="${activity.anh_dai_dien || '/public/teacher/assets/frame0.svg'}" alt="${activity.ho_ten}" />
         </div>
         <div class="noti-pa">
           <div class="sinh-vi-n-ph-m-anh-t-n-p-b-i">

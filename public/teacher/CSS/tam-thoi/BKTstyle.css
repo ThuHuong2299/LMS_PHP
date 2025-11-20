@@ -1,0 +1,324 @@
+/* ========== EXAM MODAL (BÀI KIỂM TRA) ========== */
+.exam-popup {
+  background: white;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 900px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  max-height: 95vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.exam-popup-header {
+  background: #429eff;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.exam-popup-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.exam-close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s;
+  line-height: 1;
+}
+
+.exam-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.exam-popup-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+  background: white;
+}
+
+.exam-form-group {
+  margin-bottom: 16px;
+}
+
+.exam-form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.exam-form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+  outline: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: white;
+}
+
+/* Select dropdown cho exam modal */
+select.exam-form-input {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3e%3cpath fill='%23666' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 32px;
+}
+
+.exam-form-input:focus,
+select.exam-form-input:focus {
+  border-color: #429eff;
+}
+
+.exam-form-input::placeholder {
+  color: #979797;
+}
+
+select.exam-form-input option {
+  color: #000;
+}
+
+/* Exam Question Wrapper */
+.exam-question-wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.exam-question-card {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+}
+
+.exam-question-border {
+  background: #429eff;
+  width: 4px;
+  flex-shrink: 0;
+}
+
+.exam-question-content {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.exam-question-input-wrapper {
+  background: #f8f9fa;
+  border-bottom: 2px solid #429eff;
+  padding: 12px;
+}
+
+.exam-question-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  color: #000;
+  outline: none;
+  font-family: inherit;
+}
+
+.exam-question-input::placeholder {
+  color: #000;
+}
+
+.exam-option-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-left: 16px;
+}
+
+.exam-radio-btn {
+  width: 16px;
+  height: 16px;
+  border: 1.25px solid #979797;
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.2s;
+}
+
+.exam-radio-btn:hover {
+  border-color: #429eff;
+}
+
+.exam-radio-btn.checked {
+  border-color: #429eff;
+}
+
+.exam-radio-btn.checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: #429eff;
+  border-radius: 50%;
+}
+
+.exam-option-input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+}
+
+.exam-option-input.correct {
+  background: #e5f0ff;
+}
+
+.exam-option-input.normal {
+  background: #eff0f1;
+}
+
+.exam-add-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  color: #3293f9;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 16px;
+  transition: opacity 0.2s;
+}
+
+.exam-add-option-btn:hover {
+  opacity: 0.8;
+}
+
+.exam-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.exam-icon-btn {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.exam-icon-btn:hover {
+  background: #f5f5f5;
+  transform: translateY(-2px);
+}
+
+.exam-icon-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+/* ========== RESPONSIVE - EXAM MODAL ========== */
+@media (max-width: 768px) {
+  .exam-popup {
+    max-width: 95%;
+    width: 95%;
+  }
+  
+  .exam-popup-body {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .exam-question-wrapper {
+    flex-direction: column;
+  }
+  
+  .exam-action-buttons {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .exam-question-card {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .exam-popup {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 0;
+    height: 100vh;
+    max-height: 100vh;
+  }
+  
+  .exam-popup-header {
+    padding: 16px;
+  }
+  
+  .exam-popup-body {
+    padding: 12px;
+  }
+  
+  .exam-option-wrapper {
+    gap: 12px;
+    padding-left: 8px;
+  }
+  
+  .exam-add-option-btn {
+    margin-left: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .exam-icon-btn {
+    width: 40px;
+    height: 40px;
+  }
+}

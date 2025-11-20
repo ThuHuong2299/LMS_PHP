@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&display=swap');
 /* ==================== BASE STYLES ==================== */
 * {
   box-sizing: border-box;
@@ -17,34 +20,9 @@
   background-color: var(--color-bg-primary, #fff);
 }
 
-/* Breadcrumb */
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm, 8px);
-  font-size: var(--font-size-sm, 14px);
+/* Breadcrumb - Now using components/breadcrumb.css */
+#breadcrumb-container {
   margin-bottom: var(--spacing-lg, 20px);
-  color: var(--color-text-secondary, #666);
-}
-
-.breadcrumb a {
-  color: var(--color-text-secondary, #666);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-.breadcrumb a:hover {
-  color: var(--color-primary, #3293f9);
-}
-
-.breadcrumb .separator {
-  color: #999;
-  user-select: none;
-}
-
-.breadcrumb span:last-child {
-  color: var(--color-text-primary, #000);
-  font-weight: var(--font-weight-medium, 500);
 }
 
 /* ==================== COURSE INFO ==================== */
@@ -106,11 +84,6 @@
   transition: all var(--transition-normal);
   text-decoration: none;
   white-space: nowrap;
-  background: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  font-family: inherit;
 }
 
 .tab:hover {
@@ -409,6 +382,13 @@
   background: #3293f9;
 }
 
+.document-icon.pptx {
+  background: #ff5e00;
+}
+
+.document-icon.xlsx {
+  background: #03ad58;
+}
 .document-info {
   flex: 1;
   display: flex;

@@ -5,29 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Làm bài kiểm tra</title>
     <link rel="stylesheet" href="./CSS/BKT.sv.style.css">
+    <link rel="stylesheet" href="/public/student/components/navbar.sv.style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <base href="./assets/">
+    <style>
+        /* Override cho trang bài kiểm tra - không có sidebar */
+        body {
+            padding-top: 0;
+        }
+        .container {
+            display: block;
+            min-height: 100vh;
+        }
+        #navbar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        /* Override navbar để không có margin trái (vì không có sidebar) */
+        #navbar-container .header {
+            left: 0 !important;
+        }
+        .main-content {
+            width: 100%;
+            max-width: 100%;
+            padding: 90px 40px 40px 40px;
+            margin: 0;
+        }
+    </style>
+    <script src="./js/components/navbar.js" defer></script>
 </head>
 <body>
     <div class="container">
+        <!-- Navbar Container - fixed position -->
+        <div id="navbar-container"></div>
+        
         <!-- Main Content -->
         <div class="main-content">
-            <div class="header">
-                <div class="course-title">Tiếng Anh Thương Mại 1</div>
-                <div class="user-info">
-                    <div class="user-avatar">ND</div>
-                    <div class="user-details">
-                        <h3>Nguyễn Cao Kỳ Duyên</h3>
-                        <p>23D192001</p>
-                    </div>
-                </div>
-            </div>
-
             <!-- EXAM PAGE -->
-            <div class="exam-page active">
+            <div class="exam-page active" id="examPage">
                 <div class="exam-header">
-                    <div class="exam-title">Tên bài kiểm tra</div>
-                    <button class="submit-btn" onclick="submitExam()">Nộp bài</button>
+                    <div class="exam-title"></div>
+                    <button class="submit-btn" id="submitBtn">Nộp bài</button>
                 </div>
 
                 <div class="content-area">
@@ -45,7 +67,7 @@
                                 </div>
                                 <div class="legend-item">
                                     <div class="legend-box unanswered"></div>
-                                    <span id="unansweredCount">Chưa trả lời (25)</span>
+                                    <span id="unansweredCount">Chưa trả lời (0)</span>
                                 </div>
                             </div>
                             <div class="legend-item">
@@ -61,27 +83,27 @@
                                     <circle cx="12" cy="12" r="10" stroke-width="2"/>
                                     <path d="M12 6v6l4 2" stroke-width="2" stroke-linecap="round"/>
                                 </svg>
-                                <span class="timer-value" id="timer">45:59</span>
+                                <span class="timer-value" id="timer">00:00:00</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="question-area">
                         <div class="question-header">
-                            <div class="question-title" id="questionTitle">Câu hỏi 1 trên 25</div>
+                            <div class="question-title" id="questionTitle"></div>
                             <div class="question-text" id="questionText"></div>
                         </div>
 
                         <div class="answers" id="answersContainer"></div>
 
                         <div class="navigation">
-                            <button class="nav-btn prev" onclick="previousQuestion()">
+                            <button class="nav-btn prev" id="prevBtn">
                                 <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                                 </svg>
                                 Trở lại
                             </button>
-                            <button class="nav-btn next" onclick="nextQuestion()">
+                            <button class="nav-btn next" id="nextBtn">
                                 Tiếp theo
                                 <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -93,43 +115,37 @@
             </div>
 
             <!-- RESULTS PAGE -->
-            <div class="results-page">
+            <div class="results-page" id="resultsPage">
                 <div class="score-header">
-                    <div class="exam-title">Tên bài kiểm tra</div>
+                    <div class="exam-title"></div>
                     <div class="score-display">
-                        <span class="score-value" id="finalScore">9.5</span>
-                        <span>/ 10</span>
+                        <span class="score-value" id="scorePercentage"></span><span class="score-value">/10</span>
                     </div>
                 </div>
 
                 <div class="stats-container">
                     <div class="stat-box">
                         <div class="stat-label">Câu đúng</div>
-                        <div class="stat-value" id="correctCount">8 câu</div>
+                        <div class="stat-value" id="correctCount"></div>
                     </div>
                     <div class="stat-box">
                         <div class="stat-label">Câu sai</div>
-                        <div class="stat-value" id="wrongCount">10 câu</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Câu chưa<br>hoàn thành</div>
-                        <div class="stat-value" id="skippedCount">18 câu</div>
+                        <div class="stat-value" id="wrongCount"></div>
                     </div>
                     <div class="stat-box">
                         <div class="stat-label">Thời gian<br>làm bài</div>
-                        <div class="stat-value" id="timeSpent">20 phút</div>
+                        <div class="stat-value" id="timeSpent"></div>
                     </div>
                 </div>
 
                 <div class="results-container">
                     <div class="results-header">
                         <div class="results-title">Danh sách câu trả lời</div>
-                        <div class="results-count" id="totalQuestions">32 câu</div>
                     </div>
-                    <div class="results-list" id="resultsList"></div>
+                    <div class="results-list" id="reviewList"></div>
                 </div>
 
-                <button class="back-btn" onclick="window.location.href='../Thông%20tin%20bài%20giảng.html'">Trở về lớp học</button>
+                <button class="back-btn" onclick="history.back()">Trở về</button>
             </div>
         </div>
     </div>

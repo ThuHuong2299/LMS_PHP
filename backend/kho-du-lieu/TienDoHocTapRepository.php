@@ -10,24 +10,61 @@ class TienDoHocTapRepository extends BaseRepository {
     
     /**
      * Lấy phần trăm hoàn thành (trung bình) của lớp học cho sinh viên
+     * Tính dựa trên: video đã xem, bài tập đã nộp, bài kiểm tra đã làm
      * @param int $sinhVienId - ID sinh viên
      * @param int $lopHocId - ID lớp học
      * @return float - Phần trăm hoàn thành (0-100)
      */
     public function getPhanTramHoanThanhLopHoc($sinhVienId, $lopHocId) {
         $sql = "
-            SELECT COALESCE(AVG(phan_tram_hoan_thanh), 0) AS phan_tram_trung_binh
-            FROM tien_do_hoc_tap
-            WHERE sinh_vien_id = :sinh_vien_id 
-            AND lop_hoc_id = :lop_hoc_id
+            SELECT 
+                -- Tổng số video trong lớp
+                (SELECT COUNT(*) FROM bai_giang WHERE lop_hoc_id = :lop_hoc_id1) AS tong_video,
+                -- Số video đã xem xong
+                (SELECT COUNT(*) FROM tien_do_video tdv
+                 JOIN bai_giang bg ON tdv.bai_giang_id = bg.id
+                 WHERE tdv.sinh_vien_id = :sinh_vien_id1 
+                 AND bg.lop_hoc_id = :lop_hoc_id2
+                 AND tdv.trang_thai = 'xem_xong') AS video_xem_xong,
+                -- Tổng số bài tập
+                (SELECT COUNT(*) FROM bai_tap WHERE lop_hoc_id = :lop_hoc_id3) AS tong_bai_tap,
+                -- Số bài tập đã nộp
+                (SELECT COUNT(*) FROM bai_lam bl
+                 JOIN bai_tap bt ON bl.bai_tap_id = bt.id
+                 WHERE bl.sinh_vien_id = :sinh_vien_id2
+                 AND bt.lop_hoc_id = :lop_hoc_id4
+                 AND bl.trang_thai = 'da_nop') AS bai_tap_da_nop,
+                -- Tổng số bài kiểm tra
+                (SELECT COUNT(*) FROM bai_kiem_tra WHERE lop_hoc_id = :lop_hoc_id5) AS tong_bai_kiem_tra,
+                -- Số bài kiểm tra đã làm
+                (SELECT COUNT(DISTINCT bai_kiem_tra_id) FROM bai_lam_kiem_tra blkt
+                 JOIN bai_kiem_tra bkt ON blkt.bai_kiem_tra_id = bkt.id
+                 WHERE blkt.sinh_vien_id = :sinh_vien_id3
+                 AND bkt.lop_hoc_id = :lop_hoc_id6
+                 AND blkt.trang_thai = 'da_nop') AS bai_kiem_tra_da_lam
         ";
         
         $result = $this->truyVanMot($sql, [
-            'sinh_vien_id' => $sinhVienId,
-            'lop_hoc_id' => $lopHocId
+            'sinh_vien_id1' => $sinhVienId,
+            'sinh_vien_id2' => $sinhVienId,
+            'sinh_vien_id3' => $sinhVienId,
+            'lop_hoc_id1' => $lopHocId,
+            'lop_hoc_id2' => $lopHocId,
+            'lop_hoc_id3' => $lopHocId,
+            'lop_hoc_id4' => $lopHocId,
+            'lop_hoc_id5' => $lopHocId,
+            'lop_hoc_id6' => $lopHocId
         ]);
         
-        return $result ? (float)$result['phan_tram_trung_binh'] : 0;
+        if (!$result) return 0;
+        
+        // Tính tổng số items và items đã hoàn thành
+        $tongSo = $result['tong_video'] + $result['tong_bai_tap'] + $result['tong_bai_kiem_tra'];
+        $daHoanThanh = $result['video_xem_xong'] + $result['bai_tap_da_nop'] + $result['bai_kiem_tra_da_lam'];
+        
+        if ($tongSo == 0) return 0;
+        
+        return round(($daHoanThanh / $tongSo) * 100, 2);
     }
     
     /**

@@ -148,7 +148,7 @@ function renderBaiGiang(chuongVaBaiGiang) {
     
     const lessonsHTML = chuong.bai_giang.map(baiGiang => `
       <div class="lesson-item">
-        <div class="lesson-thumbnail"></div>
+        <div class="lesson-thumbnail" style="background: url('/public/assets/avatar-bai-giang.jpg') center/cover no-repeat;"></div>
         <div class="lesson-info">
           <div class="lesson-title">${escapeHtml(baiGiang.tieu_de)}</div>
           <div class="lesson-desc">${baiGiang.duong_dan_video ? 'Video bài giảng' : 'Nội dung bài giảng'}</div>
@@ -188,7 +188,7 @@ function showErrorState(sectionId, message) {
   
   section.innerHTML = `
     <div style="text-align: center; padding: 60px;">
-      <div style="font-size: 20px; color: #ff6b6b; margin-bottom: 10px;">⚠️ Có lỗi xảy ra</div>
+      <div style="font-size: 20px; color: #ff6b6b; margin-bottom: 10px;"> Có lỗi xảy ra</div>
       <div style="font-size: 16px; color: #666;">${escapeHtml(message)}</div>
       <button onclick="location.reload()" style="
         margin-top: 20px;
@@ -205,8 +205,10 @@ function showErrorState(sectionId, message) {
 }
 
 function showError(message) {
-  alert(message);
-  window.location.href = '/public/teacher/Classroom.html';
+  ThongBao.loi(message);
+  setTimeout(() => {
+    window.location.href = '/public/teacher/Classroom.html';
+  }, 1500);
 }
 
 function escapeHtml(text) {
@@ -243,7 +245,7 @@ function renderBaiTap(danhSachBaiTap) {
   container.innerHTML = `
     <div class="page-header">
       <h1 class="page-title">Danh sách bài tập</h1>
-      <button class="btn-add" onclick="alert('Chức năng thêm mới sẽ phát triển sau')">+ Thêm mới</button>
+      <button class="btn-add" onclick="ThongBao.thong_tin('Chức năng thêm mới sẽ phát triển sau')">+ Thêm mới</button>
     </div>
     <div id="assignments-container"></div>
   `;
@@ -355,7 +357,7 @@ function renderBaiKiemTra(danhSachBaiKiemTra) {
   container.innerHTML = `
     <div class="page-header">
       <h1 class="page-title">Danh sách bài kiểm tra</h1>
-      <button class="btn-add" onclick="alert('Chức năng thêm mới sẽ phát triển sau')">+ Thêm mới</button>
+      <button class="btn-add" onclick="ThongBao.thong_tin('Chức năng thêm mới sẽ phát triển sau')">+ Thêm mới</button>
     </div>
     <div id="exams-container"></div>
   `;
@@ -438,7 +440,7 @@ function renderThongBao(danhSachThongBao) {
   container.innerHTML = `
     <div class="page-header">
       <h1 class="page-title">Danh sách thông báo</h1>
-      <button class="btn-add" onclick="alert('Chức năng thêm mới sẽ phát triển sau')">+ Thêm mới</button>
+      <button class="btn-add" onclick="ThongBao.thong_tin('Chức năng thêm mới sẽ phát triển sau')">+ Thêm mới</button>
     </div>
     <div id="notificationsList"></div>
   `;
@@ -515,7 +517,7 @@ function formatTimeAgo(thoiGianStr) {
 }
 
 function deleteNotificationAlert(id) {
-  alert('Chức năng xóa thông báo sẽ phát triển sau');
+  ThongBao.thong_tin('Chức năng xóa thông báo sẽ phát triển sau');
 }
 
 // ========== TAB SINH VIÊN ==========

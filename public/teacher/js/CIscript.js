@@ -92,12 +92,12 @@ function saveAssignment() {
   const deadline = document.getElementById('assignmentDeadline');
   
   if (!title || !deadline) {
-    alert('Không tìm thấy form!');
+    ThongBao.loi('Không tìm thấy form!');
     return;
   }
   
   if (!title.value || !deadline.value) {
-    alert('Vui lòng điền đầy đủ thông tin!');
+    ThongBao.canh_bao('Vui lòng điền đầy đủ thông tin!');
     return;
   }
   
@@ -119,7 +119,7 @@ function saveAssignment() {
     questions 
   });
   
-  alert('✅ Đã lưu bài tập!');
+  ThongBao.thanh_cong('Đã lưu bài tập!');
   closeModal('assignmentModal');
 }
 
@@ -157,7 +157,7 @@ function deleteAssignmentQuestion(button) {
   const container = document.getElementById('assignmentQuestionsContainer');
   
   if (container.querySelectorAll('.question-wrapper').length === 1) {
-    alert('Phải có ít nhất 1 câu hỏi!');
+    ThongBao.canh_bao('Phải có ít nhất 1 câu hỏi!');
     return;
   }
   
@@ -248,7 +248,7 @@ function deleteExamQuestion(button) {
   const container = document.getElementById('questionsContainer');
   
   if (container.querySelectorAll('.exam-question-wrapper').length === 1) {
-    alert('Phải có ít nhất 1 câu hỏi!');
+    ThongBao.canh_bao('Phải có ít nhất 1 câu hỏi!');
     return;
   }
   
@@ -263,12 +263,12 @@ function submitExam() {
   const datetime = document.querySelector('.exam-popup-body input[type="datetime-local"]');
   
   if (!title || !duration || !datetime) {
-    alert('Không tìm thấy form!');
+    ThongBao.loi('Không tìm thấy form!');
     return;
   }
   
   if (!title.value || !duration.value || !datetime.value) {
-    alert('Vui lòng điền đầy đủ thông tin!');
+    ThongBao.canh_bao('Vui lòng điền đầy đủ thông tin!');
     return;
   }
   
@@ -297,7 +297,7 @@ function submitExam() {
     questions 
   });
   
-  alert('✅ Đã lưu bài kiểm tra!');
+  ThongBao.thanh_cong('Đã lưu bài kiểm tra!');
   closeModal('examModal');
 }
 
@@ -376,16 +376,16 @@ function saveDocument() {
   const file = document.getElementById('documentFile').files[0];
 
   if (!title) {
-    alert('Vui lòng nhập tên tài liệu');
+    ThongBao.canh_bao('Vui lòng nhập tên tài liệu');
     return;
   }
 
   if (!file) {
-    alert('Vui lòng chọn file tài liệu');
+    ThongBao.canh_bao('Vui lòng chọn file tài liệu');
     return;
   }
 
-  alert(`Đã lưu tài liệu: ${title}\nFile: ${file.name}`);
+  ThongBao.thanh_cong(`Đã lưu tài liệu: ${title}`);
   closeDocumentModal();
 }
 
@@ -455,7 +455,7 @@ function updatePagination() {
 }
 
 function addStudent() {
-  alert('Chức năng thêm sinh viên đang được phát triển');
+  ThongBao.thong_tin('Chức năng thêm sinh viên đang được phát triển');
 }
 
 function previousPage() {

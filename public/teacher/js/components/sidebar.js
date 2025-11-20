@@ -55,7 +55,7 @@ class SidebarManager {
       this.daKhoiTao = true;
       console.log('✅ Sidebar khởi tạo thành công');
     } catch (loi) {
-      console.error('❌ Lỗi khởi tạo Sidebar:', loi);
+      console.error(' Lỗi khởi tạo Sidebar:', loi);
       this.hienThiLoiKhoiTao();
     }
   }
@@ -289,7 +289,7 @@ class SidebarManager {
     if (container) {
       container.innerHTML = `
         <div style="padding: 20px; color: red;">
-          <p>⚠️ Không thể tải sidebar</p>
+          <p> Không thể tải sidebar</p>
           <p>Vui lòng tải lại trang</p>
         </div>
       `;

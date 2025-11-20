@@ -21,8 +21,9 @@ body {
 /* Main Content */
 .main-content {
   background: #ffffff;
+  margin-left: 250px;
   flex: 1;
-  padding: 30px 40px;
+  padding: 110px 40px 40px 40px;
 }
 
 /* Sidebar */

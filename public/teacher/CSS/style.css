@@ -1,12 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&display=swap');
 * {
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .trang-ch {
   display: flex;
   flex-direction: column;
   gap: 24px;
   background: #ffffff;
-  padding: 20px 40px;
+  padding: 0px 40px 20px 40px;
   min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
@@ -66,7 +71,7 @@
 .earn-lab {
   color: #000000;
   text-align: left;
-  font-family: "BricolageGrotesque-Bold", sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 21.379295349121094px;
   font-weight: 700;
   position: relative;
@@ -220,7 +225,7 @@
 .thao-t-c-nhanh {
   color: #000000;
   text-align: left;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 24px;
   font-weight: 600;
   position: relative;
@@ -265,7 +270,7 @@
 .g-i-th-ng-b-o {
   color: #000000;
   text-align: center;
-  font-family: "Quicksand-Medium", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 20px;
   font-weight: 500;
   position: relative;
@@ -312,7 +317,7 @@
 .t-o-b-i-t-p {
   color: #000000;
   text-align: center;
-  font-family: "Quicksand-Medium", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 20px;
   font-weight: 500;
   position: relative;
@@ -333,7 +338,7 @@
 .t-o-b-i-ki-m-tra {
   color: #000000;
   text-align: center;
-  font-family: "Quicksand-Medium", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 20px;
   font-weight: 500;
   position: relative;
@@ -364,7 +369,7 @@
 .ho-t-ng-g-n-y {
   color: #000000;
   text-align: left;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 24px;
   font-weight: 600;
   position: relative;
@@ -415,29 +420,34 @@
   gap: 8px;
   align-items: flex-start;
   justify-content: flex-start;
-  flex-shrink: 0;
+  flex: 1;
+  min-width: 0;
   position: relative;
 }
 .sinh-vi-n-ph-m-anh-t-n-p-b-i {
   color: #000000;
   text-align: left;
-  font-family: "-", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 400;
   position: relative;
   align-self: stretch;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .sinh-vi-n-ph-m-anh-t-n-p-b-i-span {
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-weight: 600;
 }
 .sinh-vi-n-ph-m-anh-t-n-p-b-i-span2 {
-  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 600;
 }
 ._5-ph-t-tr-c {
   color: #979797;
   text-align: left;
-  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 400;
   position: relative;
@@ -493,22 +503,26 @@
   gap: 8px;
   align-items: flex-start;
   justify-content: flex-start;
-  flex-shrink: 0;
+  flex: 1;
+  min-width: 0;
   position: relative;
 }
 .b-i-t-p-ch-ng-3-h-t-h-n-n-p {
   color: #000000;
   text-align: left;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 600;
   position: relative;
   align-self: stretch;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 ._15-ph-t-tr-c {
   color: #979797;
   text-align: left;
-  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 400;
   position: relative;
@@ -564,22 +578,26 @@
   gap: 8px;
   align-items: flex-start;
   justify-content: flex-start;
-  flex-shrink: 0;
+  flex: 1;
+  min-width: 0;
   position: relative;
 }
 .b-i-ki-m-ch-ng-3-h-t-h-n-n-p {
   color: #000000;
   text-align: left;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 600;
   position: relative;
   align-self: stretch;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 ._25-ph-t-tr-c {
   color: #979797;
   text-align: left;
-  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 400;
   position: relative;
@@ -630,29 +648,34 @@
   gap: 8px;
   align-items: flex-start;
   justify-content: flex-start;
-  flex-shrink: 0;
+  flex: 1;
+  min-width: 0;
   position: relative;
 }
 .sinh-vi-n-ph-m-ho-ng-nhi-n-p-b-i {
   color: #000000;
   text-align: left;
-  font-family: "-", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 400;
   position: relative;
   align-self: stretch;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .sinh-vi-n-ph-m-ho-ng-nhi-n-p-b-i-span {
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-weight: 600;
 }
 .sinh-vi-n-ph-m-ho-ng-nhi-n-p-b-i-span2 {
-  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 600;
 }
 ._35-ph-t-tr-c {
   color: #979797;
   text-align: left;
-  font-family: "BeVietnamPro-Regular", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 400;
   position: relative;
@@ -723,7 +746,7 @@
 .nguy-n-cao-k-duy-n {
   color: #000000;
   text-align: left;
-  font-family: "Quicksand-SemiBold", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 20px;
   font-weight: 600;
   position: relative;
@@ -731,7 +754,7 @@
 .m-gi-ng-vi-n {
   color: #000000;
   text-align: left;
-  font-family: "Quicksand-Regular", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 20px;
   font-weight: 400;
   position: relative;
@@ -740,14 +763,14 @@
 .dashboard-gi-ng-vi-n {
   color: #000000;
   text-align: left;
-  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 32px;
   font-weight: 600;
   margin-bottom: 8px;
 }
 .info {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 21px;
   width: 100%;
 }
@@ -785,13 +808,12 @@
   align-items: center;
   justify-content: flex-start;
   flex-shrink: 0;
-  height: 69px;
   position: relative;
 }
 ._8 {
   color: #000000;
   text-align: left;
-  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 32px;
   font-weight: 600;
   position: relative;
@@ -800,7 +822,7 @@
 .l-p-gi-ng-d-y {
   color: #000000;
   text-align: left;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 600;
   position: relative;
@@ -854,7 +876,7 @@
 ._80 {
   color: #000000;
   text-align: left;
-  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 32px;
   font-weight: 600;
   position: relative;
@@ -863,7 +885,7 @@
 .sinh-vi-n-theo-h-c {
   color: #000000;
   text-align: left;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 600;
   position: relative;
@@ -922,7 +944,7 @@
 ._12 {
   color: #000000;
   text-align: left;
-  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 32px;
   font-weight: 600;
   position: relative;
@@ -931,7 +953,7 @@
 .b-i-ch-ch-m {
   color: #000000;
   text-align: left;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 600;
   position: relative;
@@ -985,7 +1007,7 @@
 ._3 {
   color: #000000;
   text-align: left;
-  font-family: "BricolageGrotesque-SemiBold", sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   font-size: 32px;
   font-weight: 600;
   position: relative;
@@ -994,7 +1016,7 @@
 .th-ng-b-o-m-i {
   color: #000000;
   text-align: left;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 600;
   position: relative;
@@ -1017,7 +1039,7 @@
   color: white;
   border: none;
   border-radius: 8px;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -1042,7 +1064,7 @@
   color: #666;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
-  font-family: "BeVietnamPro-SemiBold", sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;

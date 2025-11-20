@@ -13,9 +13,9 @@ Hiện tại có 2 trang giống hệt nhau về giao diện và logic:
 - **TestDashBoard.html** - Quản lý bài kiểm tra
 
 **Vấn đề:**
-- ❌ Duplicate code (HTML, JS, CSS)
-- ❌ Khó maintain (sửa phải sửa 2 chỗ)
-- ❌ Không scalable
+-  Duplicate code (HTML, JS, CSS)
+-  Khó maintain (sửa phải sửa 2 chỗ)
+-  Không scalable
 
 **Giải pháp:**
 ✅ Nâng cấp WorkDashBoard thành trang đa năng với query parameter `?type=homework|exam`
@@ -367,7 +367,7 @@ public/teacher/
 
 ---
 
-## 📊 Estimate thời gian
+##  Estimate thời gian
 
 | Phase | Thời gian |
 |-------|-----------|
@@ -384,11 +384,11 @@ public/teacher/
 ## 🎁 Lợi ích
 
 ### Trước refactor:
-- ❌ 2 HTML files giống hệt nhau
-- ❌ 2 JS files giống hệt nhau
-- ❌ 2 CSS files giống hệt nhau
-- ❌ Sửa bug phải sửa 2 chỗ
-- ❌ Thêm feature phải code 2 lần
+-  2 HTML files giống hệt nhau
+-  2 JS files giống hệt nhau
+-  2 CSS files giống hệt nhau
+-  Sửa bug phải sửa 2 chỗ
+-  Thêm feature phải code 2 lần
 
 ### Sau refactor:
 - ✅ 1 HTML file duy nhất
@@ -470,7 +470,7 @@ const CONFIG = {
 
 ---
 
-## ⚠️ Rủi ro & Giải pháp
+##  Rủi ro & Giải pháp
 
 | Rủi ro | Giải pháp |
 |--------|-----------|

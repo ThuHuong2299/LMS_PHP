@@ -10,235 +10,31 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="./CSS/components/sidebar.css">
+  <link rel="stylesheet" href="./components/navbar.sv.style.css">
   <link rel="stylesheet" href="./CSS/TBT.sv.style.css">
-  <base href="./assets/">
 </head>
 
 <body>
   <div class="container">
-    <!-- Sidebar -->
-    <div class="side-bar" id="sidebar">
-      <div class="logo">
-        <img class="objects" src="objects0.svg" />
-        <div class="earn-lab">earn Lab</div>
-        <img class="open-close" src="open-close0.svg" />
-      </div>
-      <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-      <div class="options">
-        <div class="tab-side-bar1" onclick="toggleDropdown()">
-          <div class="side-text">Bài giảng</div>
-          <span class="arrow" id="arrow">▾</span>
-        </div>
-        <ul class="submenu" id="submenu">
-          <div class="tab-side-bar11" onclick="window.location.href='../Thông%20tin%20bài%20giảng.html'">
-            <div class="side-text">Chương 1
-              <ul class="submenu2">
-                <div class="tab-side-bar21"
-                  onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.1. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21"
-                  onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.2. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21"
-                  onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.3. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-              </ul>
-            </div>
-          </div>
-          <div class="tab-side-bar11" onclick="window.location.href='../Thông%20tin%20bài%20giảng.html'">
-            <div class="side-text">Chương 2
-              <ul class="submenu2">
-                <div class="tab-side-bar21"
-                  onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.1. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21"
-                  onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.2. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21"
-                  onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.3. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-              </ul>
-            </div>
-          </div>
-          <div class="tab-side-bar11" onclick="window.location.href='../Thông%20tin%20bài%20giảng.html'">
-            <div class="side-text">Chương 3
-              <ul class="submenu2">
-                <div class="tab-side-bar21"
-                  onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.1. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21"
-                  onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.2. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21"
-                  onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.3. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-              </ul>
-            </div>
-          </div>
-          <div class="tab-side-bar11" onclick="window.location.href='../Thông%20tin%20bài%20giảng.html'">
-            <div class="side-text">Chương 4
-              <ul class="submenu2">
-                <div class="tab-side-bar21"
-                  onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.1. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21"
-                  onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.2. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-                <div class="tab-side-bar21"
-                  onclick="event.stopPropagation();window.location.href='../Thông%20tin%20bài%20học.html'">
-                  <div class="lesson-title">1.3. Get to know each other</div>
-                  <div class="lesson-meta">
-                    <span>Video</span>
-                    <span class="dot"></span>
-                    <span>15 phút</span>
-                  </div>
-                </div>
-              </ul>
-            </div>
-          </div>
-        </ul>
-        <div class="tab-side-bar2" onclick="window.location.href='../Bảng%20điểm.html'">
-          <div class="side-text">Điểm</div>
-        </div>
-        <div class="tab-side-bar3" onclick="window.location.href='../Tài%20liệu.html'">
-          <div class="side-text">Tài liệu</div>
-        </div>
-        <div class="tab-side-bar4" onclick="window.location.href='../Thông%20báo%20trong.html'">
-          <div class="side-text">Thông báo</div>
-        </div>
-        <div class="tab-side-bar5" onclick="window.location.href='../Thông%20tin%20môn%20học.html'">
-          <div class="side-text">Thông tin môn học</div>
-        </div>
-      </div>
-      <div class="logout-section">
-        <button class="logout-btn" onclick="logout()">
-          <img src="logout-icon.svg" alt="Đăng xuất"
-            style="filter: brightness(0) saturate(100%) invert(0);">
-          <span>Đăng xuất</span>
-        </button>
-      </div>
-    </div>
+    <!-- Sidebar Course Container (loaded dynamically) -->
+    <div id="sidebar-course-container"></div>
 
     <!-- Main Content -->
-    <!-- Main Content -->
-    <div class="main-content">
-      <div class="header">
-        <h1 class="course-title">Tiếng Anh Thương Mại 1</h1>
-        <div class="user-info">
-          <div class="user-avatar">N</div>
-          <div class="user-details">
-            <h3>Nguyễn Cao Kỳ Duyên</h3>
-            <p>23D192001</p>
-          </div>
-        </div>
-      </div>
-
-      <h2 class="page-title" id="page-title">Thông báo</h2>
+    <main class="main-content">
+      <!-- Navbar Container -->
+      <div id="navbar-container"></div>
 
       <!-- Notifications -->
       <div class="notifications" id="tab-thong-bao">
-        <div class="notification-item">
-          <div class="notification-icon">
-            <img src="exercise0.svg" alt="Thông báo" />
-          </div>
-          <div class="notification-content">
-            <div class="notification-text">
-              <h4>Bài tập Các hệ thống thông tin sắp hết hạn</h4>
-              <p>Còn 2 ngày nữa!</p>
-            </div>
-            <div class="notification-time">
-              <div class="time">20:30</div>
-              <div class="date">22/09/2025</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="notification-item">
-          <div class="notification-icon">
-            <img src="exercise0.svg" alt="Thông báo" />
-          </div>
-          <div class="notification-content">
-            <div class="notification-text">
-              <h4>Bài tập Phân tích hệ thống đã mở</h4>
-              <p>Hạn nộp 25/09/2025</p>
-            </div>
-            <div class="notification-time">
-              <div class="time">09:00</div>
-              <div class="date">23/09/2025</div>
-            </div>
-          </div>
-        </div>
+        <!-- Thông báo sẽ được load từ API -->
       </div>
-    </div>
     </main>
   </div>
-</body>
-<script src="./js/common.js"></script>
 
+  <script src="./js/common.js"></script>
+  <script src="./js/components/navbar.js"></script>
+  <script type="module" src="./js/main-course.js"></script>
+  <script src="./js/thong-bao-trong.js"></script>
+</body>
 </html>
