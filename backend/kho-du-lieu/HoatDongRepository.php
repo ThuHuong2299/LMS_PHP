@@ -12,7 +12,7 @@ class HoatDongRepository extends BaseRepository {
     /**
      * Lấy danh sách hoạt động gần đây của giảng viên
      */
-    public function layHoatDongGanDay($giangVienId, $limit = 10) {
+    public function layHoatDongGanDay($giangVienId, $limit = 3) {
         $sql = "
             -- 1. Sinh viên nộp bài tập
             SELECT 

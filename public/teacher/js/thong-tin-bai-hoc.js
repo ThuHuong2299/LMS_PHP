@@ -50,7 +50,17 @@ Vui lòng kiểm tra URL có đúng format:
     }
     
     console.log('=== INITIALIZATION START ===');
+    this.initBreadcrumb();
     this.init();
+  }
+  
+  initBreadcrumb() {
+    const breadcrumb = new BreadcrumbManager();
+    const html = breadcrumb.renderThongTinBaiHoc();
+    const container = document.getElementById('breadcrumb-container');
+    if (container) {
+      container.innerHTML = html;
+    }
   }
   
   async init() {
@@ -291,11 +301,18 @@ Vui lòng kiểm tra URL có đúng format:
     const userRole = comment.nguoi_gui_vai_tro || comment.vai_tro;
     
     // Avatar mặc định dựa vào vai trò
-    let defaultAvatar = '/public/student/CSS/avatar-sv.webp';
+    let defaultAvatar = '/public/assets/avatar-sv.webp';
     if (userRole === 'giang_vien') {
-      defaultAvatar = '/public/student/CSS/avatar-gv.jpg';
+      defaultAvatar = '/public/assets/avatar-gv.jpg';
     }
-    const avatar = comment.nguoi_gui_anh || comment.avatar || defaultAvatar;
+    
+    // Kiểm tra và clean avatar path
+    let avatar = comment.nguoi_gui_anh || comment.avatar || defaultAvatar;
+    
+    // Nếu avatar là null, undefined, hoặc string rỗng -> dùng default
+    if (!avatar || avatar === 'null' || avatar.trim() === '') {
+      avatar = defaultAvatar;
+    }
     
     return `
       <div class="comment">
@@ -332,7 +349,14 @@ Vui lòng kiểm tra URL có đúng format:
     if (userRole === 'giang_vien') {
       defaultAvatar = '/public/assets/avatar-gv.jpg';
     }
-    const avatar = reply.nguoi_gui_anh || reply.avatar || defaultAvatar;
+    
+    // Kiểm tra và clean avatar path
+    let avatar = reply.nguoi_gui_anh || reply.avatar || defaultAvatar;
+    
+    // Nếu avatar là null, undefined, hoặc string rỗng -> dùng default
+    if (!avatar || avatar === 'null' || avatar.trim() === '') {
+      avatar = defaultAvatar;
+    }
     
     return `
       <div class="reply">

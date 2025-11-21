@@ -11,11 +11,13 @@
   <link rel="stylesheet" href="/public/teacher/CSS/components/shared.css">
   <link rel="stylesheet" href="/public/teacher/CSS/components/sidebar.css">
   <link rel="stylesheet" href="/public/teacher/CSS/components/navbar.css">
+  <link rel="stylesheet" href="/public/teacher/CSS/components/breadcrumb.css">
   <link rel="stylesheet" href="/public/teacher/CSS/CIstyle.css">
   <link rel="stylesheet" href="/public/assets/css/thong-bao.css">
   
   <title>Thông tin lớp học - Learn Lab</title>
   <script src="/public/assets/js/thong-bao.js"></script>
+  <script src="/public/teacher/js/components/breadcrumb.js"></script>
 </head>
 
 <body>
@@ -26,10 +28,10 @@
       <!-- Sticky Header Wrapper -->
       <div class="sticky-header">
         <!-- Breadcrumb -->
-        <div class="breadcrumb" id="contentBreadcrumb">
-          <span>Lớp học</span>
+        <div class="breadcrumb" id="breadcrumb-container">
+          <a href="/public/teacher/Classroom.html" class="breadcrumb-link">Lớp học</a>
           <span class="separator">›</span>
-          <span>Chi tiết lớp</span>
+          <span class="current">Chi tiết lớp</span>
         </div>
 
         <!-- Course Info -->
@@ -108,7 +110,7 @@
       <div id="assignments-section" class="content-section">
         <div class="page-header">
           <h1 class="page-title">Danh sách bài tập</h1>
-          <button class="btn-add" onclick="openModal('assignment')">+ Thêm mới</button>
+          <button class="btn-add" onclick="ThongBao.thong_tin('Chức năng này đang phát triển, bạn có thể tạo ở Trang chủ')">+ Thêm mới</button>
         </div>
 
         <div class="assignment-card"  onclick="window.location.href='../WorkDashBoard.html'">
@@ -130,7 +132,7 @@
       <div id="exams-section" class="content-section">
         <div class="page-header">
           <h1 class="page-title">Danh sách bài kiểm tra</h1>
-          <button class="btn-add" onclick="openModal('exam')">+ Thêm mới</button>
+          <button class="btn-add" onclick="ThongBao.thong_tin('Chức năng này đang phát triển, bạn có thể tạo ở Trang chủ')">+ Thêm mới</button>
         </div>
 
         <div class="assignment-card">
@@ -152,7 +154,7 @@
       <div id="notifications-section" class="content-section">
         <div class="page-header">
           <h1 class="page-title">Danh sách thông báo</h1>
-          <button class="btn-add" onclick="openNotificationModal()">+ Thêm mới</button>
+          <button class="btn-add" onclick="ThongBao.thong_tin('Chức năng này đang phát triển, bạn có thể tạo ở Trang chủ')">+ Thêm mới</button>
         </div>
 
         <div id="notificationsList">
@@ -179,7 +181,7 @@
       <div id="documents-section" class="content-section">
         <div class="page-header">
           <h1 class="page-title">Danh sách tài liệu</h1>
-          <button class="btn-add">+ Thêm mới</button>
+          <button class="btn-add" onclick="ThongBao.thong_tin('Chức năng này đang phát triển, bạn có thể tạo ở Trang chủ')">+ Thêm mới</button>
         </div>
 
         <div class="document-list">

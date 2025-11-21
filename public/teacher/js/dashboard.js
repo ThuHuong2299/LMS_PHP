@@ -40,7 +40,7 @@ const DashboardAPI = {
    * @param {number} limit - Số lượng hoạt động
    * @returns {Promise<Array>}
    */
-  async getActivities(limit = 10) {
+  async getActivities(limit = 3) {
     try {
       const response = await fetch(`${this.BASE_URL}/hoat-dong-gan-day.php?limit=${limit}`, {
         method: 'GET',
@@ -139,7 +139,7 @@ async function loadRecentActivities() {
     // Hiển thị loading
     showActivitiesLoading();
     
-    const activities = await DashboardAPI.getActivities(10);
+    const activities = await DashboardAPI.getActivities(3);
     
     // Render hoạt động
     renderActivities(activities);

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS - Chọn vai trò</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 24px;
+            color: #2d3436;
+        }
+        .role-btn {
+            display: block;
+            width: 220px;
+            margin: 16px auto;
+            padding: 16px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            background: #0984e3;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .role-btn:hover {
+            background: #74b9ff;
+            color: #2d3436;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chào mừng đến với hệ thống LMS</h1>
+        <button class="role-btn" onclick="location.href='public/Login.student.html'">Đăng nhập Sinh viên</button>
+        <button class="role-btn" onclick="location.href='public/Login.teacher.html'">Đăng nhập Giảng viên</button>
+    </div>
+</body>
+</html>

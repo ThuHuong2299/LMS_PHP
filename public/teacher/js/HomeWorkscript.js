@@ -206,7 +206,17 @@ async function luuDiem(traLoiId, diem, input, cauHoiId, maxDiem) {
 
 // ==================== INITIALIZATION ====================
 
+function initBreadcrumb() {
+  const breadcrumb = new BreadcrumbManager();
+  const html = breadcrumb.renderHomeWork();
+  const container = document.getElementById('breadcrumb-container');
+  if (container) {
+    container.innerHTML = html;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+  initBreadcrumb();
   if (getUrlParams()) {
     fetchHomeWorkData();
   }

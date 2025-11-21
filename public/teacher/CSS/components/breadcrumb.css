@@ -1,0 +1,49 @@
+/**
+ * File: breadcrumb.css
+ * Muc dich: CSS cho breadcrumb navigation
+ */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333333;
+  /* padding: 12px 0;
+  margin-bottom: 10px; */
+}
+
+.breadcrumb-link {
+  color: #333333;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.breadcrumb-link:hover {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.breadcrumb .separator {
+  color: #999999;
+  user-select: none;
+  font-size: 16px;
+}
+
+.breadcrumb .current {
+  color: #666666;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .breadcrumb {
+    font-size: 13px;
+    padding: 10px 0;
+    margin-bottom: 12px;
+  }
+  
+  .breadcrumb .separator {
+    font-size: 14px;
+  }
+}

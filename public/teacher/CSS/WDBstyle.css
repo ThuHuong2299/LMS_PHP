@@ -601,7 +601,7 @@
   flex-direction: row;
   gap: 0px;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   flex-shrink: 0;
   width: 178px;
   position: relative;
@@ -643,6 +643,7 @@
   gap: 26px;
   align-items: center;
   justify-content: center;
+  text-align: center;
   flex-shrink: 0;
   width: 120px;
   height: 80px;
@@ -654,6 +655,7 @@
   gap: 26px;
   align-items: center;
   justify-content: center;
+  text-align: center;
   flex-shrink: 0;
   width: 147px;
   height: 80px;

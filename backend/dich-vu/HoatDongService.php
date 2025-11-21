@@ -18,7 +18,7 @@ class HoatDongService extends BaseService {
     /**
      * Lấy danh sách hoạt động gần đây
      */
-    public function layHoatDongGanDay($giangVienId, $limit = 10) {
+    public function layHoatDongGanDay($giangVienId, $limit = 3) {
         // Validate
         if (!$this->kiemTraSoNguyen($giangVienId)) {
             $this->nemLoi('ID giảng viên không hợp lệ');

@@ -99,8 +99,8 @@ class GiangVienController extends BaseController {
             // Kiểm tra quyền giảng viên
             $giangVienId = $this->kiemTraQuyenGiangVien();
             
-            // Lấy tham số limit
-            $limit = $this->layThamSoGetInt('limit', 10);
+            // Lấy tham số limit (mặc định 3 hoạt động)
+            $limit = $this->layThamSoGetInt('limit', 3);
             
             // Lấy dữ liệu hoạt động
             $hoatDong = $this->hoatDongService->layHoatDongGanDay($giangVienId, $limit);

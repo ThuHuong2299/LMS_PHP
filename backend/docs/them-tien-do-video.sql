@@ -1,11 +1,3 @@
--- =====================================================
--- THÊM BẢNG TIẾN ĐỘ VIDEO
--- =====================================================
--- Ngày tạo: 20/11/2025
--- Mục đích: Tracking tiến độ xem video của sinh viên
--- Chạy được trên: phpMyAdmin
--- =====================================================
-
 USE lms_hoc_tap;
 
 -- Kiểm tra và xóa bảng cũ nếu tồn tại
@@ -62,49 +54,3 @@ INSERT INTO tien_do_video (bai_giang_id, sinh_vien_id, trang_thai, thoi_gian_xem
 VALUES 
 (@bai_giang_id_l002, (SELECT id FROM nguoi_dung WHERE ma_nguoi_dung = 'SV015'), 'xem_xong', 1200, 100.00, NOW() - INTERVAL 1 DAY),
 (@bai_giang_id_l002, (SELECT id FROM nguoi_dung WHERE ma_nguoi_dung = 'SV016'), 'dang_xem', 450, 38.00, NOW());
-
--- =====================================================
--- KIỂM TRA KẾT QUẢ
--- =====================================================
-
--- Xem tất cả tiến độ video
-SELECT 
-    tdv.id,
-    nd.ma_nguoi_dung,
-    nd.ho_ten AS ten_sinh_vien,
-    bg.tieu_de AS ten_bai_giang,
-    lh.ma_lop_hoc,
-    tdv.trang_thai,
-    tdv.thoi_gian_xem,
-    tdv.phan_tram_hoan_thanh,
-    tdv.lan_xem_cuoi
-FROM tien_do_video tdv
-JOIN nguoi_dung nd ON tdv.sinh_vien_id = nd.id
-JOIN bai_giang bg ON tdv.bai_giang_id = bg.id
-JOIN lop_hoc lh ON bg.lop_hoc_id = lh.id
-ORDER BY lh.ma_lop_hoc, bg.so_thu_tu_bai, nd.ma_nguoi_dung;
-
--- Thống kê tiến độ theo sinh viên
-SELECT 
-    nd.ma_nguoi_dung,
-    nd.ho_ten,
-    lh.ma_lop_hoc,
-    COUNT(tdv.id) AS so_video_da_xem,
-    SUM(CASE WHEN tdv.trang_thai = 'xem_xong' THEN 1 ELSE 0 END) AS so_video_hoan_thanh,
-    AVG(tdv.phan_tram_hoan_thanh) AS phan_tram_trung_binh
-FROM nguoi_dung nd
-JOIN sinh_vien_lop_hoc svlh ON nd.id = svlh.sinh_vien_id
-JOIN lop_hoc lh ON svlh.lop_hoc_id = lh.id
-LEFT JOIN bai_giang bg ON lh.id = bg.lop_hoc_id
-LEFT JOIN tien_do_video tdv ON bg.id = tdv.bai_giang_id AND nd.id = tdv.sinh_vien_id
-WHERE nd.vai_tro = 'sinh_vien'
-GROUP BY nd.ma_nguoi_dung, nd.ho_ten, lh.ma_lop_hoc
-HAVING so_video_da_xem > 0
-ORDER BY lh.ma_lop_hoc, nd.ma_nguoi_dung;
-
--- =====================================================
--- HOÀN THÀNH
--- =====================================================
--- Bảng đã được tạo thành công!
--- Có thể tracking tiến độ xem video của sinh viên
--- =====================================================

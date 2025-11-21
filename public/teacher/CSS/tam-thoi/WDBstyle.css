@@ -596,7 +596,7 @@
 .table-head2,
 .table-head3 {
   padding: 16px 20px;
-  display: flex;
+  display: flex-end;
   align-items: center;
   justify-content: center;
 }
@@ -757,7 +757,7 @@
   padding: 16px 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   min-height: 80px;
 }
 .box2 {

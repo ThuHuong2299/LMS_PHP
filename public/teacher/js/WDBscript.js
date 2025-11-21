@@ -342,9 +342,24 @@ btnUngraded.addEventListener('click', function () {
 // ==================== INITIALIZATION ====================
 
 /**
+ * Khoi tao breadcrumb
+ */
+function initBreadcrumb() {
+  const breadcrumb = new BreadcrumbManager();
+  const html = breadcrumb.renderWorkDashBoard();
+  const container = document.getElementById('breadcrumb-container');
+  if (container) {
+    container.innerHTML = html;
+  }
+}
+
+/**
  * Khởi tạo khi DOM ready
  */
 document.addEventListener('DOMContentLoaded', function() {
+  // Khoi tao breadcrumb
+  initBreadcrumb();
+  
   // Lấy params từ URL
   if (getUrlParams()) {
     // Fetch dữ liệu từ API

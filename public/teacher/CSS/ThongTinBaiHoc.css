@@ -16,26 +16,35 @@ body {
 
 /* Breadcrumb */
 .breadcrumb {
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: 'Be Vietnam Pro', sans-serif;
-  font-size: 16px;
-  color: #666;
+  font-size: 14px;
+  color: #333333;
 }
 
 .breadcrumb-link {
-  color: #3293f9;
+  color: #333333;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
+  cursor: pointer;
 }
 
 .breadcrumb-link:hover {
-  color: #1e7de0;
-  text-decoration: underline;
+  color: #007BFF;
+  text-decoration: none;
 }
 
 .breadcrumb .separator {
-  margin: 0 10px;
-  color: #999;
+  color: #999999;
+  user-select: none;
+  font-size: 16px;
+}
+
+.breadcrumb .current {
+  color: #666666;
+  font-weight: 500;
 }
 
 /* Lesson Heading */
@@ -44,7 +53,6 @@ body {
   font-size: 32px;
   font-weight: 600;
   color: #000000;
-  margin-bottom: 30px;
 }
 
 /* Video Container - Responsive */
@@ -52,7 +60,7 @@ body {
   background: #f7fafd;
   width: 100%;
   max-width: 100%;
-  aspect-ratio: 16 / 9; /* Tỷ lệ video chuẩn */
+  height: 460px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -69,12 +77,12 @@ body {
 }
 
 video {
-  width: 100%;
-  height: 100%;
   max-width: 100%;
+  max-height: 100%;
+  height: 460px;
   border-radius: 10px;
   outline: none;
-  object-fit: contain; /* Giữ tỉ lệ, không bị vỡ */
+  object-fit: contain;
 }
 
 /* Comments Section */
@@ -101,7 +109,6 @@ video {
 .comment {
   display: flex;
   gap: 16px;
-  margin-bottom: 20px;
   padding: 15px;
   border-radius: 10px;
   transition: all 0.3s ease;
@@ -342,7 +349,7 @@ video {
 @media screen and (max-width: 1024px) {
   .page-container {
     margin-left: 200px;
-    padding: 30px 20px;
+    padding: 0px 20px 30px 20px;
   }
   
   .lesson-heading {
@@ -369,12 +376,12 @@ video {
   }
   
   .breadcrumb {
-    font-size: 14px;
+    font-size: 13px;
     margin-bottom: 15px;
   }
   
   .breadcrumb .separator {
-    margin: 0 5px;
+    font-size: 14px;
   }
   
   .lesson-heading {
