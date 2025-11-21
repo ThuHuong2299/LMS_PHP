@@ -44,13 +44,9 @@ function getUrlParams() {
  */
 async function fetchWorkDashboardData() {
   try {
-    let apiUrl = '';
-    
-    if (workType === 'bai_tap') {
-      apiUrl = `/backend/teacher/api/chi-tiet-bai-tap.php?bai_tap_id=${baiTapId}`;
-    } else if (workType === 'bai_kiem_tra') {
-      apiUrl = `/backend/teacher/api/chi-tiet-bai-kiem-tra.php?bai_kiem_tra_id=${baiKiemTraId}`;
-    }
+    const apiUrl = workType === 'bai_tap' 
+      ? `/backend/teacher/api/chi-tiet-bai-tap.php?bai_tap_id=${baiTapId}`
+      : `/backend/teacher/api/chi-tiet-bai-kiem-tra.php?bai_kiem_tra_id=${baiKiemTraId}`;
     
     const response = await fetch(apiUrl, {
       method: 'GET',
@@ -70,6 +66,13 @@ async function fetchWorkDashboardData() {
       console.log('👥 Danh sách sinh viên:', data.du_lieu.danh_sach_sinh_vien);
       
       updateStatistics(data.du_lieu.thong_ke);
+      
+      // Nếu là bài kiểm tra, lưu thông tin bài kiểm tra để xử lý nút "Cho phép làm lại"
+      if (workType === 'bai_kiem_tra' && data.du_lieu.thong_tin_bai_kiem_tra) {
+        window.currentExamData = data.du_lieu.thong_tin_bai_kiem_tra;
+        showAllowRetakeButton();
+      }
+      
       allStudents = formatStudentData(data.du_lieu.danh_sach_sinh_vien);
       renderStudents();
     } else {
@@ -157,7 +160,7 @@ function formatStudentData(danhSach) {
         break;
       case 'da_nop':
         statusText = 'Đã nộp';
-        markedStatus = 'chưa chấm';
+        markedStatus = sv.diem !== null ? 'đã chấm' : 'chưa chấm';
         break;
       case 'da_cham':
         statusText = 'Đã chấm';
@@ -366,4 +369,94 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchWorkDashboardData();
   }
 });
+
+// ==================== ALLOW RETAKE FUNCTIONALITY ====================
+
+/**
+ * Hiển thị nút "Cho phép làm lại" cho bài kiểm tra
+ */
+function showAllowRetakeButton() {
+  const container = document.getElementById('allow-retake-container');
+  const btn = document.getElementById('allowRetakeBtn');
+  
+  if (!container || !btn) return;
+  
+  // Hiển thị container
+  container.style.display = 'flex';
+  
+  // Cập nhật trạng thái nút
+  updateRetakeButtonState();
+}
+
+/**
+ * Cập nhật trạng thái nút "Cho phép làm lại"
+ */
+function updateRetakeButtonState() {
+  const btn = document.getElementById('allowRetakeBtn');
+  const text = document.getElementById('retakeToggleText');
+  
+  if (!btn || !window.currentExamData) return;
+  
+  const choPhep = window.currentExamData.cho_phep_lam_lai;
+  
+  if (choPhep == 1) {
+    btn.classList.add('active');
+    text.textContent = '✓ Đã cho phép sinh viên làm lại';
+  } else {
+    btn.classList.remove('active');
+    text.textContent = 'Cho phép sinh viên làm lại';
+  }
+}
+
+/**
+ * Bật/tắt quyền làm lại bài kiểm tra
+ */
+async function toggleAllowRetake() {
+  if (!window.currentExamData) {
+    alert('Không có dữ liệu bài kiểm tra');
+    return;
+  }
+  
+  const btn = document.getElementById('allowRetakeBtn');
+  const currentStatus = window.currentExamData.cho_phep_lam_lai;
+  const newStatus = currentStatus == 1 ? 0 : 1;
+  
+  btn.disabled = true;
+  btn.textContent = 'Đang xử lý...';
+  
+  try {
+    const response = await fetch('/backend/teacher/api/cho-phep-lam-lai-bai-kiem-tra.php', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        bai_kiem_tra_id: parseInt(baiKiemTraId),
+        cho_phep: newStatus
+      })
+    });
+    
+    const data = await response.json();
+    
+    if (data.thanh_cong) {
+      // Cập nhật dữ liệu hiện tại
+      window.currentExamData.cho_phep_lam_lai = newStatus;
+      
+      // Cập nhật trạng thái nút
+      updateRetakeButtonState();
+      
+      // Thông báo thành công
+      alert(data.thong_bao);
+    } else {
+      alert('Lỗi: ' + data.thong_bao);
+    }
+  } catch (error) {
+    console.error('Lỗi khi cập nhật:', error);
+    alert('Có lỗi xảy ra: ' + error.message);
+  } finally {
+    btn.disabled = false;
+    updateRetakeButtonState();
+  }
+}
 

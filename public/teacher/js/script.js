@@ -227,7 +227,7 @@ async function loadChuongTheoLop(lopHocId) {
       data.du_lieu.forEach(chuong => {
         const option = document.createElement('option');
         option.value = chuong.id;
-        option.textContent = `Chương ${chuong.so_thu_tu} - ${chuong.ten_chuong}`;
+        option.textContent = `${chuong.so_thu_tu} - ${chuong.ten_chuong}`;
         select.appendChild(option);
       });
     }
@@ -324,7 +324,7 @@ async function loadChuongTheoLopKiemTra(lopHocId) {
       data.du_lieu.forEach(chuong => {
         const option = document.createElement('option');
         option.value = chuong.id;
-        option.textContent = `Chương ${chuong.so_thu_tu}: ${chuong.ten_chuong}`;
+        option.textContent = `${chuong.so_thu_tu}: ${chuong.ten_chuong}`;
         select.appendChild(option);
       });
     }

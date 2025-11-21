@@ -37,7 +37,8 @@ class ThongKeRepository extends BaseRepository {
                 JOIN bai_tap bt ON bl.bai_tap_id = bt.id
                 JOIN lop_hoc l ON bt.lop_hoc_id = l.id
                 WHERE l.giang_vien_id = :giang_vien_id
-                AND bl.trang_thai = 'da_nop'";
+                AND bl.trang_thai = 'da_nop'
+                AND bl.diem IS NULL";
         return $this->dem($sql, ['giang_vien_id' => $giangVienId]);
     }
     

@@ -138,7 +138,7 @@ class BaiGiangRepository extends BaseRepository {
                         bkt.id, 'bai_kiem_tra' as loai, NULL as so_thu_tu_bai, bkt.tieu_de,
                         NULL as duong_dan_video, 0 as thoi_gian_phut,
                         NULL as mo_ta, bkt.ngay_tao, NULL as bai_giang_id,
-                        (SELECT COUNT(*) FROM cau_hoi_bai_kiem_tra WHERE bai_kiem_tra_id = bkt.id) as so_cau_hoi,
+                        (SELECT COUNT(*) FROM cau_hoi_trac_nghiem WHERE bai_kiem_tra_id = bkt.id) as so_cau_hoi,
                         bkt.thoi_luong as thoi_luong_giay
                     FROM bai_kiem_tra bkt
                     WHERE bkt.chuong_id = :chuong_id

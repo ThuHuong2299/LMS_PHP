@@ -50,12 +50,12 @@ class BaiKiemTraRepository extends BaseRepository {
      */
     public function layThongKeBaiKiemTra($baiKiemTraId) {
         $sql = "SELECT 
-                    COUNT(CASE WHEN blkt.trang_thai = 'da_nop' THEN 1 END) AS so_bai_chua_cham,
-                    COUNT(CASE WHEN blkt.trang_thai = 'da_cham' THEN 1 END) AS so_bai_da_cham,
-                    AVG(CASE WHEN blkt.trang_thai = 'da_cham' AND blkt.diem IS NOT NULL THEN blkt.diem END) AS diem_trung_binh,
-                    MAX(CASE WHEN blkt.trang_thai = 'da_cham' AND blkt.diem IS NOT NULL THEN blkt.diem END) AS diem_cao_nhat,
-                    MIN(CASE WHEN blkt.trang_thai = 'da_cham' AND blkt.diem IS NOT NULL THEN blkt.diem END) AS diem_thap_nhat,
-                    COUNT(CASE WHEN blkt.trang_thai IN ('da_nop', 'da_cham') THEN 1 END) AS so_bai_da_nop
+                    COUNT(CASE WHEN blkt.trang_thai = 'da_nop' AND blkt.diem IS NULL THEN 1 END) AS so_bai_chua_cham,
+                    COUNT(CASE WHEN blkt.trang_thai = 'da_nop' AND blkt.diem IS NOT NULL THEN 1 END) AS so_bai_da_cham,
+                    AVG(CASE WHEN blkt.trang_thai = 'da_nop' AND blkt.diem IS NOT NULL THEN blkt.diem END) AS diem_trung_binh,
+                    MAX(CASE WHEN blkt.trang_thai = 'da_nop' AND blkt.diem IS NOT NULL THEN blkt.diem END) AS diem_cao_nhat,
+                    MIN(CASE WHEN blkt.trang_thai = 'da_nop' AND blkt.diem IS NOT NULL THEN blkt.diem END) AS diem_thap_nhat,
+                    COUNT(CASE WHEN blkt.trang_thai = 'da_nop' THEN 1 END) AS so_bai_da_nop
                 FROM bai_lam_kiem_tra blkt
                 WHERE blkt.bai_kiem_tra_id = :bai_kiem_tra_id";
         
@@ -78,8 +78,8 @@ class BaiKiemTraRepository extends BaseRepository {
                     blkt.thoi_gian_bat_dau,
                     blkt.thoi_gian_lam_bai,
                     CASE 
-                        WHEN blkt.trang_thai = 'da_cham' THEN 'da_cham'
-                        WHEN blkt.trang_thai = 'da_nop' THEN 'chua_cham'
+                        WHEN blkt.trang_thai = 'da_nop' AND blkt.diem IS NOT NULL THEN 'da_cham'
+                        WHEN blkt.trang_thai = 'da_nop' AND blkt.diem IS NULL THEN 'chua_cham'
                         ELSE 'chua_lam'
                     END AS trang_thai_cham
                 FROM nguoi_dung sv

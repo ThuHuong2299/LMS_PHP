@@ -68,12 +68,12 @@ class BaiTapRepository extends BaseRepository {
      */
     public function layThongKeBaiTap($baiTapId) {
         $sql = "SELECT 
-                    COUNT(CASE WHEN bl.trang_thai = 'da_nop' THEN 1 END) AS so_bai_chua_cham,
-                    COUNT(CASE WHEN bl.trang_thai = 'da_cham' THEN 1 END) AS so_bai_da_cham,
-                    AVG(CASE WHEN bl.trang_thai = 'da_cham' AND bl.diem IS NOT NULL THEN bl.diem END) AS diem_trung_binh,
-                    MAX(CASE WHEN bl.trang_thai = 'da_cham' AND bl.diem IS NOT NULL THEN bl.diem END) AS diem_cao_nhat,
-                    MIN(CASE WHEN bl.trang_thai = 'da_cham' AND bl.diem IS NOT NULL THEN bl.diem END) AS diem_thap_nhat,
-                    COUNT(CASE WHEN bl.trang_thai IN ('da_nop', 'da_cham') THEN 1 END) AS so_bai_da_nop
+                    COUNT(CASE WHEN bl.trang_thai = 'da_nop' AND bl.diem IS NULL THEN 1 END) AS so_bai_chua_cham,
+                    COUNT(CASE WHEN bl.trang_thai = 'da_nop' AND bl.diem IS NOT NULL THEN 1 END) AS so_bai_da_cham,
+                    AVG(CASE WHEN bl.trang_thai = 'da_nop' AND bl.diem IS NOT NULL THEN bl.diem END) AS diem_trung_binh,
+                    MAX(CASE WHEN bl.trang_thai = 'da_nop' AND bl.diem IS NOT NULL THEN bl.diem END) AS diem_cao_nhat,
+                    MIN(CASE WHEN bl.trang_thai = 'da_nop' AND bl.diem IS NOT NULL THEN bl.diem END) AS diem_thap_nhat,
+                    COUNT(CASE WHEN bl.trang_thai = 'da_nop' THEN 1 END) AS so_bai_da_nop
                 FROM bai_lam bl
                 WHERE bl.bai_tap_id = :bai_tap_id";
         
@@ -95,8 +95,8 @@ class BaiTapRepository extends BaseRepository {
                     bl.thoi_gian_nop,
                     bl.thoi_gian_bat_dau,
                     CASE 
-                        WHEN bl.trang_thai = 'da_cham' THEN 'da_cham'
-                        WHEN bl.trang_thai = 'da_nop' THEN 'chua_cham'
+                        WHEN bl.trang_thai = 'da_nop' AND bl.diem IS NOT NULL THEN 'da_cham'
+                        WHEN bl.trang_thai = 'da_nop' AND bl.diem IS NULL THEN 'chua_cham'
                         ELSE 'chua_lam'
                     END AS trang_thai_cham
                 FROM nguoi_dung sv
@@ -504,8 +504,11 @@ class BaiTapRepository extends BaseRepository {
                     FROM tra_loi_bai_tap tl
                     WHERE tl.bai_lam_id = bl.id
                 ),
-                bl.trang_thai = 'da_cham',
-                bl.ngay_cham = NOW()
+                bl.thoi_gian_cham = CASE 
+                    WHEN (SELECT COALESCE(SUM(tl.diem), 0) FROM tra_loi_bai_tap tl WHERE tl.bai_lam_id = bl.id) > 0 
+                    THEN NOW() 
+                    ELSE bl.thoi_gian_cham 
+                END
                 WHERE bl.id = :bai_lam_id";
         
         return $this->thucThi($sql, ['bai_lam_id' => $baiLamId]);

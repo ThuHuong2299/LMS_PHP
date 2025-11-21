@@ -415,6 +415,45 @@
   font-size: 16px;
   font-weight: 600;
 }
+
+/* Allow Retake Button */
+#allow-retake-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.allow-retake-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Quicksand", sans-serif;
+}
+
+.allow-retake-btn:hover {
+  background-color: #45a049;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.allow-retake-btn.active {
+  background-color: #2196F3;
+}
+
+.allow-retake-btn.active:hover {
+  background-color: #0b7dda;
+}
+
+.allow-retake-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
 /* ==================== TABLE SECTION ==================== */
 .testinfo {
   display: flex;
@@ -503,14 +542,14 @@
   flex-wrap: wrap;
   align-content: center;
   flex-shrink: 0;
-  width: 1096px;
+  width: 1000px;
   height: 77px;
   position: relative;
   cursor: pointer;
 }
-.hs-1:hover {
+/* .hs-1:hover {
   background: #f5f9ff;
-}
+} */
 .cell-4 {
   background: rgba(255, 0, 0, 0);
   padding: 16px;
@@ -601,7 +640,7 @@
   flex-direction: row;
   gap: 0px;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   flex-shrink: 0;
   width: 178px;
   position: relative;

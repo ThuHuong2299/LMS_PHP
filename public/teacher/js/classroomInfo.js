@@ -280,9 +280,9 @@ function renderBaiTap(danhSachBaiTap) {
     // Format thông tin chương và bài giảng
     let metaText = '';
     if (baiTap.chuong) {
-      metaText = `Chương ${baiTap.chuong.so_thu_tu}`;
+      // metaText = `${baiTap.chuong.so_thu_tu}`;
       if (baiTap.bai_giang) {
-        metaText += ` - ${baiTap.bai_giang.so_thu_tu_bai}. ${baiTap.bai_giang.tieu_de}`;
+        metaText += `${baiTap.bai_giang.tieu_de}`;
       } else {
         metaText += ` - ${baiTap.chuong.ten_chuong}`;
       }
@@ -416,7 +416,7 @@ function renderBaiKiemTra(danhSachBaiKiemTra) {
     // Format thông tin chương
     let metaText = '';
     if (baiKiemTra.chuong) {
-      metaText = `Chương ${baiKiemTra.chuong.so_thu_tu} - ${baiKiemTra.chuong.ten_chuong}`;
+      metaText = `${baiKiemTra.chuong.ten_chuong}`;
     } else {
       metaText = 'Bài kiểm tra tổng hợp';
     }
